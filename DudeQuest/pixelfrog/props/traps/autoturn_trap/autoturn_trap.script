@@ -1,0 +1,17 @@
+local Prototype = require("pixelfrog.props.traps.autoturn_trap.autoturn_trap")
+
+local defold = _G
+
+go.property("turn_duration", 0.4)
+go.property("idle_duration", 1)
+go.property("start_delay", 0)
+go.property("damage_points", 1)
+go.property("is_safe", true)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

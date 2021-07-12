@@ -1,0 +1,166 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+-- local debug_draw = require("scripts.shared.debug_draw")
+local game = require("scripts.platformer.game")
+local ui = require("scripts.shared.ui.ui")
+
+-- localization
+local MULTI_TOUCH = game.MULTI_TOUCH
+local LEFT = game.LEFT
+local RIGHT = game.RIGHT
+local A = game.A
+local B = game.B
+local X = game.X
+local Y = game.Y
+-- local MAGIC1 = game.MAGIC1
+-- local MAGIC2 = game.MAGIC2
+-- local MAGIC3 = game.MAGIC3
+-- local MAGIC4 = game.MAGIC4
+-- local MAGIC5 = game.MAGIC5
+-- local MAGIC6 = game.MAGIC6
+local PAUSE = game.PAUSE
+local get_node = gui.get_node
+-- local get_position = gui.get_position
+local get_screen_position = gui.get_screen_position
+-- local get_width = gui.get_width
+-- local get_height = gui.get_height
+-- local get_config = sys.get_config
+local set_color = gui.set_color
+local next = next
+local set_render_order = gui.set_render_order
+local vector4 = vmath.vector4
+local post = msg.post
+
+-- functions
+local check_position
+local enable
+local disable
+
+-- constants
+local COLOR_PRESSED = vector4(1, 1, 1, 0.5)
+local COLOR_RELEASED = vector4(1, 1, 1, 0.25)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+	ui.multi_touch_controls_context = self
+	disable()
+	set_render_order(1)
+
+	self.buttons = {
+		[LEFT]  = get_screen_position(get_node(LEFT)),
+		[RIGHT] = get_screen_position(get_node(RIGHT)),
+		[A]     = get_screen_position(get_node(A)),
+		[B]     = get_screen_position(get_node(B)),
+		[X]     = get_screen_position(get_node(X)),
+		[Y]     = get_screen_position(get_node(Y)),
+		[PAUSE] = get_screen_position(get_node(PAUSE)),
+	}
+
+	self.images = {
+		[LEFT]  = get_node(LEFT),
+		[RIGHT] = get_node(RIGHT),
+		[A]     = get_node(A),
+		[B]     = get_node(B),
+		[X]     = get_node(X),
+		[Y]     = get_node(Y),
+		[PAUSE] = get_node(PAUSE),
+	}
+
+	for _, img in next, self.images do
+		set_color(img, COLOR_RELEASED)
+	end
+
+	self.enable = enable
+	self.disable = disable
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final ()
+	ui.multi_touch_controls_context = nil
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.ADD_ACTION then
+		self.buttons[message.action] = message.position
+	end
+end -- on_message
+
+---------------------------------------
+-- on_input
+---------------------------------------
+
+function defold.on_input(self, action_id, action)
+	if (action_id == MULTI_TOUCH) and action.touch then
+		-- local t1 = gettime()
+		for actn, _ in next, self.buttons do
+			for _, touch in next, action.touch do
+				if actn == check_position(self, touch.screen_x, touch.screen_y) then
+					game.on_input(actn, touch.released == false)
+					local img = self.images[actn]
+					if img then
+						set_color(img, touch.released and COLOR_RELEASED or COLOR_PRESSED)
+					end
+					break
+				else
+					game.on_input(actn, false)
+					local img = self.images[actn]
+					if img then
+						set_color(img, COLOR_RELEASED)
+					end
+				end
+			end
+		end
+		-- print((gettime() - t1) * 1000)
+	end
+	return true
+end -- on_input
+
+---------------------------------------
+-- check_position
+---------------------------------------
+
+function check_position (self, x, y)
+	local result = nil
+	-- 9000 for iphone 1136 x 640
+	-- 60000 for ipad 2048 x 1536
+	local min_distance_sq = 25000--60000
+	for action, position in next, self.buttons do
+		local dx = x - position.x
+		local dy = y - position.y
+		local distance_sq = dx * dx + dy * dy
+		if distance_sq < min_distance_sq then
+			min_distance_sq = distance_sq
+			result = action
+		end
+	end
+	return result
+end -- check_position
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable ()
+	game.reset_input()
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	post("#", MSG.DISABLE)
+end -- disable

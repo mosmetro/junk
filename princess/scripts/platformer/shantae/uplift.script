@@ -1,0 +1,75 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local TAG = require("scripts.shared.tags")
+local GROUP = require("scripts.shared.groups")
+local game = require("scripts.platformer.game")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local get_context = game.get_context
+local set_context = game.set_context
+local get_id = go.get_id
+local particlefx = particlefx
+local post = msg.post
+local url = msg.url
+
+-- functions
+local activator_callback
+
+go.property("ascent_velocity", 1) -- zero gravity well (no acceleration, preserves entry speed)
+go.property("active", false) -- when activator not used (always active uplift) use this to activate on start from editor
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  self.collisionobject = url("#collisionobject")
+  self.tag = TAG.UPLIFT
+  set_context(self.gameobject, self)
+  nc.add_observer(self, self.gameobject, activator_callback)
+  activator_callback(self, nil, self.active)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  set_context(self.gameobject, nil)
+  nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id, message)
+  -- utils.log(self.gameobject .. " received message " .. message_id, message.enter)
+
+  if message_id == MSG.TRIGGER_RESPONSE then
+    if message.other_group == GROUP.ACTIVATOR and message.enter then
+      local context = get_context(message.other_id)
+      utils.log(self.gameobject .. " registered in activator " .. message.other_id, game.get_frame())
+      context.objects[self.gameobject] = true
+      post("#activator_sensor", MSG.DISABLE) -- this collisionobject useless now
+    end
+  end
+end -- on_message
+
+---------------------------------------
+-- activator_callback
+---------------------------------------
+
+function activator_callback(self, _, enable)
+  if enable then
+    particlefx.play("#fx")
+    post(self.collisionobject, MSG.ENABLE)
+  else
+    particlefx.stop("#fx")
+    post(self.collisionobject, MSG.DISABLE)
+  end
+end -- activator_callback

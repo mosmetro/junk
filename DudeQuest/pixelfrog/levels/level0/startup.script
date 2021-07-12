@@ -1,0 +1,177 @@
+local const = require("m.constants")
+local nc = require("m.notification_center")
+local ui = require("m.ui.ui")
+local utils = require("m.utils")
+
+local game = require("pixelfrog.game.game")
+local gamestate = require("pixelfrog.game.gamestate")
+local snd = require("sound.sound")
+-- local factories = require("pixelfrog.game.factories")
+
+local defold = _G
+local vector3_stub = fastmath.vector3_stub
+local vector4_set_x = fastmath.vector4_set_x
+local set_constant = sprite.set_constant
+
+-- local context
+
+local cloud_near_offset_x
+local cloud_far_offset_x
+
+local offset = vmath.vector4()
+
+local OFFSET = hash("offset")
+local TO_WIND = hash("to_wind")
+local TO_NO_WIND = hash("to_no_wind")
+local WIND = hash("wind")
+local NO_WIND = hash("no_wind")
+
+local cloud_near_sprite
+local cloud_far_sprite
+local ship
+local ship_offscreen_left
+local ship_offscreen_right
+local distance_k
+local ship_onscreen
+local sail_sprite
+local splash1_sprite
+local splash2_sprite
+
+local root
+
+-- local on_departure
+
+-- local function show_slot_selector()
+--    runtime.execute_in_context(ui.slot_selector_context.enable, ui.slot_selector_context)
+-- end -- show_slot_selector
+--
+-- local function start_level()
+--    nc.post_notification(const.LEVEL_START_NOTIFICATION)
+-- end -- start_level
+
+local function departure()
+   utils.log("departure")
+   sprite.play_flipbook(sail_sprite, WIND)
+   msg.post(splash1_sprite, msg.ENABLE)
+   msg.post(splash2_sprite, msg.ENABLE)
+   go.animate(ship, const.POSITION_X, go.PLAYBACK_ONCE_FORWARD, ship_offscreen_right.x, go.EASING_INSINE, 0.8 * distance_k)
+end -- departure
+
+local function no_wind()
+   sprite.play_flipbook(sail_sprite, NO_WIND)
+end -- no_wind
+
+local function to_no_wind()
+   sprite.play_flipbook(sail_sprite, TO_NO_WIND, no_wind)
+   msg.post(splash1_sprite, msg.DISABLE)
+   msg.post(splash2_sprite, msg.DISABLE)
+end -- to_no_wind
+
+local function arrive()
+   go.cancel_animations(ship, const.POSITION_X)
+   sprite.play_flipbook(sail_sprite, WIND)
+   msg.post(splash1_sprite, msg.ENABLE)
+   msg.post(splash2_sprite, msg.ENABLE)
+   go.set_position(ship_offscreen_left, ship)
+   go.animate(ship, const.POSITION_X, go.PLAYBACK_ONCE_FORWARD, ship_onscreen.x, go.EASING_OUTSINE, 0.8, 0, to_no_wind)
+end -- arrive
+
+local function set_sail()
+   go.cancel_animations(ship, const.POSITION_X)
+   sprite.play_flipbook(sail_sprite, TO_WIND, departure)
+end
+
+-- local function on_start_game()
+--    runtime.execute_in_context(set_sail, ui.startup_context, start_level)
+-- end -- on_start_game
+--
+-- local function on_end_game()
+--    runtime.execute_in_context(set_sail, ui.startup_context, show_slot_selector)
+-- end -- on_start_game
+
+-- local function on_level_will_appear()
+--
+-- end -- on_level_will_appear
+
+local function on_level_did_appear()
+   if gamestate.get_save_slot() then
+      runtime.execute_in_context(ui.home_context.enable, ui.home_context, true)
+   else
+      runtime.execute_in_context(ui.slot_selector_context.enable, ui.slot_selector_context)
+   end
+   snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+end -- on_level_did_appear
+
+local function on_level_did_disappear()
+   go.delete(root, true)
+end -- on_level_did_disappear
+
+function defold.init(self)
+   root = msg.url(".")
+   ui.startup_context = self
+   self.arrive = arrive
+   self.set_sail = set_sail
+   local scale = game.view_width / 2048
+   fastmath.vector3_set_xyz(vector3_stub, scale, scale, 1)
+   go.set("scaler", const.SCALE, vector3_stub)
+
+   cloud_near_offset_x = 0
+   cloud_far_offset_x = 0
+
+   cloud_near_sprite = msg.url("cloud_near#sprite")
+   cloud_far_sprite = msg.url("cloud_far#sprite")
+   ship = msg.url("ship")
+   sail_sprite = msg.url("ship#sail")
+   splash1_sprite = msg.url("ship#splash1")
+   splash2_sprite = msg.url("ship#splash2")
+
+   ship_onscreen = go.get_position(ship)
+
+   ship_offscreen_left = vmath.vector3(ship_onscreen)
+   fastmath.vector3_set_x(ship_offscreen_left, game.view_left - 50)
+
+   ship_offscreen_right = vmath.vector3(ship_onscreen)
+   fastmath.vector3_set_x(ship_offscreen_right, game.view_right + 50)
+
+   distance_k = (ship_offscreen_right.x - ship_onscreen.x) / (ship_onscreen.x - ship_offscreen_left.x)
+   -- utils.log(ship_offscreen_left, ship_onscreen, ship_offscreen_right, distance_k)
+
+   go.set_position(ship_offscreen_left, ship)
+
+   go.animate(ship, const.POSITION_Y, go.PLAYBACK_LOOP_PINGPONG, 1, go.EASING_INOUTSINE, 1)
+   go.animate("sun", const.SCALE, go.PLAYBACK_LOOP_PINGPONG, 1.1, go.EASING_INOUTSINE, 3)
+
+   -- nc.add_observer(on_level_will_appear, const.LEVEL_WILL_APPEAR_NOTIFICATION)
+   nc.add_observer(on_level_did_appear, const.LEVEL_DID_APPEAR_NOTIFICATION)
+   nc.add_observer(on_level_did_disappear, const.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+   -- nc.add_observer(on_start_game, const.START_GAME)
+   -- nc.add_observer(on_end_game, const.END_GAME)
+
+   local filename = sys.get_save_file(gamestate.get_app_id(), "meta")
+   local meta = sys.load(filename)
+   local current_slot = meta.current_slot
+   runtime.execute_in_context(ui.single_touch_controls_context.enable, ui.single_touch_controls_context)
+   if current_slot and gamestate.slot_exists(current_slot) then
+      gamestate.set_save_slot(current_slot)
+   else
+      gamestate.reset_slot()
+   end
+end -- defold.init
+
+function defold.update(_, dt)
+   vector4_set_x(offset, cloud_near_offset_x)
+   set_constant(cloud_near_sprite, OFFSET, offset)
+   cloud_near_offset_x = (cloud_near_offset_x > 1) and 0 or (cloud_near_offset_x + dt * 0.03)
+
+   vector4_set_x(offset, cloud_far_offset_x)
+   set_constant(cloud_far_sprite, OFFSET, offset)
+   cloud_far_offset_x = (cloud_far_offset_x > 1) and 0 or (cloud_far_offset_x + dt * 0.015)
+end -- defold.update
+
+function defold.final()
+   -- nc.remove_observer(on_level_will_appear, const.LEVEL_WILL_APPEAR_NOTIFICATION)
+   nc.remove_observer(on_level_did_appear, const.LEVEL_DID_APPEAR_NOTIFICATION)
+   nc.remove_observer(on_level_did_disappear, const.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+   -- nc.remove_observer(on_start_game, const.START_GAME)
+   -- nc.remove_observer(on_end_game, const.END_GAME)
+end -- defold.final

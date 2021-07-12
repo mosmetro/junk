@@ -1,0 +1,52 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+
+local defold = _G
+local fastmath = fastmath
+local gui = gui
+local set_render_order = gui.set_render_order
+local set_enabled = gui.set_enabled
+local get_node = gui.get_node
+local set_color = gui.set_color
+local set_size = gui.set_size
+local animate = gui.animate
+local COLOR = gui.PROP_COLOR
+local vector3_stub = fastmath.vector3_stub
+local vector3_set_xyz = fastmath.vector3_set_xyz
+
+local TRANSITION_DURATION = 0.25
+
+local fader
+
+-- (context, ...)
+local function fadein(_, callback, duration)
+   set_enabled(fader, true)
+   set_color(fader, colors.TRANSPARENT_WHITE)
+   animate(fader, COLOR, colors.WHITE, gui.EASING_INOUTSINE, duration or TRANSITION_DURATION, 0, callback, gui.PLAYBACK_ONCE_FORWARD)
+end -- fadein
+
+local function fadeout(_, callback, duration)
+   set_color(fader, colors.WHITE)
+   animate(fader, COLOR, colors.TRANSPARENT_WHITE, gui.EASING_INOUTSINE, duration or TRANSITION_DURATION, 0, function()
+      set_enabled(fader, false)
+      if callback then callback() end
+   end, gui.PLAYBACK_ONCE_FORWARD)
+end -- fadeout
+
+function defold.init(self)
+   global.fader_context = self
+   fader = get_node("box")
+   set_color(fader, colors.WHITE)
+   vector3_set_xyz(vector3_stub, global.window_width, global.window_height, 0)
+   set_size(fader, vector3_stub)
+   set_render_order(ui.FOREGROUND)
+   self.fadein = fadein
+   self.fadeout = fadeout
+end -- defold.init
+
+function defold.final()
+   global.fader_context = nil
+end -- defold.final

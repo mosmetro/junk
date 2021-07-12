@@ -1,0 +1,11 @@
+local Repeater = require("pixelfrog.props.repeater.repeater")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = Repeater.new(self)
+end
+
+function defold.final(self)
+   Repeater.free(self.instance)
+end

@@ -1,0 +1,14 @@
+local Waypoint = require("pixelfrog.props.waypoints.waypoint")
+
+local defold = _G
+
+go.property("entity", hash(""))
+go.property("index", 1)
+
+function defold.init(self)
+   self.instance = Waypoint.new(self)
+end -- init
+
+function defold.final(self)
+   Waypoint.free(self.instance)
+end -- final

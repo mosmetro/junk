@@ -1,0 +1,21 @@
+-- import
+local MSG = require("scripts.shared.messages")
+
+-- localization
+local defold = _G
+local post = msg.post
+local get_position = go.get_position
+local delete = go.delete
+
+-- properties
+go.property("target", msg.url())
+go.property("index", 1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	post(self.target, MSG.SET_WAYPOINT, { index = self.index, position = get_position() })
+  delete()
+end -- init

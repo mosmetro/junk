@@ -1,0 +1,62 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local game = require("scripts.platformer.game")
+
+-- localization
+local post = msg.post
+local set_render_order = gui.set_render_order
+
+-- functions
+local enable
+local disable
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.keyboard_controls_context = self
+	disable()
+	set_render_order(0)
+	self.enable = enable
+	self.disable = disable
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final ()
+	ui.keyboard_controls_context = nil
+end -- final
+
+---------------------------------------
+-- on_input
+---------------------------------------
+
+function defold.on_input (_, action_id, action)
+	if action_id then
+		game.on_input(action_id, action.value == 1)
+	end
+	return true
+end -- on_input
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable ()
+	game.reset_input()
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	post("#", MSG.DISABLE)
+end -- disable

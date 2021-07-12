@@ -1,0 +1,301 @@
+local defold = _G
+
+-- import
+local Control = require("scripts.shared.ui.control")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local OnOffButton = require("scripts.shared.ui.controls.on_off_button")
+local nc = require("scripts.shared.notification_center")
+local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local next = next
+local animate = gui.animate
+local execute_in_context = utils.execute_in_context
+local post = msg.post
+local set_render_order = gui.set_render_order
+local get_node = gui.get_node
+local get_position = gui.get_position
+local get_scale = gui.get_scale
+local vector3 = vmath.vector3
+-- local get_screen_position = gui.get_screen_position
+local EASING_LINEAR = gui.EASING_LINEAR
+local EASING_OUTQUAD = gui.EASING_OUTQUAD
+local EASING_INQUAD = gui.EASING_INQUAD
+-- local EASING_OUTCUBIC = gui.EASING_OUTCUBIC
+-- local EASING_INCUBIC = gui.EASING_INCUBIC
+local TEXTFIELD_DID_GET_FOCUS_NOTIFICATION = TextfieldBase.TEXTFIELD_DID_GET_FOCUS_NOTIFICATION
+-- local TEXTFIELD_DID_LOST_FOCUS_NOTIFICATION = TextfieldBase.TEXTFIELD_DID_LOST_FOCUS_NOTIFICATION
+local KEYBOARD_WILL_APPEAR_NOTIFICATION = TextfieldBase.KEYBOARD_WILL_APPEAR_NOTIFICATION
+local KEYBOARD_WILL_DISAPPEAR_NOTIFICATION = TextfieldBase.KEYBOARD_WILL_DISAPPEAR_NOTIFICATION
+
+local KEY_RELEASED = hash("button_white_released")
+local KEY_PRESSED = hash("button_white_pressed")
+local POSITION = hash("position")
+local POSITION_Y = hash("position.y")
+local SCALE = hash("scale")
+local SWITCH_DURATION = 0.25
+local ZERO = vector3(0)
+local ONE = vector3(1)
+
+local target = {}
+
+---------------------------------------
+
+-- init
+
+---------------------------------------
+
+function defold.init (self)
+	post("#", MSG.DISABLE)
+	set_render_order(15)
+
+	local root_node = get_node("root")
+	local controls = {}
+
+	local function key_callback (sender)
+		local context = target.context
+		local control = target.control
+		if context and control then
+			execute_in_context(context, function ()
+				control.insert(sender.value)
+			end)
+		end
+	end -- key_callback
+
+	local function make_key (char)
+		local key = SimpleButton.new {
+			image_node = get_node("alpha" .. char .. "/image"),
+			text_node = get_node("alpha" .. char .. "/symbol"),
+			released = KEY_RELEASED,
+			pressed = KEY_PRESSED,
+			callback = key_callback,
+			value = char,
+		}
+		controls[#controls + 1] = key
+	end -- make_key
+
+	local function make_double_key (pair)
+		local normal_value = pair:sub(1, 1)
+		local shift_value = pair:sub(2, 2)
+		local normal_text_node = get_node("alpha" .. normal_value .. "/symbol")
+		local shift_text_node = get_node("alpha" .. shift_value .. "/symbol")
+		local shift_node_position = get_position(shift_text_node)
+		local shift_node_scale = get_scale(shift_text_node)
+		local key = SimpleButton.new {
+			image_node = get_node("alpha" .. pair .. "/image"),
+			text_node = get_node("alpha" .. pair .. "/symbol"),
+			released = KEY_RELEASED,
+			pressed = KEY_PRESSED,
+			callback = key_callback,
+			value = normal_value,
+			on_shift_press = function (key, is_on)
+				animate(normal_text_node, SCALE, is_on and ZERO or ONE, EASING_LINEAR, SWITCH_DURATION)
+				animate(shift_text_node, SCALE, is_on and ONE or shift_node_scale, EASING_LINEAR, SWITCH_DURATION)
+				animate(shift_text_node, POSITION, is_on and ZERO or shift_node_position, EASING_LINEAR, SWITCH_DURATION)
+				key.value = is_on and shift_value or normal_value
+			end
+		}
+		controls[#controls + 1] = key
+	end -- make_double_key
+
+	-- qwertyuiopasdfghjklzxcvbnm
+	-- `~1!2@3#4$5%6^7&8*9(0)-_=+[{]}\\|;:'\",<.>/?
+
+	local row1 = "`~1!2@3#4$5%6^7&8*9(0)-_=+"
+	row1:gsub("..", make_double_key)
+
+	local key_delete = SimpleButton.new {
+		image_node = get_node("del/image"),
+		text_node = get_node("del/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.delete()
+				end)
+			end
+		end
+	}
+	controls[#controls + 1] = key_delete
+
+	local row2 = "qwertyuiop"
+	row2:gsub(".", make_key)
+
+	local row2a = "[{]}\\|"
+	row2a:gsub("..", make_double_key)
+
+	local row3 = "asdfghjkl"
+	row3:gsub(".", make_key)
+
+	local row3a = ";:'\""
+	row3a:gsub("..", make_double_key)
+
+	local key_return = SimpleButton.new {
+		image_node = get_node("return/image"),
+		text_node = get_node("return/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.switch_focus(true)
+				end)
+			end
+		end
+	}
+	controls[#controls + 1] = key_return
+
+	local key_shift = OnOffButton.new {
+		image_node = get_node("shift/image"),
+		text_node = get_node("shift/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function (sender)
+			for _, key in next, controls do
+				if key.on_shift_press then
+					key:on_shift_press(sender.is_on)
+				end
+			end
+		end
+	}
+	controls[#controls + 1] = key_shift
+
+	local row4 = "zxcvbnm"
+	row4:gsub(".", make_key)
+
+	local row4a = ",<.>/?"
+	row4a:gsub("..", make_double_key)
+
+	local key_arrow_up = SimpleButton.new {
+		image_node = get_node("up/image"),
+		text_node = get_node("up/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.switch_focus(false)
+				end)
+			end
+		end
+	}
+	controls[#controls + 1] = key_arrow_up
+
+	local key_arrow_down = SimpleButton.new {
+		image_node = get_node("down/image"),
+		text_node = get_node("down/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.switch_focus(true)
+				end)
+			end
+		end
+	}
+	controls[#controls + 1] = key_arrow_down
+
+	local key_arrow_left = SimpleButton.new {
+		image_node = get_node("left/image"),
+		text_node = get_node("left/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.move_cursor(false, true)
+				end)
+			end
+		end
+	}
+	controls[#controls + 1] = key_arrow_left
+
+	local key_arrow_right = SimpleButton.new {
+		image_node = get_node("right/image"),
+		text_node = get_node("right/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.move_cursor(true, true)
+				end)
+			end
+		end
+	}
+	controls[#controls + 1] = key_arrow_right
+
+	local key_hide = SimpleButton.new {
+		image_node = get_node("hide/image"),
+		text_node = get_node("hide/symbol"),
+		released = KEY_RELEASED,
+		pressed = KEY_PRESSED,
+		callback = function ()
+			local context = target.context
+			local control = target.control
+			if (context and control) then
+				execute_in_context(context, function ()
+					control.set_focus(false)
+				end)
+			end
+			ui.first_responder = self.next_responder
+			self.next_responder = nil
+			key_shift.release(key_shift.is_on)
+			key_shift:callback()
+			local easing = EASING_INQUAD
+			animate(root_node, POSITION_Y, -1, easing, SWITCH_DURATION, 0, function ()
+				post("#", MSG.DISABLE)
+			end)
+			nc.post_notification(KEYBOARD_WILL_DISAPPEAR_NOTIFICATION, self, { duration = SWITCH_DURATION, easing = easing })
+		end
+	}
+	controls[#controls + 1] = key_hide
+
+	-- this will swallow touches on keyboard background
+	local dummy = Control.new {
+		node = get_node("background"),
+	}
+	controls[#controls + 1] = dummy
+
+	nc.add_observer(self, TEXTFIELD_DID_GET_FOCUS_NOTIFICATION, function (_, sender)
+		local easing = EASING_OUTQUAD
+		if ui.first_responder ~= self then
+			self.next_responder = ui.first_responder
+			ui.first_responder = self
+			post("#", MSG.ENABLE)
+			animate(root_node, POSITION_Y, 694, easing, SWITCH_DURATION)
+		end
+		nc.post_notification(KEYBOARD_WILL_APPEAR_NOTIFICATION, self, { height = 694, control = sender, duration = SWITCH_DURATION, easing = easing })
+		target.context = self.next_responder
+		target.control = sender
+	end)
+
+	self.controls = controls
+end -- init
+
+---------------------------------------
+
+-- final
+
+---------------------------------------
+
+function defold.final (self)
+	nc.remove_observer(self)
+end -- final

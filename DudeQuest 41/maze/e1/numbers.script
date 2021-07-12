@@ -1,0 +1,38 @@
+local thread = require("m.thread")
+
+function init(self)
+	thread.new(self, function()
+		for i = 0, 9 do
+			print(i)
+			go.set("#sprite", "cursor", i/9)
+			thread.wait_for_frames(self, 30)
+		end
+			-- 
+	end)
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- thread.update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

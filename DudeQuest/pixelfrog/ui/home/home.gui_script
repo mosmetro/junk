@@ -1,0 +1,125 @@
+local ui = require("m.ui.ui")
+local nc = require("m.notification_center")
+local const = require("m.constants")
+local colors = require("m.colors")
+local utils = require("m.utils")
+
+local game = require("pixelfrog.game.game")
+-- local gamestate = require("pixelfrog.game.gamestate")
+local Button = require("pixelfrog.ui.button")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local hash = hash
+local vector3_stub = fastmath.vector3_stub
+
+local play_button
+local exit_node
+local exit_button
+local info_node
+local info_button
+
+local function enable_buttons()
+   play_button.enable()
+   exit_button.enable()
+   info_button.enable()
+   ui.first_responder = ui.home_context
+end -- enable_buttons
+
+local function disable_buttons()
+   play_button.disable()
+   exit_button.disable()
+   info_button.disable()
+end -- disable_buttons
+
+local function enable(_, arrive)
+   msg.post("#", msg.ENABLE)
+   disable_buttons()
+
+   fastmath.vector3_set_xyz(vector3_stub, game.view_left + 20, game.view_top + 20, 0)
+   gui.set_position(exit_node, vector3_stub)
+   gui.set_color(exit_node, colors.TRANSPARENT_WHITE)
+   gui.animate(exit_node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 0.5)
+   gui.animate(exit_node, const.POSITION_Y, game.view_top - 20, gui.EASING_OUTBACK, 0.6, 0, enable_buttons)
+
+   fastmath.vector3_set_xyz(vector3_stub, game.view_right - 20, game.view_top + 20, 0)
+   gui.set_position(info_node, vector3_stub)
+   gui.set_color(info_node, colors.TRANSPARENT_WHITE)
+   gui.animate(info_node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 0.5)
+   gui.animate(info_node, const.POSITION_Y, game.view_top - 20, gui.EASING_OUTBACK, 0.6)
+
+   if arrive then
+      runtime.execute_in_context(ui.startup_context.arrive, ui.startup_context)
+   end
+end -- enable
+
+local function disable()
+   disable_buttons()
+   gui.animate(exit_node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, 0.5, 0.2)
+   gui.animate(exit_node, const.POSITION_Y, game.view_top + 20, gui.EASING_INBACK, 0.5, 0, function()
+      msg.post("#", msg.DISABLE)
+   end)
+   gui.animate(info_node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, 0.5, 0.2)
+   gui.animate(info_node, const.POSITION_Y, game.view_top + 20, gui.EASING_INBACK, 0.5)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   ui.home_context = self
+	gui.set_render_order(ui.MENU)
+   self.enable = enable
+   self.disable = disable
+
+   -- "fullscreen" button
+   play_button = Button.new {
+      node = gui.get_node("play"),
+      released_animation = hash("blank_1x1"),
+      pressed_animation = hash("blank_1x1"),
+      hit_test = function() return true end,
+      callback = function()
+         ui.first_responder = nil
+         disable()
+         runtime.execute_in_context(ui.stage_selector_context.enable, ui.stage_selector_context)
+         -- if ui.ingame_controls_context.configure then
+         --    runtime.execute_in_context(ui.ingame_controls_context.configure, ui.ingame_controls_context)
+         -- end
+         -- nc.post_notification(const.LEVEL_START_NOTIFICATION)
+      end,
+   }
+
+   exit_node = gui.get_node("exit")
+
+   exit_button = Button.new {
+      node = exit_node,
+      margin_horizontal = 10,
+      margin_up = 10,
+      released_animation = hash("back_released"),
+      pressed_animation = hash("back_pressed"),
+      callback = function()
+         ui.first_responder = nil
+         disable()
+         runtime.execute_in_context(ui.slot_selector_context.enable, ui.slot_selector_context)
+         runtime.execute_in_context(ui.startup_context.set_sail, ui.startup_context)
+      end,
+   }
+
+   info_node = gui.get_node("info")
+
+   info_button = Button.new {
+      node = info_node,
+      margin_horizontal = 10,
+      margin_up = 10,
+      released_animation = hash("info_released"),
+      pressed_animation = hash("info_pressed"),
+      callback = function()
+         utils.log("show info")
+      end,
+   }
+
+   self.controls = {
+      exit_button,
+      info_button,
+      play_button,
+   }
+end -- defold.init

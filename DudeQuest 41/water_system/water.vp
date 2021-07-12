@@ -1,0 +1,24 @@
+attribute highp vec2 position;
+attribute mediump vec2 texcoord0;
+attribute highp vec2 position1;
+attribute mediump vec2 texcoord1;
+
+uniform vec4 params;
+const vec2 scale = vec2(0.5, 2.0);
+
+varying mediump vec2 var_texcoord0;
+varying mediump vec2 var_texcoord1;
+
+varying vec2 v_position_r;
+varying vec2 v_position_g;
+varying vec2 v_position_b;
+
+void main()
+{
+    v_position_r = (position1 + vec2(params.x * 0.05 - params.y, 0.0)) * scale;
+    v_position_g = (position1 + vec2(params.x * 0.08 - params.y, 0.0)) * scale;
+    v_position_b = (position1 + vec2(-params.y, params.x * 0.03)) * scale;
+    gl_Position = vec4(position, 0.0, 1.0);
+    var_texcoord0 = texcoord0;
+    var_texcoord1 = texcoord1;
+}

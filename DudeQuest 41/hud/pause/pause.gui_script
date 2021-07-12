@@ -1,0 +1,111 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local const = require("m.constants")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+local MenuButton = require("hud.slot_selector.menu_button")
+local translations = require("game.translations")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+local translate = translations.translate
+
+local controls
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = context
+
+   for _, control in next, controls do
+      if control.on_language_change then
+         control:on_language_change()
+      end
+      set_color(control.node, colors.TRANSPARENT_WHITE)
+   end
+
+   for _, control in next, controls do
+      animate(control.node, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   end
+end -- enable
+
+local function disable(next_context, out_button)
+   global.single_touch_first_responder = nil
+
+   for _, control in next, controls do
+      if control == out_button then
+         gui.animate(out_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ACCENT_ANIMATION_EASING, ui.ACCENT_ANIMATION_DURATION, 0, function()
+            msg.post("#", msg.DISABLE)
+
+            if next_context == global.ingame_context then
+               msg.post("main:/main#game", msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+               runtime.execute_in_context(global.backdrop_context.disable, global.backdrop_context)
+               runtime.execute_in_context(global.single_touch_controls_context.disable, global.single_touch_controls_context)
+               runtime.execute_in_context(global.ingame_controls_context.enable, global.ingame_controls_context)
+
+            elseif next_context == global.options_context then
+               runtime.execute_in_context(next_context.enable, next_context)
+
+            elseif next_context == global.home_context then
+               msg.post("main:/main#game", msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+               runtime.execute_in_context(global.backdrop_context.disable, global.backdrop_context)
+               runtime.execute_in_context(global.ingame_context.enable, global.ingame_context, "e0m0")
+            end
+         end)
+      else
+         gui.animate(control.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+      end
+   end
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.pause_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   controls = {}
+
+   local continue_button = MenuButton.new {
+      node = get_node("continue/root"),
+      title_node = get_node("continue/text"),
+      callback = function(control)
+         disable(global.ingame_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.PAUSE_BUTTON_CONTINUE_GAME))
+      end,
+   }
+   controls[#controls + 1] = continue_button
+
+   local options_button = MenuButton.new {
+      node = get_node("options/root"),
+      title_node = get_node("options/text"),
+      callback = function(control)
+         global.hud_back_stack.push_right(self)
+         disable(global.options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.PAUSE_BUTTON_OPTIONS))
+      end,
+   }
+   controls[#controls + 1] = options_button
+
+   local quit_button = MenuButton.new {
+      node = get_node("quit/root"),
+      title_node = get_node("quit/text"),
+      callback = function(control)
+         disable(global.home_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.PAUSE_BUTTON_QUIT_TO_MENU))
+      end,
+   }
+   controls[#controls + 1] = quit_button
+
+   self.controls = controls
+end -- defold.init

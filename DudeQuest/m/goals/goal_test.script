@@ -1,0 +1,11 @@
+local Goal = require("m.goals.goal")
+
+local defold = _G
+
+function defold.init()
+   local goal = Goal.new {}
+   goal:process()
+
+   local goal2 = Goal.new {}
+   goal2:process()
+end

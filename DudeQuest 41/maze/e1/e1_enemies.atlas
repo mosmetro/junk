@@ -1,0 +1,349 @@
+images {
+  image: "/maze/e1/enemies/rat/images/rat_attack_4.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+animations {
+  id: "zombie_walk"
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_walk/zombie_walk_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "zombie_rise"
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "zombie_idle"
+  images {
+    image: "/maze/e1/enemies/zombie/images/zombie_rise/zombie_rise_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "wolf_idle"
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_Idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "wolf_run"
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/wolf/images/wolf_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "wolf_attack"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "wolf_hit"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "wolf_death"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "wolf_growl"
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rat_idle"
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rat_run"
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rat_attack"
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_attack_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rat_hit"
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_hit.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rat_death"
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_death_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_death_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_death_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_death_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/maze/e1/enemies/rat/images/rat_death_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0

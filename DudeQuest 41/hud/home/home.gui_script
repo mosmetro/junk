@@ -1,0 +1,108 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local const = require("m.constants")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+local MenuButton = require("hud.slot_selector.menu_button")
+local translations = require("game.translations")
+local gamestate = require("game.gamestate")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+local translate = translations.translate
+
+local title
+local controls
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = context
+
+   set_color(title, colors.TRANSPARENT_WHITE)
+   animate(title, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 1.5)
+
+   local delay = 0.1
+   for i = 1, #controls do
+      local control = controls[i]
+      if control.on_language_change then
+         control:on_language_change()
+      end
+      set_color(control.node, colors.TRANSPARENT_WHITE)
+      animate(control.node, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION, delay)
+      delay = delay + 0.1
+   end
+end -- enable
+
+local function disable(next_context)
+   global.single_touch_first_responder = nil
+   animate(title, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_INQUAD, 0.5, 0, function()
+      msg.post("#", msg.DISABLE)
+      if next_context == global.ingame_context then
+         local last_location = gamestate.get(nil, gamestate.player, "last_location",
+         gamestate.get(nil, gamestate.player, "last_checkpoint", global.start_checkpoint))
+         runtime.execute_in_context(next_context.enable, next_context, last_location.map, last_location.location, last_location.direction, "player")
+      else
+         runtime.execute_in_context(next_context.enable, next_context)
+      end
+   end)
+   local delay = 0
+   for i = #controls, 1, -1 do
+      animate(controls[i].node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION, delay)
+      delay = delay + 0.1
+   end
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.home_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   title = get_node("title")
+
+   controls = {}
+
+   local play_button = MenuButton.new {
+      node = get_node("play/root"),
+      title_node = get_node("play/text"),
+      callback = function(control)
+         disable(global.ingame_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.HOME_BUTTON_START_GAME))
+      end,
+   }
+   controls[#controls + 1] = play_button
+
+   local options_button = MenuButton.new {
+      node = get_node("options/root"),
+      title_node = get_node("options/text"),
+      callback = function(control)
+         global.hud_back_stack.push_right(self)
+         disable(global.options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.HOME_BUTTON_OPTIONS))
+      end,
+   }
+   controls[#controls + 1] = options_button
+
+   local profile_button = MenuButton.new {
+      node = get_node("profile/root"),
+      title_node = get_node("profile/text"),
+      callback = function(control)
+         disable(global.slot_selector_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.HOME_BUTTON_SELECT_PROFILE))
+      end,
+   }
+   controls[#controls + 1] = profile_button
+
+   self.controls = controls
+end -- defold.init

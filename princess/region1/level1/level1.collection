@@ -1,0 +1,622 @@
+name: "level1"
+instances {
+  id: "level1"
+  prototype: "/region1/level1/level1.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/common/camera.go"
+  position {
+    x: 0.0
+    y: -0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "clear_color"
+      value: "90.0, 137.0, 196.0, 255.0"
+      type: PROPERTY_TYPE_VECTOR4
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "factory"
+  prototype: "/common/factory.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "pin"
+  prototype: "/common/pin.go"
+  position {
+    x: 472.0
+    y: 182.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate"
+  prototype: "/common/crate.go"
+  position {
+    x: 142.0
+    y: -66.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "crate1"
+  prototype: "/common/crate.go"
+  position {
+    x: -45.0
+    y: 186.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "pin1"
+  prototype: "/common/pin.go"
+  position {
+    x: 657.0
+    y: 182.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "update_sink"
+  prototype: "/common/update_sink.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1"
+  prototype: "/common/platform.go"
+  position {
+    x: -208.0
+    y: 576.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "platform"
+    properties {
+      id: "speed"
+      value: "120.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "wait_time"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1_waypoint3"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: -208.0
+    y: 576.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform1"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1_waypoint1"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: -80.0
+    y: 176.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform1"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1_waypoint2"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: -208.0
+    y: 176.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform1"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "circular_platform1"
+  prototype: "/common/circular_platform.go"
+  position {
+    x: 273.0
+    y: 320.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "circular_platform"
+    properties {
+      id: "speed"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "pivot"
+      value: "/platform_pivot1"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform_pivot1"
+  prototype: "/common/platform_pivot.go"
+  position {
+    x: 273.0
+    y: 350.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "activator1"
+  prototype: "/region1/level1/activator1.go"
+  position {
+    x: 292.0
+    y: 350.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fall_trap_a"
+  prototype: "/common/fall_trap_a.go"
+  position {
+    x: -250.0
+    y: 115.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "fall_trap"
+    properties {
+      id: "trigger"
+      value: "/trigger1"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger1"
+  prototype: "/common/trigger1.go"
+  position {
+    x: -250.0
+    y: 56.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "fall_trap_a1"
+  prototype: "/common/fall_trap_a.go"
+  position {
+    x: -340.0
+    y: 170.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "fall_trap"
+    properties {
+      id: "trigger"
+      value: "/trigger2"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger2"
+  prototype: "/common/trigger1.go"
+  position {
+    x: -340.0
+    y: 56.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spikes_2x"
+  prototype: "/common/spikes_2x.go"
+  position {
+    x: -84.0
+    y: 48.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spikes_3x"
+  prototype: "/common/spikes_3x.go"
+  position {
+    x: 160.0
+    y: 112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spikes_3x1"
+  prototype: "/common/spikes_3x.go"
+  position {
+    x: 224.0
+    y: -112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bridge_x3"
+  prototype: "/region1/bridge_x3.go"
+  position {
+    x: 0.0
+    y: 48.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "wheel_machine"
+  collection: "/common/wheel_machine.collection"
+  position {
+    x: 360.0
+    y: 350.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "wheel_machine"
+      properties {
+        id: "speed"
+        value: "2.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "platform_count"
+        value: "4.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "player"
+  collection: "/princess/princess/princess.collection"
+  position {
+    x: -173.0
+    y: 73.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "parallax"
+  collection: "/common/forest_parallax.collection"
+  position {
+    x: -600.0
+    y: -600.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

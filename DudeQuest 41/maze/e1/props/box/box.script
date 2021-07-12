@@ -1,0 +1,21 @@
+-- import
+local Box = require("maze.e1.props.box.box")
+-- local utils = require("m.utils")
+
+-- localization
+local defold = _G
+
+-- properties
+go.property("name", hash(""))
+go.property("width", 0)
+go.property("height", 0)
+go.property("max_horizontal_speed", 0)
+go.property("gravity", 0)
+
+function defold.init(self)
+   self.instance = Box.new(self)
+end
+
+function defold.final(self)
+   Box.free(self.instance)
+end

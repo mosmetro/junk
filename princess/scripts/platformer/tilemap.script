@@ -1,0 +1,34 @@
+local defold = _G
+
+-- import
+local LAYER = require("scripts.shared.layers")
+local TAG = require("scripts.shared.tags")
+local game = require("scripts.platformer.game")
+
+-- localization
+local get_position = go.get_position
+local set_position = go.set_position
+local get_id = go.get_id
+local set_context = game.set_context
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  self.tag = TAG.STATIC
+	local position = get_position()
+	position.z = -0.3---0.001 -- ?
+	set_position(position)
+
+  set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  set_context(self.gameobject, nil)
+end -- final

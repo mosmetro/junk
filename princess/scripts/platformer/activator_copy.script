@@ -1,0 +1,68 @@
+local defold = _G
+
+-- import
+local utils = require("scripts.shared.utils")
+local game = require("scripts.platformer.game")
+local nc = require("scripts.shared.notification_center")
+local MSG = require("scripts.shared.messages")
+local GROUP = require("scripts.shared.groups")
+
+-- localization
+local post_notification = nc.post_notification
+local get_id = go.get_id
+local next = next
+local set_context = game.set_context
+-- local tostring = tostring
+
+-- functions
+-- local add_object
+-- local remove_object
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   self.gameobject = get_id()
+   self.objects = {}
+   -- self.add_object = add_object
+   -- self.remove_object = remove_object
+   set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+   if message_id == MSG.TRIGGER_RESPONSE and message.other_group == GROUP.CAMERA then
+      for gameobject, _ in next, self.objects do
+         utils.log("activator " .. self.gameobject .. " posted notification in behalf of " .. gameobject .. (message.enter and " active" or " inactive"), game.get_frame())
+         post_notification(gameobject, self, message.enter)
+      end
+   end
+end -- on_message
+
+---------------------------------------
+-- add_object
+---------------------------------------
+
+-- function add_object(self, object)
+--   self.objects[object] = true
+-- end -- add_object
+
+---------------------------------------
+-- remove_object
+---------------------------------------
+
+-- function remove_object(self, object)
+--   self.objects[object] = nil
+-- end -- remove_object

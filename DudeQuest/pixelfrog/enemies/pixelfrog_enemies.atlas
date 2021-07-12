@@ -1,0 +1,2410 @@
+images {
+  image: "/pixelfrog/enemies/trunk/bullet/debris/images/trunk_bullet_piece1_r.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/trunk/bullet/debris/images/trunk_bullet_piece2_r.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/trunk/bullet/images/trunk_bullet_r.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/trunk/bullet/images/trunk_bullet_l.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/trunk/bullet/debris/images/trunk_bullet_piece1_l.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/trunk/bullet/debris/images/trunk_bullet_piece2_l.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/plant/bullet/images/plant_bullet.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/plant/bullet/debris/images/plant_bullet_debris_1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/plant/bullet/debris/images/plant_bullet_debris_2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/bee/bullet/images/bee_bullet.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/bee/bullet/debris/images/bee_bullet_debris_1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/bee/bullet/debris/images/bee_bullet_debris_2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/radish/images/radish_leaf_1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/radish/images/radish_leaf_2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/pigs/ammo_box/images/ammo_box_debris1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/pigs/ammo_box/images/ammo_box_debris2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/pigs/ammo_box/images/ammo_box_debris3.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/enemies/pigs/ammo_box/images/ammo_box_debris4.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+animations {
+  id: "mushroom_idle"
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_idle_14.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "mushroom_run"
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_14.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_15.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_run_16.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "mushroom_hit"
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_0.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/mushroom/images/mushroom_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "trunk_idle"
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_14.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_15.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_16.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_17.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_idle_18.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "trunk_run"
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_run_14.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "trunk_hit"
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "trunk_attack"
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/trunk/images/trunk_attack_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "bluebird_fly"
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_fly_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "bluebird_hit"
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bluebird/images/bluebird_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "chicken_idle"
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_idle_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "chicken_run"
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_run_14.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "chicken_hit"
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/chicken/images/chicken_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "plant_idle"
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_idle_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "plant_attack"
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_attack_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "plant_hit"
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/plant/images/plant_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "bee_idle"
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "bee_attack"
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_attack_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "bee_hit"
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/bee/images/bee_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "snail_idle"
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_13.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_14.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_idle_15.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "snail_walk"
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_walk_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "snail_hit"
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "snail_dead"
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/images/snail.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shell_idle"
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shell_run"
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shell_hit"
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shell_wall_hit"
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_wall_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_wall_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_wall_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/snail/snail_shell/images/shell_wall_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "radish_fly"
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_fly_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_fly_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_fly_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_fly_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_fly_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_fly_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "radish_idle"
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "radish_run"
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_run_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "radish_hit"
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/radish/images/radish_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_idle"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_run"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_hit"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_jump"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_jump.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_fall"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_fall.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_attack"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_attack_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_attack_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_attack_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_attack_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_attack_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_idle_with_box"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_box_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_run_with_box"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_box_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_box_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_box_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_box_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_box_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_box_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_pick_box"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_box_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_box_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_box_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_box_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_box_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_throw_box"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_box_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_box_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_box_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_box_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_box_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "ammo_box"
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_box/images/ammo_box.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_idle_with_bomb"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_with_bomb_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_run_with_bomb"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_bomb_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_bomb_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_bomb_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_bomb_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_bomb_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_run_with_bomb_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_pick_bomb"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_bomb_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_bomb_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_bomb_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_pick_bomb_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_throw_bomb"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_bomb_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_bomb_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_bomb_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_bomb_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_throw_bomb_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "ammo_bomb_off"
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_off.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "ammo_bomb_on"
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_on_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_on_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_on_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_on_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "ammo_bomb_explosion"
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "blank"
+  images {
+    image: "/pixelfrog/common/images/blank_1x1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_match_off"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_lighting_match"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_match_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_match_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_match_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_match_on"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_match_on_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_match_on_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_match_on_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_match_on_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_match_on_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_match_on_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pig_lighting_cannon"
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_cannon_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_cannon_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_cannon_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/images/pig_lighting_cannon_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "turtle_spikes"
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "turtle_no_spikes"
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_no_spikes_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "turtle_spikes_in"
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_in_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "turtle_spikes_out"
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_spikes_out_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "turtle_hit"
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_hit_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_hit_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_hit_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_hit_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/turtle/images/turtle_hit_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pink_star_idle"
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "pink_star_celebrate"
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_celebrate_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_celebrate_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_celebrate_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_celebrate_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_celebrate_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/pink_star_celebrate_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "disappearance"
+  images {
+    image: "/pixelfrog/characters/images/disappearing_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/characters/images/disappearing_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/characters/images/disappearing_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/characters/images/disappearing_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/characters/images/disappearing_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/characters/images/disappearing_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/characters/images/disappearing_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "fierce_tooth_idle"
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "fierce_tooth_celebrate"
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_celebrate_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_celebrate_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_celebrate_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_celebrate_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_celebrate_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/fierce_tooth_celebrate_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "crabby_idle"
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_idle_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "crabby_celebrate"
+  images {
+    image: "/pixelfrog/hostages/images/crabby_celebrate_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_celebrate_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_celebrate_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_celebrate_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_celebrate_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/hostages/images/crabby_celebrate_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0

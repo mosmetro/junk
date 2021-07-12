@@ -1,0 +1,36 @@
+tile_set: "/maze/e1/episode1.tilesource"
+layers {
+  id: "static_geometry"
+  z: 0.0
+  is_visible: 1
+  cell {
+    x: 79
+    y: -68
+    tile: 15
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -24
+    y: -20
+    tile: 15
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 27
+    y: 18
+    tile: 15
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -24
+    y: 19
+    tile: 15
+    h_flip: 0
+    v_flip: 0
+  }
+}
+material: "/builtins/materials/tile_map.material"
+blend_mode: BLEND_MODE_ALPHA

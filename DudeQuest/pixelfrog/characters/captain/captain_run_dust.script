@@ -1,0 +1,18 @@
+local defold = _G
+
+local ANIMATION = hash("captain_run_dust")
+
+local function on_complete(_, _, _, sender)
+   go.delete(sender.path)
+end
+
+function defold.init()
+   sprite.play_flipbook("#sprite", ANIMATION, on_complete)
+   -- self.destroy_time = runtime.current_time + 5
+end
+
+-- function update(self)
+--    if runtime.current_time > self.destroy_time then
+--       go.delete()
+--    end
+-- end

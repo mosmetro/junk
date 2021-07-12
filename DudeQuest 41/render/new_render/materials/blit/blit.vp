@@ -1,0 +1,10 @@
+varying mediump vec2 uv;
+attribute highp vec4 position;
+attribute mediump vec2 texcoord0;
+
+
+void main()
+{
+	gl_Position = position;
+	uv = texcoord0;
+}

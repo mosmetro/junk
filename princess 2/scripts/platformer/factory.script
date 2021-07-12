@@ -1,0 +1,15 @@
+local defold = _G
+
+-- import
+local FX = require("scripts.platformer.fx")
+
+-- localization
+local url = msg.url
+
+---------------------------------------
+-- defold.init
+---------------------------------------
+
+function defold.init ()
+	FX.FACTORY = url("#fx")
+end -- init

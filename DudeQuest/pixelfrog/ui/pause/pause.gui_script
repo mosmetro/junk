@@ -1,0 +1,117 @@
+local ui = require("m.ui.ui")
+-- local utils = require("m.utils")
+local nc = require("m.notification_center")
+local const = require("m.constants")
+
+local Button = require("pixelfrog.ui.button")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local get_node = gui.get_node
+local hash = hash
+
+local on_level_did_disappear
+
+local function enable()
+   msg.post("#", msg.ENABLE)
+   -- runtime.execute_in_context(ui.backdrop_context.enable, ui.backdrop_context, nil, 0.5)
+end -- enable
+
+local function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable
+
+local function on_level_did_disappear_wrapper()
+   runtime.execute_in_context(on_level_did_disappear, ui.pause_context)
+end -- on_level_did_disappear_wrapper
+
+function on_level_did_disappear()
+   msg.post("#", msg.DISABLE)
+   msg.post("#backdrop", msg.DISABLE)
+   nc.remove_observer(on_level_did_disappear_wrapper, const.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+end -- on_level_did_disappear
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   ui.pause_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+   self.disable = disable
+
+   local resume_button = Button.new {
+      node = get_node("resume"),
+      released_animation = hash("resume_released"),
+      pressed_animation = hash("resume_pressed"),
+      aabb = { -100, -26, -60, 18 },
+      callback = function()
+         ui.first_responder = nil
+         msg.post("main:/main#game", msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+         msg.post("#", msg.DISABLE)
+         runtime.execute_in_context(ui.backdrop_context.disable, ui.backdrop_context)
+         runtime.execute_in_context(ui.single_touch_controls_context.disable, ui.single_touch_controls_context)
+         runtime.execute_in_context(ui.ingame_controls_context.enable, ui.ingame_controls_context)
+      end,
+   }
+
+   local restart_button = Button.new {
+      node = get_node("restart"),
+      released_animation = hash("restart_released"),
+      pressed_animation = hash("restart_pressed"),
+      aabb = { -60, -26, -20, 18 },
+      callback = function()
+         ui.first_responder = nil
+         msg.post("main:/main#game", msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+         runtime.execute_in_context(ui.single_touch_controls_context.disable, ui.single_touch_controls_context)
+         nc.add_observer(on_level_did_disappear_wrapper, const.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+         nc.post_notification(const.LEVEL_RESTART_NOTIFICATION)
+      end,
+   }
+
+   local home_button = Button.new {
+      node = get_node("home"),
+      released_animation = hash("home_released"),
+      pressed_animation = hash("home_pressed"),
+      aabb = { -20, -26, 20, 18 },
+      callback = function()
+         ui.first_responder = nil
+         msg.post("main:/main#game", msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+         runtime.execute_in_context(ui.single_touch_controls_context.disable, ui.single_touch_controls_context)
+         nc.add_observer(on_level_did_disappear_wrapper, const.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+         nc.post_notification(const.EXIT_GAME_NOTIFICATION)
+      end,
+   }
+
+   local audio_button = Button.new {
+      node = get_node("audio"),
+      released_animation = hash("audio_released"),
+      pressed_animation = hash("audio_pressed"),
+      aabb = { 20, -26, 60, 18 },
+      callback = function()
+         ui.first_responder = ui.audio_context
+         msg.post("#", msg.DISABLE)
+         runtime.execute_in_context(ui.audio_context.enable, ui.audio_context)
+      end,
+   }
+
+   local controls_button = Button.new {
+      node = get_node("controls"),
+      released_animation = hash("controls_released"),
+      pressed_animation = hash("controls_pressed"),
+      aabb = { 60, -26, 100, 18 },
+      callback = function()
+         ui.first_responder = ui.ui_touch_controls_context
+         msg.post("#", msg.DISABLE)
+         runtime.execute_in_context(ui.backdrop_context.disable, ui.backdrop_context)
+         runtime.execute_in_context(ui.ui_touch_controls_context.enable, ui.ui_touch_controls_context)
+      end,
+   }
+
+   self.controls = {
+      resume_button,
+      restart_button,
+      home_button,
+      audio_button,
+      controls_button,
+   }
+end -- defold.init

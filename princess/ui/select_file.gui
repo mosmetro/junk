@@ -1,0 +1,1482 @@
+script: "/scripts/platformer/gui/select_file.gui_script"
+fonts {
+  name: "bebas_regular_bitmap_64"
+  font: "/assets/fonts/bebas_regular_bitmap_64.font"
+}
+fonts {
+  name: "bebas_bold_bitmap_96"
+  font: "/assets/fonts/bebas_bold_bitmap_96.font"
+}
+textures {
+  name: "shantae_ui"
+  texture: "/assets/shantae_ui.atlas"
+}
+background_color {
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  w: 0.0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/black_1x1"
+  id: "root"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 1.0
+    y: 1.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/black_1x1"
+  id: "backdrop"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "root"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 0.66
+  template_node_child: false
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 100.0
+    y: 371.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Choose a file to play"
+  font: "bebas_bold_bitmap_96"
+  id: "title/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_NW
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "root"
+  layer: "text"
+  inherit_alpha: false
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.1
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/black_1x1"
+  id: "controls_root"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "root"
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 160.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 660.0
+    y: 160.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/transparent_1x1"
+  id: "file1/sensor"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_N
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "controls_root"
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: -60.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 600.0
+    y: 120.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_button_background"
+  id: "file1/background"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "file1/sensor"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 22.0
+    y: 30.0
+    z: 22.0
+    w: 40.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 0.5
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 600.0
+    y: 120.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_button_released"
+  id: "file1/image"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "file1/background"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 22.0
+    y: 30.0
+    z: 22.0
+    w: 40.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "file 1:  new game"
+  font: "bebas_regular_bitmap_64"
+  id: "file1/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "file1/image"
+  layer: "text"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.04
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 660.0
+    y: 160.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/transparent_1x1"
+  id: "file2/sensor"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_N
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "controls_root"
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: -60.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 600.0
+    y: 120.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_button_background"
+  id: "file2/background"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "file2/sensor"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 22.0
+    y: 30.0
+    z: 22.0
+    w: 40.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 0.5
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 600.0
+    y: 120.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_button_released"
+  id: "file2/image"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "file2/background"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 22.0
+    y: 30.0
+    z: 22.0
+    w: 40.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "file 2:  01 h 12 m"
+  font: "bebas_regular_bitmap_64"
+  id: "file2/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "file2/image"
+  layer: "text"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.04
+}
+nodes {
+  position {
+    x: 0.0
+    y: -160.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 660.0
+    y: 160.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/transparent_1x1"
+  id: "file3/sensor"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_N
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "controls_root"
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: -60.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 600.0
+    y: 120.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_button_background"
+  id: "file3/background"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "file3/sensor"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 22.0
+    y: 30.0
+    z: 22.0
+    w: 40.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 0.5
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 600.0
+    y: 120.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_button_released"
+  id: "file3/image"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "file3/background"
+  layer: "image"
+  inherit_alpha: false
+  slice9 {
+    x: 22.0
+    y: 30.0
+    z: 22.0
+    w: 40.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_MANUAL
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "file 3:  new game"
+  font: "bebas_regular_bitmap_64"
+  id: "file3/text"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "file3/image"
+  layer: "text"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.04
+}
+layers {
+  name: "image"
+}
+layers {
+  name: "text"
+}
+material: "/custom/materials/gui_linear.material"
+layouts {
+  name: "iphone"
+  nodes {
+    position {
+      x: 960.0
+      y: 540.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 1922.0
+      y: 1082.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "backdrop"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    parent: "root"
+    layer: "image"
+    inherit_alpha: false
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 0.66
+    overridden_fields: 1
+    overridden_fields: 4
+    overridden_fields: 38
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+  nodes {
+    position {
+      x: 100.0
+      y: 1030.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 200.0
+      y: 100.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_TEXT
+    blend_mode: BLEND_MODE_ALPHA
+    text: "Choose a file to play"
+    font: "bebas_bold_bitmap_96"
+    id: "title/text"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_NW
+    outline {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    shadow {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    adjust_mode: ADJUST_MODE_FIT
+    line_break: false
+    parent: "root"
+    layer: "text"
+    inherit_alpha: false
+    alpha: 1.0
+    outline_alpha: 1.0
+    shadow_alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    text_leading: 1.0
+    text_tracking: 0.1
+  }
+  nodes {
+    position {
+      x: 960.0
+      y: 600.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "controls_root"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    parent: "root"
+    layer: "image"
+    inherit_alpha: true
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+}
+layouts {
+  name: "ipad"
+  nodes {
+    position {
+      x: 1112.0
+      y: 834.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 2226.0
+      y: 1670.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "backdrop"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    parent: "root"
+    layer: "image"
+    inherit_alpha: false
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 0.66
+    overridden_fields: 1
+    overridden_fields: 4
+    overridden_fields: 38
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+  nodes {
+    position {
+      x: 100.0
+      y: 1618.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 200.0
+      y: 100.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_TEXT
+    blend_mode: BLEND_MODE_ALPHA
+    text: "Choose a file to play"
+    font: "bebas_bold_bitmap_96"
+    id: "title/text"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_NW
+    outline {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    shadow {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    adjust_mode: ADJUST_MODE_FIT
+    line_break: false
+    parent: "root"
+    layer: "text"
+    inherit_alpha: false
+    alpha: 1.0
+    outline_alpha: 1.0
+    shadow_alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    text_leading: 1.0
+    text_tracking: 0.1
+  }
+  nodes {
+    position {
+      x: 1112.0
+      y: 834.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "controls_root"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    parent: "root"
+    layer: "image"
+    inherit_alpha: true
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+}
+layouts {
+  name: "iphonex"
+  nodes {
+    position {
+      x: 1169.0
+      y: 540.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 2340.0
+      y: 1082.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "backdrop"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    parent: "root"
+    layer: "image"
+    inherit_alpha: false
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 0.66
+    overridden_fields: 1
+    overridden_fields: 4
+    overridden_fields: 38
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+  nodes {
+    position {
+      x: 100.0
+      y: 1030.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 200.0
+      y: 100.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_TEXT
+    blend_mode: BLEND_MODE_ALPHA
+    text: "Choose a file to play"
+    font: "bebas_bold_bitmap_96"
+    id: "title/text"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_NW
+    outline {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    shadow {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    adjust_mode: ADJUST_MODE_FIT
+    line_break: false
+    parent: "root"
+    layer: "text"
+    inherit_alpha: false
+    alpha: 1.0
+    outline_alpha: 1.0
+    shadow_alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    text_leading: 1.0
+    text_tracking: 0.1
+  }
+  nodes {
+    position {
+      x: 1169.0
+      y: 600.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "controls_root"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    parent: "root"
+    layer: "image"
+    inherit_alpha: true
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+}
+adjust_reference: ADJUST_REFERENCE_PARENT
+max_nodes: 512

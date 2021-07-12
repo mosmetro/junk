@@ -1,0 +1,54 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local MSG = require("scripts.shared.messages")
+local GROUP = require("scripts.shared.groups")
+-- local utils = require("scripts.shared.utils")
+-- local nc = require("scripts.shared.notification_center")
+
+-- localization
+local next = next
+-- local execute_in_context = utils.execute_in_context
+
+local CAMERA = GROUP.CAMERA
+
+function defold.init(self)
+	self.objects = {}
+	self.is_active = false
+end -- init
+
+-- function defold.final(self)
+-- end -- final
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.TRIGGER_RESPONSE then
+		if message.enter then
+			if message.other_group == CAMERA then
+				self.is_active = true
+				for _, context in next, self.objects do
+					-- execute_in_context(context, context.enable)
+					context:enable()
+				end
+			else
+				local context = game.get_shared_data(message.other_id).context
+				self.objects[message.other_id] = context
+				if self.is_active then
+					context:enable()
+				else
+					context:disable()
+				end
+			end
+		else -- exit
+			if message.other_group == CAMERA then
+				self.is_active = false
+				for _, context in next, self.objects do
+					-- execute_in_context(context, context.disable)
+					context:disable()
+				end
+			else
+				self.objects[message.other_id] = nil
+			end
+		end
+	end
+end -- on_message

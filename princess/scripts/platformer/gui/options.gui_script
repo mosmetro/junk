@@ -1,0 +1,170 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+-- local player_data = require("scripts.platformer.player_data")
+
+-- localization
+local execute_in_context = utils.execute_in_context
+local translate = translations.translate
+local next = next
+local post = msg.post
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_text = gui.set_text
+local set_enabled = gui.set_enabled
+
+-- functions
+local enable
+local disable
+local on_language_change
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.options_context = self
+	disable(self)
+	set_render_order(8)
+
+	local audio_button = SimpleButton.new {
+		sensor_node = get_node("audio/sensor"),
+		image_node = get_node("audio/image"),
+		text_node = get_node("audio/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			execute_in_context(ui.audio_options_context, ui.audio_options_context.enable, ui.first_responder)
+			execute_in_context(ui.first_responder, ui.first_responder.disable)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_BUTTON_AUDIO))
+		end,
+	}
+
+	local language_button = SimpleButton.new {
+		sensor_node = get_node("language/sensor"),
+		image_node = get_node("language/image"),
+		text_node = get_node("language/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			execute_in_context(ui.language_options_context, ui.language_options_context.enable, ui.first_responder)
+			execute_in_context(ui.first_responder, ui.first_responder.disable)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_BUTTON_LANGUAGE))
+		end,
+	}
+
+	local quit_button = SimpleButton.new {
+		sensor_node = get_node("quit/sensor"),
+		image_node = get_node("quit/image"),
+		text_node = get_node("quit/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			execute_in_context(ui.quit_warning_context, ui.quit_warning_context.enable, ui.first_responder)
+			execute_in_context(ui.first_responder, ui.first_responder.disable)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_MAIN_MENU))
+		end,
+	}
+
+	local close_button = SimpleButton.new {
+		sensor_node = get_node("close/sensor"),
+		image_node = get_node("close/image"),
+		text_node = get_node("close/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			disable(self)
+			if self.return_context then
+				execute_in_context(self.return_context, self.return_context.enable)
+				self.return_context = nil
+			end
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_COMMON_BUTTON_CLOSE))
+		end,
+	}
+
+	self.controls = {
+		audio_button,
+		language_button,
+		quit_button,
+		close_button,
+	}
+
+	self.backdrop = get_node("backdrop")
+
+	self.enable = enable
+	self.disable = disable
+	nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_change)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	ui.options_context = nil
+	nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id)
+	if self.return_context and (message_id == MSG.ENABLE) then
+		ui.first_responder = self
+	end
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable (self, return_context)
+	if return_context then
+		self.return_context = return_context
+	end
+	self.controls[3].show(self.return_context == nil)
+	self.controls[4].show(self.return_context ~= nil)
+	set_enabled(self.backdrop, self.return_context ~= nil)
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable(self)
+	if self.return_context then
+		ui.first_responder = nil
+	end
+	post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- on_language_change
+---------------------------------------
+
+function on_language_change (self)
+	local title_node = get_node("title/text")
+	set_text(title_node, translate(translations.OPTIONS_TITLE))
+
+	for _, control in next, self.controls do
+		if control.on_language_change then
+			control:on_language_change()
+		end
+	end
+end -- on_language_change

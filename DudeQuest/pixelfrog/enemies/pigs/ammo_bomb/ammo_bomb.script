@@ -1,0 +1,17 @@
+local Prototype = require("pixelfrog.enemies.pigs.ammo_bomb.ammo_bomb")
+
+local defold = _G
+
+go.property("damage_points", 0)
+go.property("velocity_x", 0)
+go.property("velocity_y", -1) -- so it's always drop down (with zero velocity it's may hanging in  the air)
+go.property("gravity", -500)
+go.property("direction", 1)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

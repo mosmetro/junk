@@ -1,0 +1,387 @@
+require("m.msg_patcher")
+require("m.fastmath_patcher")
+require("m.runtime_patcher")
+
+local colors = require("m.colors")
+local layers = require("m.layers")
+local utils = require("m.utils")
+
+local PointLight = require("lighting.point_light")
+local game = require("maze.game")
+local global = require("game.global")
+
+local defold = _G
+
+local vector4_set_x = fastmath.vector4_set_x
+local vector4_set_xy = fastmath.vector4_set_xy
+local clear = render.clear
+local disable_state = render.disable_state
+local enable_state = render.enable_state
+local set_depth_mask = render.set_depth_mask
+local set_stencil_mask = render.set_stencil_mask
+local set_blend_func = render.set_blend_func
+local set_viewport = render.set_viewport
+local set_view = render.set_view
+local set_projection = render.set_projection
+local draw = render.draw
+local set_render_target = render.set_render_target
+local enable_texture = render.enable_texture
+local disable_texture = render.disable_texture
+local enable_material = render.enable_material
+local disable_material = render.disable_material
+local BUFFER_COLOR_BIT = render.BUFFER_COLOR_BIT
+local BUFFER_STENCIL_BIT = render.BUFFER_STENCIL_BIT
+local STATE_STENCIL_TEST = render.STATE_STENCIL_TEST
+local STATE_CULL_FACE = render.STATE_CULL_FACE
+local STATE_BLEND = render.STATE_BLEND
+local BLEND_SRC_ALPHA = render.BLEND_SRC_ALPHA
+local BLEND_ONE_MINUS_SRC_ALPHA = render.BLEND_ONE_MINUS_SRC_ALPHA
+-- local BLEND_ONE = render.BLEND_ONE
+-- local BLEND_ZERO = render.BLEND_ZERO
+local RENDER_TARGET_DEFAULT = render.RENDER_TARGET_DEFAULT
+-- local get_width = render.get_render_target_width
+-- local get_height = render.get_render_target_height
+
+-- local window_width
+-- local window_height
+local view_width
+local view_height
+local view_half_width
+local view_half_height
+local viewport_left
+local viewport_bottom
+local viewport_width
+local viewport_height
+
+local view_matrix
+local projection_matrix
+local gui_projection
+
+local BLIT = hash("blit")
+local REFRACTION = hash("refraction")
+-- local BRIGHTNESS = hash("brightness")
+-- local GAUSSIAN = hash("gaussian")
+-- local DOWNSAMPLE = hash("downsample")
+-- local COLOR_FILTER = hash("color_filter")
+
+local LOWREZ_POSTPROCESS_SIZE = 256
+
+local source_target
+local haze_target
+local light_target
+local shadow_target
+local h_pass_target
+local v_pass_target
+local final_target
+-- local water_distortion_target
+-- local mirror_target
+-- local downsample_targets = {}
+-- local brightness_target
+-- local bloom_target
+-- local offscreen_left = {}
+-- local offscreen_right = {}
+-- local downsample_sizes = {}
+
+-- local AMBIENT = vmath.vector4(1)
+-- local AMBIENT = vmath.vector4(0.38, 0.38, 0.38, 1)
+-- local AMBIENT = vmath.vector4(0.1, 0.1, 0.1, 1)
+
+local TILE
+local GUI_PREDICATE
+local HUD_PREDICATE
+local MASK_PREDICATE
+local LABEL
+local HAZE
+local LIGHT
+-- local PARTICLE
+local EFFECT
+-- local FORE
+local WATER
+
+local light_pred
+local shadow_pred
+
+local buffers = {
+   [BUFFER_COLOR_BIT] = colors.BLACK,
+   [BUFFER_STENCIL_BIT] = 0,
+}
+
+local uniforms = render.constant_buffer()
+local u_params = vmath.vector4()
+local u_water_level = vmath.vector4()
+
+function defold.init()
+   -- utils.log(fastmath.M4_IDENTITY)
+   local max_view_height = 212
+   local window_width = render.get_window_width()
+   local window_height = render.get_window_height()
+   local pixel_size = math.ceil(window_height / max_view_height)
+
+   local function pass(size)
+      local view_size = math.ceil(size / pixel_size)
+      local viewport_size = view_size * pixel_size
+      while (view_size % 2 ~= 0) or (size < viewport_size) do
+         view_size = view_size - 1
+         viewport_size = view_size * pixel_size
+      end
+      return view_size, math.floor(view_size * 0.5), math.floor((size - viewport_size) * 0.5), viewport_size
+   end
+
+   view_width, view_half_width, viewport_left, viewport_width = pass(window_width)
+   view_height, view_half_height, viewport_bottom, viewport_height = pass(window_height)
+
+   global.view_x = 0
+   global.view_y = 0
+   global.view_width = view_width
+   global.view_height = view_height
+   global.view_half_width = view_half_width
+   global.view_half_height = view_half_height
+   global.window_width = window_width
+   global.window_height = window_height
+   global.viewport_left = viewport_left
+   global.viewport_bottom = viewport_bottom
+   global.viewport_width = viewport_width
+   global.viewport_height = viewport_height
+   global.pixel_size = pixel_size
+
+   game.view_width = view_width
+   game.view_height = view_height
+   game.view_half_width = view_half_width
+   game.view_half_height = view_half_height
+   game.window_width = window_width
+   game.window_height = window_height
+   game.viewport_left = viewport_left
+   game.viewport_bottom = viewport_bottom
+   game.viewport_width = viewport_width
+   game.viewport_height = viewport_height
+   game.pixel_size = pixel_size
+
+   utils.log("pixel size", pixel_size)
+   utils.log("view size", view_width, view_height)
+   utils.log("viewport", viewport_left, viewport_bottom, viewport_width, viewport_height)
+   utils.log("window size", window_width, window_height)
+
+   TILE = render.predicate({ "tile" })
+   LABEL = render.predicate({ "label" })
+   BLIT = render.predicate({ "blit" })
+   HAZE = render.predicate({ "haze" })
+   LIGHT = render.predicate({ "light" })
+   EFFECT = render.predicate({ "effect" })
+   GUI_PREDICATE = render.predicate({ "gui" })
+   HUD_PREDICATE = render.predicate({ "hud" })
+   -- FORE = render.predicate({ "fore" })
+   -- PARTICLE = render.predicate({ "particle" })
+   WATER = render.predicate({ "water" })
+   MASK_PREDICATE = render.predicate({ "mask" })
+
+   light_pred = {
+      render.predicate({ "light1" }),
+      render.predicate({ "light2" }),
+      render.predicate({ "light3" }),
+      render.predicate({ "light4" }),
+      render.predicate({ "light5" }),
+      render.predicate({ "light6" }),
+      render.predicate({ "light7" }),
+      render.predicate({ "light8" }),
+      render.predicate({ "light9" }),
+      render.predicate({ "light10" }),
+   }
+
+   shadow_pred = {
+      render.predicate({ "shadow1" }),
+      render.predicate({ "shadow2" }),
+      render.predicate({ "shadow3" }),
+      render.predicate({ "shadow4" }),
+      render.predicate({ "shadow5" }),
+      render.predicate({ "shadow6" }),
+      render.predicate({ "shadow7" }),
+      render.predicate({ "shadow8" }),
+      render.predicate({ "shadow9" }),
+      render.predicate({ "shadow10" }),
+   }
+
+   local left = -view_half_width
+   local right = view_half_width
+   local bottom = -view_half_height
+   local top = view_half_height
+   local near = -1
+   local far = 1
+   layers.setup_depths(near + 0.01, far - 0.01)
+
+   view_matrix = vmath.matrix4()
+   game.view_matrix = view_matrix
+   global.view_matrix = view_matrix
+   projection_matrix = vmath.matrix4_orthographic(left, right, bottom, top, near, far)
+   gui_projection = vmath.matrix4_orthographic(0, window_width, 0, window_height, -1, 1)
+   game.projection_matrix = projection_matrix
+   global.projection_matrix = projection_matrix
+
+   local source_target_specs = {
+      [BUFFER_COLOR_BIT] = {
+         format = render.FORMAT_RGBA,
+         width = viewport_width,
+         height = viewport_height,
+      }
+   } -- source_target_specs
+   source_target = render.render_target("", source_target_specs)
+   final_target = render.render_target("", source_target_specs)
+
+   local haze_target_specs = {
+      [BUFFER_COLOR_BIT] = {
+         format = render.FORMAT_RGBA,
+         width = LOWREZ_POSTPROCESS_SIZE,
+         height = LOWREZ_POSTPROCESS_SIZE,
+      }
+   } -- haze_target_specs
+   haze_target = render.render_target("", haze_target_specs)
+   light_target = render.render_target("", haze_target_specs)
+   shadow_target = render.render_target("", haze_target_specs)
+   h_pass_target = render.render_target("", haze_target_specs)
+   v_pass_target = render.render_target("", haze_target_specs)
+
+   -- local water_distortion_target_specs = {
+   --    [BUFFER_COLOR_BIT] = {
+   --       format = render.FORMAT_RGBA,
+   --       width = 512,
+   --       height = 512,
+   --    }
+   -- } -- water_distortion_target_specs
+   -- water_distortion_target = render.render_target("", water_distortion_target_specs)
+
+end -- init
+
+function defold.update()
+   set_depth_mask(false)
+   set_stencil_mask(0xff)
+   disable_state(render.STATE_DEPTH_TEST)
+   disable_state(STATE_STENCIL_TEST)
+   disable_state(STATE_CULL_FACE)
+   enable_state(STATE_BLEND)
+   set_blend_func(BLEND_SRC_ALPHA, BLEND_ONE_MINUS_SRC_ALPHA)
+
+   set_projection(projection_matrix)
+   set_view(view_matrix)
+
+   set_viewport(0, 0, viewport_width, viewport_height)
+
+   set_render_target(final_target)
+   buffers[BUFFER_COLOR_BIT] = colors.TRANSPARENT_BLACK; clear(buffers)
+   draw(MASK_PREDICATE)
+
+   set_render_target(source_target)
+   buffers[BUFFER_COLOR_BIT] = colors.BLACK; clear(buffers)
+   enable_texture(1, final_target, BUFFER_COLOR_BIT)
+   draw(TILE)
+   disable_texture(1)
+
+   set_viewport(0, 0, LOWREZ_POSTPROCESS_SIZE, LOWREZ_POSTPROCESS_SIZE)
+
+   set_render_target(haze_target)
+   buffers[BUFFER_COLOR_BIT] = colors.BLACK; clear(buffers)
+   draw(HAZE)
+
+   set_render_target(shadow_target)
+   buffers[BUFFER_COLOR_BIT] = vmath.vector4(0.25, 0.25, 0.28, 1); clear(buffers)
+   -- buffers[BUFFER_COLOR_BIT] = vmath.vector4(1); clear(buffers)
+   draw(LIGHT)
+
+   for i = 1, 10 do
+      if PointLight[i] then
+         set_render_target(light_target)
+         buffers[BUFFER_COLOR_BIT] = colors.BLACK; clear(buffers)
+         draw(light_pred[i])
+
+         set_render_target(shadow_target)
+         render.set_color_mask(false, false, false, true)
+         buffers[BUFFER_COLOR_BIT] = colors.BLACK; clear(buffers)
+
+         set_blend_func(render.BLEND_ZERO, render.BLEND_ONE_MINUS_SRC_COLOR)
+         draw(shadow_pred[i])
+
+         render.set_color_mask(true, true, true, true)
+
+         set_blend_func(render.BLEND_DST_ALPHA, render.BLEND_ONE)
+         enable_texture(0, light_target, BUFFER_COLOR_BIT)
+         draw(BLIT)
+         disable_texture(0)
+      end
+   end
+
+   set_render_target(h_pass_target)
+   set_blend_func(BLEND_SRC_ALPHA, BLEND_ONE_MINUS_SRC_ALPHA)
+   enable_texture(0, shadow_target, BUFFER_COLOR_BIT)
+   render.enable_material("h_blur")
+   draw(BLIT)
+   render.disable_material()
+
+   set_render_target(v_pass_target)
+   enable_texture(0, h_pass_target, BUFFER_COLOR_BIT)
+   render.enable_material("v_blur")
+   draw(BLIT)
+   render.disable_material()
+
+   set_render_target(final_target)
+   set_viewport(0, 0, viewport_width, viewport_height)
+   disable_state(STATE_BLEND)
+   enable_texture(0, source_target, BUFFER_COLOR_BIT)
+   enable_texture(1, haze_target, BUFFER_COLOR_BIT)
+   enable_material(REFRACTION)
+   draw(BLIT)
+   disable_material()
+   disable_texture(1)
+   enable_state(STATE_BLEND)
+   enable_texture(0, v_pass_target, BUFFER_COLOR_BIT)
+   set_blend_func(render.BLEND_ZERO, render.BLEND_SRC_COLOR)
+   enable_material("blit_linear")
+   -- set_view(vmath.matrix4_orthographic(-game.view_half_width, game.view_half_width, game.view_half_height, -game.view_half_height, -1, 1))
+   draw(BLIT)
+   disable_material()
+
+   -- mirror
+   -- set_render_target(source_target)
+   -- enable_texture(0, final_target, BUFFER_COLOR_BIT)
+   -- disable_state(STATE_BLEND)
+   -- enable_material("blit_mirror")
+   -- buffers[BUFFER_COLOR_BIT] = colors.TRANSPARENT_BLACK; clear(buffers)
+   -- draw(BLIT)
+   -- disable_material()
+
+   set_viewport(viewport_left, viewport_bottom, viewport_width, viewport_height)
+
+   -- on screen
+   set_render_target(RENDER_TARGET_DEFAULT)
+   buffers[BUFFER_COLOR_BIT] = colors.BLACK; clear(buffers)
+   set_viewport(viewport_left, viewport_bottom, viewport_width, viewport_height)
+   disable_state(STATE_BLEND)
+   enable_texture(0, final_target, BUFFER_COLOR_BIT)
+   draw(BLIT)
+   if global.draw_water then
+      vector4_set_xy(u_params, runtime.current_time, -(global.view_x or 0)/global.view_width)
+      vector4_set_x(u_water_level, global.water_level)
+      uniforms.params = u_params
+      uniforms.water_level = u_water_level
+      draw(WATER, uniforms)
+   end
+
+   disable_texture(0)
+
+   enable_state(STATE_BLEND)
+   set_blend_func(BLEND_SRC_ALPHA, BLEND_ONE_MINUS_SRC_ALPHA)
+   -- draw(FORE)
+   draw(EFFECT)
+   draw(LABEL)
+
+   render.draw_debug3d()
+
+   -- draw hud
+   set_view(fastmath.M4_IDENTITY)
+   enable_state(STATE_STENCIL_TEST)
+   enable_state(STATE_BLEND)
+   draw(HUD_PREDICATE)
+
+   -- render.draw_debug3d()
+
+   set_viewport(0, 0, global.window_width, global.window_height)
+   set_projection(gui_projection)
+   draw(GUI_PREDICATE)
+end -- update

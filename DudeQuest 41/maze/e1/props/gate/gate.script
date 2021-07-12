@@ -1,0 +1,15 @@
+local Gate = require("maze.e1.props.gate.gate")
+-- local utils = require("m.utils")
+
+local defold = _G
+
+go.property("destination_map", hash(""))
+go.property("destination_gate", hash(""))
+
+function defold.init(self)
+   self.instance = Gate.new(self)
+end
+
+function defold.final(self)
+   Gate.free(self.instance)
+end

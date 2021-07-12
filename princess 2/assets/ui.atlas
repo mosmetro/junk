@@ -1,0 +1,290 @@
+images {
+  image: "/assets/multi_touch_controls/button_a.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_arrow.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_b.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_round_arrow.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_x.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_y.png"
+}
+images {
+  image: "/assets/multi_touch_controls/pause.png"
+}
+images {
+  image: "/assets/common/black_1x1.png"
+}
+images {
+  image: "/assets/common/ui_digit_0.png"
+}
+images {
+  image: "/assets/common/ui_digit_1.png"
+}
+images {
+  image: "/assets/common/ui_digit_2.png"
+}
+images {
+  image: "/assets/common/ui_digit_3.png"
+}
+images {
+  image: "/assets/common/ui_digit_4.png"
+}
+images {
+  image: "/assets/common/ui_digit_5.png"
+}
+images {
+  image: "/assets/common/ui_digit_6.png"
+}
+images {
+  image: "/assets/common/ui_digit_7.png"
+}
+images {
+  image: "/assets/common/ui_digit_8.png"
+}
+images {
+  image: "/assets/common/ui_digit_9.png"
+}
+images {
+  image: "/assets/common/ui_heart_full.png"
+}
+images {
+  image: "/assets/common/ui_heart_half.png"
+}
+images {
+  image: "/assets/common/ui_magic1_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic1_disabled.png"
+}
+images {
+  image: "/assets/common/ui_magic1_enabled.png"
+}
+images {
+  image: "/assets/common/ui_magic2_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic2_disabled.png"
+}
+images {
+  image: "/assets/common/ui_magic2_enabled.png"
+}
+images {
+  image: "/assets/common/ui_magic3_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic3_disabled.png"
+}
+images {
+  image: "/assets/common/ui_magic3_enabled.png"
+}
+images {
+  image: "/assets/common/ui_magic4_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic4_disabled.png"
+}
+images {
+  image: "/assets/common/ui_magic4_enabled.png"
+}
+images {
+  image: "/assets/common/ui_magic5_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic5_disabled.png"
+}
+images {
+  image: "/assets/common/ui_magic5_enabled.png"
+}
+images {
+  image: "/assets/common/ui_magic6_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic6_disabled.png"
+}
+images {
+  image: "/assets/common/ui_magic6_enabled.png"
+}
+images {
+  image: "/assets/common/ui_magic_ornament.png"
+}
+images {
+  image: "/assets/common/ui_princess_head.png"
+}
+images {
+  image: "/assets/common/ui_princess_head_small.png"
+}
+images {
+  image: "/assets/common/ui_star.png"
+}
+images {
+  image: "/assets/common/ui_magic_disabled_cost.png"
+}
+images {
+  image: "/assets/common/ui_magic_cost_0.png"
+}
+images {
+  image: "/assets/common/ui_magic_cost_2.png"
+}
+images {
+  image: "/assets/common/ui_magic_cost_3.png"
+}
+images {
+  image: "/assets/common/ui_magic_cost_4.png"
+}
+images {
+  image: "/assets/common/transparent_1x1.png"
+}
+images {
+  image: "/assets/single_touch_controls/blue_button_outline_pressed.png"
+}
+images {
+  image: "/assets/single_touch_controls/blue_button_outline_released.png"
+}
+images {
+  image: "/assets/single_touch_controls/orange_button_outline_pressed.png"
+}
+images {
+  image: "/assets/single_touch_controls/orange_button_outline_released.png"
+}
+images {
+  image: "/assets/common/marker.png"
+}
+images {
+  image: "/assets/common/worldmap.png"
+}
+images {
+  image: "/assets/common/grey_crossWhite.png"
+}
+images {
+  image: "/assets/common/panel_grey.png"
+}
+images {
+  image: "/assets/common/slider_up_grey.png"
+}
+images {
+  image: "/assets/common/slider_track_grey.png"
+}
+images {
+  image: "/assets/common/slider_end_grey.png"
+}
+images {
+  image: "/assets/common/slider_track_red.png"
+}
+images {
+  image: "/assets/common/slider_end_red.png"
+}
+images {
+  image: "/assets/common/slider_up_grey_active.png"
+}
+images {
+  image: "/assets/common/button_white_pressed.png"
+}
+images {
+  image: "/assets/common/button_white_released.png"
+}
+images {
+  image: "/assets/common/button_close_pressed.png"
+}
+images {
+  image: "/assets/common/button_close_released.png"
+}
+images {
+  image: "/assets/common/backdrop.png"
+}
+images {
+  image: "/assets/common/radio_base.png"
+}
+images {
+  image: "/assets/common/radio_dot.png"
+}
+images {
+  image: "/assets/common/arrow_up.png"
+}
+images {
+  image: "/assets/common/arrow_down.png"
+}
+images {
+  image: "/assets/common/arrow_left.png"
+}
+images {
+  image: "/assets/common/arrow_right.png"
+}
+images {
+  image: "/assets/common/hide_keyboard.png"
+}
+images {
+  image: "/assets/common/slider_end_blue.png"
+}
+images {
+  image: "/assets/common/slider_track_blue.png"
+}
+images {
+  image: "/assets/common/slider_up_grey_active_blue.png"
+}
+animations {
+  id: "ui_magic_charge_2_8"
+  images {
+    image: "/assets/common/ui_magic_cost_2.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_3.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_4.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_5.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_6.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_7.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "ui_magic_charge_8_2"
+  images {
+    image: "/assets/common/ui_magic_cost_2.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_3.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_4.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_5.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_6.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_7.png"
+  }
+  images {
+    image: "/assets/common/ui_magic_cost_8.png"
+  }
+  playback: PLAYBACK_ONCE_BACKWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

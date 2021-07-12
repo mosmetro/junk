@@ -1,0 +1,16 @@
+local defold = _G
+
+local MSG = require("scripts.shared.messages")
+
+local post = msg.post
+-- local url = msg.url
+local get_position = go.get_position
+
+go.property("platform", msg.url())
+go.property("index", 1)
+
+function defold.init (self)
+	-- local target = url(self.platform)
+	-- target.fragment = "script"
+	post(self.platform, MSG.SET_WAYPOINT, { index = self.index, position = get_position() })
+end

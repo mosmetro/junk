@@ -1,0 +1,52 @@
+local defold = _G
+
+-- import
+-- local MSG = require("scripts.shared.messages")
+-- local LAYER = require("scripts.shared.layers")
+-- local game = require("scripts.platformer.game")
+local nc = require("scripts.shared.notification_center")
+
+-- localization
+-- local set_context = game.set_context
+local set_position = go.set_position
+local get_position = go.get_position
+local get_id = go.get_id
+-- local animate = go.animate
+-- local vector3 = vmath.vector3
+-- local post = msg.post
+-- local PLAYBACK_LOOP_FORWARD = go.PLAYBACK_LOOP_FORWARD
+-- local EASING_LINEAR = go.EASING_LINEAR
+
+-- constants
+-- local POSITION_X = hash("position.x")
+local CAMERA_UPDATED_NOTIFICATION = hash("CAMERA_UPDATED_NOTIFICATION")
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+  local background = get_id("background")
+
+  local delta_x = -4
+  local delta_y = -4
+  local position = get_position(background)
+
+  local follow_camera = function(_, _, camera_x, camera_y) -- self, sender, camera_x, camera_y
+    position.x = delta_x * camera_x
+    position.y = delta_y * camera_y
+    set_position(position, background)
+  end
+
+  -- set_context(self.gameobject, self)
+  nc.add_observer(self, CAMERA_UPDATED_NOTIFICATION, follow_camera)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final (self)
+  nc.remove_observer(self)
+  -- set_context(self.gameobject, nil)
+end -- final

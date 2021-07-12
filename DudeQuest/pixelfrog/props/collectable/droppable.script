@@ -1,0 +1,23 @@
+local Prototype = require("pixelfrog.props.collectable.droppable")
+
+local defold = _G
+
+go.property("entity_width", 8)
+go.property("entity_height", 8)
+go.property("velocity_x", 0.1)
+go.property("velocity_y", 0.1) -- with zero velocity it's may hanging in  the air
+go.property("kind", hash(""))
+go.property("variant", hash(""))
+go.property("is_persistent", true)
+go.property("collect_vfx", msg.url())
+go.property("collect_sfx", hash(""))
+go.property("bounce_sfx", hash(""))
+go.property("animation", hash(""))
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end -- init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- final

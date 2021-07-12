@@ -1,0 +1,9 @@
+function init(self)
+   self.destroy_time = runtime.current_time + 5
+end
+
+function update(self)
+   if runtime.current_time > self.destroy_time then
+      go.delete()
+   end
+end

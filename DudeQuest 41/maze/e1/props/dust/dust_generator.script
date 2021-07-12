@@ -1,0 +1,15 @@
+local DustGenerator = require("maze.e1.props.dust.dust_generator")
+
+local defold = _G
+
+go.property("is_active", true)
+go.property("max_dust", 8)
+go.property("dust_factory", msg.url())
+
+function defold.init(self)
+   self.instance = DustGenerator.new(self)
+end -- init
+
+function defold.final(self)
+   DustGenerator.free(self.instance)
+end -- final

@@ -1,0 +1,103 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local ScrollView = require("scripts.shared.ui.controls.scrollview")
+-- local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+-- local player_data = require("scripts.platformer.player_data")
+-- local Textfield = require("scripts.shared.ui.controls.textfield")
+-- local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+-- local translations = require("scripts.platformer.translations")
+-- local nc = require("scripts.shared.notification_center")
+-- local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+-- local execute_in_context = utils.execute_in_context
+-- local translate = translations.translate
+-- local hash = hash
+local next = next
+local post = msg.post
+-- local url = msg.url
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+-- local set_text = gui.set_text
+-- local vector3 = vmath.vector3
+
+-- functions
+local enable
+local disable
+
+---------------------------------------
+
+-- init
+
+---------------------------------------
+
+function defold.init (self)
+	ui.key_items_context = self
+	disable()
+	set_render_order(2)
+
+	local scrollview = ScrollView.new {
+		content_node = get_node("content_node"),
+		clip_node = get_node("clip_node"),
+		-- horizontal_scroll_enabled = false,
+		-- vertical_scroll_enabled = false,
+		controls = {
+		},
+	}
+
+	self.controls = {
+		scrollview,
+	}
+
+	self.enable = enable
+	self.disable = disable
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final()
+	ui.key_items_context = nil
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function defold.update (self, dt)
+	for _, control in next, self.controls do
+		if control.update then
+			control.update(dt)
+		end
+	end
+end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id)
+	if message_id == MSG.ENABLE then
+		ui.first_responder = self
+	end
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable ()
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end -- disable

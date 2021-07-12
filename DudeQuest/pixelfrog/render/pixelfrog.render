@@ -1,0 +1,9 @@
+script: "/pixelfrog/render/pixelfrog.render_script"
+materials {
+  name: "blit"
+  material: "/pixelfrog/render/materials/blit/blit.material"
+}
+materials {
+  name: "refraction"
+  material: "/pixelfrog/render/materials/refraction/refraction.material"
+}

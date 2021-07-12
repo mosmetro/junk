@@ -1,0 +1,248 @@
+images {
+  image: "/pixelfrog/effects/sword_hit/images/hit_circle.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/effects/sword_hit/images/hit_flash.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/effects/images/hit_spark.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/effects/images/effect_circle1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/effects/images/shantae_smoke.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+animations {
+  id: "explosion"
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_9.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_10.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_11.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/explosion/images/shantae_explosion_12.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 25
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "small_puff"
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/small_puff/images/small_puff_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "generic_collect"
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/generic_collect/images/generic_collect_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "coin_collect"
+  images {
+    image: "/pixelfrog/effects/coin_collect/images/effect_coin_collect_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/coin_collect/images/effect_coin_collect_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/coin_collect/images/effect_coin_collect_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/effects/coin_collect/images/effect_coin_collect_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "ammo_bomb_explosion"
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/enemies/pigs/ammo_bomb/images/ammo_bomb_explosion_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "cannon_fire_effect"
+  images {
+    image: "/pixelfrog/props/cannon/images/cannon_fire_effect_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/cannon/images/cannon_fire_effect_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/cannon/images/cannon_fire_effect_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/cannon/images/cannon_fire_effect_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/cannon/images/cannon_fire_effect_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/cannon/images/cannon_fire_effect_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "blank"
+  images {
+    image: "/pixelfrog/common/images/blank_1x1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0

@@ -1,0 +1,42 @@
+name: "default"
+collection_instances {
+  id: "bullet_debris1"
+  collection: "/pixelfrog/enemies/trunk/bullet/debris/trunk_bullet_debris1_r.collection"
+  position {
+    x: -2.0
+    y: -2.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "bullet_debris2"
+  collection: "/pixelfrog/enemies/trunk/bullet/debris/trunk_bullet_debris2_r.collection"
+  position {
+    x: -6.0
+    y: -2.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

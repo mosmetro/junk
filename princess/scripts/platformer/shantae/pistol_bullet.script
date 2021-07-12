@@ -1,0 +1,74 @@
+-- import
+local LAYER = require("scripts.shared.layers")
+local MSG = require("scripts.shared.messages")
+local FX = require("scripts.platformer.fx")
+-- local GRP = require("scripts.shared.groups")
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local get_position = go.get_position
+local animate = go.animate
+local delete = go.delete
+local create_gameobject = factory.create
+local play_flipbook = sprite.play_flipbook
+local get_context = game.get_context
+local execute_in_context = utils.execute_in_context
+
+-- functions
+local on_complete
+
+-- constants
+local PLAYBACK = go.PLAYBACK_ONCE_FORWARD
+local EASING = go.EASING_LINEAR
+local POSITION_X = hash("position.x")
+local IDENTITY = vmath.quat()
+local ONE = vmath.vector3(1)
+local RIGHT = hash("shantae_pistol_bullet_idle_right_1")
+local LEFT = hash("shantae_pistol_bullet_idle_left_1")
+
+-- properties
+go.property("direction", 1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  -- go.animate(url, property, playback, to, easing, duration, delay, complete_function)
+  if self.direction == 1 then
+    play_flipbook("#sprite", RIGHT)
+    animate(".", POSITION_X, PLAYBACK, get_position().x + 500, EASING, 1.5, 0.02, on_complete)
+  else
+    play_flipbook("#sprite", LEFT)
+    animate(".", POSITION_X, PLAYBACK, get_position().x - 500, EASING, 1.5, 0.02, on_complete)
+  end
+  self.is_hit_target = false
+end -- init
+
+function defold.on_message(self, message_id, message)
+  if (not self.is_hit_target) and (message_id == MSG.CONTACT_POINT_RESPONSE) then
+    self.is_hit_target = true
+    local position = get_position()
+    position.x = message.position.x
+    local damage_receiver_context = get_context(message.other_id)
+    if damage_receiver_context and damage_receiver_context.apply_damage then
+      position.z = LAYER.FX_1
+      create_gameobject(FX.IMPACT_FACTORY, position, IDENTITY, nil, ONE)
+      execute_in_context(damage_receiver_context, damage_receiver_context.apply_damage)
+    else
+      position.z = LAYER.DEBRIS_1
+      create_gameobject(self.direction == 1 and FX.PISTOL_BULLET_IMPACT_RIGHT_FACTORY or FX.PISTOL_BULLET_IMPACT_LEFT_FACTORY, position, IDENTITY, nil, ONE)
+    end
+    delete()
+  end
+end
+
+---------------------------------------
+-- on_complete
+---------------------------------------
+
+function on_complete()
+  delete()
+end -- on_complete

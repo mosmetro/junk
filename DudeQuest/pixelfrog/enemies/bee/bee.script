@@ -1,0 +1,25 @@
+local Bee = require("pixelfrog.enemies.bee.bee")
+
+local defold = _G
+
+go.property("health_points", 1)
+go.property("damage_points", 1)
+go.property("activator", hash(""))
+
+go.property("name", hash(""))
+go.property("start_waypoint", 1)
+go.property("speed", 0)
+go.property("wait_time", 0)
+go.property("easing_factor", 1)
+
+go.property("bullet_speed", 200)
+go.property("bullet_damage_points", 1)
+go.property("shots_per_attack", 3)
+
+function defold.init(self)
+   self.instance = Bee.new(self)
+end
+
+function defold.final(self)
+   Bee.free(self.instance)
+end

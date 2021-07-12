@@ -1,0 +1,19 @@
+local Prototype = require("pixelfrog.enemies.pigs.pig_cannoneer.pig_cannoneer")
+
+local defold = _G
+
+go.property("health_points", 1)
+go.property("damage_points", 1)
+go.property("horizontal_look", 0)
+go.property("fire_rate", 1.5)
+go.property("drop_gold_coin", false)
+go.property("cannon_name", hash(""))
+go.property("activator", hash(""))
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

@@ -1,0 +1,159 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local GRP = require("scripts.shared.groups")
+local game = require("scripts.platformer.game")
+local lights = require("scripts.shared.lights")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local delete = go.delete
+local get_context = game.get_context
+local execute_in_context = utils.execute_in_context
+local play_flipbook = sprite.play_flipbook
+local timer_delay = timer.delay
+local post = msg.post
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+local get_world_position = go.get_world_position
+local vector4 = vmath.vector4
+-- local get_id = go.get_id
+-- local url = msg.url
+local animate = go.animate
+
+-- constants
+local BLAST_DURATION = 1 / 24 * 8 -- 8 frames of 12 frame animation (24 fps)
+local EXPLOSION_ANIMATION = hash("shantae_explosion")
+local UPDATE_GROUP = game.update_group_lights
+local FALLOFF_Z = hash("falloff.z")
+local PLAYBACK = go.PLAYBACK_ONCE_FORWARD
+local EASING = go.EASING_INQUINT
+
+-- functions
+local animation_complete
+local blast_complete
+local enable
+local disable
+local frame_update
+
+-- properties
+go.property("falloff", vmath.vector4(0.1, 0, 35, 1))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.color = vector4(1)
+  self.light_position = vector4(0, 0, 0, 1)
+  enable(self)
+
+  animate("#script", FALLOFF_Z, PLAYBACK, 500, EASING, BLAST_DURATION, 0, disable)
+  play_flipbook("#sprite", EXPLOSION_ANIMATION, animation_complete)
+  timer_delay(BLAST_DURATION, false, blast_complete)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  disable(self)
+	remove_update_callback(self, UPDATE_GROUP)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, _)
+	local position = get_world_position(self.gameobject)
+  local light = self.light
+  local light_position = self.light_position
+  light_position.x = position.x - lights.camera_position.x + game.window.half_logic_width
+  light_position.y = position.y - lights.camera_position.y + game.window.half_logic_height
+  local screen_pos = game.ingame_projection * light_position
+  screen_pos.x = screen_pos.x * 0.5
+  screen_pos.y = screen_pos.y * 0.5
+
+  local constants = lights.constants
+  constants[light.position] = screen_pos
+  constants[light.color] = self.color
+  constants[light.falloff] = self.falloff
+end -- frame_update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+  if message_id == MSG.TRIGGER_RESPONSE then
+    if message.other_group == GRP.CAMERA then
+      if message.enter then
+        enable(self)
+      else -- exit
+        disable(self)
+      end
+    elseif message.enter then
+      local context = get_context(message.other_id)
+      if context.apply_damage then
+        execute_in_context(context, context.apply_damage, 5) -- Shantae cannon does 5 damage?
+      end
+    end
+  end
+end -- on_message
+
+---------------------------------------
+-- animation_complete
+---------------------------------------
+
+function animation_complete()
+  delete()
+end -- animation_complete
+
+---------------------------------------
+-- blast_complete
+---------------------------------------
+
+function blast_complete()
+  post("#collisionobject_blast", MSG.DISABLE)
+end -- blast_complete
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable(self)
+  -- utils.log("Try enable light...")
+  if self.light then
+    -- utils.log("Skip. Already enabled.")
+    return
+  end
+  -- utils.log("Try get light...")
+  self.light = lights.pop()
+  if self.light then
+    self.falloff.w = 1
+    frame_update(self)
+    add_update_callback(self, frame_update, UPDATE_GROUP)
+    -- utils.log("Success.")
+  -- else utils.log("Failed to get available light.")
+  end
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable(self)
+  -- utils.log("Try disable light...")
+  if self.light then
+    remove_update_callback(self, UPDATE_GROUP)
+    self.falloff.w = 0
+    frame_update(self)
+    lights.push(self.light)
+    self.light = nil
+    -- utils.log("Success.")
+  -- else utils.log("Skip. Already disabled.")
+  end
+
+end -- disable

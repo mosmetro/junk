@@ -1,0 +1,46 @@
+-- import
+local SND = require("scripts.platformer.sound")
+
+-- localization
+local defold = _G
+local hash = hash
+local delete = go.delete
+local set_position = go.set_position
+local get_world_position = go.get_world_position
+local play_flipbook = sprite.play_flipbook
+local play_sound = SND.play_sound
+
+-- functions
+local on_complete
+
+-- constants
+local NO_SOUNDFX = hash("")
+
+-- properties
+go.property("animation", hash(""))
+go.property("offset", vmath.vector3())
+go.property("soundfx", hash(""))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	local position = get_world_position()
+	position.x = position.x + self.offset.x
+	position.y = position.y + self.offset.y
+	position.z = self.offset.z
+	set_position(position)
+  play_flipbook("#sprite", self.animation, on_complete)
+	if self.soundfx ~= NO_SOUNDFX then
+		play_sound(self.soundfx)
+	end
+end -- init
+
+---------------------------------------
+-- on_complete
+---------------------------------------
+
+function on_complete()
+  delete()
+end -- on_complete

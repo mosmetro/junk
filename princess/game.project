@@ -1,0 +1,77 @@
+[project]
+title = Princess
+version = 0.1
+custom_resources = banks
+dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v1.0.5.zip
+
+[fmod]
+speaker_mode = stereo
+lib_path = /fmod_res
+
+[bootstrap]
+main_collection = /shantae/main.collectionc
+render = /custom/render/grade.renderc
+
+[input]
+game_binding = /input/game.input_bindingc
+use_accelerometer = 0
+gamepads = /custom/input/default.gamepadsc
+
+[display]
+width = 1136
+height = 640
+display_profiles = /input/default.display_profilesc
+update_frequency = 60
+vsync = 0
+
+[physics]
+scale = 0.0625
+gravity_y = -200.0
+debug_scale = 20.0
+ray_cast_limit_2d = 1024
+debug_alpha = 0.5
+trigger_overlap_capacity = 512
+gravity_x = 0.0
+max_contacts = 256
+allow_dynamic_transforms = 0
+
+[script]
+shared_state = 1
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+max_debug_vertices = 65536
+
+[ios]
+launch_image_640x1136 = /assets/ios/defold_640x1136.png
+launch_image_750x1334 = /assets/ios/defold_750x1334.png
+launch_image_1024x768 = /assets/ios/defold_1024x768.png
+launch_image_2208x1242 = /assets/ios/defold_1242x2208.png
+launch_image_2048x1536 = /assets/ios/defold_2048x1536.png
+app_icon_57x57 = /assets/ios/shantae_app_icon_57x57.png
+app_icon_72x72 = /assets/ios/shantae_app_icon_72x72.png
+app_icon_76x76 = /assets/ios/shantae_app_icon_76x76.png
+app_icon_114x114 = /assets/ios/shantae_app_icon_114x114.png
+app_icon_120x120 = /assets/ios/shantae_app_icon_120x120.png
+app_icon_144x144 = /assets/ios/shantae_app_icon_144x144.png
+app_icon_152x152 = /assets/ios/shantae_app_icon_152x152.png
+app_icon_167x167 = /assets/ios/shantae_app_icon_167x167.png
+app_icon_180x180 = /assets/ios/shantae_app_icon_180x180.png
+
+[osx]
+bundle_identifier = com.anything.platformerprototype
+app_icon = /assets/macos/shantae.icns
+
+[windows]
+app_icon = /assets/windows/shantae.ico
+
+[native_extension]
+app_manifest = /appmanifests/generated.appmanifest
+
+[sprite]
+max_count = 1024
+
+[tilemap]
+max_tile_count = 4096
+

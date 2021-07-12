@@ -1,0 +1,11 @@
+local Light = require("maze.e1.props.lights.light")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = Light.new(self)
+end -- init
+
+function defold.final(self)
+   Light.free(self.instance)
+end -- final

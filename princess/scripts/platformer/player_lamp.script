@@ -1,0 +1,97 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+-- local utils = require("scripts.shared.utils")
+local lights = require("scripts.shared.lights")
+
+-- localization
+local vector4 = vmath.vector4
+local get_id = go.get_id
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+local set_context = game.set_context
+
+-- functions
+local frame_update
+local enable
+local disable
+
+-- constants
+local POSITION = "light0_position"
+local COLOR    = "light0_color"
+local FALLOFF  = "light0_falloff"
+local UPDATE_GROUP = game.update_group_lights
+
+-- properties
+go.property("color", vmath.vector4(1, 1, 1, 1))
+go.property("falloff", vmath.vector4(1, 8, 150, 1))
+go.property("enabled", false)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  self.light_position = vector4(0, 0, 0, 1)
+
+  if self.enabled then
+    enable(self)
+  end
+
+  self.enable = enable
+  self.disable = disable
+
+  set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  set_context(self.gameobject, nil)
+	disable(self)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, _)
+  local light_position = self.light_position
+  light_position.x = lights.player_position.x - lights.camera_position.x + game.window.half_logic_width
+  light_position.y = lights.player_position.y + 16 - lights.camera_position.y + game.window.half_logic_height
+  local light_screen_position = game.ingame_projection * light_position
+  light_screen_position.x = light_screen_position.x * 0.5
+  light_screen_position.y = light_screen_position.y * 0.5
+
+  local color = vector4(self.color)
+  color.x = color.x * color.w
+  color.y = color.y * color.w
+  color.z = color.z * color.w
+
+  local constants = lights.constants
+  constants[POSITION] = light_screen_position
+  constants[COLOR] = color
+  constants[FALLOFF] = self.falloff
+end -- frame_update
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable(self)
+  self.enabled = true
+  add_update_callback(self, frame_update, UPDATE_GROUP)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable(self)
+  self.enabled = false
+  remove_update_callback(self, UPDATE_GROUP)
+end -- disable

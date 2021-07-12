@@ -1,0 +1,241 @@
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local GROUP = require("scripts.shared.groups")
+local LAYER = require("scripts.shared.layers")
+-- local nc  = require("scripts.shared.notification_center")
+local ui = require("scripts.shared.ui.ui")
+
+-- localization
+local defold = _G
+local get_id = go.get_id
+local url = msg.url
+local post = msg.post
+local get_position = go.get_position
+local set_position = go.set_position
+local set = go.set
+local play_flipbook = sprite.play_flipbook
+local set_context = game.set_context
+local get_context = game.get_context
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+local execute_in_context = utils.execute_in_context
+local abs = math.abs
+local timer = timer
+local animate = go.animate
+local cancel_animations = go.cancel_animations
+local PLAYBACK_LOOP_PINGPONG = go.PLAYBACK_LOOP_PINGPONG
+local PLAYBACK_ONCE_FORWARD = go.PLAYBACK_ONCE_FORWARD
+
+-- functions
+local on_turn_complete
+local start_interaction
+local end_interaction
+local frame_update
+local enable_button
+
+-- constants
+local UPDATE_GROUP = game.update_group_after_player
+local TURN_RIGHT = hash("shantae_saveguy_turn_right")
+local TURN_LEFT = hash("shantae_saveguy_turn_left")
+local IDLE_RIGHT = hash("shantae_saveguy_idle_right")
+local IDLE_LEFT = hash("shantae_saveguy_idle_left")
+local POSITION_Y = hash("position.y")
+local BUTTON_EASING = go.EASING_INOUTSINE
+local TINT_EASING = go.EASING_LINEAR
+local TINT_W = hash("tint.w")
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   self.gameobject = get_id()
+   self.character_sprite = url("character#sprite")
+   self.button = get_id("button")
+   self.button_position = get_position(self.button)
+   self.button_sprite = url("button#sprite")
+   post(self.button_sprite, MSG.DISABLE)
+   -- enable_button(self, false)
+   self.position = get_position()
+   self.position.z = LAYER.OBJECT_1
+   set_position(self.position)
+   self.camera = get_id("/camera")
+   self.look_direction = 1 -- right
+   self.turn_complete = true
+   self.cutscene_in_progress = false
+   self.start_interaction = start_interaction
+   self.end_interaction = end_interaction
+   set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   remove_update_callback(self, UPDATE_GROUP)
+   set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+-- function frame_update(self)
+--   local context = get_context(self.player_id)
+--   if context then
+--     local look_direction = (context.position.x - self.position.x) > 0 and 1 or -1
+--     if self.turn_complete and (look_direction ~= self.look_direction) then
+--       self.turn_complete = false
+--       self.look_direction = look_direction
+--       play_flipbook(self.character_sprite, look_direction == 1 and TURN_RIGHT or TURN_LEFT, on_turn_complete)
+--     end
+--   end
+-- end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+-- function defold.on_message(self, message_id, message)
+--   if message.other_group == GROUP.PLAYER then
+--     if message_id == MSG.TRIGGER_RESPONSE then
+--       if message.enter then
+--         add_update_callback(self, frame_update, UPDATE_GROUP)
+--       else
+--         remove_update_callback(self, UPDATE_GROUP)
+--       end
+--     elseif message_id == MSG.COLLISION_RESPONSE then
+--       self.player_id = message.other_id
+--       local context = get_context(self.player_id)
+--       if context then
+--         add_update_callback(self, frame_update, UPDATE_GROUP)
+--         local distance_x = abs(context.position.x - self.position.x)
+--         if distance_x < 20 then
+--           if not context.interactor then
+--             context.interactor = self.gameobject
+--             post(self.button_sprite, MSG.ENABLE)
+--           end
+--         else
+--           if context.interactor and (context.interactor == self.gameobject) then
+--             context.interactor = nil
+--             post(self.button_sprite, MSG.DISABLE)
+--           end
+--         end
+--       end
+--     end
+--   end
+-- end -- on_message
+function defold.on_message(self, message_id, message)
+   if (message_id == MSG.COLLISION_RESPONSE) and (message.other_group == GROUP.PLAYER) then
+      local player_position = message.other_position
+      local distance_x = player_position.x - self.position.x
+      local look_direction = distance_x > 0 and 1 or -1
+      if self.turn_complete and (look_direction ~= self.look_direction) then
+         self.turn_complete = false
+         self.look_direction = look_direction
+         play_flipbook(self.character_sprite, look_direction == 1 and TURN_RIGHT or TURN_LEFT, on_turn_complete)
+      end
+
+      if not self.cutscene_in_progress then
+         self.player_id = message.other_id
+         local player_context = get_context(self.player_id)
+         if player_context then
+            if abs(distance_x) < 40 then
+               if not player_context.interactor then
+                  player_context.interactor = self.gameobject
+                  -- post(self.button_sprite, MSG.ENABLE)
+                  enable_button(self, true)
+               end
+            else
+               if player_context.interactor and (player_context.interactor == self.gameobject) then
+                  player_context.interactor = nil
+                  -- post(self.button_sprite, MSG.DISABLE)
+                  enable_button(self, false)
+               end
+            end
+         end
+      end
+   end
+end -- on_message
+
+---------------------------------------
+-- on_turn_complete
+---------------------------------------
+
+function on_turn_complete(self)
+   self.turn_complete = true
+   play_flipbook(self.character_sprite, self.look_direction == 1 and IDLE_RIGHT or IDLE_LEFT)
+end -- on_turn_complete
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function frame_update(self)
+   local target = get_context(self.camera).target
+   target.x = self.position.x
+   target.direction = self.look_direction
+end -- update
+
+---------------------------------------
+-- start_interaction
+---------------------------------------
+
+function start_interaction(self)
+   self.cutscene_in_progress = true
+   add_update_callback(self, frame_update, UPDATE_GROUP)
+   -- post(self.button_sprite, MSG.DISABLE)
+   enable_button(self, false)
+   execute_in_context(ui.hud_context, ui.hud_context.disable, true)
+   execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.disable)
+   execute_in_context(ui.cinema_bars_context, ui.cinema_bars_context.enable, true)
+   local context = get_context(self.player_id)
+   if context then
+      local delay = abs(self.position.x - 40 - context.position.x) / context.max_horizontal_speed
+      if delay < 0.033 then delay = 0 end
+      context.look_direction = -1
+      context.move_direction = -1
+      context.velocity.x = context.max_horizontal_speed
+      timer.delay(delay, false, function()
+         context.look_direction = 1
+         context.move_direction = 0
+         context.velocity.x = 0
+         execute_in_context(ui.single_touch_controls_context, ui.single_touch_controls_context.enable)
+         execute_in_context(ui.save_dialog_context, ui.save_dialog_context.enable, self.gameobject)
+      end)
+   end
+end -- start_interaction
+
+---------------------------------------
+-- end_interaction
+---------------------------------------
+
+function end_interaction(self)
+   self.cutscene_in_progress = false
+   remove_update_callback(self, UPDATE_GROUP)
+   local context = get_context(self.player_id)
+   if context then
+      context.end_cutscene = true
+   end
+   execute_in_context(ui.cinema_bars_context, ui.cinema_bars_context.disable, true)
+   -- post(self.button_sprite, MSG.ENABLE)
+   enable_button(self, true)
+end -- end_interaction
+
+function enable_button(self, enable)
+   if enable then
+      post(self.button_sprite, MSG.ENABLE)
+      set_position(self.button_position, self.button)
+      set(self.button_sprite, TINT_W, 0)
+      animate(self.button_sprite, TINT_W, PLAYBACK_ONCE_FORWARD, 1, TINT_EASING, 0.2)
+      animate(self.button, POSITION_Y, PLAYBACK_LOOP_PINGPONG, self.button_position.y + 5, BUTTON_EASING, 0.8)
+   else
+      animate(self.button_sprite, TINT_W, PLAYBACK_ONCE_FORWARD, 0, TINT_EASING, 0.2, 0, function()
+         post(self.button_sprite, MSG.DISABLE)
+         cancel_animations(self.button, POSITION_Y)
+      end)
+   end
+end

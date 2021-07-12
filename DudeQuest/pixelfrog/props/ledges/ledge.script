@@ -1,0 +1,17 @@
+local Prototype = require("pixelfrog.props.ledges.ledge")
+
+local defold = _G
+
+go.property("can_jump_down", true)
+go.property("can_climb_up", true)
+go.property("disable_sprite", false)
+go.property("acceleration", 2000)
+go.property("max_speed", 1000)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end -- defold.init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- defold.final

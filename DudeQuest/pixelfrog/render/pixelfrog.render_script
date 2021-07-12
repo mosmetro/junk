@@ -1,0 +1,255 @@
+require("m.msg_patcher")
+require("m.fastmath_patcher")
+require("m.runtime_patcher")
+
+local colors = require("m.colors")
+local utils = require("m.utils")
+
+local layers = require("pixelfrog.render.layers")
+local game = require("pixelfrog.game.game")
+
+local defold = _G
+local math = math
+local vmath = vmath
+local render = render
+
+local clear = render.clear
+local disable_state = render.disable_state
+local enable_state = render.enable_state
+local set_depth_mask = render.set_depth_mask
+local set_stencil_mask = render.set_stencil_mask
+local set_blend_func = render.set_blend_func
+local set_viewport = render.set_viewport
+local set_view = render.set_view
+local set_projection = render.set_projection
+local draw = render.draw
+local set_render_target = render.set_render_target
+local enable_texture = render.enable_texture
+local disable_texture = render.disable_texture
+local enable_material = render.enable_material
+local disable_material = render.disable_material
+local BUFFER_COLOR_BIT = render.BUFFER_COLOR_BIT
+local BUFFER_STENCIL_BIT = render.BUFFER_STENCIL_BIT
+local STATE_STENCIL_TEST = render.STATE_STENCIL_TEST
+local STATE_DEPTH_TEST = render.STATE_DEPTH_TEST
+local STATE_CULL_FACE = render.STATE_CULL_FACE
+local STATE_BLEND = render.STATE_BLEND
+local BLEND_SRC_ALPHA = render.BLEND_SRC_ALPHA
+local BLEND_ONE_MINUS_SRC_ALPHA = render.BLEND_ONE_MINUS_SRC_ALPHA
+-- local BLEND_ONE = render.BLEND_ONE
+-- local BLEND_ZERO = render.BLEND_ZERO
+local RENDER_TARGET_DEFAULT = render.RENDER_TARGET_DEFAULT
+-- local get_width = render.get_render_target_width
+-- local get_height = render.get_render_target_height
+
+local window_width
+local window_height
+local view_width
+local view_height
+local view_half_width
+local view_half_height
+local viewport_left
+local viewport_bottom
+local viewport_width
+local viewport_height
+
+local view
+local view_projection
+local gui_projection
+
+local REFRACTION = hash("refraction")
+
+local LOWREZ_POSTPROCESS_SIZE = 256
+
+local source_target
+local haze_target
+local light_target
+
+local AMBIENT = vmath.vector4(1)
+-- local AMBIENT = vmath.vector4(0.38, 0.38, 0.38, 1)
+-- local AMBIENT = vmath.vector4(0.3, 0.3, 0.3, 1)
+local BLACK = colors.BLACK
+
+local DISTANT
+local TILE
+local LABEL
+local BLIT
+local HAZE
+local LIGHT
+local EFFECT
+local HUD
+local UI
+local GUI
+
+local buffers = {
+   [BUFFER_COLOR_BIT] = colors.BLACK,
+   [BUFFER_STENCIL_BIT] = 0,
+}
+
+local M4_IDENTITY = vmath.matrix4()
+
+local brightness_constants = render.constant_buffer()
+local threshold = vmath.vector4(0.85, 0, 0, 0)
+brightness_constants.threshold = threshold
+
+local gaussian_constants = render.constant_buffer()
+local coefficients = vmath.vector4(5 / 16, 6 / 16, 5 / 16, 0)
+local offset = vmath.vector4()
+gaussian_constants.coefficients = coefficients
+gaussian_constants.offset = offset
+
+local function pass(size, pixel_size)
+   local view_size = math.ceil(size / pixel_size)
+   local viewport_size = view_size * pixel_size
+   while (view_size % 2 ~= 0) or (size < viewport_size) do
+      view_size = view_size - 1
+      viewport_size = view_size * pixel_size
+   end
+   return view_size, math.floor(view_size * 0.5), math.floor((size - viewport_size) * 0.5), viewport_size
+end -- pass
+
+function defold.init()
+   local max_view_height = 212
+   window_width = render.get_window_width()
+   window_height = render.get_window_height()
+   local pixel_size = math.ceil(window_height / max_view_height)
+
+   view_width, view_half_width, viewport_left, viewport_width = pass(window_width, pixel_size)
+   view_height, view_half_height, viewport_bottom, viewport_height = pass(window_height, pixel_size)
+
+   game.view_width = view_width
+   game.view_height = view_height
+   game.view_half_width = view_half_width
+   game.view_half_height = view_half_height
+   game.view_left = -view_half_width
+   game.view_right = view_half_width
+   game.view_bottom = -view_half_height
+   game.view_top = view_half_height
+   game.window_width = window_width
+   game.window_height = window_height
+   game.viewport_left = viewport_left
+   game.viewport_bottom = viewport_bottom
+   game.viewport_width = viewport_width
+   game.viewport_height = viewport_height
+   game.pixel_size = pixel_size
+
+   utils.log("pixel size", pixel_size)
+   utils.log("view size", view_width, view_height)
+   utils.log("viewport", viewport_left, viewport_bottom, viewport_width, viewport_height)
+   utils.log("window size", window_width, window_height)
+
+   DISTANT = render.predicate({ "distant" })
+   TILE = render.predicate({ "tile" })
+   LABEL = render.predicate({ "label" })
+   BLIT = render.predicate({ "blit" })
+   HAZE = render.predicate({ "haze" })
+   LIGHT = render.predicate({ "light" })
+   EFFECT = render.predicate({ "effect" })
+   HUD = render.predicate({ "hud" })
+   UI = render.predicate({ "ui" })
+   GUI = render.predicate({ "gui" })
+
+   local left = -view_half_width
+   local right = view_half_width
+   local bottom = -view_half_height
+   local top = view_half_height
+   local near = -1
+   local far = 1
+   layers.setup_depths(near + 0.01, far - 0.01)
+
+   view = vmath.matrix4()
+   game.view_matrix = view
+   view_projection = vmath.matrix4_orthographic(left, right, bottom, top, near, far)
+   gui_projection = vmath.matrix4_orthographic(0, window_width, 0, window_height, -1, 1)
+
+   local source_target_specs = {
+      [BUFFER_COLOR_BIT] = {
+         format = render.FORMAT_RGBA,
+         width = viewport_width,
+         height = viewport_height,
+      }
+   } -- source_target_specs
+   source_target = render.render_target("", source_target_specs)
+
+   local haze_target_specs = {
+      [BUFFER_COLOR_BIT] = {
+         format = render.FORMAT_RGBA,
+         width = LOWREZ_POSTPROCESS_SIZE,
+         height = LOWREZ_POSTPROCESS_SIZE,
+      }
+   } -- haze_target_specs
+   haze_target = render.render_target("", haze_target_specs)
+   light_target = render.render_target("", haze_target_specs)
+end -- init
+
+function defold.update()
+   set_depth_mask(false)
+   set_stencil_mask(0xff)
+   disable_state(STATE_DEPTH_TEST)
+   disable_state(STATE_STENCIL_TEST)
+   disable_state(STATE_CULL_FACE)
+   enable_state(STATE_BLEND)
+   set_blend_func(BLEND_SRC_ALPHA, BLEND_ONE_MINUS_SRC_ALPHA)
+
+   -- clear back buffer screen
+   buffers[BUFFER_COLOR_BIT] = BLACK
+   clear(buffers)
+
+   -- set game projection & view
+   set_projection(view_projection)
+   set_view(view)
+
+   -- draw source target
+   set_render_target(source_target)
+   buffers[BUFFER_COLOR_BIT] = colors.SKY
+   clear(buffers)
+   set_viewport(0, 0, viewport_width, viewport_height)
+   draw(TILE)
+
+   -- draw lowrez postprocess targets
+   set_render_target(haze_target)
+   buffers[BUFFER_COLOR_BIT] = colors.TRANSPARENT_BLACK
+   clear(buffers)
+   set_viewport(0, 0, LOWREZ_POSTPROCESS_SIZE, LOWREZ_POSTPROCESS_SIZE)
+   draw(HAZE)
+
+   set_render_target(light_target)
+   buffers[BUFFER_COLOR_BIT] = AMBIENT
+   clear(buffers)
+   draw(LIGHT)
+
+   -- disable_state(STATE_BLEND)
+
+   set_render_target(RENDER_TARGET_DEFAULT)
+   set_viewport(viewport_left, viewport_bottom, viewport_width, viewport_height)
+   -- draw distant objects target
+   draw(DISTANT)
+   disable_state(STATE_BLEND)
+   enable_texture(0, source_target, BUFFER_COLOR_BIT)
+   enable_texture(1, haze_target, BUFFER_COLOR_BIT)
+   enable_texture(2, light_target, BUFFER_COLOR_BIT)
+   enable_material(REFRACTION)
+   draw(BLIT)
+   disable_material(REFRACTION)
+   disable_texture(0)
+   disable_texture(1)
+   disable_texture(2)
+
+   enable_state(STATE_BLEND)
+
+   draw(EFFECT)
+   draw(LABEL)
+
+   render.draw_debug3d()
+
+   set_view(M4_IDENTITY)
+   draw(HUD)
+   draw(UI)
+
+   set_viewport(0, 0, window_width, window_height)
+   set_projection(gui_projection)
+   enable_state(STATE_STENCIL_TEST)
+   -- enable_state(STATE_BLEND)
+   draw(GUI)
+   -- render.draw_debug3d()
+end -- update

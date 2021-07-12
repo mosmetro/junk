@@ -1,0 +1,33 @@
+local Platform = require("maze.e1.props.platforms.platform")
+
+local defold = _G
+
+go.property("name", hash(""))
+go.property("width", 0)
+go.property("height", 0)
+go.property("start_waypoint", 1)
+go.property("speed", 0)
+go.property("wait_time", 0)
+go.property("easing_factor", 1)
+go.property("is_solid", false)
+go.property("is_active", true)
+-- go.property("can_jump_down", false)
+go.property("aabb_min_x", 0)
+go.property("aabb_min_y", 0)
+go.property("aabb_max_x", 0)
+go.property("aabb_max_y", 0)
+go.property("aabb", vmath.vector4(-16, -24, 16, 8))
+
+function defold.init(self)
+   self.shadow_edges = {
+      { -22, -12, -23, -1 },
+      { -23, -1, 23, -1 },
+      {  23, -1, 22, -12 },
+      {  22, -12, -22, -12 },
+   }
+   self.instance = Platform.new(self)
+end
+
+function defold.final(self)
+   Platform.free(self.instance)
+end

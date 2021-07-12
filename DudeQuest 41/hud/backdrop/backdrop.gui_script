@@ -1,0 +1,49 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+
+local defold = _G
+local set_render_order = gui.set_render_order
+local get_node = gui.get_node
+local set_color = gui.set_color
+local set_size = gui.set_size
+local animate = gui.animate
+local COLOR = gui.PROP_COLOR
+local TRANSITION_ON_SCREEN = gui.EASING_INOUTSINE
+local TRANSITION_OFF_SCREEN = gui.EASING_INOUTSINE
+local vector3_stub = fastmath.vector3_stub
+local vector3_set_xyz = fastmath.vector3_set_xyz
+
+local TRANSPARENT_BLACK = colors.TRANSPARENT_BLACK
+local BLACK = vmath.vector4(0, 0, 0, 0.6)
+local TRANSITION_DURATION = 0.25
+
+local backdrop
+
+-- (context, ...)
+local function enable(_, callback, duration)
+   msg.post("#", msg.ENABLE)
+   set_color(backdrop, TRANSPARENT_BLACK)
+   animate(backdrop, COLOR, BLACK, TRANSITION_ON_SCREEN, duration or TRANSITION_DURATION, 0, callback, gui.PLAYBACK_ONCE_FORWARD)
+end -- enable
+
+local function disable(_, callback, duration)
+   animate(backdrop, COLOR, TRANSPARENT_BLACK, TRANSITION_OFF_SCREEN, duration or TRANSITION_DURATION, 0, function()
+      if callback then callback() end
+      msg.post("#", msg.DISABLE)
+   end, gui.PLAYBACK_ONCE_FORWARD)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.backdrop_context = self
+   backdrop = get_node("box")
+   vector3_set_xyz(vector3_stub, global.view_width, global.view_height, 0)
+   set_size(backdrop, vector3_stub)
+   set_render_order(ui.BACKGROUND)
+
+   self.enable = enable
+   self.disable = disable
+end -- defold.init

@@ -1,0 +1,182 @@
+local ui = require("m.ui.ui")
+-- local utils = require("m.utils")
+
+local Button = require("pixelfrog.ui.button")
+local Slider = require("pixelfrog.ui.slider")
+local game = require("pixelfrog.game.game")
+local gamestate = require("pixelfrog.game.gamestate")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local get_node = gui.get_node
+-- local set_text = gui.set_text
+local set_render_order = gui.set_render_order
+local set_position = gui.set_position
+local hash = hash
+local vector3_set_xyz = fastmath.vector3_set_xyz
+local vector4_set_xyzw = fastmath.vector4_set_xyzw
+
+local red_slider
+local green_slider
+local blue_slider
+local alpha_slider
+
+local vector3_stub = fastmath.vector3_stub
+
+local controls_color = vmath.vector4()
+
+local function get_controls_color()
+   local r = gamestate.get(nil, gamestate.player, "onscreen_controls_red", 255)
+   local g = gamestate.get(nil, gamestate.player, "onscreen_controls_green", 255)
+   local b = gamestate.get(nil, gamestate.player, "onscreen_controls_blue", 255)
+   local a = gamestate.get(nil, gamestate.player, "onscreen_controls_alpha", 38)
+   return r, g, b, a
+end -- get_controls_color
+
+local function enable()
+   msg.post("#", msg.ENABLE)
+   local r, g, b, a = get_controls_color()
+   red_slider.set_value(r)
+   green_slider.set_value(g)
+   blue_slider.set_value(b)
+   alpha_slider.set_value(a)
+   vector4_set_xyzw(controls_color, r/255, g/255, b/255, a/255)
+   runtime.execute_in_context(ui.multi_touch_controls_proxy_context.set_controls_color, ui.multi_touch_controls_proxy_context, controls_color)
+   runtime.execute_in_context(ui.multi_touch_controls_proxy_context.enable, ui.multi_touch_controls_proxy_context)
+end -- enable
+
+local function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   ui.ui_touch_controls_context = self
+	set_render_order(ui.MENU)
+   self.enable = enable
+   self.disable = disable
+
+   -- local root_node = get_node("back")
+   vector3_set_xyz(vector3_stub, 0, game.view_half_height, 0)
+   set_position(get_node("root"), vector3_stub)
+
+   local back_button = Button.new {
+      node = get_node("back"),
+      released_animation = hash("back_released"),
+      pressed_animation = hash("back_pressed"),
+      callback = function()
+         ui.first_responder = ui.pause_context
+         if ui.ingame_controls_context.configure then
+            runtime.execute_in_context(ui.ingame_controls_context.configure, ui.ingame_controls_context)
+         end
+         msg.post("#", msg.DISABLE)
+         runtime.execute_in_context(ui.backdrop_context.enable, ui.backdrop_context, nil, 0.5)
+         runtime.execute_in_context(ui.multi_touch_controls_proxy_context.disable, ui.multi_touch_controls_proxy_context)
+         runtime.execute_in_context(ui.pause_context.enable, ui.pause_context)
+      end,
+   }
+
+   local reset_button = Button.new {
+      node = get_node("reset"),
+      released_animation = hash("reset_released"),
+      pressed_animation = hash("reset_pressed"),
+      callback = function()
+         ui.first_responder = nil
+         gamestate.set(nil, gamestate.player, "onscreen_controls_red", nil)
+         gamestate.set(nil, gamestate.player, "onscreen_controls_green", nil)
+         gamestate.set(nil, gamestate.player, "onscreen_controls_blue", nil)
+         gamestate.set(nil, gamestate.player, "onscreen_controls_alpha", nil)
+         local r, g, b, a = get_controls_color()
+         red_slider.set_value(r, true)
+         green_slider.set_value(g, true)
+         blue_slider.set_value(b, true)
+         alpha_slider.set_value(a, true, function()
+            ui.first_responder = self
+         end)
+         vector4_set_xyzw(controls_color, r/255, g/255, b/255, a/255)
+         runtime.execute_in_context(ui.multi_touch_controls_proxy_context.reset_controls, ui.multi_touch_controls_proxy_context, controls_color, true)
+      end,
+   }
+
+   red_slider = Slider.new {
+      node = get_node("red/track_dark"),
+      thumb_node = get_node("red/thumb"),
+      value_node = get_node("red/value"),
+      highlight_node = get_node("red/track_light"),
+      released_animation = hash("slider_thumb_red_released"),
+      pressed_animation = hash("slider_thumb_red_pressed"),
+      min_value = 0,
+      max_value = 255,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_red", value)
+         fastmath.vector4_set_x(controls_color, value/255)
+         runtime.execute_in_context(ui.multi_touch_controls_proxy_context.set_controls_color, ui.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+
+   green_slider = Slider.new {
+      node = get_node("green/track_dark"),
+      thumb_node = get_node("green/thumb"),
+      value_node = get_node("green/value"),
+      highlight_node = get_node("green/track_light"),
+      released_animation = hash("slider_thumb_green_released"),
+      pressed_animation = hash("slider_thumb_green_pressed"),
+      min_value = 0,
+      max_value = 255,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_green", value)
+         fastmath.vector4_set_y(controls_color, value/255)
+         runtime.execute_in_context(ui.multi_touch_controls_proxy_context.set_controls_color, ui.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+
+   blue_slider = Slider.new {
+      node = get_node("blue/track_dark"),
+      thumb_node = get_node("blue/thumb"),
+      value_node = get_node("blue/value"),
+      highlight_node = get_node("blue/track_light"),
+      released_animation = hash("slider_thumb_blue_released"),
+      pressed_animation = hash("slider_thumb_blue_pressed"),
+      min_value = 0,
+      max_value = 255,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_blue", value)
+         fastmath.vector4_set_z(controls_color, value/255)
+         runtime.execute_in_context(ui.multi_touch_controls_proxy_context.set_controls_color, ui.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+
+   alpha_slider = Slider.new {
+      node = get_node("alpha/track_dark"),
+      thumb_node = get_node("alpha/thumb"),
+      value_node = get_node("alpha/value"),
+      highlight_node = get_node("alpha/track_light"),
+      released_animation = hash("slider_thumb_alpha_released"),
+      pressed_animation = hash("slider_thumb_alpha_pressed"),
+      min_value = 0,
+      max_value = 191,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_alpha", value)
+         fastmath.vector4_set_w(controls_color, value/255)
+         runtime.execute_in_context(ui.multi_touch_controls_proxy_context.set_controls_color, ui.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+
+   self.controls = {
+      back_button,
+      reset_button,
+      red_slider,
+      green_slider,
+      blue_slider,
+      alpha_slider,
+   }
+end -- defold.init

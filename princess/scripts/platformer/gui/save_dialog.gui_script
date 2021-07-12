@@ -1,0 +1,283 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local SND = require("scripts.platformer.sound")
+local game = require("scripts.platformer.game")
+local player_data = require("scripts.platformer.player_data")
+-- local Textfield = require("scripts.shared.ui.controls.textfield")
+-- local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+local translations = require("scripts.platformer.translations")
+-- local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+local richtext = require("scripts.shared.third_party.richtext")
+
+-- localization
+local defold = _G
+local post = msg.post
+local get_node = gui.get_node
+local delete_node = gui.delete_node
+local get_size = gui.get_size
+local set_size = gui.set_size
+local get_slice9 = gui.get_slice9
+local set_render_order = gui.set_render_order
+local set_enabled = gui.set_enabled
+local translate = translations.translate
+local timer = timer
+local animate = gui.animate
+local play_sound = SND.play_sound
+local execute_in_context = utils.execute_in_context
+local get_context = game.get_context
+
+-- functions
+local enable
+local disable
+local delete_text_nodes
+local type_out_message
+
+-- constants
+local SIZE_Y = hash("size.y")
+local MESSAGE_INFLATE_DURATION = 0.4
+local MESSAGE_DEFLATE_DURATION = 0.3
+local BUTTON_INFLATE_DURATION = 0.3
+local BUTTON_DEFLATE_DURATION = 0.25
+local INFLATE_EASING = gui.EASING_OUTBACK
+local DEFLATE_EASING = gui.EASING_INBACK
+local TEXT_SHOW_TIME = 0.6
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.save_dialog_context = self
+	disable(self)
+	set_render_order(8)
+
+	local message_root = get_node("message")
+	set_enabled(message_root, false)
+	local message_background = get_node("message/background")
+	local message_image = get_node("message/frame")
+	local message_small_size = get_size(message_image)
+	local message_full_size_y = message_small_size.y
+	local message_slice9 = get_slice9(message_image)
+	message_small_size.y = message_slice9.y + message_slice9.w
+	local message_text_settings = {
+		parent = get_node("message/text_position"),
+	}
+
+	local offer_text, offer_metrics, offer_timer_handle
+
+	local controls_root = get_node("controls_root")
+	set_enabled(controls_root, false)
+
+	local ok_background = get_node("ok/background")
+	local ok_image = get_node("ok/image")
+	local ok_text
+	local ok_text_settings = {
+		parent = get_node("ok/text_position")
+	}
+
+	local cancel_background = get_node("cancel/background")
+	local cancel_image = get_node("cancel/image")
+	local cancel_text
+	local cancel_text_settings = {
+		parent = get_node("cancel/text_position")
+	}
+
+	local button_small_size = get_size(ok_image)
+	local button_full_size_y = button_small_size.y
+	local button_slice9 = get_slice9(ok_image)
+	button_small_size.y = button_slice9.y + button_slice9.w
+
+	self.show_offer = function()
+		play_sound(SND.SHANTAE_INITIATE_DIALOG)
+
+		set_size(message_background, message_small_size)
+		set_size(message_image, message_small_size)
+		set_enabled(message_root, true)
+
+		set_size(ok_background, button_small_size)
+		set_size(ok_image, button_small_size)
+
+		set_size(cancel_background, button_small_size)
+		set_size(cancel_image, button_small_size)
+
+		animate(message_background, SIZE_Y, message_full_size_y, INFLATE_EASING, MESSAGE_INFLATE_DURATION)
+		animate(message_image, SIZE_Y, message_full_size_y, INFLATE_EASING, MESSAGE_INFLATE_DURATION, 0, function()
+			offer_text, offer_metrics = richtext.create(translate(translations.SAVE_DIALOG_OFFER), "roboto_dialog", message_text_settings)
+			local length = 0
+			local char_count = offer_metrics.char_count
+			richtext.truncate(offer_text, length)
+			offer_timer_handle = timer.delay(0.01, true, function()
+				play_sound(SND.SHANTAE_TEXT_TYPEOUT)
+				length = (length + 1) % (char_count + 1)
+				richtext.truncate(offer_text, length)
+				if length == char_count then
+					timer.cancel(offer_timer_handle)
+				end
+				if length == 5 then
+					set_enabled(controls_root, true)
+					animate(cancel_background, SIZE_Y, button_full_size_y, INFLATE_EASING, BUTTON_INFLATE_DURATION)
+					animate(cancel_image, SIZE_Y, button_full_size_y, INFLATE_EASING, BUTTON_INFLATE_DURATION)
+					animate(ok_background, SIZE_Y, button_full_size_y, INFLATE_EASING, BUTTON_INFLATE_DURATION)
+					animate(ok_image, SIZE_Y, button_full_size_y, INFLATE_EASING, BUTTON_INFLATE_DURATION, 0, function()
+						ok_text = richtext.create(translate(translations.CONFIRM), "roboto_dialog", ok_text_settings)
+						cancel_text = richtext.create(translate(translations.CANCEL), "roboto_dialog", cancel_text_settings)
+						ui.first_responder = self
+					end)
+				end
+			end)
+		end)
+	end -- show_offer
+
+	local finalize_dialog = function()
+		animate(message_background, SIZE_Y, message_small_size.y, DEFLATE_EASING, MESSAGE_DEFLATE_DURATION)
+		animate(message_image, SIZE_Y, message_small_size.y, DEFLATE_EASING, MESSAGE_DEFLATE_DURATION, 0, function()
+			set_enabled(message_root, false)
+			local context = get_context(self.interactor)
+			if context and context.end_interaction then
+				execute_in_context(context, context.end_interaction)
+			end
+			disable(self)
+			execute_in_context(ui.single_touch_controls_context, ui.single_touch_controls_context.disable)
+			execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.enable)
+			execute_in_context(ui.hud_context, ui.hud_context.enable, true)
+		end)
+	end
+
+	local ok_button = SimpleButton.new {
+		sensor_node = get_node("ok/sensor"),
+		image_node = get_node("ok/image"),
+		text_node = get_node("ok/text_position"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function()
+			player_data.save()
+			ui.first_responder = nil
+			play_sound(SND.SHANTAE_CONFIRM)
+			timer.cancel(offer_timer_handle)
+			delete_text_nodes(offer_text)
+			delete_text_nodes(ok_text)
+			delete_text_nodes(cancel_text)
+			animate(cancel_background, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION)
+			animate(cancel_image, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION)
+			animate(ok_background, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION)
+			animate(ok_image, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION, 0, function()
+				set_enabled(controls_root, false)
+				type_out_message(translate(translations.SAVE_DIALOG_SAVING), nil, message_text_settings, TEXT_SHOW_TIME, function()
+					type_out_message(translate(translations.SAVE_DIALOG_COMPLETE), nil, message_text_settings, TEXT_SHOW_TIME, function()
+						finalize_dialog()
+					end)
+				end)
+			end)
+		end,
+	}
+
+	local cancel_button = SimpleButton.new {
+		sensor_node = get_node("cancel/sensor"),
+		image_node = get_node("cancel/image"),
+		text_node = get_node("cancel/text_position"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function()
+			ui.first_responder = nil
+			play_sound(SND.SHANTAE_CANCEL)
+			timer.cancel(offer_timer_handle)
+			delete_text_nodes(offer_text)
+			delete_text_nodes(ok_text)
+			delete_text_nodes(cancel_text)
+			animate(cancel_background, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION)
+			animate(cancel_image, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION)
+			animate(ok_background, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION)
+			animate(ok_image, SIZE_Y, button_small_size.y, DEFLATE_EASING, BUTTON_DEFLATE_DURATION, 0, function()
+				set_enabled(controls_root, false)
+				type_out_message(translate(translations.SAVE_DIALOG_COME_BACK), nil, message_text_settings, TEXT_SHOW_TIME, function()
+					finalize_dialog()
+				end)
+			end)
+		end,
+	}
+
+	self.controls = {
+		ok_button,
+		cancel_button,
+	}
+
+	self.enable = enable
+	self.disable = disable
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final()
+	ui.first_responder = nil
+	ui.save_dialog_context = nil
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+-- TODO: remove save_doalog from save guy! (message flood!)
+function defold.on_message (self, message_id)
+	if message_id == MSG.ENABLE then
+		self.show_offer()
+	end
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable(self, interactor)
+	self.interactor = interactor
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- type_out_message
+---------------------------------------
+
+function type_out_message(message, font, settings, delay, on_complete)
+	local text, metrics = richtext.create(message, (font or "roboto_dialog"), settings)
+	local length = 0
+	local char_count = metrics.char_count
+	richtext.truncate(text, length)
+	local timer_handle
+	timer_handle = timer.delay(0.01, true, function()
+		play_sound(SND.SHANTAE_TEXT_TYPEOUT)
+		length = (length + 1) % (char_count + 1)
+		richtext.truncate(text, length)
+		if length == char_count then
+			timer.cancel(timer_handle)
+			timer.delay(delay, false, function()
+				delete_text_nodes(text)
+				if on_complete then
+					on_complete()
+				end
+			end)
+		end
+	end)
+	return timer_handle
+end -- type_out_message
+
+---------------------------------------
+-- delete_text_nodes
+---------------------------------------
+
+function delete_text_nodes(text)
+	for i = 1, #text do
+		delete_node(text[i].node)
+	end
+end -- delete_text_nodes

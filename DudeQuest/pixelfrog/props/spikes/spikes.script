@@ -1,0 +1,15 @@
+local Prototype = require("pixelfrog.props.spikes.spikes")
+
+local defold = _G
+
+go.property("damage_points", 1)
+go.property("kind", 16) -- 16, 32, 48, 64 - width in pixels
+go.property("is_static", true)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end -- defold.init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- defold.final

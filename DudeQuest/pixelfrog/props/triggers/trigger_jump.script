@@ -1,0 +1,23 @@
+local TriggerJump = require("pixelfrog.props.triggers.trigger_jump")
+
+local defold = _G
+
+go.property("jump_speed", 230)
+
+function defold.init(self)
+   self.instance = TriggerJump.new(self)
+   self.dispatch_table = {
+      [msg.TRIGGER_RESPONSE] = self.instance.on_trigger_response,
+   }
+end -- init
+
+function defold.final(self)
+   TriggerJump.free(self.instance)
+end -- final
+
+function defold.on_message(self, message_id, message, sender)
+   local fn = self.dispatch_table[message_id]
+   if fn then
+      fn(message, sender)
+   end
+end -- on_message

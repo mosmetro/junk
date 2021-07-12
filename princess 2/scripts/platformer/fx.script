@@ -1,0 +1,33 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+
+-- localization
+local post = msg.post
+local hash = hash
+local delete = go.delete
+local set_position = go.set_position
+local get_position = go.get_position
+
+-- properties
+go.property("animation", hash(""))
+go.property("offset", vmath.vector3())
+
+local ANIMATION = { id = hash("") }
+
+function defold.init (self)
+	local position = get_position()
+	position.x = position.x + self.offset.x
+	position.y = position.y + self.offset.y
+	position.z = self.offset.z
+	set_position(position)
+	ANIMATION.id = self.animation
+	post("#sprite", MSG.PLAY_ANIMATION, ANIMATION)
+end
+
+function defold.on_message(_, message_id)
+	if message_id == MSG.ANIMATION_DONE or message_id == MSG.DELETE then
+		delete()
+	end
+end

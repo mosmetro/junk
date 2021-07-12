@@ -1,0 +1,30 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local get_shared_data = game.get_shared_data
+local execute_in_context = utils.execute_in_context
+local get_position = go.get_position
+local set_position = go.set_position
+
+go.property("damage_amount", 1)
+
+function defold.init()
+	local position = get_position()
+	position.z = LAYER.THREAT
+	set_position(position)
+end
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.COLLISION_RESPONSE then
+		local context = get_shared_data(message.other_id).context
+		if context and context.apply_damage then
+			execute_in_context(context, context.apply_damage, self.damage_amount)
+		end
+	end
+end

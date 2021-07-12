@@ -1,0 +1,13 @@
+local Maze = require("maze.maze")
+
+local defold = _G
+
+function defold.init(self)
+	self.instance = Maze.new(self)
+end
+
+function defold.final(self)
+	Maze.free(self.instance)
+end
+
+defold.update = runtime.update

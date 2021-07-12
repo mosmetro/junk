@@ -1,0 +1,11 @@
+local defold = _G
+
+local ANIMATION = hash("player_hit")
+
+local function destroy()
+	go.delete()
+end -- destroy
+
+function defold.init()
+	sprite.play_flipbook("#sprite", ANIMATION, destroy)
+end

@@ -1,0 +1,1659 @@
+name: "default"
+instances {
+  id: "waypoint1"
+  prototype: "/pixelfrog/props/waypoints/waypoint.go"
+  position {
+    x: 352.0
+    y: 289.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "entity"
+      value: "test_platform1"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint2"
+  prototype: "/pixelfrog/props/waypoints/waypoint.go"
+  position {
+    x: 352.0
+    y: 430.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "entity"
+      value: "test_platform1"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "aabb1"
+  prototype: "/pixelfrog/props/aabb/aabb.go"
+  position {
+    x: 1120.0
+    y: 224.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "name"
+      value: "aabb1"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "min_x"
+      value: "864.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "min_y"
+      value: "192.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "max_x"
+      value: "1120.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "max_y"
+      value: "224.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "aabb2"
+  prototype: "/pixelfrog/props/aabb/aabb.go"
+  position {
+    x: 848.0
+    y: 224.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "name"
+      value: "aabb2"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "min_x"
+      value: "496.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "min_y"
+      value: "176.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "max_x"
+      value: "848.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "max_y"
+      value: "224.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger_jump2"
+  prototype: "/pixelfrog/props/triggers/trigger_jump.go"
+  position {
+    x: 571.0
+    y: 176.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger_jump1"
+  prototype: "/pixelfrog/props/triggers/trigger_jump.go"
+  position {
+    x: 485.0
+    y: 176.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint3"
+  prototype: "/pixelfrog/props/waypoints/waypoint.go"
+  position {
+    x: -914.0
+    y: 100.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "entity"
+      value: "bluebird1"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint4"
+  prototype: "/pixelfrog/props/waypoints/waypoint.go"
+  position {
+    x: -863.0
+    y: 100.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "entity"
+      value: "bluebird1"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint5"
+  prototype: "/pixelfrog/props/waypoints/waypoint.go"
+  position {
+    x: -644.0
+    y: 101.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "entity"
+      value: "bee1"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint6"
+  prototype: "/pixelfrog/props/waypoints/waypoint.go"
+  position {
+    x: -774.0
+    y: 101.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "entity"
+      value: "bee1"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right"
+  prototype: "/pixelfrog/levels/slope_32x16_right_end.go"
+  position {
+    x: 544.0
+    y: 160.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left"
+  prototype: "/pixelfrog/levels/slope_32x16_left_end.go"
+  position {
+    x: 480.0
+    y: 160.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left1"
+  prototype: "/pixelfrog/levels/slope_32x16_left_end.go"
+  position {
+    x: 1408.0
+    y: 240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right1"
+  prototype: "/pixelfrog/levels/slope_32x16_right_end.go"
+  position {
+    x: 1648.0
+    y: 144.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger_jump3"
+  prototype: "/pixelfrog/props/triggers/trigger_jump.go"
+  position {
+    x: 1539.0
+    y: 240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "jump_speed"
+      value: "260.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger_jump4"
+  prototype: "/pixelfrog/props/triggers/trigger_jump.go"
+  position {
+    x: 1595.0
+    y: 128.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger_jump5"
+  prototype: "/pixelfrog/props/triggers/trigger_jump.go"
+  position {
+    x: 1509.0
+    y: 128.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "trigger_jump"
+  prototype: "/pixelfrog/props/triggers/trigger_jump.go"
+  position {
+    x: 1565.0
+    y: 240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "jump_speed"
+      value: "260.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "test_platform1"
+  collection: "/pixelfrog/props/platforms/test_platform.collection"
+  position {
+    x: 352.0
+    y: 352.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "test_platform1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "width"
+        value: "64.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "height"
+        value: "160.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "speed"
+        value: "40.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "is_solid"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ice"
+  collection: "/pixelfrog/props/ice/ice.collection"
+  position {
+    x: 624.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "acceleration"
+        value: "10.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "mud"
+  collection: "/pixelfrog/props/mud/mud.collection"
+  position {
+    x: 1008.0
+    y: -0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "max_speed"
+        value: "0.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "sand"
+  collection: "/pixelfrog/props/sand/sand.collection"
+  position {
+    x: 1280.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "sand_slope_right"
+    properties {
+      id: "script"
+      properties {
+        id: "max_speed"
+        value: "20.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  instance_properties {
+    id: "sand_slope_left"
+    properties {
+      id: "script"
+      properties {
+        id: "max_speed"
+        value: "20.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "max_speed"
+        value: "20.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "fan4"
+  collection: "/pixelfrog/props/fan/fan.collection"
+  position {
+    x: -944.0
+    y: 13.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "airflow_length"
+        value: "150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "airflow_strength"
+        value: "150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_x"
+        value: "-960.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_y"
+        value: "-3.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_x"
+        value: "-794.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_y"
+        value: "29.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "fan1"
+  collection: "/pixelfrog/props/fan/fan.collection"
+  position {
+    x: -304.0
+    y: 12.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+    w: 6.123234E-17
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "airflow_length"
+        value: "-150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "airflow_strength"
+        value: "-150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_x"
+        value: "-454.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_y"
+        value: "-4.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_x"
+        value: "-288.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_y"
+        value: "28.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "fan2"
+  collection: "/pixelfrog/props/fan/fan.collection"
+  position {
+    x: -331.0
+    y: 96.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.70710677
+    w: 0.70710677
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "airflow_length"
+        value: "150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "airflow_strength"
+        value: "60.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_x"
+        value: "-347.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_y"
+        value: "80.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_x"
+        value: "-315.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_y"
+        value: "246.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "fan3"
+  collection: "/pixelfrog/props/fan/fan.collection"
+  position {
+    x: 1380.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.70710677
+    w: 0.70710677
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "airflow_length"
+        value: "150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "airflow_strength"
+        value: "120.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_x"
+        value: "1364.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_y"
+        value: "-16.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_x"
+        value: "1396.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_y"
+        value: "150.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "trampoline2"
+  collection: "/pixelfrog/props/trampoline/trampoline.collection"
+  position {
+    x: -395.0
+    y: 95.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "trampoline1"
+  collection: "/pixelfrog/props/trampoline/trampoline.collection"
+  position {
+    x: 202.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box1"
+  collection: "/pixelfrog/props/boxes/box1/box1.collection"
+  position {
+    x: -593.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box2"
+  collection: "/pixelfrog/props/boxes/box2/box2.collection"
+  position {
+    x: -474.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box"
+  collection: "/pixelfrog/props/boxes/box2/box2.collection"
+  position {
+    x: -474.0
+    y: 66.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box3"
+  collection: "/pixelfrog/props/boxes/box1/box1.collection"
+  position {
+    x: -474.0
+    y: 86.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box4"
+  collection: "/pixelfrog/props/boxes/box1/box1.collection"
+  position {
+    x: -613.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box5"
+  collection: "/pixelfrog/props/boxes/box2/box2.collection"
+  position {
+    x: -529.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box6"
+  collection: "/pixelfrog/props/boxes/box2/box2.collection"
+  position {
+    x: -360.0
+    y: 106.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box31"
+  collection: "/pixelfrog/props/boxes/box3/box3.collection"
+  position {
+    x: -573.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box7"
+  collection: "/pixelfrog/props/boxes/box3/box3.collection"
+  position {
+    x: -529.0
+    y: 30.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box8"
+  collection: "/pixelfrog/props/boxes/box3/box3.collection"
+  position {
+    x: -924.0
+    y: 58.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box9"
+  collection: "/pixelfrog/props/boxes/box2/box2.collection"
+  position {
+    x: -360.0
+    y: 126.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "checkpoint1"
+  collection: "/pixelfrog/props/checkpoint/checkpoint.collection"
+  position {
+    x: 296.0
+    y: 119.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "map"
+        value: "level101"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "location"
+        value: "checkpoint1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "teleport1"
+  collection: "/pixelfrog/props/teleport/teleport.collection"
+  position {
+    x: 1434.0
+    y: 61.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "map"
+        value: "level101"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "location"
+        value: "teleport1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "mushroom2"
+  collection: "/pixelfrog/enemies/mushroom/mushroom.collection"
+  position {
+    x: 593.0
+    y: 192.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "horizontal_look"
+        value: "-1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "activator"
+        value: "aabb2"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "mushroom1"
+  collection: "/pixelfrog/enemies/mushroom/mushroom.collection"
+  position {
+    x: 464.0
+    y: 192.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "horizontal_look"
+        value: "1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "activator"
+        value: "aabb2"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "trunk1"
+  collection: "/pixelfrog/enemies/trunk/trunk.collection"
+  position {
+    x: 1001.0
+    y: 192.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "horizontal_look"
+        value: "1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "activator"
+        value: "aabb1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "bluebird1"
+  collection: "/pixelfrog/enemies/bluebird/bluebird.collection"
+  position {
+    x: -941.0
+    y: 100.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "health_points"
+        value: "5.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "name"
+        value: "bluebird1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "speed"
+        value: "30.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "chicken1"
+  collection: "/pixelfrog/enemies/chicken/chicken.collection"
+  position {
+    x: 470.0
+    y: 320.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "horizontal_look"
+        value: "-1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "plant"
+  collection: "/pixelfrog/enemies/plant/plant.collection"
+  position {
+    x: 1132.0
+    y: 320.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "bee1"
+  collection: "/pixelfrog/enemies/bee/bee.collection"
+  position {
+    x: -797.0
+    y: 181.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "health_points"
+        value: "5.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "name"
+        value: "bee1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "speed"
+        value: "30.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "snail1"
+  collection: "/pixelfrog/enemies/snail/snail.collection"
+  position {
+    x: 771.0
+    y: 192.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "activator"
+        value: "aabb2"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box10"
+  collection: "/pixelfrog/props/boxes/box3/box3.collection"
+  position {
+    x: 1798.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "radish2"
+  collection: "/pixelfrog/enemies/radish/radish.collection"
+  position {
+    x: 1489.0
+    y: 286.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "fly_speed"
+        value: "0.75"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "fly_angle"
+        value: "180.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "radish1"
+  collection: "/pixelfrog/enemies/radish/radish.collection"
+  position {
+    x: 1553.0
+    y: 162.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "fly_speed"
+        value: "0.75"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "static_geometry"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/pixelfrog/levels/level999/level101.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"script\"\n"
+  "  component: \"/pixelfrog/props/static_geometry/static_geometry.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"max_speed\"\n"
+  "    value: \"1000.0\"\n"
+  "    type: PROPERTY_TYPE_NUMBER\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/pixelfrog/levels/level999/level101.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player_hitbox\\\"\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

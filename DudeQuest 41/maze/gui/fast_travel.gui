@@ -1,0 +1,18 @@
+script: "/maze/gui/fast_travel.gui_script"
+fonts {
+  name: "uni05_53"
+  font: "/maze/gui/fonts/uni05_53.font"
+}
+textures {
+  name: "hud"
+  texture: "/maze/hud/hud.atlas"
+}
+background_color {
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  w: 0.0
+}
+material: "/maze/hud/materials/hud.material"
+adjust_reference: ADJUST_REFERENCE_DISABLED
+max_nodes: 512

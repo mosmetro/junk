@@ -1,0 +1,17 @@
+-- import
+local FX = require("scripts.platformer.fx")
+
+-- localization
+local defold = _G
+local url = msg.url
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init ()
+
+	FX.PLAYER_FACTORY = url("#player_factory")
+
+	
+end -- init

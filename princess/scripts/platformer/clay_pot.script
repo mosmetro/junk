@@ -1,0 +1,62 @@
+local defold = _G
+
+local game = require("scripts.platformer.game")
+-- local utils = require("scripts.shared.utils")
+local LAYER = require("scripts.shared.layers")
+local FX = require("scripts.platformer.fx")
+local collectables = require("scripts.platformer.collectables")
+
+local get_drop = collectables.get_drop
+local hash = hash
+local get_id = go.get_id
+local get_world_position = go.get_world_position
+local get_position = go.get_position
+local set_position = go.set_position
+local delete = go.delete
+local collection_create = collectionfactory.create
+local create_gameobject = factory.create
+local set_context = game.set_context
+
+-- functions
+local apply_damage
+
+local GO = hash("/go")
+
+go.property("drop_id", hash(""))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+    self.gameobject = get_id()
+    local position = get_position()
+    position.z = LAYER.OBJECT_2
+    set_position(position)
+
+    self.drop = get_drop(self.drop_id)
+
+    self.apply_damage = apply_damage
+    set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+    set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- apply_damage
+---------------------------------------
+function apply_damage (self, direction)
+    -- number
+    local position = get_world_position()
+    collection_create(FX.CLAY_POT_DEBRIS_FACTORY, position, nil, { [GO] = { direction = direction } })
+    position.y = position.y + 10.5 -- half height of the pot
+    self.drop.velocity.x = self.drop.velocity.x * direction
+    create_gameobject(FX.GOLD_COIN_FACTORY, position, nil, self.drop)
+    delete()
+end -- apply_damage

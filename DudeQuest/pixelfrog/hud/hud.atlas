@@ -1,0 +1,195 @@
+images {
+  image: "/pixelfrog/common/images/black_1x1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/heart_empty.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_0.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_1.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_3.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_4.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_5.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_6.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_7.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_8.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/small_white_digits_9.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/pixelfrog/hud/images/heart_full.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+animations {
+  id: "coin"
+  images {
+    image: "/pixelfrog/props/collectable/coins/images/gold_coin_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/coins/images/gold_coin_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/coins/images/gold_coin_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/coins/images/gold_coin_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "sword"
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/sword/images/sword_idle_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "key_iron_presentation"
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_iron_presentation_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "key_gold_presentation"
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_1.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_2.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_3.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_4.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_5.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_6.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_7.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/pixelfrog/props/collectable/keys/images/key_gold_presentation_8.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

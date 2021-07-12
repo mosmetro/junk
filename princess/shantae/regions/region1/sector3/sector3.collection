@@ -1,0 +1,1378 @@
+name: "region1_sector1"
+instances {
+  id: "map"
+  prototype: "/shantae/regions/region1/sector3/sector3.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/common/camera.go"
+  position {
+    x: 2.0
+    y: -337.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "update_sink"
+  prototype: "/common/update_sink.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "grade"
+  prototype: "/common/grade.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "factory"
+  prototype: "/common/factory.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player_entry_point1"
+  prototype: "/common/player_entry_point.go"
+  position {
+    x: 0.0
+    y: 490.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "enter_sector_64x16"
+  prototype: "/shantae/regions/enter_sector_64x16.go"
+  position {
+    x: 0.0
+    y: 360.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "uplift"
+  prototype: "/shantae/uplift/uplift.go"
+  position {
+    x: 100.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "ascent_velocity"
+      value: "1.2"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "well_tube"
+  prototype: "/shantae/regions/region1/sector3/well_tube.go"
+  position {
+    x: 0.0
+    y: 416.0
+    z: 0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "exit_sector_32x16"
+  prototype: "/shantae/regions/exit_sector_32x16.go"
+  position {
+    x: 0.0
+    y: 435.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "to_region"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "to_sector"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "entry_point"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "exit_velocity"
+      value: "0.35, 1.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR3
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "rope_a"
+  prototype: "/common/rope_a.go"
+  position {
+    x: 304.0
+    y: 400.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "/map"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "rope_b"
+  prototype: "/common/rope_b.go"
+  position {
+    x: 224.0
+    y: 400.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "/map"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1_waypoint1"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 280.0
+    y: 60.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform1"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1_waypoint2"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 280.0
+    y: 256.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform1"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform1"
+  prototype: "/common/platform.go"
+  position {
+    x: 280.0
+    y: 100.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "platform"
+    properties {
+      id: "speed"
+      value: "150.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "wait_time"
+      value: "0.25"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform2"
+  prototype: "/common/platform.go"
+  position {
+    x: 328.0
+    y: 100.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "platform"
+    properties {
+      id: "speed"
+      value: "150.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "wait_time"
+      value: "0.25"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "ease_factor"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform2_waypoint2"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 328.0
+    y: 60.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform2"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform2_waypoint1"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 328.0
+    y: 256.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform2"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 245.0
+    y: 233.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_medium_a"
+  prototype: "/shantae/clay_jugs/clay_jug_medium_a.go"
+  position {
+    x: 211.0
+    y: 230.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_medium_b"
+  prototype: "/shantae/clay_jugs/clay_jug_medium_b.go"
+  position {
+    x: 227.0
+    y: 231.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large1"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 433.0
+    y: 105.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "static_spikes_x3"
+  prototype: "/common/static_spikes_x3.go"
+  position {
+    x: 691.0
+    y: -16.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "pain_maker"
+    properties {
+      id: "instant_death"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spiked_block3"
+  prototype: "/common/spiked_block_32x48.go"
+  position {
+    x: 941.0
+    y: 308.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spiked_block1"
+  prototype: "/common/spiked_block_48x32.go"
+  position {
+    x: 708.0
+    y: 233.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3"
+  prototype: "/common/platform.go"
+  position {
+    x: 566.0
+    y: 295.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "platform"
+    properties {
+      id: "speed"
+      value: "80.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "cyclic"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+    properties {
+      id: "wait_time"
+      value: "0.18"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "rope_b1"
+  prototype: "/common/rope_b.go"
+  position {
+    x: 566.0
+    y: 265.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3_waypoint1"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 566.0
+    y: 318.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3_waypoint2"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 770.0
+    y: 318.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3_waypoint3"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 822.0
+    y: 368.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "3.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3_waypoint4"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 997.0
+    y: 368.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "4.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3_waypoint5"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 997.0
+    y: 201.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "5.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "platform3_waypoint6"
+  prototype: "/common/platform_waypoint.go"
+  position {
+    x: 566.0
+    y: 367.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "waypoint"
+    properties {
+      id: "platform"
+      value: "/platform3"
+      type: PROPERTY_TYPE_URL
+    }
+    properties {
+      id: "index"
+      value: "6.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spiked_block4"
+  prototype: "/common/spiked_block_48x32.go"
+  position {
+    x: 995.0
+    y: 87.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "spiked_block2"
+  prototype: "/common/spiked_block_32x48.go"
+  position {
+    x: 851.0
+    y: 209.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large2"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 501.0
+    y: 217.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_medium_a1"
+  prototype: "/shantae/clay_jugs/clay_jug_medium_a.go"
+  position {
+    x: 1175.0
+    y: 294.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_medium_b1"
+  prototype: "/shantae/clay_jugs/clay_jug_medium_b.go"
+  position {
+    x: 1191.0
+    y: 295.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large3"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 477.0
+    y: 217.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large4"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 522.0
+    y: 217.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large5"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 453.0
+    y: 217.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large6"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 429.0
+    y: 217.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large7"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 405.0
+    y: 217.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "activator1"
+  data: "components {\n"
+  "  id: \"activator_copy\"\n"
+  "  component: \"/scripts/platformer/activator_copy.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"activator\\\"\\n"
+  "mask: \\\"camera\\\"\\n"
+  "mask: \\\"activator_sensor\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "      w: 1.0\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 60.0\\n"
+  "  data: 150.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 304.0
+    y: 150.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "activator2"
+  data: "components {\n"
+  "  id: \"activator_copy\"\n"
+  "  component: \"/scripts/platformer/activator_copy.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"activator\\\"\\n"
+  "mask: \\\"camera\\\"\\n"
+  "mask: \\\"activator_sensor\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "      w: 1.0\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 80.0\\n"
+  "  data: 150.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 100.0
+    y: 150.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "activator3"
+  data: "components {\n"
+  "  id: \"activator_copy\"\n"
+  "  component: \"/scripts/platformer/activator_copy.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"activator\\\"\\n"
+  "mask: \\\"camera\\\"\\n"
+  "mask: \\\"activator_sensor\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "      w: 1.0\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 250.0\\n"
+  "  data: 150.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 782.0
+    y: 233.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "go"
+  data: "embedded_components {\n"
+  "  id: \"sprite\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/assets/shantae.atlas\\\"\\n"
+  "default_animation: \\\"dude_test_single\\\"\\n"
+  "material: \\\"/custom/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 10.0
+    y: 251.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

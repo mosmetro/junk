@@ -1,0 +1,56 @@
+-- import
+local LAYER = require("scripts.shared.layers")
+local MSG = require("scripts.shared.messages")
+local FX = require("scripts.platformer.fx")
+-- local game = require("scripts.platformer.game")
+-- local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local get_position = go.get_position
+local animate = go.animate
+local delete = go.delete
+local factory = factory
+
+-- constants
+local PLAYBACK = go.PLAYBACK_ONCE_FORWARD
+local EASING = go.EASING_INQUAD
+local POSITION_Y = hash("position.y")
+local IDENTITY = vmath.quat()
+local ONE = vmath.vector3(1)
+
+-- functions
+local on_complete
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  -- self.position = get_position()
+  animate(".", POSITION_Y, PLAYBACK, get_position().y - 350, EASING, 0.45, 0.01, on_complete)
+  self.is_exploded = false
+end -- init
+
+function defold.on_message(self, message_id, message)
+  if (not self.is_exploded) and (message_id == MSG.CONTACT_POINT_RESPONSE) then
+    if message.normal.y > 0.7 then
+      self.is_exploded = true
+      local position = get_position()
+      position.z = LAYER.DEBRIS_2
+      factory.create(FX.CANNON_BALL_EXPLOSION_FACTORY, position, IDENTITY, nil, ONE)
+      position.y = message.position.y
+      position.z = LAYER.FX_1
+      factory.create(FX.IMPACT_FACTORY, position, IDENTITY, nil, ONE)
+      delete()
+    end
+  end
+end
+
+---------------------------------------
+-- on_complete
+---------------------------------------
+
+function on_complete()
+  delete()
+end -- on_complete

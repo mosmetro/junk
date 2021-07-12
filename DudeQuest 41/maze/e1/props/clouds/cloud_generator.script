@@ -1,0 +1,15 @@
+local CloudGenerator = require("maze.e1.props.clouds.cloud_generator")
+
+local defold = _G
+
+go.property("is_active", true)
+go.property("length", 0)
+go.property("max_clouds", 0)
+
+function defold.init(self)
+   self.instance = CloudGenerator.new(self)
+end -- init
+
+function defold.final(self)
+   CloudGenerator.free(self.instance)
+end -- final

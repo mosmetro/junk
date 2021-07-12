@@ -1,0 +1,99 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+-- local COLOR = require("scripts.shared.colors")
+
+-- localization
+local get_id = go.get_id
+local url = msg.url
+local post = msg.post
+local vector3 = vmath.vector3
+local get_position = go.get_position
+local set_position = go.set_position
+local rad = math.rad
+local sin = math.sin
+local cos = math.cos
+local quat_rotation_z = vmath.quat_rotation_z
+local create = factory.create
+local set_rotation = go.set_rotation
+
+-- functions
+local frame_update
+local enable
+local disable
+
+-- properties
+go.property("speed", 1) -- degree per second
+go.property("angle", 0)
+go.property("radius", 29)
+go.property("platform_count", 1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	self.gameobject = get_id()
+	self.sprite = url("#sprite")
+	self.position = get_position()
+	self.position.z = LAYER.MACHINERY_2
+	set_position(self.position)
+
+	local factory = url("#factory")
+	local angle = 0
+	local step = rad(360 / self.platform_count)
+	local position = vector3()
+	for _ = 1, self.platform_count do
+		position.x = self.position.x + self.radius * cos(angle)
+		position.y = self.position.y + self.radius * sin(angle)
+		create(factory, position, nil, { speed = self.speed, pivot = self.gameobject })
+		angle = angle + step
+	end
+
+  -- game.add_update_callback(self, frame_update, game.motor_platforms)
+	game.get_shared_data(self.gameobject).context = self
+	self.enable = enable
+	self.disable = disable
+	disable(self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	game.remove_update_callback(self, game.motor_platforms)
+	game.remove_shared_data(self.gameobject)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update (self, dt)
+	local angle = self.angle + self.speed * dt
+	local rotation = quat_rotation_z(angle)
+	set_rotation(rotation)
+	self.angle = angle
+end -- update
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable (self)
+	game.add_update_callback(self, frame_update, game.motor_platforms)
+	post(self.sprite, MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable (self)
+	game.remove_update_callback(self, game.motor_platforms)
+	post(self.sprite, MSG.DISABLE)
+end -- disable

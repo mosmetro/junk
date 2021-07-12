@@ -1,0 +1,568 @@
+script: "/scripts/platformer/gui/loader.gui_script"
+fonts {
+  name: "bebas_regular_bitmap_64"
+  font: "/assets/fonts/bebas_regular_bitmap_64.font"
+}
+textures {
+  name: "shantae_ui"
+  texture: "/assets/shantae_ui.atlas"
+}
+background_color {
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  w: 0.0
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 1.0
+    y: 1.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/black_1x1"
+  id: "black_box"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_CENTER
+  adjust_mode: ADJUST_MODE_FIT
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.6
+    y: 0.6
+    z: 0.6
+    w: 1.0
+  }
+  type: TYPE_TEXT
+  blend_mode: BLEND_MODE_ALPHA
+  text: "Loading"
+  font: "bebas_regular_bitmap_64"
+  id: "loading"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_SE
+  outline {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  shadow {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+    w: 1.0
+  }
+  adjust_mode: ADJUST_MODE_FIT
+  line_break: false
+  parent: "black_box"
+  layer: "text"
+  inherit_alpha: true
+  alpha: 1.0
+  outline_alpha: 1.0
+  shadow_alpha: 1.0
+  template_node_child: false
+  text_leading: 1.0
+  text_tracking: 0.1
+}
+nodes {
+  position {
+    x: 13.0
+    y: 21.0
+    z: 0.0
+    w: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale {
+    x: 0.6
+    y: 0.6
+    z: 1.0
+    w: 1.0
+  }
+  size {
+    x: 120.0
+    y: 24.0
+    z: 0.0
+    w: 1.0
+  }
+  color {
+    x: 0.6
+    y: 0.6
+    z: 0.6
+    w: 1.0
+  }
+  type: TYPE_BOX
+  blend_mode: BLEND_MODE_ALPHA
+  texture: "shantae_ui/shantae_progress_bar"
+  id: "progress"
+  xanchor: XANCHOR_NONE
+  yanchor: YANCHOR_NONE
+  pivot: PIVOT_W
+  adjust_mode: ADJUST_MODE_FIT
+  parent: "loading"
+  layer: "image"
+  inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
+  alpha: 1.0
+  template_node_child: false
+  size_mode: SIZE_MODE_AUTO
+}
+layers {
+  name: "image"
+}
+layers {
+  name: "text"
+}
+material: "/custom/materials/gui_linear.material"
+layouts {
+  name: "ipad"
+  nodes {
+    position {
+      x: 1112.0
+      y: 834.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 2226.0
+      y: 1670.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "black_box"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    layer: "image"
+    inherit_alpha: true
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 1.0
+    overridden_fields: 1
+    overridden_fields: 4
+    overridden_fields: 38
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+  nodes {
+    position {
+      x: 960.0
+      y: -781.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 200.0
+      y: 100.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 0.6
+      y: 0.6
+      z: 0.6
+      w: 1.0
+    }
+    type: TYPE_TEXT
+    blend_mode: BLEND_MODE_ALPHA
+    text: "Loading"
+    font: "bebas_regular_bitmap_64"
+    id: "loading"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_SE
+    outline {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    shadow {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    adjust_mode: ADJUST_MODE_FIT
+    line_break: false
+    parent: "black_box"
+    layer: "text"
+    inherit_alpha: true
+    alpha: 1.0
+    outline_alpha: 1.0
+    shadow_alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    text_leading: 1.0
+    text_tracking: 0.1
+  }
+}
+layouts {
+  name: "iphone"
+  nodes {
+    position {
+      x: 960.0
+      y: 540.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 1930.0
+      y: 1090.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "black_box"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    layer: "image"
+    inherit_alpha: true
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 1.0
+    overridden_fields: 1
+    overridden_fields: 4
+    overridden_fields: 38
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+  nodes {
+    position {
+      x: 800.0
+      y: -480.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 200.0
+      y: 100.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 0.6
+      y: 0.6
+      z: 0.6
+      w: 1.0
+    }
+    type: TYPE_TEXT
+    blend_mode: BLEND_MODE_ALPHA
+    text: "Loading"
+    font: "bebas_regular_bitmap_64"
+    id: "loading"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_SE
+    outline {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    shadow {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    adjust_mode: ADJUST_MODE_FIT
+    line_break: false
+    parent: "black_box"
+    layer: "text"
+    inherit_alpha: true
+    alpha: 1.0
+    outline_alpha: 1.0
+    shadow_alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    text_leading: 1.0
+    text_tracking: 0.1
+  }
+}
+layouts {
+  name: "iphonex"
+  nodes {
+    position {
+      x: 1169.0
+      y: 540.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 2348.0
+      y: 1090.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    type: TYPE_BOX
+    blend_mode: BLEND_MODE_ALPHA
+    texture: "shantae_ui/black_1x1"
+    id: "black_box"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_CENTER
+    adjust_mode: ADJUST_MODE_FIT
+    layer: "image"
+    inherit_alpha: true
+    slice9 {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+    }
+    clipping_mode: CLIPPING_MODE_NONE
+    clipping_visible: true
+    clipping_inverted: false
+    alpha: 1.0
+    overridden_fields: 1
+    overridden_fields: 4
+    overridden_fields: 38
+    template_node_child: false
+    size_mode: SIZE_MODE_MANUAL
+  }
+  nodes {
+    position {
+      x: 1000.0
+      y: -480.0
+      z: 0.0
+      w: 1.0
+    }
+    rotation {
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+    }
+    scale {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    size {
+      x: 200.0
+      y: 100.0
+      z: 0.0
+      w: 1.0
+    }
+    color {
+      x: 0.6
+      y: 0.6
+      z: 0.6
+      w: 1.0
+    }
+    type: TYPE_TEXT
+    blend_mode: BLEND_MODE_ALPHA
+    text: "Loading"
+    font: "bebas_regular_bitmap_64"
+    id: "loading"
+    xanchor: XANCHOR_NONE
+    yanchor: YANCHOR_NONE
+    pivot: PIVOT_SE
+    outline {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    shadow {
+      x: 1.0
+      y: 1.0
+      z: 1.0
+      w: 1.0
+    }
+    adjust_mode: ADJUST_MODE_FIT
+    line_break: false
+    parent: "black_box"
+    layer: "text"
+    inherit_alpha: true
+    alpha: 1.0
+    outline_alpha: 1.0
+    shadow_alpha: 1.0
+    overridden_fields: 1
+    template_node_child: false
+    text_leading: 1.0
+    text_tracking: 0.1
+  }
+}
+adjust_reference: ADJUST_REFERENCE_PARENT
+max_nodes: 512

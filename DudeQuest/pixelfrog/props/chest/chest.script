@@ -1,0 +1,14 @@
+local Prototype = require("pixelfrog.props.chest.chest")
+
+local defold = _G
+
+go.property("name", hash(""))
+go.property("direction", 1)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

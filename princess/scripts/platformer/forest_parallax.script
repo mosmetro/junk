@@ -1,0 +1,132 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local game = require("scripts.platformer.game")
+local nc = require("scripts.shared.notification_center")
+
+-- localization
+local set_context = game.set_context
+local set_position = go.set_position
+local get_id = go.get_id
+local animate = go.animate
+local vector3 = vmath.vector3
+local post = msg.post
+local PLAYBACK_LOOP_FORWARD = go.PLAYBACK_LOOP_FORWARD
+local EASING_LINEAR = go.EASING_LINEAR
+
+-- constants
+local POSITION_X = hash("position.x")
+local CAMERA_UPDATED_NOTIFICATION = hash("CAMERA_UPDATED_NOTIFICATION")
+
+-- properties
+go.property("forest_near_x", 0)
+go.property("forest_far_x", 0)
+go.property("sky_near_x", 0)
+go.property("sky_far_x", 0)
+
+go.property("forest_near_y", 0)
+go.property("forest_far_y", 0)
+go.property("sky_near_y", 0)
+go.property("sky_far_y", 0)
+
+go.property("shift_y", 0)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+   self.gameobject = get_id()
+   set_position(vector3(), self.gameobject)
+   post(self.gameobject, MSG.SET_PARENT, { parent_id = get_id("/camera"), keep_world_transform = 0 })
+
+   local forest_near = get_id("forest_near")
+   local forest_near_position = vector3()
+   forest_near_position.z = LAYER.PARALLAX_1
+   set_position(forest_near_position, forest_near)
+   -- msg.post(forest_near, MSG.DISABLE)
+   local forest_far = get_id("forest_far")
+   local forest_far_position = vector3()
+   forest_far_position.z = LAYER.PARALLAX_2
+   set_position(forest_far_position, forest_far)
+
+   local sky_near_root = get_id("sky_near_root")
+   local sky_near_position = vector3()
+   sky_near_position.z = LAYER.PARALLAX_3
+   set_position(sky_near_position, sky_near_root)
+   --go.animate(url, property, playback, to, easing, duration)
+   animate(get_id("sky_near"), POSITION_X, PLAYBACK_LOOP_FORWARD, 320, EASING_LINEAR, 60)
+
+   local sky_far = get_id("sky_far")
+   local sky_far_position = vector3()
+   sky_far_position.z = LAYER.PARALLAX_4
+   set_position(sky_far_position, sky_far)
+
+   -- self.forest_far_x = self.forest_near_x * 0.5
+   -- self.sky_near_x = self.forest_far_x
+   -- self.sky_far_x = self.sky_near_x * 0.2
+   --
+   -- self.forest_far_y = self.forest_near_y * 0.5
+   -- self.sky_near_y = self.forest_far_y
+   -- self.sky_far_y = 0--self.sky_near_y * 0.2
+
+   -- local FOREST_NEAR_X = 160 -- sprite width * 0.5
+   -- local FOREST_FAR_X  = 80
+   -- local SKY_NEAR_X = 80
+   -- local SKY_FAR_X  = 10
+
+   -- local FOREST_NEAR_Y = 40-- sprite height * 0.5
+   -- local FOREST_FAR_Y  = 20
+   -- local SKY_NEAR_Y = 20
+   -- local SKY_FAR_Y  = 0--16--24
+
+   -- self.follow_camera = function(_, camera_x, camera_y)
+   --   forest_near_position.x = -self.forest_near_x * camera_x
+   --   forest_near_position.y = -self.forest_near_y * camera_y + self.shift_y
+   --   set_position(forest_near_position, forest_near)
+   --
+   --   forest_far_position.x = -self.forest_far_x * camera_x
+   --   forest_far_position.y = -self.forest_far_y * camera_y + self.shift_y
+   --   set_position(forest_far_position, forest_far)
+   --
+   --   sky_near_position.x = -self.sky_near_x * camera_x
+   --   sky_near_position.y = -self.sky_near_y * camera_y + self.shift_y
+   --   set_position(sky_near_position, sky_near_root)
+   --
+   --   sky_far_position.x = -self.sky_far_x * camera_x
+   --   sky_far_position.y = -self.sky_far_y * camera_y + self.shift_y
+   --   set_position(sky_far_position, sky_far)
+   -- end
+
+   local follow_camera = function(_, _, camera_x, camera_y) -- self, sender, camera_x, camera_y
+      forest_near_position.x = -self.forest_near_x * camera_x
+      forest_near_position.y = -self.forest_near_y * camera_y + self.shift_y
+      set_position(forest_near_position, forest_near)
+
+      forest_far_position.x = -self.forest_far_x * camera_x
+      forest_far_position.y = -self.forest_far_y * camera_y + self.shift_y
+      set_position(forest_far_position, forest_far)
+
+      sky_near_position.x = -self.sky_near_x * camera_x
+      sky_near_position.y = -self.sky_near_y * camera_y + self.shift_y
+      set_position(sky_near_position, sky_near_root)
+
+      sky_far_position.x = -self.sky_far_x * camera_x
+      sky_far_position.y = -self.sky_far_y * camera_y + self.shift_y
+      set_position(sky_far_position, sky_far)
+   end
+
+   set_context(self.gameobject, self)
+   nc.add_observer(self, CAMERA_UPDATED_NOTIFICATION, follow_camera)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final (self)
+   nc.remove_observer(self)
+   set_context(self.gameobject, nil)
+end -- final

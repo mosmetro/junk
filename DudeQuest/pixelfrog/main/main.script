@@ -1,0 +1,19 @@
+local snd = require("sound.sound")
+-- local utils = require("m.utils")
+
+local defold = _G
+
+function defold.init()
+   snd.init_sound()
+
+   timer.delay(0.1, false, function()
+      msg.post(".", msg.ACQUIRE_INPUT_FOCUS)
+      msg.post("#game", msg.LOAD)
+   end)
+end -- defold.init
+
+function defold.on_message(_, message_id, _, sender)
+   if message_id == msg.PROXY_LOADED then
+      msg.post(sender, msg.ENABLE)
+   end
+end -- defold.on_message

@@ -1,0 +1,114 @@
+local defold = _G
+
+local MSG = require("scripts.shared.messages")
+local UI = require("scripts.shared.ui.ui")
+local ScrollView = require("scripts.shared.ui.controls.scrollview")
+local Simple_button = require("scripts.shared.ui.controls.simple_button")
+
+-- localization
+local next = next
+local post = msg.post
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local get_scale = gui.get_scale
+local get_position = gui.get_position
+
+-- functions
+local on_event
+
+---------------------------------------
+
+-- init
+
+---------------------------------------
+
+function defold.init (self)
+	post("#", MSG.DISABLE)
+	set_render_order(1)
+
+	-- UI.context = self
+
+	local scrollview
+	local button1
+	local button2
+	local panel
+
+	button1 = Simple_button.new {
+		node = get_node("button1/image"),
+		released = "orange_button_outline_released",
+		pressed = "orange_button_outline_pressed",
+		callback = function ()
+			print("button1 clicked")
+		end
+	}
+
+	button2 = Simple_button.new {
+		node = get_node("button2/image"),
+		released = "orange_button_outline_released",
+		pressed = "orange_button_outline_pressed",
+		callback = function ()
+			print("button2 clicked")
+		end
+	}
+
+	panel = Simple_button.new {
+		node = get_node("panel"),
+		released = "orange_button_outline_pressed",
+		pressed = "orange_button_outline_pressed",
+		position_one = true,
+		callback = function ()
+			local position = panel.position_one and get_position(button1.node) or get_position(button2.node)
+			panel.position_one = not panel.position_one
+			local scale = get_scale(get_node("content_node"))
+			position = position * scale.x
+			scrollview.scroll_to(position, 0.75)
+		end
+	}
+
+	scrollview = ScrollView.new {
+		content_node = get_node("content_node"),
+		controls = {
+			button1,
+			button2,
+		},
+	}
+
+	self.controls = {
+		panel,
+		scrollview,
+	}
+
+	self.on_event = on_event
+
+	local position = get_position(button2.node)
+	local scale = get_scale(get_node("content_node"))
+	position = position * scale.x
+	scrollview.scroll_to(position)
+
+end -- init
+
+---------------------------------------
+
+-- update
+
+---------------------------------------
+
+function defold.update (self, dt)
+	for _, control in next, self.controls do
+		if control.update then
+			control.update(dt)
+		end
+	end
+end -- update
+
+---------------------------------------
+
+-- on_event
+
+---------------------------------------
+
+function on_event (self, event)
+	for _, control in next, self.controls do
+			if control.on_event(event) then return end
+	end
+end -- on_event

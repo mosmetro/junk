@@ -1,0 +1,16 @@
+local Snail = require("pixelfrog.enemies.snail.snail")
+
+local defold = _G
+
+go.property("health_points", 1)
+go.property("damage_points", 1)
+go.property("horizontal_look", 0)
+go.property("activator", hash(""))
+
+function defold.init(self)
+   self.instance = Snail.new(self)
+end
+
+function defold.final(self)
+   Snail.free(self.instance)
+end

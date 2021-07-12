@@ -1,0 +1,16 @@
+local Prototype = require("pixelfrog.props.cannon.cannon")
+
+local defold = _G
+
+go.property("bullet_damage_points", 1)
+go.property("bullet_speed", 300)
+go.property("direction", 1)
+go.property("name", hash(""))
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

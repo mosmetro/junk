@@ -1,0 +1,51 @@
+local defold = _G
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local FX = require("scripts.platformer.fx")
+local GROUP = require("scripts.shared.groups")
+
+local execute_in_context = utils.execute_in_context
+local get_id = go.get_id
+-- local post = msg.post
+local create = factory.create
+local IDENTITY = vmath.quat()
+local PLATFORM = GROUP.PLATFORM
+local STATIC = GROUP.STATIC
+
+function defold.init(self)
+	local shared_data = game.get_shared_data(get_id())
+	shared_data.damage_dealer_context = self
+	self.player_context = shared_data.context
+	self.hits = self.player_context.hits
+end
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.RAY_CAST_RESPONSE then
+		if self.hits[message.id] then
+			return
+		end
+
+		local damage_receiver = message.id
+		self.hits[damage_receiver] = true
+		local damage_receiver_context = game.get_shared_data(damage_receiver).context
+		if damage_receiver_context and damage_receiver_context.apply_damage then
+			-- execute_in_context(damage_receiver_context, function (context)
+			-- 	context:apply_damage()
+			-- end)
+			execute_in_context(damage_receiver_context, damage_receiver_context.apply_damage)
+		end
+		create(FX.FACTORY, message.position, IDENTITY, FX.IMPACT_SMALL)
+
+		if message.request_id == 4 then -- down thrust
+			self.player_context.velocity.y = self.player_context.jump_speed * 0.8
+		else -- normal attack
+			if message.group == PLATFORM or message.group == STATIC then
+				self.player_context.velocity.x = -175 * self.player_context.look_direction
+			end
+		end
+
+	elseif message_id == MSG.RAY_CAST_MISSED and message.request_id == 4 and self.player_context.velocity.y == 0 then
+		self.player_context.velocity.y = self.player_context.jump_speed * 0.5
+	end
+end

@@ -1,0 +1,10 @@
+attribute highp vec4 position;
+attribute mediump vec2 texcoord0;
+
+varying mediump vec2 var_texcoord0;
+
+void main()
+{
+	gl_Position = vec4(position.x, position.y * -1.0, 0.0, 1.0);
+	var_texcoord0 = texcoord0;
+}

@@ -1,0 +1,59 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local FX = require("scripts.platformer.fx")
+-- local GROUP = require("scripts.shared.groups")
+
+-- localization
+local execute_in_context = utils.execute_in_context
+local get_context = game.get_context
+local set_context = game.set_context
+local get_id = go.get_id
+local create = factory.create
+local IDENTITY = vmath.quat()
+local RAY_CAST_RESPONSE = MSG.RAY_CAST_RESPONSE
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  go.get_id()
+  -- utils.log("player_damage_dealer_init")
+  self.gameobject = get_id()
+  self.root_gameobject = get_id("root")
+  set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final (self)
+	set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+   local player_context
+   if message_id == RAY_CAST_RESPONSE then
+      player_context = get_context(self.root_gameobject)
+      if player_context.hits[message.id] then
+         return
+      end
+
+      local damage_receiver = message.id
+      player_context.hits[damage_receiver] = true
+      local damage_receiver_context = get_context(damage_receiver)
+      if damage_receiver_context and damage_receiver_context.apply_damage then
+         execute_in_context(damage_receiver_context, damage_receiver_context.apply_damage, player_context.look_direction)
+      end
+      create(FX.FACTORY, message.position, IDENTITY, FX.IMPACT_SMALL)
+   end
+end -- on_message

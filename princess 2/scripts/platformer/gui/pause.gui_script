@@ -1,0 +1,180 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+local thread = require("scripts.shared.thread")
+
+-- localization
+local execute_in_context = utils.execute_in_context
+local translate = translations.translate
+local next = next
+local post = msg.post
+local url = msg.url
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_text = gui.set_text
+
+-- functions
+local enable
+local disable
+local on_language_change
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.pause_context = self
+	disable()
+	set_render_order(1)
+
+	local resume_button = SimpleButton.new {
+		image_node = get_node("resume/image"),
+		text_node = get_node("resume/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			execute_in_context(ui.single_touch_controls_context, function (context)
+				context:disable()
+			end)
+			disable()
+			execute_in_context(ui.ingame_controls_context, function (context)
+				context:enable()
+			end)
+			post(url("main:/region1#level1_proxy"), MSG.SET_TIME_STEP, { factor = 1, mode = 1 })
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.GAME_RESUME))
+		end,
+	}
+
+	local restart_button = SimpleButton.new {
+		image_node = get_node("restart/image"),
+		text_node = get_node("restart/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			execute_in_context(ui.single_touch_controls_context, function (context)
+				context:disable()
+			end)
+			thread.new(self, function ()
+				thread.unload(self, url("main:/region1#level1_proxy"))
+				thread.load(self, url("main:/region1#level1_proxy"), true)
+				post(url("main:/region1#level1_proxy"), MSG.SET_TIME_STEP, { factor = 1, mode = 1 })
+				execute_in_context(ui.ingame_controls_context, function (context)
+					context:enable()
+				end)
+				disable()
+			end)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.GAME_RESTART))
+		end,
+	}
+
+	local quit_button = SimpleButton.new {
+		image_node = get_node("quit/image"),
+		text_node = get_node("quit/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			thread.new(self, function ()
+				thread.unload(self, url("main:/region1#level1_proxy"))
+				disable()
+				execute_in_context(ui.start_context, function (context)
+					context:enable()
+				end)
+			end)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.GAME_QUIT))
+		end,
+	}
+
+	local options_button = SimpleButton.new {
+		image_node = get_node("options/image"),
+		text_node = get_node("options/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			disable()
+			execute_in_context(ui.options_context, function (context)
+				context:enable(self)
+			end)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.GAME_OPTIONS))
+		end,
+	}
+
+	self.controls = {
+		resume_button,
+		restart_button,
+		quit_button,
+		options_button,
+	}
+
+	self.enable = enable
+	self.disable = disable
+	nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_change)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final (self)
+	ui.pause_context = nil
+	nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function defold.update( self, dt)
+	thread.update(self, dt)
+end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message, sender)
+	thread.on_message(self, message_id, message, sender)
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable (self)
+	ui.first_responder = self
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- on_language_change
+---------------------------------------
+
+function on_language_change (self)
+	for _, control in next, self.controls do
+		if control.on_language_change then
+			control:on_language_change()
+		end
+	end
+end -- on_language_change

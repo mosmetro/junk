@@ -1,0 +1,124 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local const = require("m.constants")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+local MenuButton = require("hud.slot_selector.menu_button")
+local Label = require("hud.label")
+local translations = require("game.translations")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local next = next
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+local translate = translations.translate
+
+local controls
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = context
+
+   for _, control in next, controls do
+      if control.on_language_change then
+         control:on_language_change()
+      end
+      set_color(control.node, colors.TRANSPARENT_WHITE)
+   end
+
+   for _, control in next, controls do
+      animate(control.node, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   end
+end -- enable
+
+local function disable(next_context, out_button)
+   global.single_touch_first_responder = nil
+
+   for _, control in next, controls do
+      if control ~= out_button then
+         gui.animate(control.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+      end
+   end
+   gui.animate(out_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ACCENT_ANIMATION_EASING, ui.ACCENT_ANIMATION_DURATION, 0, function()
+      msg.post("#", msg.DISABLE)
+      runtime.execute_in_context(next_context.enable, next_context, global.options_context)
+   end)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.options_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   -- heading_root = get_node("heading/root")
+
+   set_color(get_node("heading/text"), colors.LABEL_COLOR)
+   set_color(get_node("heading/underline"), colors.CONTROL_DISABLED_COLOR)
+
+   controls = {}
+
+   local heading_label = Label.new {
+      node = get_node("heading/root"),
+      title_node = get_node("heading/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.OPTIONS_LABEL_HEADING))
+      end,
+   }
+   controls[#controls + 1] = heading_label
+
+   local game_button = MenuButton.new {
+      node = get_node("game/root"),
+      title_node = get_node("game/text"),
+      callback = function(control)
+         disable(global.game_options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.OPTIONS_BUTTON_GAME))
+      end,
+   }
+   controls[#controls + 1] = game_button
+
+   local audio_button = MenuButton.new {
+      node = get_node("audio/root"),
+      title_node = get_node("audio/text"),
+      callback = function(control)
+         disable(global.audio_options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.OPTIONS_BUTTON_AUDIO))
+      end,
+   }
+   controls[#controls + 1] = audio_button
+
+   local controls_button = MenuButton.new {
+      node = get_node("controls/root"),
+      title_node = get_node("controls/text"),
+      callback = function(control)
+         disable(global.touch_controls_options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.OPTIONS_BUTTON_CONTROLS))
+      end,
+   }
+   controls[#controls + 1] = controls_button
+
+   local back_button  = MenuButton.new {
+      node = get_node("back/root"),
+      title_node = get_node("back/text"),
+      callback = function(control)
+         local to_context = global.hud_back_stack.pop_right()
+         disable(to_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_BACK))
+      end,
+   }
+   controls[#controls + 1] = back_button
+
+   self.controls = controls
+end -- defold.init

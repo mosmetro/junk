@@ -1,0 +1,58 @@
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_a.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_b.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_l.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_r.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_x.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_y.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_arrow.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_pause.png"
+}
+images {
+  image: "/assets/multi_touch_controls/multi_touch_button_round_arrow.png"
+}
+images {
+  image: "/assets/images/white_1x1.png"
+}
+images {
+  image: "/assets/images/black_1x1.png"
+}
+images {
+  image: "/assets/multi_touch_controls/Group.png"
+}
+animations {
+  id: "loading_progress"
+  images {
+    image: "/assets/images/gui/loading_progress_bar_1.png"
+  }
+  images {
+    image: "/assets/images/gui/loading_progress_bar_2.png"
+  }
+  images {
+    image: "/assets/images/gui/loading_progress_bar_3.png"
+  }
+  images {
+    image: "/assets/images/gui/loading_progress_bar_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 2
+inner_padding: 0

@@ -1,0 +1,1028 @@
+name: "default"
+collection_instances {
+  id: "tut1"
+  collection: "/pixelfrog/props/billboards/tutorial/tut1.collection"
+  position {
+    x: 185.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "teleport1"
+  collection: "/pixelfrog/props/teleport/teleport.collection"
+  position {
+    x: 63.0
+    y: 33.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "map"
+        value: "level1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "location"
+        value: "/teleport1/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "tut2"
+  collection: "/pixelfrog/props/billboards/tutorial/tut2.collection"
+  position {
+    x: 586.0
+    y: 32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "tut3"
+  collection: "/pixelfrog/props/billboards/tutorial/tut3.collection"
+  position {
+    x: 863.0
+    y: 96.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "tut4"
+  collection: "/pixelfrog/props/billboards/tutorial/tut4.collection"
+  position {
+    x: 1175.0
+    y: 48.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "tut5"
+  collection: "/pixelfrog/props/billboards/tutorial/tut5.collection"
+  position {
+    x: 1478.0
+    y: -32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "tut6"
+  collection: "/pixelfrog/props/billboards/tutorial/tut6.collection"
+  position {
+    x: 1659.0
+    y: -32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ledge_a_48_1"
+  collection: "/pixelfrog/props/ledges/ledge_a_48.collection"
+  position {
+    x: 952.0
+    y: 96.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "gem_blue_static"
+  collection: "/pixelfrog/props/collectable/gems/gem_blue_static.collection"
+  position {
+    x: 376.0
+    y: 25.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "gem_green_static"
+  collection: "/pixelfrog/props/collectable/gems/gem_green_static.collection"
+  position {
+    x: 778.0
+    y: 105.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "coin_gold_static"
+  collection: "/pixelfrog/props/collectable/coins/coin_gold_static.collection"
+  position {
+    x: 981.0
+    y: 57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "coin_silver_static"
+  collection: "/pixelfrog/props/collectable/coins/coin_silver_static.collection"
+  position {
+    x: 995.0
+    y: 57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "coin_gold_static1"
+  collection: "/pixelfrog/props/collectable/coins/coin_gold_static.collection"
+  position {
+    x: 1009.0
+    y: 57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "coin_silver_static1"
+  collection: "/pixelfrog/props/collectable/coins/coin_silver_static.collection"
+  position {
+    x: 1023.0
+    y: 57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "coin_gold_static2"
+  collection: "/pixelfrog/props/collectable/coins/coin_gold_static.collection"
+  position {
+    x: 1037.0
+    y: 57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "coin_silver_static2"
+  collection: "/pixelfrog/props/collectable/coins/coin_silver_static.collection"
+  position {
+    x: 1051.0
+    y: 57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "mushroom"
+  collection: "/pixelfrog/enemies/mushroom/mushroom.collection"
+  position {
+    x: 1345.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "drop_gold_coin"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "drop_silver_coin"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "drop_blue_gem"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "drop_green_gem"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "drop_red_gem"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "spawner1"
+  collection: "/pixelfrog/props/spawner/spawner.collection"
+  position {
+    x: 1568.0
+    y: 16.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "sword_spawner"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "spawn_on_init"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+      properties {
+        id: "default_factory"
+        value: "game:/collectable#sword_pickup"
+        type: PROPERTY_TYPE_URL
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "door_wood"
+  collection: "/pixelfrog/props/doors/door_wood/door_wood.collection"
+  position {
+    x: 1850.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "door1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "key_name"
+        value: "key_iron"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "stay_open"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "hostage1"
+  collection: "/pixelfrog/hostages/hostage.collection"
+  position {
+    x: 1889.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pink_star"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "door_name"
+        value: "door1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "direction"
+        value: "-1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "spawner2"
+  collection: "/pixelfrog/props/spawner/spawner.collection"
+  position {
+    x: 1775.0
+    y: 89.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "key_spawner"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "sender"
+        value: "pink_star"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "hostage2"
+  collection: "/pixelfrog/hostages/hostage.collection"
+  position {
+    x: 2042.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "fierce_tooth"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "door_name"
+        value: "door2"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "direction"
+        value: "-1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "hostage3"
+  collection: "/pixelfrog/hostages/hostage.collection"
+  position {
+    x: 2205.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "crabby"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "door_name"
+        value: "door3"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "direction"
+        value: "-1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "door_wood1"
+  collection: "/pixelfrog/props/doors/door_wood/door_wood.collection"
+  position {
+    x: 2010.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "door2"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "key_name"
+        value: "key_iron"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "stay_open"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "spawner3"
+  collection: "/pixelfrog/props/spawner/spawner.collection"
+  position {
+    x: 1969.0
+    y: 89.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "key_spawner"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "sender"
+        value: "fierce_tooth"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "spawner4"
+  collection: "/pixelfrog/props/spawner/spawner.collection"
+  position {
+    x: 2126.0
+    y: 89.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "key_spawner"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "sender"
+        value: "crabby"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "door_wood2"
+  collection: "/pixelfrog/props/doors/door_wood/door_wood.collection"
+  position {
+    x: 2170.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "door3"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "key_name"
+        value: "key_iron"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "stay_open"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "chest"
+  collection: "/pixelfrog/props/chest/chest_gold.collection"
+  position {
+    x: 2422.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "movable_block"
+  collection: "/pixelfrog/props/movable_block/movable_block.collection"
+  position {
+    x: 2209.0
+    y: 194.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "radish"
+  collection: "/pixelfrog/enemies/radish/radish.collection"
+  position {
+    x: 2378.0
+    y: 129.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "fly_radius_x"
+        value: "0.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "fly_factor_y"
+        value: "10.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "static_geometry"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/pixelfrog/levels/level1/level1.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"script\"\n"
+  "  component: \"/pixelfrog/props/static_geometry/static_geometry.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/pixelfrog/levels/level1/level1.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"player_hitbox\\\"\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "passage1"
+  data: "components {\n"
+  "  id: \"sceipt\"\n"
+  "  component: \"/pixelfrog/props/passage/passage.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"destination_map\"\n"
+  "    value: \"level2\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"destination_passage\"\n"
+  "    value: \"/passage1\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"trigger\\\"\\n"
+  "mask: \\\"sensor\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 28.0\\n"
+  "      y: 80.0\\n"
+  "      z: 0.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      x: 0.0\\n"
+  "      y: 0.0\\n"
+  "      z: 0.0\\n"
+  "      w: 1.0\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 16.0\\n"
+  "  data: 80.0\\n"
+  "  data: 10.0\\n"
+  "}\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 2580.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

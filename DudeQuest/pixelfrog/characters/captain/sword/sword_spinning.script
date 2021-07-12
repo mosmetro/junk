@@ -1,0 +1,14 @@
+local SwordSpinning = require("pixelfrog.characters.captain.sword.sword_spinning")
+
+local defold = _G
+
+go.property("speed", 0)
+go.property("damage_points", 0)
+
+function defold.init(self)
+   self.instance = SwordSpinning.new(self)
+end
+
+function defold.final(self)
+   SwordSpinning.free(self.instance)
+end

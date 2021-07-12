@@ -1,0 +1,43 @@
+-- import
+local ui = require("m.ui.ui")
+
+-- localization
+local defold = _G
+local msg = msg
+local on_input = runtime.on_input
+
+-- functions
+local enable
+local disable
+
+function defold.init(self)
+   local sys_info = sys.get_sys_info()
+   local system_name = sys_info.system_name
+   if system_name == "iPhone OS" or system_name == "Android" then
+      disable()
+      return
+   else
+      ui.ingame_controls_context = self
+   end
+
+   gui.set_render_order(0)
+
+   self.enable = enable
+   self.disable = disable
+end -- init
+
+function defold.on_input(_, action_id, action)
+   if action_id then
+      on_input(action_id, action.value == 1)
+   end
+   return true
+end -- on_input
+
+function enable()
+   runtime.reset_input()
+   msg.post("#", msg.ENABLE)
+end -- enable
+
+function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable

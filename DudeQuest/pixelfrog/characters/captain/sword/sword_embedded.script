@@ -1,0 +1,11 @@
+local SwordEmbedded = require("pixelfrog.characters.captain.sword.sword_embedded")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = SwordEmbedded.new(self)
+end -- defold.init
+
+function defold.final(self)
+   SwordEmbedded.free(self.instance)
+end -- defold.final

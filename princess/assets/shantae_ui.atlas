@@ -1,0 +1,214 @@
+images {
+  image: "/assets/multi_touch_controls/button_a.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_arrow.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_b.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_round_arrow.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_x.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_y.png"
+}
+images {
+  image: "/assets/multi_touch_controls/pause.png"
+}
+images {
+  image: "/assets/common/black_1x1.png"
+}
+images {
+  image: "/assets/common/transparent_1x1.png"
+}
+images {
+  image: "/assets/common/marker.png"
+}
+images {
+  image: "/assets/common/grey_crossWhite.png"
+}
+images {
+  image: "/assets/common/panel_grey.png"
+}
+images {
+  image: "/assets/common/slider_up_grey.png"
+}
+images {
+  image: "/assets/common/slider_track_grey.png"
+}
+images {
+  image: "/assets/common/slider_end_grey.png"
+}
+images {
+  image: "/assets/common/slider_track_red.png"
+}
+images {
+  image: "/assets/common/slider_end_red.png"
+}
+images {
+  image: "/assets/common/slider_up_grey_active.png"
+}
+images {
+  image: "/assets/common/button_close_pressed.png"
+}
+images {
+  image: "/assets/common/button_close_released.png"
+}
+images {
+  image: "/assets/common/backdrop.png"
+}
+images {
+  image: "/assets/common/radio_base.png"
+}
+images {
+  image: "/assets/common/radio_dot.png"
+}
+images {
+  image: "/assets/common/arrow_up.png"
+}
+images {
+  image: "/assets/common/arrow_down.png"
+}
+images {
+  image: "/assets/common/arrow_left.png"
+}
+images {
+  image: "/assets/common/arrow_right.png"
+}
+images {
+  image: "/assets/common/hide_keyboard.png"
+}
+images {
+  image: "/assets/common/slider_end_blue.png"
+}
+images {
+  image: "/assets/common/slider_track_blue.png"
+}
+images {
+  image: "/assets/common/slider_up_grey_active_blue.png"
+}
+images {
+  image: "/assets/common/button_grey_pressed.png"
+}
+images {
+  image: "/assets/common/button_grey_released.png"
+}
+images {
+  image: "/assets/common/button_white_pressed.png"
+}
+images {
+  image: "/assets/common/button_white_released.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_0.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_5.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_6.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_7.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_8.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_digit_9.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_gem_symbol.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_heart_0.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_heart_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_heart_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_heart_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_ui_heart_4.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_l.png"
+}
+images {
+  image: "/assets/multi_touch_controls/button_r.png"
+}
+images {
+  image: "/assets/shantae/shantae_startup.png"
+}
+images {
+  image: "/assets/shantae/shantae_button_background.png"
+}
+images {
+  image: "/assets/shantae/shantae_button_pressed.png"
+}
+images {
+  image: "/assets/shantae/shantae_button_released.png"
+}
+images {
+  image: "/assets/shantae/shantae_button_released_shadow.png"
+}
+images {
+  image: "/assets/shantae/shantae_thumb.png"
+}
+images {
+  image: "/assets/shantae/shantae_thumb_background.png"
+}
+images {
+  image: "/assets/shantae/shantae_slider_track.png"
+}
+images {
+  image: "/assets/shantae/shantae_slider_end.png"
+}
+images {
+  image: "/assets/shantae/shantae_radio_dot.png"
+}
+images {
+  image: "/assets/common/white_1x1.png"
+}
+animations {
+  id: "shantae_progress_bar"
+  images {
+    image: "/assets/shantae/shantae_progress_bar_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_progress_bar_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_progress_bar_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_progress_bar_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

@@ -1,0 +1,18 @@
+local Geometry = require("pixelfrog.props.static_geometry.static_geometry")
+
+local defold = _G
+
+go.property("can_jump_down", false)
+go.property("can_climb_up", true)
+go.property("disable_sprite", false)
+go.property("acceleration", 2000)
+go.property("max_speed", 1000)
+go.property("impenetrable", false)
+
+function defold.init(self)
+   self.instance = Geometry.new(self)
+end -- defold.init
+
+function defold.final(self)
+   Geometry.free(self.instance)
+end -- defold.final

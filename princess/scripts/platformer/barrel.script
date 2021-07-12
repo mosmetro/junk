@@ -1,0 +1,52 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local LAYER = require("scripts.shared.layers")
+local FX = require("scripts.platformer.fx")
+
+-- localization
+local hash = hash
+local get_id = go.get_id
+local get_position = go.get_position
+local set_position = go.set_position
+local delete = go.delete
+local collection_create = collectionfactory.create
+local create_gameobject = factory.create
+local vector3 = vmath.vector3
+local set_context = game.set_context
+
+-- functions
+local apply_damage
+
+local GO = hash("/go")
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   self.gameobject = get_id()
+   self.position = get_position()
+   self.position.z = LAYER.OBJECT_2
+   set_position(self.position)
+   set_context(self.gameobject, self)
+   self.apply_damage = apply_damage
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- apply_damage
+---------------------------------------
+function apply_damage (self, direction) -- number
+   collection_create(FX.BARREL_DEBRIS_FACTORY, self.position, nil, { [GO] = { direction = direction } })
+   create_gameobject(FX.GOLD_COIN_FACTORY, self.position, nil, { velocity = vector3(direction * 175, 175, 0) })
+   delete()
+end -- apply_damage

@@ -1,0 +1,18 @@
+local Fan = require("pixelfrog.props.fan.fan")
+
+local defold = _G
+
+go.property("airflow_length", 0)
+go.property("airflow_strength", 0)
+go.property("aabb_min_x", 0)
+go.property("aabb_min_y", 0)
+go.property("aabb_max_x", 0)
+go.property("aabb_max_y", 0)
+
+function defold.init(self)
+   self.instance = Fan.new(self)
+end
+
+function defold.final(self)
+   Fan.free(self.instance)
+end

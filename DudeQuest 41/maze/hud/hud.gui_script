@@ -1,0 +1,66 @@
+local ui = require("m.ui.ui")
+local game = require("maze.game")
+local Counter = require("maze.hud.counter")
+local utils = require("m.utils")
+
+local defold = _G
+local get_node = gui.get_node
+local play_flipbook = gui.play_flipbook
+
+local vector3_stub = vmath.vector3()
+local currency_counter
+local currency_symbol_node
+local CURRENCY_SYMBOL = hash("coin")
+
+local enable
+local disable
+
+function defold.init(self)
+    ui.hud_context = self
+    -- utils.log(self)
+   -- msg.post("#", msg.DISABLE)
+   -- local w = game.view_width
+   -- local h = game.view_height
+   local right = game.view_half_width
+   local left = -right
+   local top = game.view_half_height
+   -- local bottom = -top
+   -- utils.log(w, h, left, right, bottom, top)
+   local hp_node = get_node("health")
+   fastmath.vector3_set_xy(vector3_stub, left + 1, top - 2)
+   gui.set_position(hp_node, vector3_stub)
+   local currency_node = get_node("currency")
+   fastmath.vector3_set_xy(vector3_stub, right - 1, top - 2)
+   gui.set_position(currency_node, vector3_stub)
+
+   currency_counter = Counter.new(get_node("currency_counter"), 20, game.get(nil, game.player, "currency_counter", 0))
+   currency_symbol_node = get_node("currency_symbol")
+
+   self.enable = enable
+   self.disable = disable
+end -- init
+
+function defold.final()
+   ui.hud_context = nil
+end -- final
+
+local playing = false
+local function on_animation_end()
+   playing = false
+end -- on_animation_end
+
+function defold.update(_, dt)
+   local success = currency_counter(game.get(nil, game.player, "currency_counter", 0), dt)
+   if success and (not playing) then
+      play_flipbook(currency_symbol_node, CURRENCY_SYMBOL, on_animation_end)
+      playing = true
+   end
+end -- update
+
+function enable()
+   msg.post("#", msg.ENABLE)
+end -- enable
+
+function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable

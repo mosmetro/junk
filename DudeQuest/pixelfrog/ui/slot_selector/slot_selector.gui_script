@@ -1,0 +1,407 @@
+local ui = require("m.ui.ui")
+-- local nc = require("m.notification_center")
+local const = require("m.constants")
+local colors = require("m.colors")
+local utils = require("m.utils")
+
+-- local game = require("pixelfrog.game.game")
+local snd = require("sound.sound")
+local gamestate = require("pixelfrog.game.gamestate")
+local Button = require("pixelfrog.ui.button")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local hash = hash
+local vector3_stub = fastmath.vector3_stub
+
+local root
+local hand
+local hand_root
+local hand_root_x
+local hand_root_y1
+local hand_root_y2
+local hand_root_y3
+local current_hand_y
+local play_button
+local trash_button
+local copy_button
+local paste_button
+local confirm_node
+local cancel_node
+local confirm_cancel_root
+local confirm_button
+local cancel_button
+local badge
+-- local slot4_button
+
+local slot_copy_from
+
+local slot_group = {}
+
+local badge_image = {
+   hash("slot_badge_1"),
+   hash("slot_badge_2"),
+   hash("slot_badge_3"),
+   hash("slot_badge_4"),
+}
+
+local function set_slot_copy_from(slot)
+   slot_copy_from = slot
+   if slot then
+      gui.set_enabled(badge, true)
+      gui.play_flipbook(badge, badge_image[slot])
+   else
+      gui.set_enabled(badge, false)
+   end
+end -- set_slot_copy_from
+
+local function appearance_complete()
+   for _, slot_button in next, slot_group do
+      slot_button.enable()
+   end
+end -- appearance_complete
+
+local function refresh_play_time(slot)
+   local file = sys.get_save_file(gamestate.get_app_id(), gamestate.get_slot_name(slot)) .. "/" .. "player"
+   local play_time
+   if gamestate.file_exists(file) then
+      local t = sys.load(file)
+      play_time = t.play_time
+      utils.log("play time: ", slot, play_time)
+   end
+   gui.set_text(slot_group[slot].info_node, os.date("!%H:%M", play_time or 0))
+end -- refresh_play_time
+
+-- local function refresh_slots()
+--    for i, slot_button in next, slot_group do
+--       local file = sys.get_save_file(gamestate.get_app_id(), gamestate.get_slot_name(i)) .. "/" .. "player"
+--       local play_time
+--       if gamestate.file_exists(file) then
+--          local t = sys.load(file)
+--          play_time = t.play_time
+--          -- utils.log(i, play_time)
+--       end
+--       gui.set_text(slot_button.info_node, os.date("!%H:%M", play_time or 0))
+--       slot_button.enable()
+--    end
+-- end -- refresh_slots
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   ui.first_responder = ui.slot_selector_context
+   runtime.execute_in_context(ui.backdrop_context.enable, ui.backdrop_context, nil, 0.5)
+
+   set_slot_copy_from(nil)
+
+   for _, control in next, context.controls do
+      control.deactivate()
+   end
+   play_button.disable()
+   trash_button.disable()
+   copy_button.disable()
+   paste_button.disable()
+   confirm_button.hide()
+   cancel_button.hide()
+
+   fastmath.vector3_set_xyz(vector3_stub, 0, 30, 0)
+   gui.set_position(root, vector3_stub)
+   gui.set_color(root, colors.TRANSPARENT_WHITE)
+   gui.animate(root, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 0.4)
+   gui.animate(root, const.POSITION_Y, 0, go.EASING_OUTBACK, 0.5, 0, appearance_complete)
+
+   current_hand_y = hand_root_y1
+   fastmath.vector3_set_xyz(vector3_stub, hand_root_x, current_hand_y, 0)
+   gui.set_position(hand_root, vector3_stub)
+
+   fastmath.vector3_set_xyz(vector3_stub, -2, 0, 0)
+   gui.set_position(hand, vector3_stub)
+   gui.animate(hand, const.POSITION_X, 2, go.EASING_INOUTSINE, 1, 0, nil, gui.PLAYBACK_LOOP_PINGPONG)
+
+   local slot = gamestate.get_save_slot()
+   if slot then
+      slot_group[slot].set_on(true)
+   end
+   for i, _ in next, slot_group do
+      refresh_play_time(i)
+   end
+end -- enable
+
+local function disappearance_complete()
+   runtime.execute_in_context(ui.home_context.enable, ui.home_context, true)
+   msg.post("#", msg.DISABLE)
+end -- disappearance_complete
+
+local function disable()
+   gui.animate(root, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, 0.5)
+   gui.animate(root, const.POSITION_Y, 30, go.EASING_INBACK, 0.5, 0, disappearance_complete)
+   runtime.execute_in_context(ui.backdrop_context.disable, ui.backdrop_context)
+end -- disable
+
+local function set_hand_position(y)
+   if current_hand_y ~= y then
+      current_hand_y = y
+      gui.animate(hand_root, const.POSITION_Y, y, gui.EASING_INOUTSINE, 0.4)
+   end
+end -- set_hand_position
+
+local function select_save_slot(slot)
+   play_button.enable()
+   trash_button.enable()
+   copy_button.enable()
+   if slot_copy_from and (slot_copy_from ~= slot) then
+      paste_button.enable()
+   else
+      paste_button.disable()
+   end
+   if gamestate.get_save_slot() ~= slot then
+      utils.log("setting slot")
+      gamestate.set_save_slot(fastmath.clamp(slot, 1, 4))
+      snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+   end
+end -- select_save_slot
+
+local function ready_delete_slot()
+   for _, slot_button in next, slot_group do
+      if slot_button.is_on() then
+         slot_button.deactivate()
+      else
+         slot_button.disable()
+      end
+   end
+   play_button.disable()
+   trash_button.deactivate()
+   copy_button.disable()
+   paste_button.disable()
+
+   gui.set_position(confirm_cancel_root, gui.get_position(trash_button.node))
+
+   confirm_button.show()
+   cancel_button.show()
+   confirm_button.enable()
+   cancel_button.enable()
+   -- gui.animate(confirm_button.node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 0.25)
+end -- ready_delete_slot
+
+local function ready_copy_slot()
+   for _, slot_button in next, slot_group do
+      if slot_button.is_on() then
+         slot_button.deactivate()
+      else
+         slot_button.disable()
+      end
+   end
+   play_button.disable()
+   trash_button.disable()
+   copy_button.disable()
+   paste_button.deactivate()
+   -- gui.set_color(confirm_button.node, colors.TRANSPARENT_WHITE)
+
+   gui.set_position(confirm_cancel_root, gui.get_position(paste_button.node))
+
+   confirm_button.show()
+   cancel_button.show()
+   confirm_button.enable()
+   cancel_button.enable()
+   -- gui.animate(confirm_button.node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 0.25)
+end -- ready_copy_slot
+
+local function refresh_controls()
+   for slot, slot_button in next, slot_group do
+      refresh_play_time(slot)
+      slot_button.enable()
+   end
+   play_button.enable()
+   trash_button.set_on(false)
+   trash_button.enable()
+   copy_button.enable()
+   paste_button.set_on(false)
+   if slot_copy_from and (slot_copy_from ~= gamestate.get_save_slot()) then
+      paste_button.enable()
+   else
+      paste_button.disable()
+   end
+   confirm_button.hide()
+   cancel_button.hide()
+   confirm_button.callback = nil
+   set_hand_position(hand_root_y2)
+end -- refresh_controls
+
+local function confirm_delete_slot()
+   local slot_to_clear = gamestate.get_save_slot()
+   if slot_copy_from == slot_to_clear then
+      set_slot_copy_from(nil)
+   end
+   gamestate.clear_slot(slot_to_clear)
+   snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+   refresh_controls()
+end -- confirm_delete_slot
+
+local function confirm_copy_slot()
+   local slot_copy_to = gamestate.get_save_slot()
+   utils.log("from ", slot_copy_from, "to ", slot_copy_to)
+   gamestate.clear_slot(slot_copy_to)
+   gamestate.copy_slot(slot_copy_from, slot_copy_to)
+   snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+   refresh_controls()
+end -- confirm_copy_slot
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   ui.slot_selector_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+   self.disable = disable
+
+   root = gui.get_node("root")
+   hand_root = gui.get_node("hand_root")
+   hand_root_x, hand_root_y1 = fastmath.vector3_get_xy(gui.get_position(hand_root))
+   hand = gui.get_node("hand")
+   badge = gui.get_node("badge")
+
+   local play_node = gui.get_node("play")
+   hand_root_y2 = fastmath.vector3_get_y(gui.get_position(play_node))
+   play_button = Button.new {
+      node = play_node,
+      released_animation = hash("play_released"),
+      pressed_animation = hash("play_pressed"),
+      disabled_animation = hash("play_disabled"),
+      callback = function()
+         ui.first_responder = nil
+         disable()
+      end,
+   }
+
+   trash_button = Button.new {
+      node = gui.get_node("trash"),
+      released_animation = hash("trash_released"),
+      pressed_animation = hash("trash_pressed"),
+      selected_released_animation = hash("trash_selected_released"),
+      selected_pressed_animation = hash("trash_selected_pressed"),
+      disabled_animation = hash("trash_disabled"),
+      callback = function()
+         confirm_button.callback = confirm_delete_slot
+         set_hand_position(hand_root_y3)
+         ready_delete_slot()
+      end,
+   }
+
+   copy_button = Button.new {
+      node = gui.get_node("copy"),
+      released_animation = hash("copy_released"),
+      pressed_animation = hash("copy_pressed"),
+      disabled_animation = hash("copy_disabled"),
+      on_press = function()
+         gui.set_enabled(badge, false)
+      end,
+      callback = function()
+         set_slot_copy_from(gamestate.get_save_slot())
+         paste_button.disable()
+      end,
+   }
+
+   paste_button = Button.new {
+      node = gui.get_node("paste"),
+      released_animation = hash("paste_released"),
+      pressed_animation = hash("paste_pressed"),
+      selected_released_animation = hash("paste_selected_released"),
+      selected_pressed_animation = hash("paste_selected_pressed"),
+      disabled_animation = hash("paste_disabled"),
+      callback = function()
+         confirm_button.callback = confirm_copy_slot
+         set_hand_position(hand_root_y3)
+         ready_copy_slot()
+      end,
+   }
+
+   local slot1_button = Button.new {
+      node = gui.get_node("slot1/slot"),
+      info_node = gui.get_node("slot1/info"),
+      released_animation = hash("slot1_released"),
+      pressed_animation = hash("slot1_pressed"),
+      selected_released_animation = hash("slot1_selected_released"),
+      selected_pressed_animation = hash("slot1_selected_pressed"),
+      disabled_animation = hash("slot1_disabled"),
+      radio_group = slot_group,
+      callback = function()
+         select_save_slot(1)
+         set_hand_position(hand_root_y2)
+      end,
+   }
+
+   local slot2_button = Button.new {
+      node = gui.get_node("slot2/slot"),
+      info_node = gui.get_node("slot2/info"),
+      released_animation = hash("slot2_released"),
+      pressed_animation = hash("slot2_pressed"),
+      selected_released_animation = hash("slot2_selected_released"),
+      selected_pressed_animation = hash("slot2_selected_pressed"),
+      disabled_animation = hash("slot2_disabled"),
+      radio_group = slot_group,
+      callback = function()
+         select_save_slot(2)
+         set_hand_position(hand_root_y2)
+      end,
+   }
+
+   local slot3_button = Button.new {
+      node = gui.get_node("slot3/slot"),
+      info_node = gui.get_node("slot3/info"),
+      released_animation = hash("slot3_released"),
+      pressed_animation = hash("slot3_pressed"),
+      selected_released_animation = hash("slot3_selected_released"),
+      selected_pressed_animation = hash("slot3_selected_pressed"),
+      disabled_animation = hash("slot3_disabled"),
+      radio_group = slot_group,
+      callback = function()
+         select_save_slot(3)
+         set_hand_position(hand_root_y2)
+      end,
+   }
+
+   -- slot4_button = Button.new {
+   --    node = gui.get_node("slot4/slot"),
+   --    info_node = gui.get_node("slot4/info"),
+   --    released_animation = hash("slot4_released"),
+   --    pressed_animation = hash("slot4_pressed"),
+   --    selected_released_animation = hash("slot4_selected_released"),
+   --    selected_pressed_animation = hash("slot4_selected_pressed"),
+   --    disabled_animation = hash("slot4_disabled"),
+   --    -- radio_group = slot_group,
+   --    callback = function()
+   --    end,
+   -- }
+
+   confirm_cancel_root = gui.get_node("confirm_cancel_root")
+
+   confirm_node = gui.get_node("confirm")
+   -- hand_root_y3 = fastmath.vector3_get_y(gui.get_position(confirm_node))
+   local _
+   _, hand_root_y3 = fastmath.get_absolute_node_position(confirm_node)
+   confirm_button = Button.new {
+      node = confirm_node,
+      released_animation = hash("confirm_released"),
+      pressed_animation = hash("confirm_pressed"),
+   }
+
+   cancel_node = gui.get_node("cancel")
+   cancel_button = Button.new {
+      node = cancel_node,
+      released_animation = hash("cancel_released"),
+      pressed_animation = hash("cancel_pressed"),
+      callback = refresh_controls,
+   }
+
+   self.controls = {
+      slot1_button,
+      slot2_button,
+      slot3_button,
+      -- slot4_button,
+      play_button,
+      trash_button,
+      copy_button,
+      paste_button,
+      confirm_button,
+      cancel_button,
+   }
+end -- defold.init

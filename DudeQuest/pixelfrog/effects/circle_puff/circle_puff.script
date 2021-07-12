@@ -1,0 +1,19 @@
+local const = require("m.constants")
+
+local defold = _G
+local TINT_W = const.TINT_W
+local SCALE = const.SCALE
+
+local function destroy()
+	go.delete()
+end -- destroy
+
+function defold.init()
+	local root = msg.url(".")
+	local sprite = msg.url("#sprite")
+	go.set(root, SCALE, 0)
+	go.set(sprite, TINT_W, 0.5)
+	-- go.animate(url, property, playback, to, easing, duration)
+	go.animate(root, SCALE, go.PLAYBACK_ONCE_FORWARD, 0.5, go.EASING_INQUAD, 0.3, 0, destroy)
+	go.animate(sprite, TINT_W, go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_INQUAD, 0.29)
+end

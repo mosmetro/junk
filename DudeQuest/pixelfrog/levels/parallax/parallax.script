@@ -1,0 +1,11 @@
+local Parallax = require("pixelfrog.levels.parallax.parallax")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = Parallax.new(self)
+end
+
+function defold.final(self)
+   Parallax.free(self.instance)
+end

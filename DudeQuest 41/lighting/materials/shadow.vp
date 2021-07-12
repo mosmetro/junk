@@ -1,0 +1,9 @@
+attribute highp vec2 position;
+
+uniform mediump mat4 mtx_proj;
+
+void main()
+{
+    vec4 p = vec4(position, 0.0, 1.0);
+    gl_Position = mtx_proj * p;
+}

@@ -1,0 +1,1047 @@
+images {
+  image: "/assets/common/marker.png"
+}
+images {
+  image: "/assets/common/transparent_1x1.png"
+}
+images {
+  image: "/assets/princess/princess_jump_up_2.png"
+}
+images {
+  image: "/assets/princess/princess_chain_hook_2.png"
+}
+images {
+  image: "/assets/common/magic1_projectile.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_1.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_2.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_3.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_4.png"
+}
+images {
+  image: "/assets/princess/princess_attack_land_1.png"
+}
+images {
+  image: "/assets/princess/princess_attack_land_2.png"
+}
+images {
+  image: "/assets/princess/princess_attack_land_3.png"
+}
+images {
+  image: "/assets/princess/princess_attack_air_1.png"
+}
+images {
+  image: "/assets/princess/princess_attack_air_2.png"
+}
+images {
+  image: "/assets/princess/princess_attack_air_3.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_1.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_2.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_3.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_4.png"
+}
+images {
+  image: "/assets/sunnyland/crate1.png"
+}
+images {
+  image: "/assets/sunnyland/crate2.png"
+}
+images {
+  image: "/assets/princess/princess_attack_down_repeat_1.png"
+}
+images {
+  image: "/assets/common/pin_for_hook.png"
+}
+images {
+  image: "/assets/kronbits-inca/kronbits-inca-crate1.png"
+}
+images {
+  image: "/assets/kronbits-inca/kronbits-inca-platform1.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-wheel-machine.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-wheel-platform.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-city1.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-doubleaxe-blade.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-nails.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-mountain2.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-onoff.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-rolling-bladetrap.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-doubleaxe-block.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-spikes-castle.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/forest_bg_parallaxNear.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/forest_bg_parallaxFar.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/sky_bg.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/sky_bg_clouds.png"
+}
+animations {
+  id: "princess_idle"
+  images {
+    image: "/assets/princess/princess_idle_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_blink"
+  images {
+    image: "/assets/princess/princess_idle_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_idle_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bored"
+  images {
+    image: "/assets/princess/princess_bored_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_run"
+  images {
+    image: "/assets/princess/princess_run_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_look_up"
+  images {
+    image: "/assets/princess/princess_look_up.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_crouch"
+  images {
+    image: "/assets/princess/princess_crouch.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hide"
+  images {
+    image: "/assets/princess/princess_hide.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_crawl"
+  images {
+    image: "/assets/princess/princess_crawl_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_jump_up"
+  images {
+    image: "/assets/princess/princess_jump_up_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_jump_up_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_jump_up_apex"
+  images {
+    image: "/assets/princess/princess_jump_up_apex.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_land"
+  images {
+    image: "/assets/princess/princess_land.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_land_side"
+  images {
+    image: "/assets/princess/princess_land_side.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_roll"
+  images {
+    image: "/assets/princess/princess_roll_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_roll_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_roll_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_roll_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_fall"
+  images {
+    image: "/assets/princess/princess_fall_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_fall_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_fall_side"
+  images {
+    image: "/assets/princess/princess_fall_side_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_fall_side_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bounce_up"
+  images {
+    image: "/assets/princess/princess_bounce_up.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bounce_down"
+  images {
+    image: "/assets/princess/princess_bounce_down.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_smash"
+  images {
+    image: "/assets/princess/princess_smash.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bounce_land"
+  images {
+    image: "/assets/princess/princess_bounce_land.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_jump_side"
+  images {
+    image: "/assets/princess/princess_jump_side.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_crash_fall"
+  images {
+    image: "/assets/princess/princess_crashfall_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_crashfall_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_push"
+  images {
+    image: "/assets/princess/princess_push_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_7.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_chain_a"
+  images {
+    image: "/assets/princess/princess_chain_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_chain_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_chain_b"
+  images {
+    image: "/assets/princess/princess_chain_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_chain_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_chain_hook"
+  images {
+    image: "/assets/princess/princess_chain_hook_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_chain_hook_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "sparkle"
+  images {
+    image: "/assets/common/sparkle_1.png"
+  }
+  images {
+    image: "/assets/common/sparkle_2.png"
+  }
+  images {
+    image: "/assets/common/sparkle_3.png"
+  }
+  images {
+    image: "/assets/common/sparkle_4.png"
+  }
+  images {
+    image: "/assets/common/sparkle_5.png"
+  }
+  images {
+    image: "/assets/common/sparkle_6.png"
+  }
+  images {
+    image: "/assets/common/sparkle_7.png"
+  }
+  images {
+    image: "/assets/common/sparkle_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_basic_magic_attack"
+  images {
+    image: "/assets/princess/princess_magic_attack_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_magic_attack_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_magic_attack_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_magic_attack_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_sword_attack_air"
+  images {
+    image: "/assets/princess/princess_attack_air_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_air_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_air_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_sword_attack_land"
+  images {
+    image: "/assets/princess/princess_attack_land_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_land_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_land_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_sword_power_attack"
+  images {
+    image: "/assets/princess/princess_power_attack_land_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_power_attack_land_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_power_attack_land_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_power_attack_land_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_slide"
+  images {
+    image: "/assets/princess/princess_slide_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_slide_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_balance_start"
+  images {
+    image: "/assets/princess/princess_balance_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_balance_middle"
+  images {
+    image: "/assets/princess/princess_balance_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_7.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_8.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_7.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 9
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_balance_end"
+  images {
+    image: "/assets/princess/princess_balance_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hit"
+  images {
+    image: "/assets/princess/princess_hit_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hit_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_attack_down_start"
+  images {
+    image: "/assets/princess/princess_attack_down_start_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_down_start_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_attack_down_repeat"
+  images {
+    image: "/assets/princess/princess_attack_down_repeat_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_down_repeat_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_land_start"
+  images {
+    image: "/assets/princess/princess_hook_throw_land_start_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_land_start_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_land_end"
+  images {
+    image: "/assets/princess/princess_hook_throw_land_end_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_land_end_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_land_end_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_air_start"
+  images {
+    image: "/assets/princess/princess_hook_throw_air_start_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_air_start_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_air_end"
+  images {
+    image: "/assets/princess/princess_hook_throw_air_end_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_air_end_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_air_end_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_1"
+  images {
+    image: "/assets/princess/princess_swing_1.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_2"
+  images {
+    image: "/assets/princess/princess_swing_2.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_3"
+  images {
+    image: "/assets/princess/princess_swing_3.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_4"
+  images {
+    image: "/assets/princess/princess_swing_4.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_5"
+  images {
+    image: "/assets/princess/princess_swing_5.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_6"
+  images {
+    image: "/assets/princess/princess_swing_6.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "impact_small"
+  images {
+    image: "/assets/common/impact_small_1.png"
+  }
+  images {
+    image: "/assets/common/impact_small_2.png"
+  }
+  images {
+    image: "/assets/common/impact_small_3.png"
+  }
+  images {
+    image: "/assets/common/impact_small_4.png"
+  }
+  images {
+    image: "/assets/common/impact_small_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_conveyor_left"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_conveyor_middle"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_conveyor_right"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_trampoline"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline5.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-roller-idle"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-idle-unarmed.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-roller-prepare"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-roller-throw"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-fx-destroy"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy5.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy6.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy7.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy8.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy9.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy10.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy11.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy12.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-fx-hero-get-hit"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit5.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

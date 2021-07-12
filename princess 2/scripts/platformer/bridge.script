@@ -1,0 +1,14 @@
+local defold = _G
+
+-- import
+local LAYER = require("scripts.shared.layers")
+
+-- localization
+local get_position = go.get_position
+local set_position = go.set_position
+
+function defold.init()
+	local position = get_position()
+	position.z = LAYER.TILES_A
+	set_position(position)
+end -- init

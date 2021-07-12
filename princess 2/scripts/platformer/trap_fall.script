@@ -1,0 +1,18 @@
+local defold = _G
+
+function defold.init(self)
+	self.truck = 10
+	-- Add initialization code here
+	-- Remove this function if not needed
+end
+
+function defold.final(self)
+	self.truck = 12
+	-- Add finalization code here
+	-- Remove this function if not needed
+end
+
+function defold.update(self, dt)
+	-- Add update code here
+	-- Remove this function if not needed
+end

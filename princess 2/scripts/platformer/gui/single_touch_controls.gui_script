@@ -1,0 +1,217 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local utils = require("scripts.shared.utils")
+local game = require("scripts.platformer.game")
+
+-- localization
+local tonumber = tonumber
+local get_config = sys.get_config
+local execute_in_context = utils.execute_in_context
+local next = next
+local post = msg.post
+local set_render_order = gui.set_render_order
+local get_width = gui.get_width
+local get_height = gui.get_height
+local POINTER_DOWN = ui.POINTER_DOWN
+local POINTER_UP = ui.POINTER_UP
+local POINTER_DRAGGED = ui.POINTER_DRAGGED
+local POINTER_CANCELLED = ui.POINTER_CANCELLED
+
+-- functions
+local is_down
+local is_up
+local is_pressed
+local send_event
+local on_event
+local enable
+local disable
+-- local on_layout_change
+
+local event = {
+	type = POINTER_CANCELLED,
+	x    = 0,
+	y    = 0,
+	dx   = 0,
+	dy   = 0,
+	vx   = 0,
+	vy   = 0,
+}
+
+local current_state = {}
+local previous_state = {}
+local current_x = 0
+local current_y = 0
+-- local screen_x = 0
+-- local screen_y = 0
+
+
+local TOUCH = game.TOUCH
+local MULTI_TOUCH = game.MULTI_TOUCH
+local LAYOUT_MULTIPLIER_X
+local LAYOUT_MULTIPLIER_Y
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.single_touch_controls_context = self
+	post("#", MSG.DISABLE)
+	set_render_order(0)
+
+	local layout_width  = get_width()
+	local layout_height = get_height()
+	utils.log("layout", layout_width, layout_height)
+	local default_layout_width  = tonumber(get_config("display.width"))
+	local default_layout_height = tonumber(get_config("display.height"))
+	utils.log("default layout", default_layout_width, default_layout_height)
+	LAYOUT_MULTIPLIER_X = layout_width / default_layout_width
+	LAYOUT_MULTIPLIER_Y = layout_height / default_layout_height
+	ui.LAYOUT_MULTIPLIER_X = LAYOUT_MULTIPLIER_X
+	ui.LAYOUT_MULTIPLIER_Y = LAYOUT_MULTIPLIER_Y
+	utils.log(LAYOUT_MULTIPLIER_X, LAYOUT_MULTIPLIER_Y)
+	self.enable = enable
+	self.disable = disable
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final ()
+	ui.single_touch_controls_context = nil
+end -- final
+
+---------------------------------------
+-- on_input
+---------------------------------------
+
+function defold.on_input(_, action_id, action)
+	if action_id and action_id ~= MULTI_TOUCH then
+		current_state[action_id] = (action.released == false)
+		current_x = action.x
+		current_y = action.y
+		-- screen_x = action.screen_x
+		-- screen_y = action.screen_y
+	end
+	return true
+end -- on_input
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function defold.update (_, dt)
+	local first_responder = ui.first_responder
+	if not first_responder then return end
+
+	for action_id, _ in next, current_state do
+		if action_id == TOUCH then
+
+			if is_down(action_id) then
+				event.type = POINTER_DOWN
+				event.x = current_x
+				event.y = current_y
+				-- event.screen_x = screen_x
+				-- event.screen_y = screen_y
+				send_event(first_responder, event)
+
+			elseif is_pressed(action_id) then
+				local dx = (current_x - event.x) * LAYOUT_MULTIPLIER_X
+				local dy = (current_y - event.y) * LAYOUT_MULTIPLIER_Y
+				if dx ~= 0 or dy ~= 0 then
+					event.type = POINTER_DRAGGED
+					event.x = current_x
+					event.y = current_y
+					-- event.screen_x = screen_x
+					-- event.screen_y = screen_y
+					event.dx = dx
+					event.dy = dy
+					event.vx = dx / dt
+					event.vy = dy / dt
+					send_event(first_responder, event)
+				else
+					event.dx = 0
+					event.dy = 0
+					event.vx = 0
+					event.vy = 0
+				end
+
+			elseif is_up(action_id) then
+				event.type = POINTER_UP
+				event.x = current_x
+				event.y = current_y
+				-- event.screen_x = screen_x
+				-- event.screen_y = screen_y
+				send_event(first_responder, event)
+			end
+		end -- if action_id...
+		previous_state[action_id] = current_state[action_id]
+	end -- for action_id...
+end -- update
+
+---------------------------------------
+-- send_event
+---------------------------------------
+
+function send_event (context, e)
+	execute_in_context(context, on_event, e)
+end -- send_event
+
+---------------------------------------
+-- on_event
+---------------------------------------
+
+function on_event (context, e)
+	for _, control in next, context.controls do
+		if control.on_event(e) then	return end
+	end
+
+	if context.next_responder then
+		send_event(context.next_responder, e)
+	end
+end -- on_event
+
+---------------------------------------
+-- is_down
+---------------------------------------
+
+function is_down (action_id)
+	return current_state[action_id] and (previous_state[action_id] ~= current_state[action_id])
+end -- is_down
+
+---------------------------------------
+-- is_up
+---------------------------------------
+
+function is_up (action_id)
+	return (not current_state[action_id]) and (previous_state[action_id] ~= current_state[action_id])
+end -- is_up
+
+---------------------------------------
+-- is_pressed
+---------------------------------------
+
+function is_pressed (action_id)
+	return current_state[action_id]
+end -- is_pressed
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable ()
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end -- disable

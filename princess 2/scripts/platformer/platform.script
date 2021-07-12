@@ -1,0 +1,214 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local GROUP = require("scripts.shared.groups")
+-- local COLOR = require("scripts.shared.colors")
+
+-- localization
+local reverse = utils.reverse
+local clamp = utils.clamp
+local ease = utils.ease
+local length = vmath.length
+local lerp = vmath.lerp
+local set_position = go.set_position
+local get_id = go.get_id
+local url = msg.url
+local ray_cast = physics.ray_cast
+local vector3 = vmath.vector3
+local set_hflip = sprite.set_hflip
+local get_position = go.get_position
+local sign = utils.sign
+local PLAYER = GROUP.PLAYER
+local CRATES = GROUP.CRATES
+local abs = math.abs
+
+-- functions
+local raycast_request
+local raycast_response
+local frame_update
+local calculate_movement
+
+-- constants
+local PUSHABLES = {
+	CRATES,
+	PLAYER,
+  -- ENEMIES, --?
+}
+
+local RAY_LENGTH = 2000
+local ZERO = vector3()
+
+-- properties
+go.property("character_width", 32)
+go.property("character_height", 16)
+go.property("horizontal_ray_count", 2)
+go.property("skin_width", 0.01)
+go.property("speed", 0)
+go.property("cyclic", false)
+go.property("wait_time", 0)
+go.property("ease_factor", 1)
+go.property("flip_horizontal", false)
+go.property("ram", false)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+  self.gameobject = get_id()
+  self.script = url()
+  self.sprite = url("#sprite")
+  self.waypoints = {}
+  self.from_waypoint = 1
+  self.interpolator = 0
+  self.next_move_time = 0
+  self.delta_position = vector3()
+	self.position = nil
+  self.depth_x = self.character_width * 0.5
+  self.horizontal_ray_spacing = (self.character_height -  2 * self.skin_width) / (self.horizontal_ray_count - 1)
+	self.processed_targets = {}
+
+  game.add_update_callback(self, frame_update, game.motor_platforms)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	game.remove_update_callback(self, game.motor_platforms)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update (self, dt)
+	-- if dt == 0 then return end
+
+  if not self.position then
+    self.position = #self.waypoints > 0 and self.waypoints[1] or get_position(self.gameobject)
+  end
+
+  if self.stop then
+    if self.stopper then
+      local stopper_position = get_position(self.stopper)
+      set_hflip(self.sprite, self.flip_horizontal and stopper_position.x < self.position.x)
+    end
+    return
+  end
+
+  if #self.waypoints > 1 then
+    self.position = self.position + self.delta_position
+    set_position(self.position, self.gameobject)
+    set_hflip(self.sprite, self.flip_horizontal and self.delta_position.x < 0)
+    self.delta_position = calculate_movement(self, dt)
+    game.set_delta_position(self.gameobject, self.delta_position)
+    if self.ram then
+			raycast_request(self)
+    end
+  end
+end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id, message)
+  if message_id == MSG.RAY_CAST_RESPONSE then
+		raycast_response(self, message)
+
+  elseif message_id == MSG.STOP then
+    self.stop = true
+    self.stopper = message.stopper
+
+  elseif message_id == MSG.START then
+    self.stop = false
+
+  elseif message_id == MSG.SET_WAYPOINT then
+    self.waypoints[message.index] = message.position
+	end
+end -- on_message
+
+---------------------------------------
+-- calculate_movement
+---------------------------------------
+
+function calculate_movement (self, dt)
+  local time = game.get_time()
+  if time < self.next_move_time then
+    return ZERO
+  end
+  self.from_waypoint = ((self.from_waypoint - 1) % #self.waypoints) + 1
+  local to_waypoint = (self.from_waypoint % #self.waypoints) + 1
+
+  local distance = length(self.waypoints[self.from_waypoint] - self.waypoints[to_waypoint])
+  self.interpolator = self.interpolator + dt * self.speed / distance
+  self.interpolator = clamp(self.interpolator, 0, 1)
+  local eased_interpolator = ease(self.interpolator, self.ease_factor)
+  local new_position = lerp(eased_interpolator, self.waypoints[self.from_waypoint], self.waypoints[to_waypoint])
+
+  if self.interpolator == 1 then
+    self.interpolator = 0
+    self.from_waypoint = self.from_waypoint + 1
+    if not self.cyclic then
+      if self.from_waypoint == #self.waypoints then
+        self.from_waypoint = 1
+        reverse(self.waypoints)
+      end
+    end
+    self.next_move_time = time + self.wait_time
+  end
+
+  return new_position - self.position
+end -- calculate_movement
+
+---------------------------------------
+
+-- raycast_request
+
+---------------------------------------
+
+function raycast_request (self)
+	self.processed_targets = {}
+	local ray_origin_horizontal = vector3(self.position.x, self.position.y - self.character_height + self.skin_width, 0)
+
+	local dx = self.delta_position.x
+	if dx ~= 0 then
+		local direction = sign(dx)
+		local ray_start = vector3(ray_origin_horizontal)
+		local ray_end = vector3(ray_start.x + RAY_LENGTH * direction, ray_start.y, 0)
+		for ray = 1, self.horizontal_ray_count do
+			ray_cast(ray_start, ray_end, PUSHABLES, ray)
+			-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+			ray_start.y = ray_start.y + self.horizontal_ray_spacing
+			ray_end.y = ray_start.y
+		end
+	end
+end -- raycast_request
+
+---------------------------------------
+
+-- raycast_response
+
+---------------------------------------
+
+function raycast_response (self, message)
+	if message.group == CRATES or message.group == PLAYER then
+		local target = game.get_shared_data(message.id).context
+		if not self.processed_targets[target] then
+			local direction = sign(self.delta_position.x)
+			local hit_distance = RAY_LENGTH * message.fraction - self.depth_x
+			-- if abs(hit_distance) < 0.001 then
+			-- 	hit_distance = 0
+			-- end
+			if hit_distance + target.delta_position.x * direction < abs(self.delta_position.x) then
+				target.push = self.delta_position.x - hit_distance * direction
+				self.processed_targets[target] = true
+			end
+		end
+	end
+end -- raycast_response

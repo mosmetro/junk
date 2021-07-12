@@ -1,0 +1,134 @@
+local ui = require("m.ui.ui")
+local utils = require("m.utils")
+
+local global = require("game.global")
+
+local defold = _G
+local ensure_zero = fastmath.ensure_zero
+local next = next
+local msg = msg
+local set_render_order = gui.set_render_order
+local execute_in_context = runtime.execute_in_context
+local POINTER_DOWN = ui.POINTER_DOWN
+local POINTER_UP = ui.POINTER_UP
+local POINTER_DRAGGED = ui.POINTER_DRAGGED
+local POINTER_CANCELLED = ui.POINTER_CANCELLED
+local TOUCH = ui.TOUCH
+
+local event = {
+   type = POINTER_CANCELLED,
+   x    = 0,
+   y    = 0,
+   dx   = 0,
+   dy   = 0,
+   vx   = 0,
+   vy   = 0,
+}
+
+local current_state
+local previous_state
+local current_x
+local current_y
+
+local coord_conversion_x
+local coord_conversion_y
+local half_window_width
+local half_window_height
+
+local function enable()
+   msg.post("#", msg.ENABLE)
+end -- enable
+
+local function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable
+
+local function reset_input()
+   -- utils.log("ui reset input")
+   current_state = false
+   previous_state = false
+   current_x = 0
+   current_y = 0
+end -- reset_input
+
+local function on_event(context, e)
+   for _, control in next, context.controls do
+      if control.on_event(e) then return end
+   end
+
+   if context.next_responder then
+      execute_in_context(on_event, context.next_responder, e)
+   end
+end -- on_event
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.single_touch_controls_context = self
+   set_render_order(ui.CONTROLS)
+   coord_conversion_x = global.view_width / global.viewport_width
+   coord_conversion_y = global.view_height / global.viewport_height
+   half_window_width = global.window_width * 0.5
+   half_window_height = global.window_height * 0.5
+   self.enable = enable
+   self.disable = disable
+   reset_input()
+end -- defold.init
+
+function defold.final()
+   global.single_touch_controls_context = nil
+end -- defold.final
+
+function defold.on_input(_, action_id, action)
+   if action_id and action_id == TOUCH then
+      -- current_state = (action.released == false)
+      current_state = (not action.released)
+      -- if we don't move mouse after game start, action.screen_y reported wrong position
+      current_x = (action.screen_x - half_window_width) * coord_conversion_x
+      current_y = (action.screen_y - half_window_height) * coord_conversion_y
+      -- utils.log(action_id, current_x, current_y, action.screen_x, action.screen_y)
+   end
+   return true
+end -- defold.on_input
+
+function defold.update(_, dt)
+   local first_responder = global.single_touch_first_responder
+   if not first_responder then return end
+
+   if current_state and (previous_state ~= current_state) then
+      event.type = POINTER_DOWN
+      event.x = current_x
+      event.y = current_y
+      execute_in_context(on_event, first_responder, event)
+   elseif current_state then
+      local dx = ensure_zero(current_x - event.x)
+      local dy = ensure_zero(current_y - event.y)
+      if (dx ~= 0) or (dy ~= 0) then
+         event.type = POINTER_DRAGGED
+         event.x = current_x
+         event.y = current_y
+         event.dx = dx
+         event.dy = dy
+         event.vx = dx / dt
+         event.vy = dy / dt
+         execute_in_context(on_event, first_responder, event)
+      else
+         event.dx = 0
+         event.dy = 0
+         event.vx = 0
+         event.vy = 0
+      end
+   elseif (not current_state) and (previous_state ~= current_state) then
+      event.type = POINTER_UP
+      event.x = current_x
+      event.y = current_y
+      execute_in_context(on_event, first_responder, event)
+   end
+   previous_state = current_state
+end -- defold.update
+
+function defold.on_message(_, message_id)
+   -- utils.log(message_id, sender)
+   if message_id == msg.ENABLE then
+      reset_input()
+   end
+end -- defold.on_message

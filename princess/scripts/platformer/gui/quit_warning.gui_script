@@ -1,0 +1,146 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local player_data = require("scripts.platformer.player_data")
+-- local Textfield = require("scripts.shared.ui.controls.textfield")
+-- local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local execute_in_context = utils.execute_in_context
+local translate = translations.translate
+-- local hash = hash
+local next = next
+local post = msg.post
+-- local url = msg.url
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_text = gui.set_text
+-- local vector3 = vmath.vector3
+
+-- functions
+local enable
+local disable
+local on_language_change
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.quit_warning_context = self
+	disable(self)
+	set_render_order(8)
+
+	local ok_button = SimpleButton.new {
+    sensor_node = get_node("ok/sensor"),
+		image_node = get_node("ok/image"),
+		text_node = get_node("ok/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+    callback = function ()
+      self.return_context = nil
+			execute_in_context(ui.single_touch_controls_context, ui.single_touch_controls_context.disable)
+			execute_in_context(ui.loader_context, ui.loader_context.enable, player_data.get_current_sector_url(), nil, nil, function()
+				execute_in_context(ui.hud_context, ui.hud_context.disable, false)
+        execute_in_context(self, self.disable)
+			end,
+			function()
+				execute_in_context(ui.startup_background_context, ui.startup_background_context.enable)
+				execute_in_context(ui.start_context, ui.start_context.enable)
+				execute_in_context(ui.single_touch_controls_context, ui.single_touch_controls_context.enable)
+			end)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_COMMON_BUTTON_OK))
+		end,
+	}
+
+	local cancel_button = SimpleButton.new {
+    sensor_node = get_node("cancel/sensor"),
+		image_node = get_node("cancel/image"),
+		text_node = get_node("cancel/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function()
+      disable(self)
+			if self.return_context then
+				execute_in_context(self.return_context, self.return_context.enable)
+				self.return_context = nil
+			end
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_COMMON_BUTTON_CANCEL))
+		end,
+	}
+
+
+	self.controls = {
+    ok_button,
+		cancel_button,
+	}
+
+	self.enable = enable
+	self.disable = disable
+	nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_change)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	ui.quit_warning_context = nil
+  nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id)
+  if self.return_context and (message_id == MSG.ENABLE) then
+		ui.first_responder = self
+	end
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable(self, return_context)
+	if return_context then
+		self.return_context = return_context
+	end
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable(self)
+	if self.return_context then
+		ui.first_responder = nil
+	end
+	post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- on_language_change
+---------------------------------------
+
+function on_language_change (self)
+	set_text(get_node("title/text"), translate(translations.OPTIONS_WARNINIG_TITLE))
+	set_text(get_node("warning/text"), translate(translations.OPTIONS_WARNINIG_MESSAGE))
+
+	for _, control in next, self.controls do
+		if control.on_language_change then
+			control:on_language_change()
+		end
+	end
+end -- on_language_change

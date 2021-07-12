@@ -1,0 +1,27 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+
+-- localization
+local defold = _G
+local post = msg.post
+-- local url = msg.url
+local get_position = go.get_position
+local set_position = go.set_position
+
+-- properties
+go.property("platform", msg.url())
+go.property("index", 1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	-- local target = url(self.platform)
+	-- target.fragment = "script"
+  local position = get_position()
+  position.z = LAYER.PLATFORM
+  set_position(position)
+	post(self.platform, MSG.SET_WAYPOINT, { index = self.index, position = position })
+end -- init

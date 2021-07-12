@@ -1,0 +1,128 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local nc = require("scripts.shared.notification_center")
+local translations = require("scripts.platformer.translations")
+-- local utils = require("scripts.shared.utils")
+local thread = require("scripts.shared.thread")
+-- local player_data = require("scripts.platformer.player_data")
+
+-- localization
+local defold = _G
+local translate = translations.translate
+local set_text = gui.set_text
+local set_render_order = gui.set_render_order
+local post = msg.post
+-- local execute_in_context = utils.execute_in_context
+local get_node = gui.get_node
+local set_color = gui.set_color
+local vector4 = vmath.vector4
+local animate = gui.animate
+local play_flipbook = gui.play_flipbook
+local PROP_COLOR = gui.PROP_COLOR
+local TRANSITION_ON_SCREEN = gui.EASING_INQUART
+local TRANSITION_OFF_SCREEN = gui.EASING_OUTQUART
+
+-- functions
+local enable
+local disable
+local on_language_change
+
+-- constants
+local TRANSPARENT_WHITE = vector4(1, 1, 1, 0)
+local OPAQUE_WHITE = vector4(1, 1, 1, 1)
+local TRANSITION_DURATION = 0.4
+local PROGRESS_BAR = hash("shantae_progress_bar")
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  ui.loader_context = self
+  disable()
+  set_render_order(15)
+
+  self.text_node = get_node("loading")
+  self.progress_node = get_node("progress")
+  self.node = get_node("black_box")
+  self.enable = enable
+  self.disable = disable
+  nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_change)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	ui.loader_context = nil
+  nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function defold.update(self, dt)
+	thread.update(self, dt)
+end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message, sender)
+	thread.on_message(self, message_id, message, sender)
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+-- gui.animate(node, property, to, easing, duration, delay, complete_function, playback)
+function enable (self, current_proxy, next_proxy, delay, after_fadein, before_fadeout)
+	post("#", MSG.ENABLE)
+  play_flipbook(self.progress_node, PROGRESS_BAR)
+  set_color(self.node, TRANSPARENT_WHITE)
+  thread.new(self, function ()
+    if delay then
+      thread.wait_for_seconds(self, delay)
+    end
+    animate(self.node, PROP_COLOR, OPAQUE_WHITE, TRANSITION_ON_SCREEN, TRANSITION_DURATION, 0, function()
+      self.transition_on_screen_complete = true
+    end)
+    thread.wait_for_condition(self, function() return self.transition_on_screen_complete end)
+    self.transition_on_screen_complete = false
+    if after_fadein then after_fadein() end
+    if current_proxy then thread.unload(self, current_proxy) end
+    if next_proxy then
+      thread.load(self, next_proxy, true)
+      post(next_proxy, MSG.SET_TIME_STEP, { factor = 1, mode = 1 })
+    end
+    thread.wait_for_frames(self, 2)
+    if before_fadeout then before_fadeout() end
+    animate(self.node, PROP_COLOR, TRANSPARENT_WHITE, TRANSITION_OFF_SCREEN, TRANSITION_DURATION, 0, function()
+      self.transition_off_screen_complete = true
+    end)
+    thread.wait_for_condition(self, function() return self.transition_off_screen_complete end)
+    self.transition_off_screen_complete = false
+    disable()
+  end)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- on_language_change
+---------------------------------------
+
+function on_language_change(self)
+	set_text(self.text_node, translate(translations.LOADER_LOADING))
+end -- on_language_change

@@ -1,0 +1,14 @@
+local Teleport = require("pixelfrog.props.teleport.teleport")
+
+local defold = _G
+
+go.property("map", hash(""))
+go.property("location", hash(""))
+
+function defold.init(self)
+   self.instance = Teleport.new(self)
+end
+
+function defold.final(self)
+   Teleport.free(self.instance)
+end

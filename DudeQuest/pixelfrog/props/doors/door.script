@@ -1,0 +1,18 @@
+local Prototype = require("pixelfrog.props.doors.door")
+
+local defold = _G
+
+go.property("name", hash(""))
+go.property("kind", 1) -- 1: wood, 2: gold
+go.property("key_name", hash(""))
+go.property("controller_name", hash(""))
+go.property("stay_open", false)
+go.property("direction", 1)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end -- defold.init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- defold.final

@@ -1,0 +1,103 @@
+local defold = _G
+
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local translations = require("scripts.platformer.translations")
+-- local nc = require("scripts.shared.notification_center")
+local application = require("scripts.shared.application")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local execute_in_context = utils.execute_in_context
+local translate = translations.translate
+local next = next
+local post = msg.post
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_text = gui.set_text
+local format = string.format
+local tostring = tostring
+
+-- functions
+local enable
+local disable
+
+---------------------------------------
+
+-- init
+
+---------------------------------------
+
+function defold.init (self)
+	ui.select_file_context = self
+	disable()
+	set_render_order(1)
+
+	local files = {
+		file1 = translations.FILE1,
+		file2 = translations.FILE2,
+		file3 = translations.FILE3,
+	}
+
+	local controls = {}
+
+	local function callback (sender)
+		application.file = sender.file
+		disable()
+		execute_in_context(ui.manage_file_context, function (context)
+			context:enable()
+		end)
+	end
+
+	for file, title in next, files do
+		local button = SimpleButton.new {
+			image_node = get_node(file .. "/image"),
+			text_node = get_node(file .. "/text"),
+			released = SimpleButton.RELEASED_IMAGE,
+			pressed = SimpleButton.PRESSED_IMAGE,
+			file = file,
+			title = title,
+			callback = callback,
+		}
+		controls[#controls + 1] = button
+	end
+
+	self.controls = controls
+	self.enable = enable
+	self.disable = disable
+end -- init
+
+---------------------------------------
+
+-- enable
+
+---------------------------------------
+
+function enable (self, return_context)
+	local title_node = get_node("title/text")
+	set_text(title_node, translate(translations.CHOOSE_FILE))
+
+	for _, control in next, self.controls do
+		local play_time = application.get_play_time(control.file) or translate(translations.NEW_GAME)
+		local title = format("%s:  %s", translate(control.title), play_time)
+		set_text(control.text_node, title)
+	end
+
+	ui.first_responder = self
+	if return_context then
+		self.return_context = return_context
+	end
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+
+-- disable
+
+---------------------------------------
+
+function disable ()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end -- disable

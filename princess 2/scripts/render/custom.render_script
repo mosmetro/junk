@@ -1,0 +1,180 @@
+local defold = _G
+
+-- imports
+local MSG = require("scripts.shared.messages")
+-- local GUI = require("scripts.platformer.gui")
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local screen_size = game.window.screen_size
+local logic_size = game.window.logic_size
+local default_layout_size = game.window.default_layout_size
+
+local STATE_DEPTH_TEST = render.STATE_DEPTH_TEST
+local STATE_STENCIL_TEST = render.STATE_STENCIL_TEST
+local STATE_BLEND = render.STATE_BLEND
+local BLEND_SRC_ALPHA = render.BLEND_SRC_ALPHA
+local BLEND_ONE_MINUS_SRC_ALPHA = render.BLEND_ONE_MINUS_SRC_ALPHA
+local STATE_CULL_FACE = render.STATE_CULL_FACE
+local BUFFER_COLOR_BIT = render.BUFFER_COLOR_BIT
+local BUFFER_DEPTH_BIT = render.BUFFER_DEPTH_BIT
+local BUFFER_STENCIL_BIT = render.BUFFER_STENCIL_BIT
+
+local hash = hash
+local vector4 = vmath.vector4
+local get_window_width = render.get_window_width
+local get_window_height = render.get_window_height
+local set_depth_mask = render.set_depth_mask
+local set_stencil_mask = render.set_stencil_mask
+local disable_state = render.disable_state
+local enable_state = render.enable_state
+local set_blend_func = render.set_blend_func
+local set_view = render.set_view
+local set_projection = render.set_projection
+local draw = render.draw
+local draw_debug3d = render.draw_debug3d
+local tonumber = tonumber
+
+local clear = render.clear
+local set_viewport = render.set_viewport
+local predicate = render.predicate
+local get_config = sys.get_config
+
+local matrix4 = vmath.matrix4
+local matrix4_orthographic = vmath.matrix4_orthographic
+
+local M4_IDENTITY = matrix4()
+local VIEW = M4_IDENTITY
+local GUI_PROJECTION
+local INGAME_PROJECTION
+local CLEAR_COLOR = vector4(0.25, 0.25, 0.25, 1)
+-- local CLEAR_COLOR = vector4(utils.tocolor("5a89c4"))
+
+local buffers = {
+	[BUFFER_COLOR_BIT] = CLEAR_COLOR,
+	[BUFFER_DEPTH_BIT] = 1,
+	[BUFFER_STENCIL_BIT] = 0,
+}
+
+local TILE
+local GUI
+local TEXT
+local PARTICLE
+
+local screen_width_to_pixel_size = {
+	-- device
+	-- x2
+	[1136] = 3, -- 1136 x 640  iPhone5S, SE        284 x 160       1.775
+	[1334] = 3, -- 1334 x 750  iPhone8             333.5 x 187.5   1.778666
+
+  -- x3
+	[2208] = 6, -- 2208 x 1242 iPhone8+            368 x 207       1.777777
+	[2436] = 6, -- 2436 x 1125 iPhoneX             406 x 187.5     2.165333
+
+	-- x2
+	[2048] = 6, -- 2048 x 1536 iPad Mini, Air      341.33334350586 x 256     1.333333
+	[2224] = 6, -- 2224 x 1668 iPad Pro 10.5"      370.66665649414 x 278     1.333333
+	[2732] = 6, -- 2732 x 2048 iPad Pro 12.9"      455.33334350586 x 341.33334350586  1.333984
+
+	-- desktop simulation
+	-- x2
+	[568] = 2, -- 568 x 320  iPhone5S, SE
+	[667] = 2, -- 667 x 375  iPhone8
+
+	-- x3
+	[736] = 2, -- 736 x 414 iPhone8+
+	[812] = 2, -- 812 x 375 iPhoneX
+
+	-- x2
+	[1024] = 3, -- 1024 x 768 iPad Mini, Air
+	[1112] = 3, -- 1112 x 834 iPad Pro 10.5"
+	[1366] = 3, -- 1366 x 1024 iPad Pro 12.9"
+}
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init()
+	utils.random_seed()
+	game.reset_input()
+
+	TILE     = predicate({ hash("tile") })
+	GUI      = predicate({ hash("gui") })
+	TEXT     = predicate({ hash("text") })
+	PARTICLE = predicate({ hash("particle") })
+
+	screen_size.x = get_window_width()
+	screen_size.y = get_window_height()
+	utils.log("screen_size: " .. screen_size.x .. " x " .. screen_size.y)
+	default_layout_size.x = tonumber(get_config("display.width"))
+	default_layout_size.y = tonumber(get_config("display.height"))
+
+	GUI_PROJECTION = matrix4_orthographic(0, screen_size.x, 0, screen_size.y, -1, 1)
+	set_viewport(0, 0, screen_size.x, screen_size.y)
+
+	local pixel_size = screen_width_to_pixel_size[screen_size.x]
+	utils.log("pixel size: " .. pixel_size)
+	logic_size.x = screen_size.x / pixel_size
+	logic_size.y = screen_size.y / pixel_size
+
+	INGAME_PROJECTION = matrix4_orthographic(-logic_size.x * 0.5, logic_size.x * 0.5, -logic_size.y * 0.5, logic_size.y * 0.5, -1, 1)
+
+	utils.log("logic_size: " .. logic_size.x .. " x " .. logic_size.y)
+
+end -- init
+
+---------------------------------------
+
+-- update
+
+---------------------------------------
+
+function defold.update()
+	set_depth_mask(true)
+	set_stencil_mask(0xff)
+	clear(buffers)
+
+	set_viewport(0, 0, screen_size.x, screen_size.y)
+
+	if VIEW then
+		set_view(VIEW)
+		set_depth_mask(false)
+		disable_state(STATE_DEPTH_TEST)
+		disable_state(STATE_STENCIL_TEST)
+		enable_state(STATE_BLEND)
+		set_blend_func(BLEND_SRC_ALPHA, BLEND_ONE_MINUS_SRC_ALPHA)
+		disable_state(STATE_CULL_FACE)
+		set_projection(INGAME_PROJECTION)
+		draw(TILE)
+		draw(PARTICLE)
+		draw_debug3d()
+	end
+
+	-- GUI
+	set_view(M4_IDENTITY)
+	set_projection(GUI_PROJECTION)
+
+	enable_state(STATE_STENCIL_TEST)
+	draw(GUI)
+	draw(TEXT)
+	disable_state(STATE_STENCIL_TEST)
+
+	set_depth_mask(false)
+
+	game.increment_frame()
+	VIEW = nil
+end -- update
+
+---------------------------------------
+
+-- on_message
+
+---------------------------------------
+
+function defold.on_message(_, message_id, message)
+	if message_id == MSG.SET_VIEW_PROJECTION then
+		VIEW = message.view
+	elseif message_id == MSG.CLEAR_COLOR then
+		buffers[BUFFER_COLOR_BIT] = message.color
+	end
+end

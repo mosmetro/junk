@@ -1,0 +1,22 @@
+local Prototype = require("pixelfrog.enemies.pigs.pig_grenadier.pig_grenadier")
+
+local defold = _G
+
+go.property("health_points", 1)
+go.property("damage_points", 1)
+go.property("ammo_damage_points", 1)
+go.property("horizontal_look", 0)
+go.property("drop_gold_coin", false)
+go.property("max_range", 140)
+go.property("min_range", 50)
+go.property("ammo", 2) -- 1: none, 2: box, 2: bomb
+go.property("activator", hash(""))
+go.property("probe_length", 2)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

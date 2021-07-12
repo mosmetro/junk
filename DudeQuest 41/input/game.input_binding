@@ -1,0 +1,44 @@
+key_trigger {
+  input: KEY_Z
+  action: "b"
+}
+key_trigger {
+  input: KEY_LEFT
+  action: "left"
+}
+key_trigger {
+  input: KEY_RIGHT
+  action: "right"
+}
+key_trigger {
+  input: KEY_X
+  action: "a"
+}
+key_trigger {
+  input: KEY_ESC
+  action: "pause"
+}
+key_trigger {
+  input: KEY_A
+  action: "x"
+}
+key_trigger {
+  input: KEY_S
+  action: "y"
+}
+key_trigger {
+  input: KEY_UP
+  action: "up"
+}
+key_trigger {
+  input: KEY_DOWN
+  action: "down"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_1
+  action: "touch"
+}
+touch_trigger {
+  input: TOUCH_MULTI
+  action: "multi_touch"
+}

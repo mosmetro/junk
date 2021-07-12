@@ -1,0 +1,102 @@
+name: "default"
+instances {
+  id: "circle_puff"
+  prototype: "/pixelfrog/effects/circle_puff/circle_puff.go"
+  position {
+    x: 0.0
+    y: 8.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ammo_box_debris1"
+  collection: "/pixelfrog/enemies/pigs/ammo_box/ammo_box_debris1.collection"
+  position {
+    x: -6.0
+    y: 2.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ammo_box_debris2"
+  collection: "/pixelfrog/enemies/pigs/ammo_box/ammo_box_debris2.collection"
+  position {
+    x: -6.0
+    y: 7.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ammo_box_debris3"
+  collection: "/pixelfrog/enemies/pigs/ammo_box/ammo_box_debris3.collection"
+  position {
+    x: 6.0
+    y: 7.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "ammo_box_debris4"
+  collection: "/pixelfrog/enemies/pigs/ammo_box/ammo_box_debris4.collection"
+  position {
+    x: 6.0
+    y: 4.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

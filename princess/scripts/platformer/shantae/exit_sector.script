@@ -1,0 +1,107 @@
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local nc  = require("scripts.shared.notification_center")
+local ui = require("scripts.shared.ui.ui")
+local player_data = require("scripts.platformer.player_data")
+
+-- localization
+local defold = _G
+local go = go
+local get_id = go.get_id
+-- local delete = go.delete
+-- local url = msg.url
+local post = msg.post
+local get_context = game.get_context
+local set_context = game.set_context
+local execute_in_context = utils.execute_in_context
+
+-- functions
+local exit_sector
+local on_player_enter_sector
+local frame_update
+
+-- constants
+local PLAYER_ENTER_SECTOR_NOTIFICATION = hash("PLAYER_ENTER_SECTOR_NOTIFICATION")
+local UPDATE_GROUP = game.update_group_after_player
+
+-- properties
+go.property("to_region", 0)
+go.property("to_sector", 0)
+go.property("entry_point", 0)
+go.property("look_direction", 0)
+go.property("primary_action", hash(""))
+go.property("secondary_action", hash(""))
+go.property("exit_velocity", vmath.vector3())
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  --self.collisionobject = url("#collisionobject")
+  post(self.gameobject, MSG.DISABLE)
+  self.position_y = go.get_position().y
+  self.camera = get_id("/camera")
+  nc.add_observer(self, PLAYER_ENTER_SECTOR_NOTIFICATION, on_player_enter_sector)
+  set_context(self.gameobject, self)
+  self.exit_sector = exit_sector
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  game.remove_update_callback(self, UPDATE_GROUP)
+  set_context(self.gameobject, nil)
+  nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function frame_update(self)
+  local target = get_context(self.camera).target
+  target.y = self.position_y
+  target.bottom = self.position_y
+	target.top = self.position_y
+  target.direction = player_data.get_look_direction()
+end -- update
+
+---------------------------------------
+-- exit_sector
+---------------------------------------
+
+function exit_sector(self, caller)
+  utils.log("exit!")
+  -- delete(caller.gameobject, true)
+  execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.disable)
+  game.reset_input()
+  game.add_update_callback(self, frame_update, UPDATE_GROUP)
+  local current_proxy = player_data.get_current_sector_url()
+  player_data.set_current_region(self.to_region)
+  player_data.set_current_sector(self.to_sector)
+  player_data.set_entry_point(self.entry_point)
+  local look_direction = (self.look_direction == 0) and caller.look_direction or self.look_direction
+  player_data.set_look_direction(look_direction)
+  player_data.set_move_direction((self.exit_velocity.x == 0) and 0 or look_direction)
+  player_data.set_primary_action(self.primary_action)
+  player_data.set_secondary_action(self.secondary_action)
+  player_data.set_exit_velocity(self.exit_velocity)
+  local next_proxy = player_data.get_current_sector_url()
+  execute_in_context(ui.loader_context, ui.loader_context.enable, current_proxy, next_proxy)
+  return true
+end -- exit_sector
+
+---------------------------------------
+-- on_player_enter_sector
+---------------------------------------
+
+function on_player_enter_sector(self) -- self, sender, payload
+  game.remove_update_callback(self, UPDATE_GROUP)
+  post(self.gameobject, MSG.ENABLE)
+end -- on_player_enter_sector

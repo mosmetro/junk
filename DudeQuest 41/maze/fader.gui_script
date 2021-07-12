@@ -1,0 +1,71 @@
+local ui = require("m.ui.ui")
+local game = require("maze.game")
+local colors = require("m.colors")
+-- local utils = require("m.utils")
+
+local defold = _G
+local gui = gui
+local set_render_order = gui.set_render_order
+local set_enabled = gui.set_enabled
+local post = msg.post
+local get_node = gui.get_node
+local set_color = gui.set_color
+-- local vector4 = vmath.vector4
+local animate = gui.animate
+-- local play_flipbook = gui.play_flipbook
+local COLOR = gui.PROP_COLOR
+
+local enable
+local disable
+local fadein
+local fadeout
+
+local TRANSPARENT_WHITE = colors.TRANSPARENT_WHITE
+local WHITE = colors.WHITE
+local TRANSITION_DURATION = 0.1
+
+local vector3_stub = fastmath.vector3_stub
+
+-- nodes
+local fader
+
+function defold.init(self)
+   ui.fader_context = self
+   set_render_order(15)
+
+   fader = get_node("fader")
+   fastmath.vector3_set_xy(vector3_stub, game.view_width, game.view_height)
+   gui.set_size(fader, vector3_stub)
+
+   self.enable = enable
+   self.disable = disable
+   self.fadein = fadein
+   self.fadeout = fadeout
+end -- init
+
+function defold.final()
+   ui.fader_context = nil
+end -- final
+
+function fadein(_, callback, duration) -- (context, ...)
+   set_enabled(fader, true)
+   set_color(fader, TRANSPARENT_WHITE)
+   animate(fader, COLOR, WHITE, gui.EASING_LINEAR, duration or TRANSITION_DURATION, 0, callback, gui.PLAYBACK_ONCE_FORWARD)
+end -- fadein
+
+function fadeout(_, callback, duration)
+   set_color(fader, WHITE)
+   animate(fader, COLOR, TRANSPARENT_WHITE, gui.EASING_LINEAR, duration or TRANSITION_DURATION, 0, function()
+      set_enabled(fader, false)
+      if callback then callback() end
+   end, gui.PLAYBACK_ONCE_FORWARD)
+end -- fadeout
+
+-- gui.animate(node, property, to, easing, duration, delay, complete_function, playback)
+function enable()
+   post("#", msg.ENABLE)
+end -- enable
+
+function disable()
+   post("#", msg.DISABLE)
+end -- disable

@@ -1,0 +1,92 @@
+local PointLight = require("lighting.point_light")
+
+go.property("light1_material", resource.material("/lighting/materials/light1.material"))
+go.property("light2_material", resource.material("/lighting/materials/light2.material"))
+go.property("light3_material", resource.material("/lighting/materials/light3.material"))
+go.property("light4_material", resource.material("/lighting/materials/light4.material"))
+go.property("light5_material", resource.material("/lighting/materials/light5.material"))
+go.property("light6_material", resource.material("/lighting/materials/light6.material"))
+go.property("light7_material", resource.material("/lighting/materials/light7.material"))
+go.property("light8_material", resource.material("/lighting/materials/light8.material"))
+go.property("light9_material", resource.material("/lighting/materials/light9.material"))
+go.property("light10_material", resource.material("/lighting/materials/light10.material"))
+go.property("nodraw_material", resource.material("/lighting/materials/nodraw.material"))
+
+
+local defold = _G
+
+function defold.init(self)
+   local description = {
+      {
+         index = 1,
+         positions = {},
+         resource = go.get("#shadow1_mesh", "vertices"),
+         light_material = self.light1_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 2,
+         positions = {},
+         resource = go.get("#shadow2_mesh", "vertices"),
+         light_material = self.light2_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 3,
+         positions = {},
+         resource = go.get("#shadow3_mesh", "vertices"),
+         light_material = self.light3_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 4,
+         positions = {},
+         resource = go.get("#shadow4_mesh", "vertices"),
+         light_material = self.light4_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 5,
+         positions = {},
+         resource = go.get("#shadow5_mesh", "vertices"),
+         light_material = self.light5_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 6,
+         positions = {},
+         resource = go.get("#shadow6_mesh", "vertices"),
+         light_material = self.light6_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 7,
+         positions = {},
+         resource = go.get("#shadow7_mesh", "vertices"),
+         light_material = self.light7_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 8,
+         positions = {},
+         resource = go.get("#shadow8_mesh", "vertices"),
+         light_material = self.light8_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 9,
+         positions = {},
+         resource = go.get("#shadow9_mesh", "vertices"),
+         light_material = self.light9_material,
+         nodraw_material = self.nodraw_material,
+      },
+      {
+         index = 10,
+         positions = {},
+         resource = go.get("#shadow10_mesh", "vertices"),
+         light_material = self.light10_material,
+         nodraw_material = self.nodraw_material,
+      },
+   }
+   PointLight.init(description, self)
+end -- defold.init

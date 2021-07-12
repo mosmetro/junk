@@ -1,0 +1,38 @@
+name: "quad"
+vertex_program: "/materials/passthrough.vp"
+fragment_program: "/materials/quad.fp"
+vertex_space: VERTEX_SPACE_WORLD
+vertex_constants {
+  name: "view_proj"
+  type: CONSTANT_TYPE_VIEWPROJ
+  value {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+}
+vertex_constants {
+  name: "proj"
+  type: CONSTANT_TYPE_PROJECTION
+  value {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+}
+samplers {
+  name: "original"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_NEAREST
+  filter_mag: FILTER_MODE_MAG_NEAREST
+}
+samplers {
+  name: "light_mask"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_NEAREST
+  filter_mag: FILTER_MODE_MAG_NEAREST
+}

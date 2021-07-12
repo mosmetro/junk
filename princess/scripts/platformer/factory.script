@@ -1,0 +1,81 @@
+-- import
+local utils = require("scripts.shared.utils")
+local FX = require("scripts.platformer.fx")
+
+-- localization
+local defold = _G
+local url = msg.url
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init ()
+	utils.log("creating factories")
+	FX.FACTORY = url("#fx")
+
+	FX.INSTANT_DEATH_FACTORY = url("#instant_death")
+
+	FX.PLAYER_FACTORY = url("#player_factory")
+
+	FX.CANNON_BALL_FACTORY = url("#cannon_ball_factory")
+	FX.CANNON_BALL_EXPLOSION_FACTORY = url("#cannon_ball_explosion_factory")
+
+	FX.IMPACT_FACTORY = url("#impact_factory")
+
+	FX.PISTOL_BULLET_1_FACTORY = url("#pistol_bullet_1_factory")
+	FX.PISTOL_BULLET_IMPACT_RIGHT_FACTORY = url("#pistol_bullet_impact_right_factory")
+	FX.PISTOL_BULLET_IMPACT_LEFT_FACTORY = url("#pistol_bullet_impact_left_factory")
+
+	FX.HEART_SMALL_DROP_FACTORY = url("#heart_small_drop_factory")
+
+	FX.GEM_LARGE_DROP_FACTORY = url("#gem_large_drop_factory")
+	FX.GEM_MEDIUM_DROP_FACTORY = url("#gem_medium_drop_factory")
+	FX.GEM_SMALL_DROP_FACTORY = url("#gem_small_drop_factory")
+
+	FX.CLAY_JUG_LARGE_DROPS = {
+		FX.GEM_LARGE_DROP_FACTORY,
+		FX.GEM_MEDIUM_DROP_FACTORY,
+		FX.GEM_MEDIUM_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+	}
+	utils.shuffle(FX.CLAY_JUG_LARGE_DROPS)
+
+	FX.CLAY_JUG_MEDIUM_DROPS = {
+		FX.GEM_MEDIUM_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+	}
+	utils.shuffle(FX.CLAY_JUG_MEDIUM_DROPS)
+
+	FX.CLAY_JUG_SMALL_DROPS = {
+		FX.HEART_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+		FX.GEM_SMALL_DROP_FACTORY,
+	}
+	utils.shuffle(FX.CLAY_JUG_SMALL_DROPS)
+
+	FX.CLAY_JUG_DEBRIS_A_FACTORY = url("#clay_jug_debris_a_factory")
+	FX.CLAY_JUG_DEBRIS_B_FACTORY = url("#clay_jug_debris_b_factory")
+	FX.CLAY_JUG_DEBRIS_C_FACTORY = url("#clay_jug_debris_c_factory")
+	FX.CLAY_JUG_DEBRIS_D_FACTORY = url("#clay_jug_debris_d_factory")
+	FX.CLAY_JUG_DEBRIS_E_FACTORY = url("#clay_jug_debris_e_factory")
+
+	FX.CLAY_JUG_DEBRIS = {
+		FX.CLAY_JUG_DEBRIS_A_FACTORY,
+		FX.CLAY_JUG_DEBRIS_B_FACTORY,
+		FX.CLAY_JUG_DEBRIS_C_FACTORY,
+		FX.CLAY_JUG_DEBRIS_D_FACTORY,
+		FX.CLAY_JUG_DEBRIS_E_FACTORY,
+	}
+	utils.shuffle(FX.CLAY_JUG_DEBRIS)
+end -- init

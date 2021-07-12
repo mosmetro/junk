@@ -1,0 +1,53 @@
+[project]
+title = Princess
+version = 0.1
+custom_resources = banks
+dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v1.0.5.zip
+
+[fmod]
+speaker_mode = stereo
+lib_path = /fmod_res
+
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /custom/render/default.renderc
+
+[input]
+game_binding = /input/game.input_bindingc
+use_accelerometer = 0
+gamepads = /custom/input/default.gamepadsc
+
+[display]
+width = 1136
+height = 640
+display_profiles = /custom/render/default.display_profilesc
+vsync = 0
+update_frequency = 60
+
+[physics]
+scale = 0.0625
+gravity_y = 0.0
+debug_scale = 20.0
+ray_cast_limit_2d = 1024
+debug_alpha = 0.5
+trigger_overlap_capacity = 1024
+debug = 0
+allow_dynamic_transforms = 0
+
+[script]
+shared_state = 1
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
+
+[ios]
+launch_image_640x1136 = /assets/ios/defold_640x1136.png
+launch_image_750x1334 = /assets/ios/defold_750x1334.png
+launch_image_1024x768 = /assets/ios/defold_1024x768.png
+launch_image_2208x1242 = /assets/ios/defold_1242x2208.png
+launch_image_2048x1536 = /assets/ios/defold_2048x1536.png
+
+[native_extension]
+app_manifest = /appmanifests/disable_audio.appmanifest
+

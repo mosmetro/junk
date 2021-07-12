@@ -1,0 +1,24 @@
+[
+   {
+      "name": "position",
+      "type": "float32",
+      "count": 2,
+      "data": [
+         -1, -1,
+         1, -1,
+         -1, 1,
+         1, 1
+      ]
+   },
+   {
+      "name": "texcoord0",
+      "type": "float32",
+      "count": 2,
+      "data": [
+         0, 0,
+         1, 0,
+         0, 1,
+         1, 1
+      ]
+   }
+]

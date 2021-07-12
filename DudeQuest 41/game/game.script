@@ -1,0 +1,13 @@
+local Prototype = require("game.game")
+
+local defold = _G
+
+function defold.init(self)
+	self.instance = Prototype.new(self)
+end -- defold.init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- defold.final
+
+defold.update = runtime.update

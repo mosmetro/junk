@@ -1,0 +1,14 @@
+local Checkpoint = require("pixelfrog.props.checkpoint.checkpoint")
+
+local defold = _G
+
+go.property("map", hash(""))
+go.property("location", hash(""))
+
+function defold.init(self)
+   self.instance = Checkpoint.new(self)
+end
+
+function defold.final(self)
+   Checkpoint.free(self.instance)
+end

@@ -1,0 +1,34 @@
+-- import
+local utils = require("scripts.shared.utils")
+local clay_jug_debris = require("scripts.platformer.shantae.clay_jug_debris")
+
+local defold = _G
+
+-- properties
+go.property("velocity", vmath.vector3())
+
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   utils.log("debris_init_pooled")
+   self.debris = clay_jug_debris.new(self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   clay_jug_debris.free(self.debris)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+   self.debris.on_message(message_id, message)
+end -- on_message

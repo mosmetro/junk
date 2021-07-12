@@ -1,0 +1,108 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+local ui = require("scripts.shared.ui.ui")
+local application = require("scripts.shared.application")
+local SND = require("scripts.platformer.sound")
+local translations = require("scripts.platformer.translations")
+-- local game = require("scripts.platformer.game")
+
+-- localization
+local defold = _G
+local execute_in_context = utils.execute_in_context
+local set_listener = window.set_listener
+local post = msg.post
+local get_sys_info = sys.get_sys_info
+local get_engine_info = sys.get_engine_info
+local format = string.format
+local hash_to_hex = hash_to_hex
+
+-- functions
+local window_callback
+
+-- constants
+local WINDOW_EVENT_FOCUS_LOST = window.WINDOW_EVENT_FOCUS_LOST
+local APPLICATION_START = MSG.APPLICATION_START
+local ACQUIRE_INPUT_FOCUS = MSG.ACQUIRE_INPUT_FOCUS
+local RELEASE_INPUT_FOCUS = MSG.RELEASE_INPUT_FOCUS
+
+-- properties
+go.property("application_id", hash("undefined"))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init()
+   -- print(crash)
+   -- print(gui)
+   -- print(go)
+   -- print(profiler)
+   -- print(render)
+   -- print(resource)
+   -- print(sys)
+   -- print(window)
+   local engine_info = get_engine_info()
+   local engine_info_str = format("Version: %s(%s, %s)", engine_info.version, engine_info.is_debug and "DEBUG" or "RELEASE", engine_info.version_sha1)
+   utils.log(engine_info_str)
+
+   set_listener(window_callback)
+
+post("#", MSG.APPLICATION_START)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final()
+   post(".", RELEASE_INPUT_FOCUS)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id)
+   if message_id == APPLICATION_START then
+      local info = get_sys_info()
+      local system_name = info.system_name
+      if system_name == "iPhone OS" or system_name == "Android" then
+         ui.ingame_controls_context = ui.multi_touch_controls_context
+      else
+         ui.ingame_controls_context = ui.keyboard_controls_context
+      end
+
+      SND.init_sound()
+
+      translations.set_language(info.device_language:sub(1, 2))
+      nc.post_notification(translations.LANGUAGE_DID_CHANGE_NOTIFICATION)
+
+      execute_in_context(ui.single_touch_controls_context, ui.single_touch_controls_context.enable)
+
+      application.set_id(hash_to_hex(self.application_id))
+      local meta = application.load_table(application.get_id())
+      if meta.file then
+         application.set_slot(meta.file)
+         execute_in_context(ui.start_context, ui.start_context.enable)
+      else
+         execute_in_context(ui.select_file_context, ui.select_file_context.enable)
+      end
+      execute_in_context(ui.startup_background_context, ui.startup_background_context.enable)
+
+      -- post("@system:", "toggle_profile")
+
+      post(".", ACQUIRE_INPUT_FOCUS)
+   end
+end -- on_message
+
+---------------------------------------
+-- window_callback
+---------------------------------------
+
+function window_callback(_, event)
+   if event == WINDOW_EVENT_FOCUS_LOST then
+      utils.log("focus lost")
+   end
+end -- window_callback

@@ -1,0 +1,13 @@
+local CONST = require("m.constants")
+local defold = _G
+
+local ANIMATION = hash("small_flame")
+
+local function destroy()
+	go.delete()
+end -- destroy
+
+function defold.init()
+	sprite.play_flipbook("#sprite", ANIMATION, destroy)
+   go.animate("#light", CONST.SCALE, go.PLAYBACK_ONCE_FORWARD, CONST.VECTOR3_ZERO, go.EASING_INQUAD, 0.6)
+end

@@ -1,0 +1,21 @@
+local Prototype = require("maze.e1.props.bench.bench")
+
+local defold = _G
+
+go.property("can_jump_down", false)
+go.property("can_climb_up", true)
+go.property("aabb", vmath.vector4(-16, -24, 16, 8))
+
+function defold.init(self)
+   self.shadow_edges = {
+      { -6, -12, -7,   0 },
+      { -7,   0,  7,   0 },
+      {  7,   0,  6, -12 },
+      {  6, -12, -6, -12 },
+   }
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

@@ -1,0 +1,22 @@
+name: "downsample_pass"
+tags: ""
+vertex_program: "/materials/passthrough.vp"
+fragment_program: "/materials/downsample_pass/downsample_pass.fp"
+vertex_space: VERTEX_SPACE_WORLD
+fragment_constants {
+  name: "source_size"
+  type: CONSTANT_TYPE_USER
+  value {
+    x: 1.0
+    y: 1.0
+    z: 0.0
+    w: 0.0
+  }
+}
+samplers {
+  name: "source"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_LINEAR
+  filter_mag: FILTER_MODE_MAG_LINEAR
+}

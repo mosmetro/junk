@@ -1,0 +1,67 @@
+-- import
+-- local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local game = require("scripts.platformer.game")
+-- local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local get_id = go.get_id
+-- local get_context = game.get_context
+local set_context = game.set_context
+-- local execute_in_context = utils.execute_in_context
+local get_position = go.get_position
+local set_position = go.set_position
+
+-- functions
+local collect_damage
+
+-- properties
+go.property("damage_amount", 1)
+go.property("instant_death", false)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+	self.gameobject = get_id()
+	local position = get_position()
+	position.z = LAYER.MACHINERY_1
+	set_position(position)
+	self.collect_damage = collect_damage
+	set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+-- function defold.on_message(self, message_id, message)
+-- 	if message_id == MSG.COLLISION_RESPONSE then
+-- 		local context = get_context(message.other_id)
+-- 		if context and context.apply_damage then
+-- 			execute_in_context(context, context.apply_damage, self.damage_amount)
+-- 		end
+-- 	end
+-- end -- on_message
+
+---------------------------------------
+-- collect_damage
+---------------------------------------
+
+function collect_damage(self)
+	if self.instant_death then
+		return nil
+	else
+		return self.damage_amount
+	end
+end --collect_damage

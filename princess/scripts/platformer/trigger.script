@@ -1,0 +1,18 @@
+local defold = _G
+
+-- import
+local NTN = require("scripts.platformer.notifications")
+local MSG = require("scripts.shared.messages")
+local nc  = require("scripts.shared.notification_center")
+
+local get_id = go.get_id
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(_, message_id, message)
+	if message_id == MSG.TRIGGER_RESPONSE and message.enter then
+		nc.post_notification(NTN.TRIGGER_ENTER, get_id())
+	end
+end

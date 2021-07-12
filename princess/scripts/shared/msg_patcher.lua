@@ -1,0 +1,1 @@
+msg.ASYNC_LOAD = hash("async_load")

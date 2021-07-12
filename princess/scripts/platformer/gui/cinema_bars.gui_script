@@ -1,0 +1,120 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+-- local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+-- local player_data = require("scripts.platformer.player_data")
+-- local Textfield = require("scripts.shared.ui.controls.textfield")
+-- local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+-- local translations = require("scripts.platformer.translations")
+-- local nc = require("scripts.shared.notification_center")
+-- local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+-- local execute_in_context = utils.execute_in_context
+-- local translate = translations.translate
+-- local hash = hash
+local post = msg.post
+-- local url = msg.url
+local get_node = gui.get_node
+local get_position = gui.get_position
+local set_position = gui.set_position
+local set_render_order = gui.set_render_order
+local animate = gui.animate
+local get_size = gui.get_size
+-- local set_text = gui.set_text
+local vector3 = vmath.vector3
+
+-- functions
+-- local enable
+-- local disable
+
+-- constants
+local POSITION_Y = hash("position.y")
+local ON_SCREEN_EASING = gui.EASING_OUTSINE
+local OFF_SCREEN_EASING = gui.EASING_INSINE
+local DURATION = 0.2
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.cinema_bars_context = self
+	set_render_order(15)
+
+	local top_bar = get_node("top")
+	local bottom_bar = get_node("bottom")
+	local bar_size = get_size(top_bar)
+
+	local top_bar_on_screen_position = get_position(top_bar)
+	local top_bar_off_screen_position = vector3(top_bar_on_screen_position)
+	top_bar_off_screen_position.y = top_bar_on_screen_position.y + bar_size.y
+
+	local bottom_bar_on_screen_position = get_position(bottom_bar)
+	local bottom_bar_off_screen_position = vector3(bottom_bar_on_screen_position)
+	bottom_bar_off_screen_position.y = bottom_bar_on_screen_position.y - bar_size.y
+
+	self.enable = function(_, animated)
+		post("#", MSG.ENABLE)
+		if animated then
+			set_position(top_bar, top_bar_off_screen_position)
+			animate(top_bar, POSITION_Y, top_bar_on_screen_position, ON_SCREEN_EASING, DURATION)
+			set_position(bottom_bar, bottom_bar_off_screen_position)
+			animate(bottom_bar, POSITION_Y, bottom_bar_on_screen_position, ON_SCREEN_EASING, DURATION)
+		else
+			set_position(top_bar, top_bar_on_screen_position)
+			set_position(bottom_bar, bottom_bar_on_screen_position)
+		end
+	end
+
+	self.disable = function(_, animated)
+		if animated then
+			set_position(top_bar, top_bar_on_screen_position)
+			animate(top_bar, POSITION_Y, top_bar_off_screen_position, OFF_SCREEN_EASING, DURATION)
+			set_position(bottom_bar, bottom_bar_on_screen_position)
+			animate(bottom_bar, POSITION_Y, bottom_bar_off_screen_position, OFF_SCREEN_EASING, DURATION, 0, function()
+				post("#", MSG.DISABLE)
+			end)
+		else
+			set_position(top_bar, top_bar_off_screen_position)
+			set_position(bottom_bar, bottom_bar_off_screen_position)
+			post("#", MSG.DISABLE)
+		end
+	end
+
+	self.disable(self, false)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final()
+	ui.cinema_bars_context = nil
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+-- function defold.on_message (self, message_id)
+-- 	if message_id == MSG.ENABLE then
+-- 	end
+-- end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+-- function enable ()
+-- 	post("#", MSG.ENABLE)
+-- end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+-- function disable ()
+-- 	post("#", MSG.DISABLE)
+-- end -- disable

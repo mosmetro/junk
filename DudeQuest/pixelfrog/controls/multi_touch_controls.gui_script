@@ -1,0 +1,223 @@
+-- import
+local ui = require("m.ui.ui")
+local utils = require("m.utils")
+-- local debug_draw = require("m.debug_draw")
+
+local gamestate = require("pixelfrog.game.gamestate")
+
+-- localization
+local defold = _G
+local vector3_get_xy = fastmath.vector3_get_xy
+local next = next
+local max = math.max
+local msg = msg
+local get_node = gui.get_node
+local get_height = gui.get_height
+local get_screen_position = gui.get_screen_position
+local get_position = gui.get_position
+local set_position = gui.set_position
+local set_color = gui.set_color
+local vector4 = vmath.vector4
+local on_input = runtime.on_input
+local MULTI_TOUCH = ui.MULTI_TOUCH
+local LEFT = ui.LEFT
+local RIGHT = ui.RIGHT
+local UP = ui.UP
+local DOWN = ui.DOWN
+local A = ui.A
+local X = ui.X
+local Y = ui.Y
+local PAUSE = ui.PAUSE
+
+local COLOR_PRESSED = vector4()
+local COLOR_RELEASED = vector4()
+local SIZE_A = 200
+local SIZE_B = 80
+local SIZE_C = 55
+local MIN_DISTANCE_SQUARED
+
+local buttons
+local images
+
+local function configure()
+   local get = gamestate.get
+   local player = gamestate.player
+   -- color
+   local r = get(nil, player, "onscreen_controls_red", 255)
+   local g = get(nil, player, "onscreen_controls_green", 255)
+   local b = get(nil, player, "onscreen_controls_blue", 255)
+   local a = get(nil, player, "onscreen_controls_alpha", 38)
+   fastmath.vector4_set_xyzw(COLOR_RELEASED, r/255, g/255, b/255, a/255)
+   fastmath.vector4_set_xyzw(COLOR_PRESSED, r/255, g/255, b/255, fastmath.clamp01(a/255 + 0.25))
+   for _, node in next, images do
+      set_color(node, COLOR_RELEASED)
+   end
+   -- posiion
+   for id, button in next, buttons do
+      local node = images[id]
+      local position = get(nil, player, button.key, button.position)
+      set_position(node, position)
+      local x, y = vector3_get_xy(get_screen_position(node))
+      button.screen_x = button.shift_x + x
+      button.screen_y = button.shift_y + y
+   end
+end -- configure
+
+local function enable()
+   msg.post("#", msg.ENABLE)
+   runtime.reset_input()
+   -- configure()
+end -- enable
+
+local function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable
+
+local function check_position(x, y)
+   local result = nil
+   local min_distance_sq = MIN_DISTANCE_SQUARED
+   for action, description in next, buttons do
+      local dx = x - description.screen_x
+      local dy = y - description.screen_y
+      local distance_sq = dx * dx + dy * dy
+      if (distance_sq < min_distance_sq) and (distance_sq < description.radius_squared) then
+         min_distance_sq = distance_sq
+         result = action
+      end
+   end
+   return result
+end -- check_position
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   local sys_info = sys.get_sys_info()
+   local system_name = sys_info.system_name
+   if system_name == "iPhone OS" or system_name == "Android" then
+      ui.ingame_controls_context = self
+   else
+      return
+   end
+
+   local multiplier = get_height() / 1080 -- current display profile height / reference profile (1920x1080) height
+   utils.log(multiplier)
+   SIZE_A = multiplier * SIZE_A
+   SIZE_B = multiplier * SIZE_B
+   SIZE_C = multiplier * SIZE_C
+   MIN_DISTANCE_SQUARED = max(SIZE_A, SIZE_B, SIZE_C) ^ 2
+
+   images = {
+      [LEFT]  = get_node(LEFT),
+      [RIGHT] = get_node(RIGHT),
+      [A]     = get_node(A),
+      [X]     = get_node(X),
+      [Y]     = get_node(Y),
+      [DOWN]  = get_node(DOWN),
+      [UP]    = get_node(UP),
+      [PAUSE] = get_node(PAUSE),
+   }
+
+   buttons = {
+      [LEFT] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = 0,
+         radius_squared = SIZE_A^2,
+         key = "onscreen_controls_left",
+         position = get_position(images[LEFT])
+      },
+      [RIGHT] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = 0,
+         radius_squared = SIZE_A^2,
+         key = "onscreen_controls_right",
+         position = get_position(images[RIGHT])
+      },
+      [A] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = 0,
+         radius_squared = SIZE_A^2,
+         key = "onscreen_controls_a",
+         position = get_position(images[A])
+      },
+      [X] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = -40,
+         shift_y = 0,
+         radius_squared = SIZE_A^2,
+         key = "onscreen_controls_x",
+         position = get_position(images[X])
+      },
+      [Y] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = 60,
+         radius_squared = SIZE_A^2,
+         key = "onscreen_controls_y",
+         position = get_position(images[Y])
+      },
+      [DOWN] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = -20 * multiplier,
+         radius_squared = SIZE_B^2,
+         key = "onscreen_controls_down",
+         position = get_position(images[DOWN])
+      },
+      [UP] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = 28 * multiplier,
+         radius_squared = SIZE_C^2,
+         key = "onscreen_controls_up",
+         position = get_position(images[UP])
+      },
+      [PAUSE] = {
+         screen_x = 0,
+         screen_y = 0,
+         shift_x = 0,
+         shift_y = 0,
+         radius_squared = SIZE_A^2,
+         key = "onscreen_controls_pause",
+         position = get_position(images[PAUSE])
+      },
+   }
+
+   self.enable = enable
+   self.disable = disable
+   self.configure = configure
+end -- defold.init
+
+function defold.on_input(_, action_id, action)
+   -- utils.log("on_play")
+   if (action_id == MULTI_TOUCH) and action.touch then
+      for actn, _ in next, buttons do
+         for _, touch in next, action.touch do
+            if actn == check_position(touch.screen_x, touch.screen_y) then
+               on_input(actn, touch.released == false)
+               set_color(images[actn], touch.released and COLOR_RELEASED or COLOR_PRESSED)
+               break
+            else
+               on_input(actn, false)
+               set_color(images[actn], COLOR_RELEASED)
+            end
+         end
+      end
+   end
+   return true
+end -- defold.on_input
+
+-- function defold.update()
+--    local sqrt = math.sqrt
+--    for _, button in next, buttons do
+--       debug_draw.circle(button.screen_x, button.screen_y, sqrt(button.radius_squared), 32)
+--    end
+-- end -- update

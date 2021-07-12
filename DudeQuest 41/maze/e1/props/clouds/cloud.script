@@ -1,0 +1,14 @@
+local Cloud = require("maze.e1.props.clouds.cloud")
+
+local defold = _G
+
+go.property("start_x", 0)
+go.property("direction", 0)
+
+function defold.init(self)
+   self.instance = Cloud.new(self)
+end -- init
+
+function defold.final(self)
+   Cloud.free(self.instance)
+end -- final

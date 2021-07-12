@@ -1,0 +1,78 @@
+tile_set: "/region1/forest.tilesource"
+layers {
+  id: "layer1"
+  z: 0.0
+  is_visible: 1
+  cell {
+    x: 0
+    y: -1
+    tile: 46
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 1
+    y: -1
+    tile: 46
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 2
+    y: -1
+    tile: 46
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 3
+    y: -1
+    tile: 47
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -1
+    y: -1
+    tile: 45
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 0
+    y: 0
+    tile: 38
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 1
+    y: 0
+    tile: 38
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 2
+    y: 0
+    tile: 38
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 3
+    y: 0
+    tile: 39
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -1
+    y: 0
+    tile: 37
+    h_flip: 0
+    v_flip: 0
+  }
+}
+material: "/custom/materials/tile_map.material"
+blend_mode: BLEND_MODE_ALPHA

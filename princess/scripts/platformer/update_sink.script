@@ -1,0 +1,68 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local FX = require("scripts.platformer.fx")
+local game = require("scripts.platformer.game")
+-- local nc = require("scripts.shared.notification_center")
+-- local utils = require("scripts.shared.utils")
+local ui = require("scripts.shared.ui.ui")
+local player_data = require("scripts.platformer.player_data")
+-- local FACTORY = require("scripts.shared.factories")
+
+-- localization
+local defold = _G
+local post = msg.post
+-- local game_update = game.update
+local get_position = go.get_position
+local create_collection = collectionfactory.create
+
+-- constants
+local IDENTITY = vmath.quat()
+local ONE = vmath.vector3(1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init()
+  post("#", MSG.STAGE_START)
+end -- init
+
+---------------------------------------
+-- update
+---------------------------------------
+
+defold.update = game.update
+
+-- function defold.update(self, dt)
+--   if dt == 0 then
+--     return
+--   end
+--   game_update(self, dt)
+-- end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(_, message_id)
+  if message_id == MSG.STAGE_START then
+    -- utils.log("STAGE_START received")
+    local entry_point = player_data.get_entry_point()
+    -- local context = game.get_context(entry_point)
+    local position = get_position(entry_point)
+    -- FACTORY.create_player(position)
+    create_collection(FX.PLAYER_FACTORY, position, IDENTITY, nil, ONE)
+    local primary_action = player_data.get_primary_action()
+    if primary_action == ui.NO_ACTION then
+      local move_direction = player_data.get_move_direction()
+      if move_direction == 1 then
+        game.set_down(ui.RIGHT)
+      elseif move_direction == -1 then
+        game.set_down(ui.LEFT)
+      end
+    else
+      game.set_down(player_data.get_primary_action())
+      game.set_down(player_data.get_secondary_action())
+    end
+  end
+end

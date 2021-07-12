@@ -1,0 +1,155 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local MSG = require("scripts.shared.messages")
+local GROUP = require("scripts.shared.groups")
+local states = require("scripts.platformer.fall_trap_states")
+local nc  = require("scripts.shared.notification_center")
+local COLOR = require("scripts.shared.colors")
+
+-- localization
+local STATIC = GROUP.STATIC
+local ONE_WAY_STATIC = GROUP.ONE_WAY_STATIC
+local post = msg.post
+local get_id = go.get_id
+local url = msg.url
+local ray_cast = physics.ray_cast
+local vector3 = vmath.vector3
+local get_position = go.get_position
+local abs = math.abs
+local ceil = math.ceil
+
+-- functions
+local raycast_request
+local raycast_response
+local frame_update
+local fall
+
+-- constants
+local GROUND = {
+	-- traps on moving platforms is unsupported!
+	STATIC,
+	ONE_WAY_STATIC,
+}
+
+local MAX_FALL_SPEED = -300
+local SKIN_WIDTH = 0.01
+local MIN_OBSTACLE_WIDTH = 16
+
+-- go.property("cyclic", false)
+go.property("wait_time", 0.5)
+go.property("ease_factor", 1)
+go.property("recoil_velocity", 120)
+go.property("raycast_width", 31)
+go.property("raycast_height", 19)
+go.property("trigger", hash(""))
+go.property("rise_speed", 30)
+go.property("gravity", -800)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	self.label = url("#label")
+	-- post(self.label, MSG.DISABLE)
+
+  self.gameobject = get_id()
+	self.idle_position = get_position()
+	self.position = get_position()
+	self.delta_position = vector3()
+	self.velocity_y = 0
+	self.MAX_FALL_SPEED = -300
+
+	self.vertical_ray_count = ceil(self.raycast_width / MIN_OBSTACLE_WIDTH) + 1
+	self.vertical_ray_spacing = (self.raycast_width - 2 * SKIN_WIDTH) / (self.vertical_ray_count - 1)
+
+	self.machine = states.make_machine(self)
+
+	self.fall = fall
+	self.raycast_request = raycast_request
+  game.add_update_callback(self, frame_update, game.motor_platforms)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	game.remove_update_callback(self, game.motor_platforms)
+	game.remove_shared_data(self.gameobject)
+	game.set_delta_position(self.gameobject, nil)
+	nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update (self, dt)
+	self.machine.update(dt)
+end -- update
+
+---------------------------------------
+-- fall
+---------------------------------------
+
+function fall(self, dt)
+
+
+	local old_velocity_y = self.velocity_y
+	self.velocity_y = self.velocity_y + self.gravity * dt
+	if self.velocity_y < MAX_FALL_SPEED then
+		self.velocity_y = MAX_FALL_SPEED
+	end
+	self.delta_position.y = (old_velocity_y + self.velocity_y) * 0.5 * dt
+	game.set_delta_position(self.gameobject, self.delta_position)
+
+	raycast_request(self)
+end -- fall
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id, message)
+	if message_id == MSG.RAY_CAST_RESPONSE then
+		raycast_response(self, message)
+	end
+end -- on_message
+
+---------------------------------------
+-- raycast_request
+---------------------------------------
+
+function raycast_request (self)
+	self.collision_below = false
+	self.ray_length = SKIN_WIDTH + abs(self.delta_position.y)
+	local ray_start = vector3(self.position.x - (self.raycast_width * 0.5) + SKIN_WIDTH, self.position.y - self.raycast_height + SKIN_WIDTH, 0)
+	local ray_end = vector3(ray_start.x, ray_start.y - self.ray_length, 0)
+	for ray = 1, self.vertical_ray_count do
+		ray_cast(ray_start, ray_end, GROUND, ray)
+		post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.x = ray_start.x + self.vertical_ray_spacing
+		ray_end.x = ray_start.x
+	end
+end -- raycast_request
+
+---------------------------------------
+-- raycast_response
+---------------------------------------
+
+function raycast_response (self, message)
+	local hit_distance = self.ray_length * message.fraction - SKIN_WIDTH
+	if abs(hit_distance) < 0.001 then
+		hit_distance = 0
+	end
+	if -hit_distance > self.delta_position.y then
+		self.delta_position.y = -hit_distance
+		if hit_distance == 0 then
+			self.velocity_y = 0
+			self.collision_below = true
+		end
+	end
+end -- raycast_response

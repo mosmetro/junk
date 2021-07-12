@@ -1,0 +1,372 @@
+name: "default"
+instances {
+  id: "bench1"
+  prototype: "/maze/e1/props/static_geometry/bench1.go"
+  position {
+    x: -53.0
+    y: 48.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench2"
+  prototype: "/maze/e1/props/static_geometry/bench1.go"
+  position {
+    x: 56.0
+    y: 103.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench3"
+  prototype: "/maze/e1/props/static_geometry/bench1.go"
+  position {
+    x: 0.0
+    y: 162.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "candle_single"
+  collection: "/maze/e1/props/candles/candle_single.collection"
+  position {
+    x: 87.0
+    y: 120.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "bench_a_16"
+  collection: "/maze/e1/props/bench/bench_a_16.collection"
+  position {
+    x: 87.0
+    y: 120.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "passage1"
+  collection: "/maze/e1/maps/m5/passage1.collection"
+  position {
+    x: -192.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination"
+        value: "e1m4"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "passage"
+        value: "/passage1/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "passage2"
+  collection: "/maze/e1/maps/m5/passage2.collection"
+  position {
+    x: 112.0
+    y: -76.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination"
+        value: "e1t1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "passage"
+        value: "/passage3/root"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "is_horizontal"
+        value: "false"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "passage3"
+  collection: "/maze/e1/maps/m5/passage3.collection"
+  position {
+    x: 0.0
+    y: 226.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination"
+        value: "e1m5"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "passage"
+        value: "/passage2/root"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "is_horizontal"
+        value: "false"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "gate1"
+  collection: "/props/gate/gate.collection"
+  position {
+    x: 53.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination"
+        value: "e1m4"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "gate"
+        value: "/gate1/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "static_geometry"
+  data: "components {\n"
+  "  id: \"script\"\n"
+  "  component: \"/maze/e1/props/static_geometry/static_geometry.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/maze/e1/maps/m5/e1m5_static_geometry.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/maze/e1/maps/m5/e1m5_static_geometry.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"default\\\"\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"web1\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/maze/e1/e1_props.atlas\\\"\\n"
+  "default_animation: \\\"web0\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 541.0\n"
+  "    y: 181.0\n"
+  "    z: -0.334\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"web2\"\n"
+  "  type: \"sprite\"\n"
+  "  data: \"tile_set: \\\"/maze/e1/e1_props.atlas\\\"\\n"
+  "default_animation: \\\"web1\\\"\\n"
+  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
+  "blend_mode: BLEND_MODE_ALPHA\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 546.0\n"
+  "    y: 22.0\n"
+  "    z: -0.334\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: -0.70710677\n"
+  "    w: 0.70710677\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

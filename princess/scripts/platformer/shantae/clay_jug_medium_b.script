@@ -1,0 +1,88 @@
+-- import
+local game = require("scripts.platformer.game")
+local LAYER = require("scripts.shared.layers")
+local SND = require("scripts.platformer.sound")
+local FX = require("scripts.platformer.fx")
+local MSG = require("scripts.shared.messages")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local url = msg.url
+local get_id = go.get_id
+local get_position = go.get_position
+local set_position = go.set_position
+local delete = go.delete
+local create_gameobject = factory.create
+local vector3 = vmath.vector3
+local set_context = game.set_context
+local play_sound = SND.play_sound
+local play_flipbook = sprite.play_flipbook
+local random = math.random
+local select_next = utils.select_next
+local post = msg.post
+
+-- functions
+local apply_damage
+local impact_complete
+
+-- constants
+local IDENTITY = vmath.quat()
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   self.gameobject = get_id()
+   self.collisionobject = url("#collisionobject")
+   self.sprite = url("#sprite")
+   self.position = get_position()
+   self.position.z = LAYER.OBJECT_2
+   set_position(self.position)
+   self.properties = { velocity = vector3() }
+   set_context(self.gameobject, self)
+   self.apply_damage = apply_damage
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- apply_damage
+---------------------------------------
+
+function apply_damage(self)
+   post(self.collisionobject, MSG.DISABLE)
+   play_sound(SND.SHANTAE_CLAY_JUG_SHATTER_MEDIUM)
+   play_flipbook(self.sprite, FX.SHANTAE_CLAY_JUG_MEDIUM_B_IMPACT, impact_complete)
+
+   local debris_count = random(4, 6)
+   local debris = FX.CLAY_JUG_DEBRIS
+   for _ = 1, debris_count do
+      self.properties.velocity.x = random(-120, 120)
+      self.properties.velocity.y = random(230, 350)
+      create_gameobject(select_next(debris), self.position, IDENTITY, self.properties)
+   end
+
+   local drop_count = random(2, 3)
+   local drops = FX.CLAY_JUG_MEDIUM_DROPS
+   for _ = 1, drop_count do
+      self.properties.velocity.x = random(-90, 90)
+      self.properties.velocity.y = random(220, 260)
+      create_gameobject(select_next(drops), self.position, IDENTITY, self.properties)
+   end
+end -- apply_damage
+
+---------------------------------------
+-- impact_complete
+---------------------------------------
+
+function impact_complete()
+   delete()
+end -- impact_complete

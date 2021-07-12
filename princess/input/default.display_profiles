@@ -1,0 +1,21 @@
+profiles {
+  name: "ipad"
+  qualifiers {
+    width: 2224
+    height: 1668
+  }
+}
+profiles {
+  name: "iphone"
+  qualifiers {
+    width: 1920
+    height: 1080
+  }
+}
+profiles {
+  name: "iphonex"
+  qualifiers {
+    width: 2338
+    height: 1080
+  }
+}

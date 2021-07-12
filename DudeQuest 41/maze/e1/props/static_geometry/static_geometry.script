@@ -1,0 +1,17 @@
+-- import
+local Geometry = require("maze.e1.props.static_geometry.static_geometry")
+-- local utils = require("m.utils")
+
+-- localization
+local defold = _G
+
+go.property("can_jump_down", false)
+go.property("can_climb_up", true)
+
+function defold.init(self)
+   self.instance = Geometry.new(self)
+end
+
+function defold.final(self)
+   Geometry.free(self.instance)
+end

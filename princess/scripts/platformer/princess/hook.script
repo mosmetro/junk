@@ -1,0 +1,14 @@
+local defold = _G
+local MSG = require("scripts.shared.messages")
+local GROUP = require("scripts.shared.groups")
+
+local post = msg.post
+local get_position = go.get_position
+
+function defold.on_message(_, message_id, message)
+	if message_id == MSG.TRIGGER_RESPONSE then
+		if message.other_group == GROUP.PIN and message.enter then
+			post("root#script", MSG.ON_HOOK, { pivot_position = get_position(message.other_id) })
+		end
+	end
+end

@@ -1,0 +1,110 @@
+local ui = require("m.ui.ui")
+-- local utils = require("m.utils")
+-- local nc = require("m.notification_center")
+-- local const = require("m.constants")
+
+local game = require("pixelfrog.game.game")
+local gamestate = require("pixelfrog.game.gamestate")
+local snd = require("sound.sound")
+local Button = require("pixelfrog.ui.button")
+local Slider = require("pixelfrog.ui.slider")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_position = gui.set_position
+local hash = hash
+local vector3_set_xyz = fastmath.vector3_set_xyz
+
+local vector3_stub = fastmath.vector3_stub
+
+local sound_volume_slider
+local music_volume_slider
+
+local function enable()
+   msg.post("#", msg.ENABLE)
+   sound_volume_slider.set_value(gamestate.get(nil, gamestate.player, "sound_volume", 100))
+   music_volume_slider.set_value(gamestate.get(nil, gamestate.player, "music_volume", 100))
+end -- enable
+
+local function disable()
+   msg.post("#", msg.DISABLE)
+   if gamestate.get(nil, gamestate.player, "music_volume", 100) == 0 then
+      snd.stop_music(fmod.STUDIO_STOP_IMMEDIATE)
+   end
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   ui.audio_context = self
+	set_render_order(ui.MENU)
+   self.enable = enable
+   self.disable = disable
+
+   local music_bus
+	local soundfx_bus
+
+   local back_button_node = get_node("back")
+   vector3_set_xyz(vector3_stub, -game.view_half_width + 32, game.view_half_height - 32, 0)
+   set_position(back_button_node, vector3_stub)
+
+   local back_button = Button.new {
+      node = back_button_node,
+      released_animation = hash("back_released"),
+      pressed_animation = hash("back_pressed"),
+      callback = function()
+         ui.first_responder = ui.pause_context
+         disable()
+         runtime.execute_in_context(ui.pause_context.enable, ui.pause_context)
+      end,
+   }
+
+   sound_volume_slider = Slider.new {
+      node = get_node("sound/track_dark"),
+      thumb_node = get_node("sound/thumb"),
+      value_node = get_node("sound/value"),
+      highlight_node = get_node("sound/track_light"),
+      released_animation = hash("slider_thumb_sound_released"),
+      pressed_animation = hash("slider_thumb_sound_pressed"),
+      min_value = 0,
+      max_value = 100,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "sound_volume", value)
+         if not soundfx_bus then
+				soundfx_bus = fmod.studio.system:get_bus("bus:/soundfx")
+			end
+			soundfx_bus:set_volume(value/100)
+      end
+   }
+
+   music_volume_slider = Slider.new {
+      node = get_node("music/track_dark"),
+      thumb_node = get_node("music/thumb"),
+      value_node = get_node("music/value"),
+      highlight_node = get_node("music/track_light"),
+      released_animation = hash("slider_thumb_music_released"),
+      pressed_animation = hash("slider_thumb_music_pressed"),
+      min_value = 0,
+      max_value = 100,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "music_volume", value)
+         if not music_bus then
+				music_bus = fmod.studio.system:get_bus("bus:/music")
+			end
+         music_bus:set_volume(value/100)
+         if value > 0 then snd.start_music() end
+      end
+   }
+
+   self.controls = {
+      back_button,
+      sound_volume_slider,
+      music_volume_slider,
+   }
+end -- defold.init

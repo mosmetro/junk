@@ -1,0 +1,533 @@
+local defold = _G
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local COLOR = require("scripts.shared.colors")
+local GROUP = require("scripts.shared.groups")
+local TAG = require("scripts.shared.tags")
+local game = require("scripts.platformer.game")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local PLAYER = GROUP.PLAYER
+local PLATFORM = GROUP.PLATFORM
+local STATIC = GROUP.STATIC
+local ONE_WAY_STATIC = GROUP.ONE_WAY_STATIC
+local ONE_WAY_PLATFORM = GROUP.ONE_WAY_PLATFORM
+local CAMERA = GROUP.CAMERA
+local ACTIVATOR = GROUP.ACTIVATOR
+local RAY_CAST_RESPONSE = MSG.RAY_CAST_RESPONSE
+local TRIGGER_RESPONSE = MSG.TRIGGER_RESPONSE
+local get_position = go.get_position
+local set_position = go.set_position
+local get_id = go.get_id
+local vector3 = vmath.vector3
+local post = msg.post
+local url = msg.url
+local ray_cast = physics.ray_cast
+local abs = math.abs
+local sign = utils.sign
+local next = next
+local delete = go.delete
+local get_context = game.get_context
+local set_context = game.set_context
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+local get_delta_position = game.get_delta_position
+local set_delta_position = game.set_delta_position
+local post_notification = nc.post_notification
+local add_observer = nc.add_observer
+local remove_observer = nc.remove_observer
+
+-- functions
+local apply_damage
+local frame_update
+local raycast_request
+local raycast_response
+local calculate_delta_position
+local down_pass
+local up_pass
+local horizontal_pass
+local activator_callback
+local subscribe
+local unsubscribe
+
+local HUGE = math.huge
+local RAY_LENGTH = 5000
+local MAX_VERTICAL_SPEED = 500
+
+local PUSHABLES = {
+	STATIC,
+	PLATFORM,
+	PLAYER,
+}
+
+local GROUND = {
+	STATIC,
+	ONE_WAY_STATIC,
+	PLATFORM,
+	ONE_WAY_PLATFORM,
+}
+
+local SOLIDS = {
+	STATIC,
+	PLATFORM,
+	-- CRATE,
+}
+
+local UPDATE_GROUP = game.update_group_crates
+
+---------------------------------------
+-- properties
+---------------------------------------
+
+go.property("character_width", 32)
+go.property("character_height", 32)
+go.property("horizontal_ray_count", 3)
+go.property("vertical_ray_count", 3)
+go.property("skin_width", 0.01)
+go.property("speed", 30)
+go.property("acceleration", 1500)
+go.property("gravity", -435)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self) -- luacheck: no unused args
+	self.gameobject = get_id()
+	self.script = url()
+
+	self.position = get_position()
+	self.position.z = LAYER.MACHINERY_1
+	set_position(self.position)
+	self.delta_position = vector3()
+
+	self.half_character_width = self.character_width * 0.5
+	self.depth_x = self.character_width * 0.5
+
+	self.horizontal_ray_spacing = (self.character_height -  2 * self.skin_width) / (self.horizontal_ray_count - 1)
+	self.vertical_ray_spacing = (self.character_width - 2 * self.skin_width) / (self.vertical_ray_count - 1)
+
+	self.total_ray_count = (self.horizontal_ray_count + self.vertical_ray_count) * 2
+
+	self.first_right_ray = 1
+	self.last_right_ray = self.first_right_ray + self.horizontal_ray_count - 1
+
+	self.first_left_ray = self.last_right_ray + 1
+	self.last_left_ray = self.first_left_ray + self.horizontal_ray_count - 1
+
+	self.first_down_ray = self.last_left_ray + 1
+	self.last_down_ray = self.first_down_ray + self.vertical_ray_count - 1
+
+	self.first_up_ray = self.last_down_ray + 1
+	self.last_up_ray = self.first_up_ray + self.vertical_ray_count - 1
+
+	self.velocity = vector3()
+
+	self.responses = {}
+	self.contacts = {}
+
+  self.push_limit_right = HUGE
+	self.push_limit_left = -HUGE
+
+	self.apply_damage = apply_damage
+
+	set_context(self.gameobject, self)
+  add_observer(self, self.gameobject, activator_callback)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	remove_update_callback(self, UPDATE_GROUP)
+  set_context(self.gameobject, nil)
+  set_delta_position(self.gameobject, nil)
+  remove_observer(self, self.gameobject)
+  if self.activator then
+    self.activator.objects[self.gameobject] = nil
+    self.activator = nil
+  end
+  if self.broadcaster then
+    unsubscribe(self)
+  end
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, dt)
+  if self.ground and self.velocity.y == 0 then
+    local context = get_context(self.ground)
+    if context then
+      if context.tag == TAG.STATIC then
+        if self.broadcaster then
+          unsubscribe(self)
+        end
+      else
+        if self.broadcaster ~= self.ground then
+          if self.broadcaster then
+            unsubscribe(self)
+          end
+          subscribe(self)
+        end
+      end
+    end
+  else
+    if self.broadcaster then
+      unsubscribe(self)
+    end
+  end
+
+	self.position = self.position + self.delta_position
+	set_position(self.position, self.gameobject)
+	self.delta_position = calculate_delta_position(self, dt)
+	self.delta_position.x = 0
+	self.velocity.x = 0
+	raycast_request(self)
+end -- frame_update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+	if message_id == RAY_CAST_RESPONSE then
+		raycast_response(self, message)
+
+  elseif message_id == TRIGGER_RESPONSE then
+    if message.other_group == ACTIVATOR then
+      local context = get_context(message.other_id)
+      if context then
+        if message.enter then
+          self.activator = context
+          context.objects[self.gameobject] = true
+        else
+          self.activator = nil
+          context.objects[self.gameobject] = nil
+        end
+      end
+
+    elseif (not self.activator) and message.other_group == CAMERA then
+      post_notification(self.gameobject, self, message.enter)
+    end
+	end
+end -- on_message
+
+---------------------------------------
+-- activator_callback
+---------------------------------------
+
+function activator_callback(self, _, enable)
+  if enable then
+    add_update_callback(self, frame_update, UPDATE_GROUP)
+    -- post(self.sprite, MSG.ENABLE)
+  else
+    remove_update_callback(self, UPDATE_GROUP)
+    self.velocity.x = 0
+    self.velocity.y = 0
+    self.delta_position.x = 0
+    self.delta_position.y = 0
+    -- post(self.sprite, MSG.DISABLE)
+  end
+end -- activator_callback
+
+---------------------------------------
+-- calculate_delta_position
+---------------------------------------
+
+function calculate_delta_position (self, dt)
+	-- the complete acceleration to integrate over this frame
+	local acceleration = vector3(0, self.gravity, 0)
+
+	local dv = acceleration * dt
+
+	-- calculate the new velocity by adding the velocity change
+	local old_velocity = self.velocity
+	self.velocity = self.velocity + dv
+
+	if abs(self.velocity.y) > MAX_VERTICAL_SPEED then
+		self.velocity.y = MAX_VERTICAL_SPEED * sign(self.velocity.y)
+	end
+
+
+	-- calculate the translation this frame (delta position) by integrating the velocity
+	-- http://lolengine.net/blog/2011/12/14/understanding-motion-in-games
+	return (old_velocity + self.velocity) * 0.5 * dt
+end -- calculate_delta_position
+
+---------------------------------------
+-- raycast_request
+---------------------------------------
+
+function raycast_request (self)
+	-- update ray origins
+	local position = self.position
+	local skin_width = self.skin_width
+	local half_width = self.character_width * 0.5
+	-- local ray_origin_bottom_right = vector3(position.x + half_width - skin_width, position.y + skin_width, 0)
+	-- local ray_origin_bottom_left  = vector3(position.x - half_width + skin_width, position.y + skin_width, 0)
+	-- local ray_origin_top_left     = vector3(position.x - half_width + skin_width, position.y + self.character_height - skin_width, 0)
+
+	local ray_origin_horizontal_right = vector3(position.x + half_width - self.depth_x, position.y + skin_width, 0)
+	local ray_origin_horizontal_left  = vector3(position.x - half_width + self.depth_x, position.y + skin_width, 0)
+	local ray_origin_vertical_down    = vector3(position.x - half_width + skin_width, position.y + skin_width, 0)
+	local ray_origin_vertical_up      = vector3(position.x - half_width + skin_width, position.y + self.character_height - skin_width, 0)
+
+	-- reset collisions
+	self.collision_left = false
+	self.collision_right = false
+	self.collision_below = false
+	self.collision_above = false
+
+	local ray_start
+	local ray_end
+
+	-- right rays (horizontal)
+	ray_start = vector3(ray_origin_horizontal_right)
+	ray_end = vector3(ray_start.x + RAY_LENGTH, ray_start.y, 0)
+	for ray = self.first_right_ray, self.last_right_ray do
+		ray_cast(ray_start, ray_end, PUSHABLES, ray)
+		post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.y = ray_start.y + self.horizontal_ray_spacing
+		ray_end.y = ray_start.y
+	end
+
+	-- left rays (horizontal)
+	ray_start = vector3(ray_origin_horizontal_left)
+	ray_end = vector3(ray_start.x - RAY_LENGTH, ray_start.y, 0)
+	for ray = self.first_left_ray, self.last_left_ray do
+		ray_cast(ray_start, ray_end, PUSHABLES, ray)
+		post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.y = ray_start.y + self.horizontal_ray_spacing
+		ray_end.y = ray_start.y
+	end
+
+	-- down rays (vertical)
+	ray_start = vector3(ray_origin_vertical_down)
+	-- ray_start.x = ray_start.x + self.delta_position.x
+	ray_end = vector3(ray_start.x, ray_start.y - RAY_LENGTH, 0)
+	for ray = self.first_down_ray, self.last_down_ray do
+		ray_cast(ray_start, ray_end, GROUND, ray)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.x = ray_start.x + self.vertical_ray_spacing
+		ray_end.x = ray_start.x
+	end
+
+	-- up rays (vertical)
+	ray_start = vector3(ray_origin_vertical_up)
+	-- ray_start.x = ray_start.x + self.delta_position.x
+	ray_end = vector3(ray_start.x, ray_start.y + RAY_LENGTH, 0)
+	for ray = self.first_up_ray, self.last_up_ray do
+		ray_cast(ray_start, ray_end, SOLIDS, ray)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.x = ray_start.x + self.vertical_ray_spacing
+		ray_end.x = ray_start.x
+	end
+
+end -- raycast_request
+
+---------------------------------------
+-- raycast_response
+---------------------------------------
+
+function raycast_response (self, message)
+	self.responses[message.request_id] = message
+	if message.request_id < self.total_ray_count then
+		return
+	end
+	-- all responses now collected
+
+	local d1, v1 = down_pass(self, self.delta_position.y, self.velocity.y, self.first_down_ray, self.last_down_ray, 1)
+	local d2, v2 = down_pass(self, self.delta_position.y, self.velocity.y, self.last_down_ray, self.first_down_ray, -1)
+
+	local d = d1 > d2 and d1 or d2
+	local v = v1 > v2 and v1 or v2
+
+	self.delta_position.y, self.velocity.y = up_pass(self, d, v, self.first_up_ray, self.last_up_ray, 1)
+
+	self.ground = nil
+	for _, g in next, self.contacts do
+		if not self.ground then
+			self.ground = g
+		end
+		if self.ground ~= g then
+			self.ground = nil
+			break
+		end
+	end
+
+	-- self.processed_targets = {}
+	self.push_limit_right = HUGE
+	self.push_limit_left = -HUGE
+
+	local dx = get_delta_position(self.ground).x
+	if self.push then
+		dx = self.push
+	end
+
+	-- if dx > 0 then
+	-- 	dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+	-- 	dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+	-- else
+	-- 	dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+	-- 	dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+	-- end
+
+	dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+	dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+
+	self.push = nil
+	self.delta_position.x = dx
+	set_delta_position(self.gameobject, self.delta_position)
+end -- raycast_response
+
+---------------------------------------
+-- horizontal_pass
+---------------------------------------
+
+function horizontal_pass (self, direction, dx, first_ray, last_ray)
+	for ray = first_ray, last_ray do
+		local response = self.responses[ray]
+		local hit_distance = RAY_LENGTH * response.fraction - self.depth_x
+		-- hit_distance = (hit_distance < self.depth_x) and 0 or (hit_distance - self.depth_x)
+		-- if abs(hit_distance) < 0.001 then
+		-- 	hit_distance = 0
+		-- end
+		local target_dx = get_delta_position(response.id).x
+		-- local delta = dx - target_dx
+
+		if response.group == PLAYER then
+			-- if hit_distance < abs(delta) then
+			if hit_distance + (target_dx * direction) < abs(dx) then
+				if self.push and (sign(self.push) == direction) then
+					local target = get_context(response.id)
+					target.push = dx - hit_distance * direction
+					self.push = nil
+				end
+			end
+		else
+			local limit = hit_distance * direction + target_dx
+			-- if abs(limit) < 0.001 then
+			-- 	limit = 0
+			-- end
+			if direction > 0 then
+				if limit < 0 then limit = 0 end
+				if self.push_limit_right > limit then
+					self.push_limit_right = limit
+				end
+				if dx > limit then
+					dx = limit
+				end
+			else
+				if limit > 0 then limit = 0 end
+				if self.push_limit_left < limit then
+					self.push_limit_left = limit
+				end
+				if dx < limit then
+					dx = limit
+				end
+			end
+		end
+
+
+
+	end
+	return dx
+end -- horizontal_pass
+
+---------------------------------------
+-- down_pass
+---------------------------------------
+
+function down_pass (self, delta_y, velocity_y, start, finish, step)
+	for i = start, finish, step do
+		local response = self.responses[i]
+		local target_delta_y = get_delta_position(response.id).y
+
+		if delta_y < 0 or target_delta_y ~= 0 then
+			local hit_distance = response.fraction * RAY_LENGTH - self.skin_width
+			if abs(hit_distance) < 0.0001 then
+				hit_distance = 0
+			end
+
+			if target_delta_y < 0 then
+				if delta_y < 0 then
+					if hit_distance < abs(delta_y + target_delta_y) then
+						velocity_y = 0
+						delta_y = -hit_distance + target_delta_y
+					end
+				end
+			else -- target_delta_y >= 0 then
+				if hit_distance + delta_y < target_delta_y then
+					velocity_y = 0
+					delta_y = -hit_distance + target_delta_y
+				end
+			end
+
+			self.contacts[response.request_id] = hit_distance == 0 and response.id or nil
+		end
+	end -- end for
+
+	return delta_y, velocity_y
+end -- down_pass
+
+---------------------------------------
+-- up_pass
+---------------------------------------
+
+function up_pass (self, delta_y, velocity_y, start, finish, step)
+	for i = start, finish, step do
+		local response = self.responses[i]
+		local target_delta_y = get_delta_position(response.id).y
+
+		if delta_y > 0 or target_delta_y ~= 0 then
+			local hit_distance = response.fraction * RAY_LENGTH - self.skin_width
+			if abs(hit_distance) < 0.001 then
+				hit_distance = 0
+			end
+
+			local delta_position_y = delta_y - target_delta_y
+			if hit_distance < delta_position_y then
+				delta_y = hit_distance + target_delta_y
+				if velocity_y > 0 then
+					velocity_y = 0
+				end
+			end
+		end
+	end -- end for
+
+	return delta_y, velocity_y
+end -- up_pass
+
+---------------------------------------
+-- subscribe
+---------------------------------------
+
+function subscribe(self)
+  self.broadcaster = self.ground
+  add_observer(self, self.broadcaster, activator_callback)
+end -- subscribe
+
+---------------------------------------
+-- unsubscribe
+---------------------------------------
+
+function unsubscribe(self)
+  remove_observer(self, self.broadcaster)
+  self.broadcaster = nil
+end -- unsubscribe
+
+---------------------------------------
+-- apply_damage
+---------------------------------------
+
+function apply_damage (_)
+	-- local position = vector3(self.position)
+	-- position.y = position.y + 16
+	-- create(FX.FACTORY, position, IDENTITY, FX.DESTROY, ONE)
+  delete()
+end -- apply_damage

@@ -1,0 +1,11 @@
+local Prototype = require("pixelfrog.backgrounds.temple.temple")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

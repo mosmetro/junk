@@ -1,0 +1,17 @@
+local Candle = require("maze.e1.props.candles.candle")
+
+local defold = _G
+
+go.property("platform", hash(""))
+go.property("min_x", 0)
+go.property("min_y", 0)
+go.property("max_x", 0)
+go.property("max_y", 0)
+
+function defold.init(self)
+    self.instance = Candle.new(self)
+end -- init
+
+function defold.final(self)
+   Candle.free(self.instance)
+end -- final

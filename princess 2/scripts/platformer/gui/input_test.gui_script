@@ -1,0 +1,167 @@
+local defold = _G
+
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local ScrollView = require("scripts.shared.ui.controls.scrollview")
+-- local Simple_button = require("scripts.shared.ui.controls.simple_button")
+local Textfield = require("scripts.shared.ui.controls.textfield")
+local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+-- local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+-- local utils = require("scripts.shared.utils")
+
+-- localization
+-- local execute_in_context = utils.execute_in_context
+-- local translate = translations.translate
+-- local hash = hash
+local next = next
+local post = msg.post
+-- local url = msg.url
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+-- local set_text = gui.set_text
+-- local vector3 = vmath.vector3
+
+-- functions
+local enable
+local disable
+-- local on_event
+-- local on_language_did_change
+-- local key_callback
+-- local on_key_init
+
+-- local KEY_RELEASED = hash("button_white_released")
+-- local KEY_PRESSED = hash("button_white_pressed")
+
+local KEYBOARD_WILL_APPEAR_NOTIFICATION = TextfieldBase.KEYBOARD_WILL_APPEAR_NOTIFICATION
+local KEYBOARD_WILL_DISAPPEAR_NOTIFICATION = TextfieldBase.KEYBOARD_WILL_DISAPPEAR_NOTIFICATION
+-- local TEXTFIELD_DID_GET_FOCUS_NOTIFICATION = TextfieldBase.TEXTFIELD_DID_GET_FOCUS_NOTIFICATION
+
+---------------------------------------
+
+-- init
+
+---------------------------------------
+
+function defold.init (self)
+	ui.input_test_context = self
+	disable()
+	set_render_order(1)
+
+	local input_group = {}
+
+	local username_field = Textfield.new {
+		text_node = get_node("username/text"),
+		cursor_node = get_node("username/cursor"),
+		label_node = get_node("username/label"),
+		underline_node = get_node("username/underline_front"),
+		input_group = input_group,
+	}
+
+	local password_field = Textfield.new {
+		text_node = get_node("password/text"),
+		cursor_node = get_node("password/cursor"),
+		label_node = get_node("password/label"),
+		underline_node = get_node("password/underline_front"),
+		input_group = input_group,
+	}
+
+	local email_field = Textfield.new {
+		text_node = get_node("email/text"),
+		cursor_node = get_node("email/cursor"),
+		label_node = get_node("email/label"),
+		underline_node = get_node("email/underline_front"),
+		input_group = input_group,
+	}
+
+	local scrollview = ScrollView.new {
+		content_node = get_node("content_node"),
+		clip_node = get_node("clip_node"),
+		-- horizontal_scroll_enabled = false,
+		-- vertical_scroll_enabled = false,
+		controls = {
+			username_field,
+			password_field,
+			email_field,
+		},
+	}
+
+	-- scrollview.scroll_to(vector3(0, 1000, 0), vector3(0, 0, 0))
+
+	self.controls = {
+		scrollview,
+	}
+
+	self.enable = enable
+	self.disable = disable
+	-- nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_did_change)
+
+	nc.add_observer(self, KEYBOARD_WILL_APPEAR_NOTIFICATION, function (_, _, payload)
+		scrollview.adjust_to_keyboard_height(payload.height, payload.control, payload.duration, payload.easing)
+	end)
+
+	nc.add_observer(self, KEYBOARD_WILL_DISAPPEAR_NOTIFICATION, function (_, _, payload)
+		scrollview.revert_to_normal_height(payload.duration, payload.easing)
+	end)
+end -- init
+
+---------------------------------------
+
+-- final
+
+---------------------------------------
+
+function defold.final (self)
+	nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+
+-- update
+
+---------------------------------------
+
+function defold.update (self, dt)
+	for _, control in next, self.controls do
+		if control.update then
+			control.update(dt)
+		end
+	end
+end -- update
+
+---------------------------------------
+
+-- on_message
+
+---------------------------------------
+
+function defold.on_message (self, message_id)
+	if message_id == MSG.ENABLE then
+		ui.first_responder = self
+	end
+end -- on_message
+
+---------------------------------------
+
+-- enable
+
+---------------------------------------
+
+function enable (self, return_context)
+	-- ui.context = self
+	if return_context then
+		self.return_context = return_context
+	end
+	post("#", MSG.ENABLE)
+end
+
+---------------------------------------
+
+-- disable
+
+---------------------------------------
+
+function disable ()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end

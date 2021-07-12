@@ -1,0 +1,188 @@
+local defold = _G
+
+-- imports
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local lights = require("scripts.shared.lights")
+-- local COLOR = require("scripts.shared.colors")
+local nc = require("scripts.shared.notification_center")
+
+-- localization
+local get_id = go.get_id
+local clamp = utils.clamp
+local get_position = go.get_position
+local set_position = go.set_position
+local post = msg.post
+local url = msg.url
+local vector3 = vmath.vector3
+local lerp = vmath.lerp
+local get_bounds = tilemap.get_bounds
+local abs = math.abs
+-- local execute_in_context = utils.execute_in_context
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+-- local get_context = game.get_context
+local set_context = game.set_context
+local timer = timer
+local max = math.max
+local min = math.min
+
+-- functions
+local frame_update
+
+-- constants
+local UPDATE_GROUP = game.update_group_cameras
+local TILE_SIZE = 16
+local FOLLOW_TIME = 0.2
+local SWITCH_TIME = 0.02
+local SWITCH_SPEED = 0.2
+local AMBIENT_COLOR = "ambient_color"
+local CAMERA_UPDATED_NOTIFICATION = hash("CAMERA_UPDATED_NOTIFICATION")
+
+-- properties
+go.property("look_ahead", 8)
+go.property("focus_height", 64)
+go.property("vertical_offset", 24)
+-- go.property("map", msg.url("map#tilemap"))
+go.property("clear_color", vmath.vector4())
+go.property("ambient_color", vmath.vector4(1, 1, 1, 1))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   msg.post("#camera", MSG.ACQUIRE_CAMERA_FOCUS)
+   post("@render:", MSG.CLEAR_COLOR, { color = self.clear_color * (1/255) } )
+   post("#sprite", MSG.DISABLE)
+   self.gameobject = get_id()
+  self.map = url("map#tilemap")
+   self.parallax = get_id("/parallax/root")
+   lights.camera_position = get_position(self.gameobject)
+
+  local collisionobject = url("#collisionobject")
+  post(collisionobject, MSG.DISABLE)
+  timer.delay(0.033, false, function()
+    post(collisionobject, MSG.ENABLE)
+  end)
+
+   local x, y, w, h = get_bounds(self.map)
+   utils.log("bounds", x, y, w, h)
+   local pos = get_position(self.map)
+   x = x - 1
+   y = y - 1
+   local half_logic_size = game.window.logic_size * 0.5
+   local x_stop = half_logic_size.x + TILE_SIZE * 4
+   self.left = pos.x + max(-abs(x_stop - abs(x * TILE_SIZE)), -x_stop)
+   self.right = pos.x + min(abs(x_stop - abs((x + w) * TILE_SIZE)), abs((x + w) * TILE_SIZE) + x_stop)
+   self.bottom = pos.y + (y * TILE_SIZE) + half_logic_size.y + TILE_SIZE
+   self.top = pos.y + ((y + h) * TILE_SIZE) - half_logic_size.y
+
+   utils.log("left", self.left, "right", self.right, "bottom", self.bottom, "top", self.top)
+   self.space_x = self.right - self.left
+   self.space_y = self.top - self.bottom
+  utils.log("space_x", self.space_x, "space_y", self.space_y)
+   self.t = 0.2
+
+  self.target = {
+    x = 0,
+      y = 0,
+      bottom = 0,
+      top = 0,
+      direction = 1
+  }
+
+   self.shake_y = 0
+   self.shake_x = 0
+
+   add_update_callback(self, frame_update, UPDATE_GROUP)
+  set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   remove_update_callback(self, UPDATE_GROUP)
+   set_context(self.gameobject, nil)
+   post("#camera", MSG.RELEASE_CAMERA_FOCUS)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, dt)
+   -- if dt == 0 then return end
+
+   local target = self.target
+   local target_bottom = target.bottom + self.vertical_offset
+   local target_top = target.top + self.vertical_offset
+   local direction = target.direction
+   local target_x = target.x + direction * self.look_ahead
+   local target_y = target.y + self.vertical_offset
+
+   if (self.prev_direction or 1) == direction then
+      if self.t < FOLLOW_TIME then
+         self.t = self.t + SWITCH_SPEED * dt
+      else
+         self.t = FOLLOW_TIME
+      end
+   else
+      self.t = SWITCH_TIME
+   end
+   self.prev_direction = direction
+
+   local focus_position = self.focus_position
+   local camera_position = self.position
+   if not focus_position then
+      focus_position = vector3(target_x, target_y, 0)
+      camera_position = vector3(focus_position)
+   end
+
+   local focus_bottom = focus_position.y
+   local focus_top = focus_position.y + self.focus_height
+
+   local shift_y = target_bottom < focus_bottom and target_bottom - focus_bottom or (target_top > focus_top and target_top - focus_top or 0)
+
+  focus_position.x = target_x
+   focus_position.y = focus_position.y + shift_y
+
+   local x = lerp(self.t, camera_position.x, focus_position.x)
+   local y = lerp(FOLLOW_TIME, camera_position.y, focus_position.y)
+
+  x = clamp(x, self.left, self.right)
+   y = clamp(y, self.bottom, self.top)
+
+   if abs(camera_position.x - x) > 0.1 then
+      camera_position.x = x
+   end
+
+   if abs(camera_position.y - y) > 0.1 then
+      camera_position.y = y
+   end
+
+   if self.shake_y > 6 then
+      camera_position.y = camera_position.y + self.shake_y
+      self.shake_y = self.shake_y * 0.8
+   end
+
+   set_position(camera_position, self.gameobject)
+   self.focus_position = focus_position
+   self.position = camera_position
+  lights.camera_position = camera_position -- reference for light calculations
+  lights.constants[AMBIENT_COLOR] = self.ambient_color
+
+   -- local parallax_context = get_context(self.parallax)
+  -- if parallax_context then
+   --    local camera_x = ((camera_position.x - self.left) / self.space_x) * 2 - 1
+   --    local camera_y = ((camera_position.y - self.bottom) / self.space_y) * 2 - 1
+   --    execute_in_context(parallax_context, parallax_context.follow_camera, camera_x, camera_y)
+  -- end
+
+   local camera_x = ((camera_position.x - self.left) / self.space_x) * 2 - 1
+   local camera_y = ((camera_position.y - self.bottom) / self.space_y) * 2 - 1
+   nc.post_notification(CAMERA_UPDATED_NOTIFICATION, self, camera_x, camera_y)
+end -- frame_update

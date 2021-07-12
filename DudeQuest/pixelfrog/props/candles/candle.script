@@ -1,0 +1,13 @@
+local Candle = require("pixelfrog.props.candles.candle")
+
+local defold = _G
+
+go.property("platform", hash(""))
+
+function defold.init(self)
+   self.instance = Candle.new(self)
+end -- init
+
+function defold.final(self)
+   Candle.free(self.instance)
+end -- final

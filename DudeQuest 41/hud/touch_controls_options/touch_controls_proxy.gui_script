@@ -1,0 +1,134 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local utils = require("m.utils")
+
+local gamestate = require("game.gamestate")
+local global = require("game.global")
+
+local defold = _G
+local next = next
+local msg = msg
+local gui = gui
+local animate = gui.animate
+local set_color = gui.set_color
+local vector3_get_xy = fastmath.vector3_get_xy
+local vector3_set_xy = fastmath.vector3_set_xy
+local get_node = gui.get_node
+local get_position = gui.get_position
+local set_position = gui.set_position
+local TOUCH = ui.TOUCH
+
+local onscreen_controls
+-- local nodes
+local dragged_node
+local dragged_node_key
+local kx, ky
+
+local root
+
+local function set_controls_color(_, color, animated)
+   for _, value in next, onscreen_controls do
+      if animated then
+         animate(value.node, gui.PROP_COLOR, color, gui.EASING_INOUTQUAD, 0.3)
+      else
+         set_color(value.node, color)
+      end
+   end
+end -- set_controls_color
+
+local function reset_controls(_, color, animated)
+   local set = gamestate.set
+   local player = gamestate.player
+   for key, value in next, onscreen_controls do
+      set(nil, player, key, nil)
+      if animated then
+         animate(value.node, gui.PROP_COLOR, color, gui.EASING_INOUTQUAD, 0.3)
+         animate(value.node, gui.PROP_POSITION, value.position, gui.EASING_INOUTQUAD, 0.3)
+      else
+         set_color(value.node, color)
+         set_position(value.node, value.position)
+      end
+   end
+end -- reset_controls
+
+local function enable()
+   msg.post("#", msg.ENABLE)
+   msg.post(".", msg.ACQUIRE_INPUT_FOCUS)
+
+   set_color(root, colors.TRANSPARENT_WHITE)
+   animate(root, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+
+   for key, value in next, onscreen_controls do
+      local position = gamestate.get(nil, gamestate.player, key, value.position)
+      set_position(value.node, position)
+   end
+end -- enable
+
+local function disable()
+   animate(root, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION, 0, function()
+      msg.post(".", msg.RELEASE_INPUT_FOCUS)
+      msg.post("#", msg.DISABLE)
+   end)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.multi_touch_controls_proxy_context = self
+   self.enable = enable
+   self.disable = disable
+   self.set_controls_color = set_controls_color
+   self.reset_controls = reset_controls
+
+   root = get_node("root")
+
+   local node_a = get_node("a")
+   local node_x = get_node("x")
+   local node_y = get_node("y")
+   local node_left = get_node("left")
+   local node_right = get_node("right")
+   local node_up = get_node("up")
+   local node_down = get_node("down")
+   local node_pause = get_node("pause")
+
+   onscreen_controls = {
+      onscreen_controls_a = { node = node_a, position = get_position(node_a) },
+      onscreen_controls_x = { node = node_x, position = get_position(node_x) },
+      onscreen_controls_y = { node = node_y, position = get_position(node_y) },
+      onscreen_controls_left = { node = node_left, position = get_position(node_left) },
+      onscreen_controls_right = { node = node_right, position = get_position(node_right) },
+      onscreen_controls_up = { node = node_up, position = get_position(node_up) },
+      onscreen_controls_down = { node = node_down, position = get_position(node_down) },
+      onscreen_controls_pause = { node = node_pause, position = get_position(node_pause) },
+   }
+
+   kx = gui.get_width() / tonumber(sys.get_config("display.width"))
+   ky = gui.get_height() / tonumber(sys.get_config("display.height"))
+end -- defold.init
+
+function defold.on_input(_, action_id, action)
+   if action_id == TOUCH then
+      if action.pressed then
+         for key, value in next, onscreen_controls do
+            if (not dragged_node) and gui.pick_node(value.node, action.x, action.y) then
+               dragged_node = value.node
+               dragged_node_key = key
+               action.dx = 0
+               action.dy = 0
+            end
+         end
+      elseif action.released then
+         dragged_node = nil
+         dragged_node_key = nil
+      end
+      if dragged_node then
+         local position = get_position(dragged_node)
+         local x, y = vector3_get_xy(position)
+         x = x + action.dx * kx
+         y = y + action.dy * ky
+         vector3_set_xy(position, x, y)
+         set_position(dragged_node, position)
+         gamestate.set(nil, gamestate.player, dragged_node_key, position)
+      end
+   end
+   return (dragged_node ~= nil)
+end -- defold.on_input

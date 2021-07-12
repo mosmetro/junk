@@ -1,0 +1,99 @@
+# App manifest generated Mon Jul 20 2020 13:46:33 GMT+0300 (Moscow Standard Time)
+# Settings: Physics3D,Record,Sound,OpenGL
+platforms:
+    x86_64-osx:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            frameworks: []
+            linkFlags: []
+
+    x86_64-linux:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            linkFlags: []
+
+    js-web:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeJsLibs: []
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            linkFlags: []
+
+    wasm-web:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeJsLibs: []
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            linkFlags: []
+
+    x86-win32:
+        context:
+            excludeLibs: ["libphysics","libLinearMath","libBulletDynamics","libBulletCollision","librecord","vpx","libsound","libtremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["libphysics_2d.lib","librecord_null.lib","libsound_null.lib"]
+            linkFlags: []
+
+    x86_64-win32:
+        context:
+            excludeLibs: ["libphysics","libLinearMath","libBulletDynamics","libBulletCollision","librecord","vpx","libsound","libtremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["libphysics_2d.lib","librecord_null.lib","libsound_null.lib"]
+            linkFlags: []
+
+    armv7-android:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeJars: []
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            linkFlags: []
+
+    arm64-android:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeJars: []
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            linkFlags: []
+
+    armv7-ios:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            frameworks: []
+            linkFlags: []
+
+    arm64-ios:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            frameworks: []
+            linkFlags: []
+
+    x86_64-ios:
+        context:
+            excludeLibs: ["physics","LinearMath","BulletDynamics","BulletCollision","record","vpx","sound","tremolo"]
+            excludeSymbols: ["DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            symbols: []
+            libs: ["physics_2d","record_null","sound_null"]
+            frameworks: []
+            linkFlags: []
+

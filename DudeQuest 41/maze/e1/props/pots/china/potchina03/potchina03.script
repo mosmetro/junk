@@ -1,0 +1,15 @@
+local Pot = require("maze.e1.props.pots.china.potchina03.potchina03")
+
+local defold = _G
+
+go.property("name", hash(""))
+go.property("platform", hash(""))
+go.property("rat_inside", false)
+
+function defold.init(self)
+   self.instance = Pot.new(self)
+end
+
+function defold.final(self)
+   Pot.free(self.instance)
+end

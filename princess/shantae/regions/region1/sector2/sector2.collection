@@ -1,0 +1,450 @@
+name: "region1_sector2"
+instances {
+  id: "camera"
+  prototype: "/common/camera.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "grade"
+  prototype: "/common/grade.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "map"
+  prototype: "/shantae/regions/region1/sector2/sector2.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "update_sink"
+  prototype: "/common/update_sink.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "exit_sector"
+  prototype: "/shantae/regions/exit_sector.go"
+  position {
+    x: -360.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "to_region"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "to_sector"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "entry_point"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "primary_action"
+      value: "left"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "enter_sector"
+  prototype: "/shantae/regions/enter_sector.go"
+  position {
+    x: -280.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player_entry_point1"
+  prototype: "/common/player_entry_point.go"
+  position {
+    x: -352.0
+    y: -32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "exit_sector1"
+  prototype: "/shantae/regions/exit_sector.go"
+  position {
+    x: 360.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "to_region"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "to_sector"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "entry_point"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "primary_action"
+      value: "right"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "enter_sector1"
+  prototype: "/shantae/regions/enter_sector.go"
+  position {
+    x: 280.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player_entry_point2"
+  prototype: "/common/player_entry_point.go"
+  position {
+    x: 352.0
+    y: -32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cinema_bars"
+  prototype: "/shantae/cutscenes/cinema_bars.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player_entry_point3"
+  prototype: "/common/player_entry_point.go"
+  position {
+    x: 0.0
+    y: -64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "under_well"
+  prototype: "/shantae/regions/region1/sector2/under_well.go"
+  position {
+    x: 0.0
+    y: -32.0
+    z: 0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "factory"
+  prototype: "/common/factory.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "parallax"
+  collection: "/common/forest_parallax.collection"
+  position {
+    x: -174.0
+    y: -503.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "forest_parallax"
+      properties {
+        id: "forest_near_x"
+        value: "40.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "forest_far_x"
+        value: "20.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "sky_near_x"
+        value: "10.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "forest_near_y"
+        value: "40.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "forest_far_y"
+        value: "20.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "sky_near_y"
+        value: "10.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "shift_y"
+        value: "20.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "saveguy"
+  collection: "/shantae/saveguy/saveguy.collection"
+  position {
+    x: -80.0
+    y: -32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "well"
+  collection: "/shantae/well/well.collection"
+  position {
+    x: 0.0
+    y: -32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "to_region"
+        value: "1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "to_sector"
+        value: "3.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "entry_point"
+        value: "1.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

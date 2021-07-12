@@ -1,0 +1,31 @@
+-- import
+local Player = require("maze.player.tim.tim")
+-- local utils = require("m.utils")
+
+-- localization
+local defold = _G
+
+function defold.init(self)
+   self.instance = Player.new()
+   self.dispatch_table = {
+      [msg.COLLISION_RESPONSE] = self.instance.on_collision_response,
+      [msg.TRIGGER_RESPONSE] = self.instance.on_trigger_response,
+   }
+end -- init
+
+function defold.final(self)
+   Player.free(self.instance)
+end -- final
+
+-- function defold.on_message(self, message_id, message, sender)
+--    self.dispatch_table[message_id](message, sender)
+-- end -- on_message
+
+function defold.on_message(self, message_id, message, sender)
+   local fn = self.dispatch_table[message_id]
+   if fn then
+      fn(message, sender)
+   else
+      print(message_id)
+   end
+end -- on_message

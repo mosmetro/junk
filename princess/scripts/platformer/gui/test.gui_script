@@ -1,0 +1,85 @@
+local defold = _G
+
+local MSG = require("scripts.shared.messages")
+-- local UI = require("scripts.shared.ui.ui")
+local Simple_button = require("scripts.shared.ui.controls.simple_button")
+
+-- localization
+local next = next
+local post = msg.post
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+
+-- functions
+local on_event
+
+---------------------------------------
+
+-- init
+
+---------------------------------------
+
+function defold.init (self)
+  post("#", MSG.DISABLE)
+  set_render_order(1)
+
+  -- UI.context = self
+
+  local simple_button = Simple_button.new {
+    node = get_node("box/image"),
+    released = "blue_button_outline_released",
+    pressed = "blue_button_outline_pressed",
+    callback = function ()
+      -- utils.log("simple_button clicked")
+    end
+  }
+
+  local resume_button = Simple_button.new {
+    node = get_node("resume/image"),
+    released = "blue_button_outline_released",
+    pressed = "blue_button_outline_pressed",
+    callback = function ()
+      simple_button.disable()
+    end
+  }
+
+  local restart_button = Simple_button.new {
+    node = get_node("restart/image"),
+    released = "blue_button_outline_released",
+    pressed = "blue_button_outline_pressed",
+    callback = function ()
+      simple_button.enable()
+    end
+  }
+
+  local quit_button = Simple_button.new {
+    node = get_node("quit/image"),
+    released = "orange_button_outline_released",
+    pressed = "orange_button_outline_pressed",
+    callback = function ()
+      -- utils.log("quit")
+    end
+  }
+
+  self.controls = {
+    resume_button,
+    restart_button,
+    quit_button,
+    simple_button,
+  }
+  self.on_event = on_event
+end -- init
+
+---------------------------------------
+
+-- on_event
+
+---------------------------------------
+
+function on_event (self, event)
+  for _, control in next, self.controls do
+    if control.on_event(event) then
+      return
+    end
+  end
+end -- on_event

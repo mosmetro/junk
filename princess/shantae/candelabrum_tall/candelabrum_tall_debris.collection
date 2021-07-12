@@ -1,0 +1,142 @@
+name: "default"
+instances {
+  id: "candelabrum_tall_debris1"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris1.go"
+  position {
+    x: -8.0
+    y: 42.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall_debris2"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris2.go"
+  position {
+    x: -7.0
+    y: 2.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall_debris3"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris3.go"
+  position {
+    x: 7.0
+    y: 30.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall_debris4"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris4.go"
+  position {
+    x: 0.0
+    y: 25.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall_debris5"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris5.go"
+  position {
+    x: -8.0
+    y: 30.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall_debris6"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris6.go"
+  position {
+    x: 6.0
+    y: 2.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall_debris7"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall_debris7.go"
+  position {
+    x: 7.0
+    y: 40.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

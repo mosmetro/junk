@@ -1,0 +1,193 @@
+-- import
+local ui = require("m.ui.ui")
+local game = require("maze.game")
+-- local utils = require("m.utils")
+-- local debug_draw = require("m.debug_draw")
+
+-- localization
+local defold = _G
+local next = next
+local max = math.max
+-- local msg = msg
+local get_node = gui.get_node
+-- local get_height = gui.get_height
+-- local get_screen_position = gui.get_screen_position
+local set_color = gui.set_color
+local set_render_order = gui.set_render_order
+local on_input = runtime.on_input
+local MULTI_TOUCH = ui.MULTI_TOUCH
+local LEFT = ui.LEFT
+local RIGHT = ui.RIGHT
+local UP = ui.UP
+local DOWN = ui.DOWN
+local A = ui.A
+local B = ui.B
+local X = ui.X
+local Y = ui.Y
+-- local PAUSE = ui.PAUSE
+
+-- functions
+local check_position
+local enable
+local disable
+
+-- constants
+local COLOR_PRESSED = vmath.vector4(1, 1, 1, 0.6)
+local COLOR_RELEASED = vmath.vector4(1, 1, 1, 0.17)
+local SIZE_A = 50--190
+local SIZE_B = 24
+local SIZE_C = 14
+local MIN_DISTANCE_SQUARED
+
+local buttons
+local vector3_stub = vmath.vector3()
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   disable()
+   local sys_info = sys.get_sys_info()
+   local system_name = sys_info.system_name
+   if system_name == "iPhone OS" or system_name == "Android" then
+      ui.ingame_controls_context = self
+   else
+      return
+   end
+
+   set_render_order(14)
+
+   local view_half_width = game.view_half_width
+   local view_half_height = game.view_half_height
+   local view_right = view_half_width
+   local view_left = -view_right
+   local view_top = view_half_height
+   local view_bottom = -view_top
+
+   local pixel_size = game.pixel_size
+   MIN_DISTANCE_SQUARED = (max(SIZE_A, SIZE_B, SIZE_C) * pixel_size) ^ 2
+
+
+   buttons = {
+      [LEFT] = {
+         node = get_node(LEFT),
+         x = view_left + 20,
+         y = view_bottom + 34,
+         r = SIZE_A,
+      },
+      [RIGHT] = {
+         node = get_node(RIGHT),
+         x = view_left + 64,
+         y = view_bottom + 34,
+         r = SIZE_A,
+      },
+      [DOWN] = {
+         node = get_node(DOWN),
+         x = view_left + 42,
+         y = view_bottom + 12,
+         r = SIZE_C,
+         shift_y = -3,
+      },
+      [UP] = {
+         node = get_node(UP),
+         x = view_left + 42,
+         y = view_bottom + 56,
+         r = SIZE_C,
+         shift_y = 3,
+      },
+      [A] = {
+         node = get_node(A),
+         x = view_right - 60,
+         y = view_bottom + 16,
+         r = SIZE_A,
+      },
+      [B] = {
+         node = get_node(B),
+         x = view_right - 20,
+         y = view_bottom + 16,
+         r = SIZE_A,
+      },
+      [X] = {
+         node = get_node(X),
+         x = view_right - 48,
+         y = view_bottom + 48,
+         r = SIZE_B,
+      },
+      [Y] = {
+         node = get_node(Y),
+         x = view_right - 16,
+         y = view_bottom + 56,
+         r = SIZE_C,
+      },
+   }
+
+   for _, button in next, buttons do
+      fastmath.vector3_set_xy(vector3_stub, button.x, button.y)
+      gui.set_position(button.node, vector3_stub)
+      set_color(button.node, COLOR_RELEASED)
+      button.screen_x = (button.x + view_half_width + (button.shift_x or 0)) * pixel_size + game.viewport_left
+      button.screen_y = (button.y + view_half_height + (button.shift_y or 0)) * pixel_size + game.viewport_bottom
+      button.screen_r_squared = (button.r * pixel_size)^2
+   end
+
+   self.enable = enable
+   self.disable = disable
+end -- init
+
+function defold.on_input(_, action_id, action)
+   if (action_id == MULTI_TOUCH) and action.touch then
+      for actn, button in next, buttons do
+         for _, touch in next, action.touch do
+            if actn == check_position(touch.screen_x, touch.screen_y) then
+               on_input(actn, touch.released == false)
+               set_color(button.node, touch.released and COLOR_RELEASED or COLOR_PRESSED)
+               break
+            else
+               on_input(actn, false)
+               set_color(button.node, COLOR_RELEASED)
+            end
+         end
+      end
+   end
+   return true
+end -- on_input
+
+function defold.on_message(_, message_id)
+   if message_id == msg.ENABLE then
+      runtime.reset_input()
+      for _, button in next, buttons do
+         set_color(button.node, COLOR_RELEASED)
+      end
+   end
+end -- on_message
+
+-- function defold.update()
+--    local sqrt = math.sqrt
+--    for _, button in next, buttons do
+--       debug_draw.circle(button.screen_x, button.screen_y, sqrt(button.screen_r_squared), 32)
+--    end
+-- end -- update
+
+function check_position(x, y)
+   local result = nil
+   local min_distance_sq = MIN_DISTANCE_SQUARED
+   for action, button in next, buttons do
+      local dx = x - button.screen_x
+      local dy = y - button.screen_y
+      local distance_sq = dx * dx + dy * dy
+      if (distance_sq < min_distance_sq) and (distance_sq < button.screen_r_squared) then
+         min_distance_sq = distance_sq
+         result = action
+      end
+   end
+   return result
+end -- check_position
+
+function enable()
+   msg.post("#", msg.ENABLE)
+end -- enable
+
+function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable

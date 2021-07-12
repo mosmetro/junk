@@ -1,0 +1,79 @@
+images {
+  image: "/maze/e1/props/lights/images/light_white_62x62.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_mask-export.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_mask_yellow_64-export.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_white_2_62x62.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_66.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/Texture_Particles_Dust.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/Texture_Particles_Glow.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/flare_01_t.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/circle_05.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/circle_05_2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/flare_01_t2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/test.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_a.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_b.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_b_half_opacity.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/dust_light.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_b_128.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/enemies/rat/images/small_flame_light.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/maze/e1/props/lights/images/light_b_half_opacity_2.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

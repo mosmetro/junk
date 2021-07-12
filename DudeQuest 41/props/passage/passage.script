@@ -1,0 +1,15 @@
+local Prototype = require("props.passage.passage")
+
+local defold = _G
+
+go.property("destination", hash(""))
+go.property("passage", hash(""))
+go.property("is_horizontal", true)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

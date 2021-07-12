@@ -1,0 +1,21 @@
+local defold = _G
+local game = require("scripts.platformer.game")
+local MSG = require("scripts.shared.messages")
+
+local get_id = go.get_id
+local post = msg.post
+
+function defold.init(self)
+	self.gameobject = get_id()
+	game.get_shared_data(self.gameobject).edge_checker_context = self
+end
+
+function defold.final(self)
+	game.remove_shared_data(self.gameobject)
+end
+
+function defold.on_message(_, message_id, message)
+	if message_id == MSG.RAY_CAST_MISSED then
+		post("#script", message.request_id == 1 and MSG.ON_LEFT_EDGE or MSG.ON_RIGHT_EDGE)
+	end
+end

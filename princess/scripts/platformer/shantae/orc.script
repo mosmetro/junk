@@ -1,0 +1,108 @@
+-- import
+local game = require("scripts.platformer.game")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local GROUP = require("scripts.shared.groups")
+
+-- localization
+local defold = _G
+local post = msg.post
+local url = msg.url
+local get_id = go.get_id
+local get_position = go.get_position
+local set_position = go.set_position
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+local set_context = game.set_context
+local get_context = game.get_context
+local execute_in_context = utils.execute_in_context
+local add_observer = nc.add_observer
+local remove_observer = nc.remove_observer
+
+-- functions
+local frame_update
+local activator_callback
+
+-- constants
+local UPDATE_GROUP = game.update_group_before_player
+local PLAYER = GROUP.PLAYER
+local ACTIVATOR = GROUP.ACTIVATOR
+local SET_WAYPOINT = MSG.SET_WAYPOINT
+local TRIGGER_RESPONSE = MSG.TRIGGER_RESPONSE
+local COLLISION_RESPONSE = MSG.COLLISION_RESPONSE
+local DAMAGE_AMOUNT = 1
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  self.pivot = get_id("pivot")
+  self.sprite = url("pivot#sprite")
+  self.damage_dealer = url("#damage_dealer")
+  self.damage_receiver = url("#damage_receiver")
+  local position = get_position()
+	position.z = LAYER.THREAT
+	set_position(position)
+  self.waypoints = {}
+  set_context(self.gameobject, self)
+  add_observer(self, self.gameobject, activator_callback)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	remove_update_callback(self, UPDATE_GROUP)
+	set_context(self.gameobject, nil)
+  remove_observer(self, self.gameobject)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update (self, _)
+  if not self.position then
+    self.position = #self.waypoints > 0 and self.waypoints[1] or get_position()
+  end
+end -- frame_update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+  if message_id == COLLISION_RESPONSE then
+    if message.other_group == PLAYER then
+      local context = get_context(message.other_id)
+      execute_in_context(context, context.apply_damage, DAMAGE_AMOUNT)
+    end
+
+  elseif message_id == TRIGGER_RESPONSE then
+    if message.other_group == ACTIVATOR then
+      local context = get_context(message.other_id)
+      context.objects[self.gameobject] = message.enter and true or nil
+    end
+
+  elseif message_id == SET_WAYPOINT then
+    self.waypoints[message.index] = message.position
+	end
+end -- on_message
+
+---------------------------------------
+-- activator_callback
+---------------------------------------
+
+function activator_callback(self, _, enable)
+  if enable then
+    add_update_callback(self, frame_update, UPDATE_GROUP)
+    post(self.sprite, MSG.ENABLE)
+  else
+    remove_update_callback(self, UPDATE_GROUP)
+    post(self.sprite, MSG.DISABLE)
+  end
+end -- activator_callback

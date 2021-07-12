@@ -1,0 +1,843 @@
+-- import
+local shared_state_module = require( "scripts.shared.shared_state_module" )
+local MSG = require("scripts.shared.messages")
+local SND = require("scripts.platformer.sound")
+local COLOR = require("scripts.shared.colors")
+local GROUP = require("scripts.shared.groups")
+local TAG = require("scripts.shared.tags")
+local FX = require("scripts.platformer.fx")
+local LAYER = require("scripts.shared.layers")
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local player_states = require("scripts.platformer.shantae.shantae_states")
+local lights = require("scripts.shared.lights")
+local player_data = require("scripts.platformer.player_data")
+local ui = require("scripts.shared.ui.ui")
+
+-- localization
+local defold = _G
+local ROPE = TAG.ROPE
+local BORDER = GROUP.BORDER
+local STATIC = GROUP.STATIC
+local ONE_WAY_STATIC = GROUP.ONE_WAY_STATIC
+local PLATFORM = GROUP.PLATFORM
+local ONE_WAY_PLATFORM = GROUP.ONE_WAY_PLATFORM
+local CRATE = GROUP.CRATE
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+local get_context = game.get_context
+local set_context = game.set_context
+local get_delta_position = game.get_delta_position
+local set_delta_position = game.set_delta_position
+local get_position = go.get_position
+local set_position = go.set_position
+-- local get_world_position = go.get_world_position
+-- local set = go.set
+local get_id = go.get_id
+local vector3 = vmath.vector3
+local vector4 = vmath.vector4
+local vector = vmath.vector
+local quat_rotation_z = vmath.quat_rotation_z
+local rotate = vmath.rotate
+local post = msg.post
+local url = msg.url
+local ray_cast = physics.ray_cast
+local abs = math.abs
+local min = math.min
+local ceil = math.ceil
+-- local sqrt = math.sqrt
+local sign = utils.sign
+local clamp = utils.clamp
+local execute_in_context = utils.execute_in_context
+local next = next
+local create_object = factory.create
+local delete = go.delete
+local set_constant = sprite.set_constant
+local animate = go.animate
+local cancel_animations = go.cancel_animations
+local PLAYBACK_LOOP_FORWARD = go.PLAYBACK_LOOP_FORWARD
+local PLAYBACK_ONCE_FORWARD = go.PLAYBACK_ONCE_FORWARD
+local EASING_LINEAR = go.EASING_LINEAR
+-- local tostring = tostring
+local to_radians = math.rad
+local play_sound = SND.play_sound
+-- local socket = socket
+
+-- functions
+local glide
+local calculate_glide
+local climb
+local move
+-- local whip
+local frame_update
+local raycast_request
+local raycast_response
+-- local calculate_gravity_and_jump_speed
+-- local calculate_climb_position
+local calculate_delta_position
+local down_pass
+local up_pass
+local horizontal_pass
+local set_height_profile
+local apply_damage
+-- local sword_attack
+local go_drop_your_little_life
+
+-- constants
+local PI = math.pi
+local TWO_PI = 2 * PI
+local RAY_LENGTH = 5000
+local HUGE = math.huge
+-- local IDENTITY = vmath.quat()
+-- local ONE = vector3(1)
+local SOLID_WHITE = vector4(1)
+local DAMAGE_COOLDOWN = 1.33 -- seconds
+local TINT = hash("tint")
+local POSITION = hash("position")
+local CUSTOM_EASING = vector {
+   0, 0, 0, 0, 0, 0, 0, 0,
+   1, 1, 1, 1, 1, 1, 1, 0,
+}
+local BLINK_DURATION = 0.26
+
+local PUSHABLES = {
+   STATIC,
+   PLATFORM,
+   CRATE,
+   BORDER,
+}
+
+local GROUND = {
+   STATIC,
+   ONE_WAY_STATIC,
+   PLATFORM,
+   ONE_WAY_PLATFORM,
+   CRATE,
+   BORDER,
+}
+
+local SOLIDS = {
+   STATIC,
+   PLATFORM,
+   CRATE,
+   BORDER,
+}
+
+-- local DAMAGE_RECEIVERS = {
+-- 	-- STATIC,
+-- 	-- ONE_WAY_STATIC,
+-- 	-- PLATFORM,
+-- 	-- ONE_WAY_PLATFORM,
+-- 	CRATE,
+-- 	ENEMY,
+--   BREAKABLE,
+-- }
+
+local UPDATE_GROUP = game.update_group_player
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+   shared_state_module.some_go_context = self
+
+   post("go#sprite", MSG.DISABLE)
+
+   self.gameobject = get_id()
+   self.pivot = get_id("pivot")
+   self.body = get_id("body")
+   self.body_sprite = url("body#sprite")
+   self.whip = get_id("whip")
+   self.lamp = get_id("lamp")
+   self.label = url("#label")
+
+   self.fx_dust_left = url("#fx_dust_left") -- [editor] set z position to LAYER.SMOKE_2
+   self.fx_dust_right = url("#fx_dust_right") -- -- [editor] set z position to LAYER.SMOKE_2
+
+   self.collisionobject_raycast_high = url("#collisionobject_raycast_high")
+   self.collisionobject_raycast_low = url("#collisionobject_raycast_low")
+
+   self.responses = {}
+   self.contacts = {}
+   self.processed_targets = {}
+   self.hits = {}
+
+   self.min_obstacle_height = 16
+   self.min_obstacle_width = 10
+   self.raycast_high_profile = 31
+   self.raycast_low_profile = 15
+   self.raycast_profile_delta = self.raycast_high_profile - self.raycast_low_profile
+   self.skin_width = 0.01
+   self.raycast_width = 15
+   self.vertical_ray_count = ceil(self.raycast_width / self.min_obstacle_width) + 1
+   self.vertical_ray_spacing = (self.raycast_width - 2 * self.skin_width) / (self.vertical_ray_count - 1)
+   self.max_horizontal_speed = 170
+   self.max_vertical_speed = 900
+   self.climb_speed = 50
+   set_height_profile(self, self.raycast_high_profile)
+
+   self.look_direction = player_data.get_look_direction()
+   self.move_direction = player_data.get_move_direction()
+   self.climb_direction = 0
+
+   self.position = get_position()
+   self.position.z = LAYER.PLAYER
+   set_position(self.position)
+
+   self.delta_position = vector3()
+
+   self.depth_x = self.raycast_width * 0.5
+   self.depth_y = self.skin_width
+   self.up_space = HUGE
+
+   local jump_height = 68
+   local time_to_apex = 0.38
+   self.normal_gravity = -(2 * jump_height) / (time_to_apex * time_to_apex)
+   self.gravity = self.normal_gravity
+   self.jump_speed = abs(self.gravity) * time_to_apex
+   self.cannon_jump_speed = abs(self.gravity) * (1 / 20 * 7)
+   utils.log(self.gameobject .. " gravity: " .. self.gravity .. ", jump speed: " .. self.jump_speed)
+   utils.log("cannon jump speed: " .. self.cannon_jump_speed)
+
+   -- self.early_jump_termination_speed = math.sqrt(self.jump_speed * self.jump_speed + 2 * self.gravity * (jump_height - 34))
+
+   local exit_velocity = player_data.get_exit_velocity()
+   self.velocity = vector3(exit_velocity.x * self.max_horizontal_speed * self.look_direction, exit_velocity.y * self.jump_speed, 0)
+   self.acceleration = 5000
+   if exit_velocity.x ~= 0 then
+      self.speed = abs(self.velocity.x)
+   end
+   local l = ((2 * jump_height * self.speed) / self.jump_speed ) * 2
+   utils.log(self.velocity, self.move_direction, self.look_direction, l)
+
+   self.glide_velocity = -70
+   self.ascent_velocity = 0
+
+   self.camera = get_id("/camera")
+
+   self.collision_right = false
+   self.collision_left = false
+
+   self.state_machine = player_states.make_machine(self)
+
+   self.damage_cooldown = 0
+   self.health_amount = 10
+   self.max_jumps = 4
+
+   self.ray_start = vector3()
+   self.ray_end = vector3()
+
+   self.calculate_delta_position_fn = calculate_delta_position
+   self.glide = glide
+   self.climb = climb
+   self.move = move
+   self.set_height_profile = set_height_profile
+   self.apply_damage = apply_damage
+
+   add_update_callback(self, frame_update, UPDATE_GROUP)
+   set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+   remove_update_callback(self, UPDATE_GROUP)
+   set_context(self.gameobject, nil)
+   set_delta_position(self.gameobject, nil)
+   -- player_data.set_look_direction(self.look_direction)
+end -- final
+
+---------------------------------------
+-- set_height_profile
+---------------------------------------
+
+function set_height_profile(self, height)
+   self.raycast_height = height
+   self.horizontal_ray_count = ceil(height / self.min_obstacle_height) + 1
+   self.horizontal_ray_spacing = (height -  2 * self.skin_width) / (self.horizontal_ray_count - 1)
+
+   self.total_ray_count = (self.horizontal_ray_count + self.vertical_ray_count) * 2
+
+   self.first_right_ray = 1
+   self.last_right_ray = self.first_right_ray + self.horizontal_ray_count - 1
+
+   self.first_left_ray = self.last_right_ray + 1
+   self.last_left_ray = self.first_left_ray + self.horizontal_ray_count - 1
+
+   self.first_down_ray = self.last_left_ray + 1
+   self.last_down_ray = self.first_down_ray + self.vertical_ray_count - 1
+
+   self.first_up_ray = self.last_down_ray + 1
+   self.last_up_ray = self.first_up_ray + self.vertical_ray_count - 1
+
+   for k, _ in next, self.responses do
+      self.responses[k] = nil
+   end
+
+   for k, _ in next, self.contacts do
+      self.contacts[k] = nil
+   end
+
+   if height == self.raycast_low_profile then
+      self.speed = self.max_horizontal_speed * 0.3
+      post(self.collisionobject_raycast_high, MSG.DISABLE)
+      post(self.collisionobject_raycast_low, MSG.ENABLE)
+   else
+      self.speed = self.max_horizontal_speed
+      post(self.collisionobject_raycast_high, MSG.ENABLE)
+      post(self.collisionobject_raycast_low, MSG.DISABLE)
+   end
+end -- set_height_profile
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, dt)
+
+   self.state_machine.update(dt)
+
+   self.damage_cooldown = self.damage_cooldown - dt
+   if self.damage_cooldown < 0 then
+      cancel_animations(self.body_sprite, TINT)
+      set_constant(self.body_sprite, TINT, COLOR.WHITE)
+   end
+
+   local camera = get_context(self.camera)
+   local target = camera.target
+   local position = self.position
+   target.x = position.x
+   target.y = position.y
+   target.bottom = position.y
+   target.top = position.y + self.raycast_height
+   target.direction = self.look_direction
+-- print(position.x)
+   lights.player_position = position -- reference for light calculations
+
+   local lamp = get_context(self.lamp)
+   if camera.ambient_color == SOLID_WHITE then
+      if lamp.enabled then
+         execute_in_context(lamp, lamp.disable)
+      end
+   else
+      if not lamp.enabled then
+         execute_in_context(lamp, lamp.enable)
+      end
+   end
+end -- frame_update
+
+---------------------------------------
+-- move
+---------------------------------------
+
+function move(self, dt)
+   self.position = self.position + self.delta_position
+   set_position(self.position, self.gameobject)
+   self.delta_position = calculate_delta_position(self, dt)
+   set_delta_position(self.gameobject, self.delta_position + get_delta_position(self.ground))
+   raycast_request(self)
+end -- move
+
+---------------------------------------
+-- climb
+---------------------------------------
+
+function climb(self, dy)
+   self.position = self.position + self.delta_position
+   set_position(self.position, self.gameobject)
+   self.delta_position.y = dy
+   self.delta_position.x = 0
+   set_delta_position(self.gameobject, self.delta_position + get_delta_position(self.rope_platform))
+   raycast_request(self)
+end -- climb
+
+---------------------------------------
+-- glide
+---------------------------------------
+
+function glide(self, dt)
+   self.position = self.position + self.delta_position
+   set_position(self.position, self.gameobject)
+   self.delta_position = calculate_glide(self, dt)
+   set_delta_position(self.gameobject, self.delta_position)
+   raycast_request(self)
+end -- move
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+   if message_id == MSG.RAY_CAST_RESPONSE then
+      raycast_response(self, message)
+
+   elseif message.other_group == GROUP.TRIGGER then
+      local context = get_context(message.other_id)
+      if not context then return end
+
+      if message_id == MSG.COLLISION_RESPONSE then
+
+         if context.collect_damage then
+            local value = execute_in_context(context, context.collect_damage, self)
+            apply_damage(self, value)
+         end
+
+      elseif message_id == MSG.TRIGGER_RESPONSE then
+
+         if context.collect_gem then
+            if message.enter then
+               local value = execute_in_context(context, context.collect_gem, self)
+               player_data.append_currency(value)
+            end
+
+         elseif context.exit_sector then
+            if message.enter then
+               if execute_in_context(context, context.exit_sector, self) then
+                  self.state_machine.stop()
+               end
+            end
+
+         elseif context.enter_sector then
+            if message.enter then
+               execute_in_context(context, context.enter_sector, self)
+            end
+
+         elseif context.tag then
+            if context.tag == ROPE then
+               self.rope = message.enter and message.other_id or nil
+            elseif context.tag == TAG.UPLIFT then
+               self.uplift = message.enter and message.other_id or nil
+            end
+         end
+      end
+   end
+end -- on_message
+
+---------------------------------------
+-- calculate_delta_position
+---------------------------------------
+
+-- function calculate_delta_position (self, dt)
+--   local old_velocity = vector3(self.velocity)
+--   self.velocity.x = self.move_direction * self.speed
+--   self.velocity.y = self.velocity.y + self.gravity * dt
+--
+-- 	if abs(self.velocity.y) > self.max_vertical_speed then
+-- 		self.velocity.y = self.max_vertical_speed * sign(self.velocity.y)
+-- 	end
+--
+-- 	-- calculate the translation this frame (delta position) by integrating the velocity
+-- 	-- http://lolengine.net/blog/2011/12/14/understanding-motion-in-games
+-- 	return (old_velocity + self.velocity) * 0.5 * dt
+-- end -- calculate_delta_position
+
+---------------------------------------
+-- calculate_glide
+---------------------------------------
+
+-- function calculate_glide (self, dt)
+--   local old_velocity = vector3(self.velocity)
+--   self.velocity.x = self.move_direction * self.speed
+--   self.velocity.y = self.velocity.y + (self.gravity + self.ascent_velocity) * dt
+--   if self.velocity.y < self.glide_velocity then
+--     self.velocity.y = self.glide_velocity
+--   end
+-- 	return (old_velocity + self.velocity) * 0.5 * dt
+-- end -- calculate_glide
+
+function calculate_glide(self, dt)
+   -- determine the target speed based on input
+   local target_speed = self.move_direction * self.speed
+   -- calculate the difference between our current speed and the target speed
+   local speed_diff = target_speed - self.velocity.x
+   -- the complete acceleration to integrate over this frame
+
+   local uplift_context = get_context(self.uplift)
+   local ascent_velocity = 0
+   if uplift_context then
+      ascent_velocity = -self.gravity * uplift_context.ascent_velocity
+   end
+   local acceleration = vector3(0, (self.gravity + ascent_velocity), 0)
+
+   -- set the acceleration to work in the direction of the difference
+   if speed_diff < 0 then
+      acceleration.x = -self.acceleration
+   elseif speed_diff > 0 then
+      acceleration.x = self.acceleration
+   else
+      acceleration.x = 0
+   end
+
+   local dv = acceleration * dt
+
+   --check if dv exceeds the intended speed difference, clamp it in that case
+   if abs(dv.x) > abs(speed_diff) then
+      dv.x = speed_diff
+   end
+
+   -- calculate the new velocity by adding the velocity change
+   local old_velocity = self.velocity
+   self.velocity = old_velocity + dv
+
+   self.velocity.y = clamp(self.velocity.y, self.glide_velocity, -self.glide_velocity)
+
+   -- calculate the translation this frame (delta position) by integrating the velocity
+   -- http://lolengine.net/blog/2011/12/14/understanding-motion-in-games
+   return (old_velocity + self.velocity) * 0.5 * dt
+end -- calculate_glide
+
+function calculate_delta_position(self, dt)
+   -- determine the target speed based on input
+   local target_speed = self.move_direction * self.speed
+   -- calculate the difference between our current speed and the target speed
+   local speed_diff = target_speed - self.velocity.x
+   -- the complete acceleration to integrate over this frame
+   local acceleration = vector3(0, self.gravity, 0)
+
+   -- set the acceleration to work in the direction of the difference
+   if speed_diff < 0 then
+      acceleration.x = -self.acceleration
+   elseif speed_diff > 0 then
+      acceleration.x = self.acceleration
+   else
+      acceleration.x = 0
+   end
+
+   local dv = acceleration * dt
+
+   --check if dv exceeds the intended speed difference, clamp it in that case
+   if abs(dv.x) > abs(speed_diff) then
+      dv.x = speed_diff
+   end
+
+   -- calculate the new velocity by adding the velocity change
+   local old_velocity = self.velocity
+   self.velocity = old_velocity + dv
+
+
+   if abs(self.velocity.y) > self.max_vertical_speed then
+      self.velocity.y = self.max_vertical_speed * sign(self.velocity.y)
+   end
+
+   -- calculate the translation this frame (delta position) by integrating the velocity
+   -- http://lolengine.net/blog/2011/12/14/understanding-motion-in-games
+   return (old_velocity + self.velocity) * 0.5 * dt
+end -- calculate_delta_position
+
+---------------------------------------
+-- raycast_request
+---------------------------------------
+
+function raycast_request(self)
+   -- local t1 = socket.gettime()
+
+   -- reset flags
+   self.collision_right = false
+   self.collision_left = false
+
+   -- update ray origins
+   -- local position = self.position
+   local pos_x = self.position.x
+   local pos_y = self.position.y
+   local depth_x = self.depth_x
+   local skin_width = self.skin_width
+   local half_width = self.raycast_width * 0.5
+
+   local ray_start = self.ray_start
+   local ray_end = self.ray_end
+
+   -- right rays (horizontal)
+   ray_start.x = pos_x + half_width - depth_x
+   ray_start.y = pos_y + skin_width
+   ray_end.x = ray_start.x + RAY_LENGTH
+   ray_end.y = ray_start.y
+   for ray = self.first_right_ray, self.last_right_ray do
+      ray_cast(ray_start, ray_end, PUSHABLES, ray)
+      -- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+      ray_start.y = ray_start.y + self.horizontal_ray_spacing
+      ray_end.y = ray_start.y
+   end
+
+   -- left rays (horizontal)
+   ray_start.x = pos_x - half_width + depth_x
+   ray_start.y = pos_y + skin_width
+   ray_end.x = ray_start.x - RAY_LENGTH
+   ray_end.y = ray_start.y
+   for ray = self.first_left_ray, self.last_left_ray do
+      ray_cast(ray_start, ray_end, PUSHABLES, ray)
+      -- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+      ray_start.y = ray_start.y + self.horizontal_ray_spacing
+      ray_end.y = ray_start.y
+   end
+
+   -- down rays (vertical)
+   ray_start.x = pos_x - half_width + skin_width
+   ray_start.y = pos_y + skin_width
+   ray_end.x = ray_start.x
+   ray_end.y = ray_start.y - RAY_LENGTH
+   for ray = self.first_down_ray, self.last_down_ray do
+      ray_cast(ray_start, ray_end, GROUND, ray)
+      -- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+      ray_start.x = ray_start.x + self.vertical_ray_spacing
+      ray_end.x = ray_start.x
+   end
+
+   -- up rays (vertical)
+   ray_start.x = pos_x - half_width + skin_width
+   ray_start.y = pos_y + self.raycast_height - skin_width
+   ray_end.x = ray_start.x
+   ray_end.y = ray_start.y + RAY_LENGTH
+   for ray = self.first_up_ray, self.last_up_ray do
+      ray_cast(ray_start, ray_end, SOLIDS, ray)
+      -- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+      ray_start.x = ray_start.x + self.vertical_ray_spacing
+      ray_end.x = ray_start.x
+   end
+   -- print((socket.gettime() - t1) * 1000)
+end -- raycast_request
+
+---------------------------------------
+-- raycast_response
+---------------------------------------
+
+function raycast_response (self, message)
+   self.responses[message.request_id] = message
+   if message.request_id < self.total_ray_count then
+      return
+   end
+   -- all responses now collected
+
+   local dx = self.delta_position.x
+   local dy = self.delta_position.y
+
+   if self.rope then
+      local ground_dy = get_delta_position(self.rope_platform).y
+      dy = dy + ground_dy
+   end
+
+   local d1, v1 = down_pass(self, dy, self.velocity.y, self.first_down_ray, self.last_down_ray, 1)
+   local d2, v2 = down_pass(self, dy, self.velocity.y, self.last_down_ray, self.first_down_ray, -1)
+
+   local d = d1 > d2 and d1 or d2
+   local v = v1 > v2 and v1 or v2
+
+   dy, self.velocity.y, self.up_space = up_pass(self, d, v, self.first_up_ray, self.last_up_ray, 1)
+
+   self.previous_ground = self.ground
+   self.ground = nil
+   for _, g in next, self.contacts do
+      if not self.ground then
+         self.ground = g
+      end
+      if self.ground ~= g then
+         local g_delta = get_delta_position(g)
+         local ground_delta = get_delta_position(self.ground)
+         if g_delta.y > ground_delta.y then
+            self.ground = g
+         elseif g_delta.x == 0 then
+            self.ground = g
+         end
+      end
+   end
+
+   local ground_dx = get_delta_position(self.rope and self.rope_platform or self.ground).x
+   local self_push = self.push
+
+   -- local dx = ground_dx
+   if self_push then
+      dx = self.push
+   else
+      dx = dx + ground_dx
+   end
+
+   if dx > 0 then
+      dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+      dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+   else
+      dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+      dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+   end
+
+   self.push = nil
+   self.delta_position.x = dx
+   self.delta_position.y = dy
+   for target, push in next, self.processed_targets do
+      target.delta_position.x = target.delta_position.x + push
+      self.processed_targets[target] = nil
+   end
+end -- raycast_response
+
+---------------------------------------
+-- horizontal_pass
+---------------------------------------
+
+function horizontal_pass (self, direction, dx, first_ray, last_ray)
+   for ray = first_ray, last_ray do
+      local response = self.responses[ray]
+      local hit_distance = RAY_LENGTH * response.fraction - self.depth_x
+      if abs(hit_distance) < 0.001 then
+         hit_distance = 0
+      end
+      local target_dx = get_delta_position(response.id).x
+      local delta = dx - target_dx
+      if abs(delta) < 0.001 then
+         delta = 0
+      end
+
+      if hit_distance <= abs(delta) then
+         if direction == 1 then
+            self.collision_right = true
+         end
+         if direction == -1 then
+            self.collision_left = true
+         end
+
+         if delta * direction > 0 then
+            if response.group == CRATE then
+               local target = get_context(response.id)
+               if not self.processed_targets[target] then
+                  local push_limit = min(abs(target.speed * game.get_delta_time()), abs((direction > 0) and target.push_limit_right or target.push_limit_left))
+                  local push = delta - hit_distance * direction
+                  if push_limit < abs(push) then
+                     push = push_limit * sign(push)
+                  end
+                  self.processed_targets[target] = push
+                  dx = push + hit_distance * direction + target_dx
+               end
+            else
+               dx = hit_distance * direction + target_dx
+            end
+         end
+      end
+   end
+   return dx
+end -- horizontal_pass
+
+---------------------------------------
+-- down_pass
+---------------------------------------
+
+function down_pass (self, delta_y, velocity_y, start, finish, step)
+   for i = start, finish, step do
+      local response = self.responses[i]
+      local target_delta_y = get_delta_position(response.id).y
+      local hit_distance = response.fraction * RAY_LENGTH - self.skin_width
+      if abs(hit_distance) < 0.001 then
+         hit_distance = 0
+      end
+
+      if delta_y < 0 or target_delta_y ~= 0 then
+         if target_delta_y < 0 then
+            if delta_y < 0 then
+               if hit_distance < abs(delta_y + target_delta_y) then
+                  if hit_distance == 0 then
+                     velocity_y = 0
+                  end
+                  delta_y = -hit_distance + target_delta_y
+               end
+            end
+         else -- target_delta_y >= 0 then
+            if hit_distance + delta_y < target_delta_y then
+               if hit_distance == 0 then
+                  velocity_y = 0
+               end
+               delta_y = -hit_distance + target_delta_y
+            end
+         end
+      end
+      self.contacts[response.request_id] = (hit_distance == 0) and response.id or nil
+   end -- end for
+
+   return delta_y, velocity_y
+end -- down_pass
+
+---------------------------------------
+-- up_pass
+---------------------------------------
+
+function up_pass (self, delta_y, velocity_y, start, finish, step)
+   local up_space = HUGE
+   for i = start, finish, step do
+      local response = self.responses[i]
+      local target_delta_y = get_delta_position(response.id).y
+
+      local hit_distance = response.fraction * RAY_LENGTH - self.skin_width
+      if hit_distance < up_space then
+         up_space = hit_distance
+      end
+
+      if delta_y > 0 or target_delta_y ~= 0 then
+         if abs(hit_distance) < 0.001 then
+            hit_distance = 0
+         end
+
+         local delta_position_y = delta_y - target_delta_y
+         if hit_distance < delta_position_y then
+            delta_y = hit_distance + target_delta_y
+            if velocity_y > 0 then
+               velocity_y = 0
+            end
+         end
+      end
+   end -- end for
+
+   return delta_y, velocity_y, up_space
+end -- up_pass
+
+---------------------------------------
+-- apply_damage
+---------------------------------------
+
+function apply_damage(self, value)
+   if self.damage_cooldown > 0 then return end
+   self.damage_cooldown = DAMAGE_COOLDOWN
+
+   if value then
+      if player_data.subtract_health(value) then
+         animate(self.body_sprite, TINT, PLAYBACK_LOOP_FORWARD, COLOR.TRANSPARENT_WHITE, CUSTOM_EASING, BLINK_DURATION)
+      else
+         go_drop_your_little_life(self)
+      end
+   else
+      self.health_penalty = 1
+      go_drop_your_little_life(self)
+   end
+end -- apply_damage
+
+---------------------------------------
+-- go_drop_your_little_life
+---------------------------------------
+
+function go_drop_your_little_life(self)
+   execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.disable)
+   -- execute_in_context(ui.hud_context, ui.hud_context.disable, false)
+   game.reset_input()
+   delete(self.gameobject, true)
+   play_sound(SND.SHANTAE_HIT_SPIKES)
+   play_sound(SND.SHANTAE_DEATH_SCREAM)
+
+   local STEP = to_radians(30)
+   local end_point = vector3(500, 0, 0)
+   local angle = 0
+   local position = vector3(self.position)
+   position.y = position.y + 16
+   while angle < TWO_PI do
+      local rotation = quat_rotation_z(angle)
+      local obj = create_object(FX.INSTANT_DEATH_FACTORY, position)
+      animate(obj, POSITION, PLAYBACK_ONCE_FORWARD, position + rotate(rotation, end_point), EASING_LINEAR, 1.5)
+      angle = angle + STEP
+   end
+
+   local current_proxy = player_data.get_current_sector_url()
+   if self.health_penalty and player_data.subtract_health(self.health_penalty) then
+      execute_in_context(ui.loader_context, ui.loader_context.enable, current_proxy, current_proxy, 1.6)
+   else
+      player_data.load()
+      local next_proxy = player_data.get_current_sector_url()
+      execute_in_context(ui.loader_context, ui.loader_context.enable, current_proxy, next_proxy, 1.6)
+   end
+   self.health_penalty = nil
+end -- go_drop_your_little_life

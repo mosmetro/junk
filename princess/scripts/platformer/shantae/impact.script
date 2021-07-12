@@ -1,0 +1,33 @@
+-- localization
+local defold = _G
+local hash = hash
+local delete = go.delete
+local set = go.set
+local random = math.random
+local play_flipbook = sprite.play_flipbook
+
+-- functions
+local animation_complete
+
+-- constants
+local EULER_Z = hash("euler.z")
+
+-- properties
+go.property("animation", hash(""))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+  set(".", EULER_Z, random(0, 360))
+  play_flipbook("#sprite", self.animation, animation_complete)
+end -- init
+
+---------------------------------------
+-- on_complete
+---------------------------------------
+
+function animation_complete()
+  delete()
+end -- on_complete

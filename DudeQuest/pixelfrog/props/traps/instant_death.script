@@ -1,0 +1,11 @@
+local InstantDeath = require("pixelfrog.props.traps.instant_death")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = InstantDeath.new(self)
+end
+
+function defold.final(self)
+   InstantDeath.free(self.instance)
+end

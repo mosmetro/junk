@@ -1,0 +1,118 @@
+-- import
+local ui = require("m.ui.ui")
+local game = require("maze.game")
+local colors = require("m.colors")
+local translations = require("game.translations")
+local thread = require("m.thread")
+-- local utils = require("m.utils")
+
+-- localization
+local defold = _G
+local translate = translations.translate
+local set_text = gui.set_text
+local set_render_order = gui.set_render_order
+local post = msg.post
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+-- local play_flipbook = gui.play_flipbook
+local PROP_COLOR = gui.PROP_COLOR
+local TRANSITION_ON_SCREEN = gui.EASING_INQUAD
+local TRANSITION_OFF_SCREEN = gui.EASING_INCUBIC
+
+-- functions
+local enable
+local disable
+
+-- constants
+local TRANSPARENT_WHITE = colors.TRANSPARENT_WHITE
+local WHITE = colors.WHITE
+local TRANSITION_DURATION = 0.4
+
+local vector3_stub = vmath.vector3()
+local black_box
+local text_node
+local progress_node
+
+function defold.init(self)
+    ui.loader_context = self
+    -- utils.log(self)
+   disable()
+   set_render_order(15)
+
+   local view_half_width = game.view_half_width
+   local view_half_height = game.view_half_height
+   local view_right = view_half_width
+   -- local view_left = -view_right
+   local view_top = view_half_height
+   local view_bottom = -view_top
+
+   text_node = get_node("loading")
+   fastmath.vector3_set_xy(vector3_stub, view_right - 16, view_bottom + 8)
+   gui.set_position(text_node, vector3_stub)
+   set_text(text_node, translate(translations.LOADER_LOADING))
+
+   progress_node = get_node("progress")
+   fastmath.vector3_set_xy(vector3_stub, view_right - 16 - 62, view_bottom + 10)
+   gui.set_position(progress_node, vector3_stub)
+
+   black_box = get_node("black_box")
+   fastmath.vector3_set_xy(vector3_stub, game.view_width, game.view_height)
+   gui.set_size(black_box, vector3_stub)
+
+   self.enable = enable
+   self.disable = disable
+end -- init
+
+function defold.final()
+   ui.loader_context = nil
+end -- final
+
+function defold.update(self, dt)
+   thread.update(self, dt)
+end -- update
+
+function defold.on_message(self, message_id, message, sender)
+   thread.on_message(self, message_id, message, sender)
+end -- on_message
+
+function enable(self, current_proxy, next_proxy, delay, after_fadein, before_fadeout)
+   post("#", msg.ENABLE)
+   set_color(black_box, TRANSPARENT_WHITE)
+
+   thread.new(self, "lowrez_loader::enable", function ()
+      if delay then
+         thread.wait_for_seconds(self, delay)
+      end
+
+      local transition_on_screen_complete = false
+      animate(black_box, PROP_COLOR, WHITE, TRANSITION_ON_SCREEN, current_proxy and TRANSITION_DURATION or 0, 0, function()
+         transition_on_screen_complete = true
+      end)
+      thread.wait_for_condition(self, function() return transition_on_screen_complete end)
+
+      if after_fadein then after_fadein() end
+
+      if current_proxy then thread.unload(self, current_proxy) end
+      thread.wait_for_frames(self, 2)
+      if next_proxy then
+         thread.load(self, next_proxy, true)
+         post(next_proxy, msg.SET_TIME_STEP, { factor = 1, mode = 0 })
+      end
+      thread.wait_for_frames(self, 2)
+
+      if before_fadeout then before_fadeout() end
+
+      local transition_off_screen_complete = false
+      animate(black_box, PROP_COLOR, TRANSPARENT_WHITE, TRANSITION_OFF_SCREEN, TRANSITION_DURATION, 0, function()
+         transition_off_screen_complete = true
+      end)
+      thread.wait_for_condition(self, function() return transition_off_screen_complete end)
+
+      disable()
+   end)
+end -- enable
+
+function disable()
+   post("#", msg.DISABLE)
+end -- disable

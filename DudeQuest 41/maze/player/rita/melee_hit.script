@@ -1,0 +1,11 @@
+local MeleeHit = require("maze.player.rita.melee_hit")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = MeleeHit.new(self)
+end -- init
+
+function defold.final(self)
+   MeleeHit.free(self.instance)
+end -- final

@@ -1,0 +1,7 @@
+local defold = _G
+local game = require("scripts.platformer.game")
+
+function defold.update (_, dt)
+	if dt == 0 then return end
+	game.update(dt)
+end

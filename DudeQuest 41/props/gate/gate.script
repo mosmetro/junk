@@ -1,0 +1,15 @@
+local Prototype = require("props.gate.gate")
+-- local utils = require("m.utils")
+
+local defold = _G
+
+go.property("destination", hash(""))
+go.property("gate", hash(""))
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

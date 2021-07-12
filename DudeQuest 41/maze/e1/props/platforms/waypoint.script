@@ -1,0 +1,14 @@
+local Waypoint = require("maze.e1.props.platforms.waypoint")
+
+local defold = _G
+
+go.property("platform", hash(""))
+go.property("index", 1)
+
+function defold.init(self)
+   self.instance = Waypoint.new(self)
+end -- init
+
+function defold.final(self)
+   Waypoint.free(self.instance)
+end -- final

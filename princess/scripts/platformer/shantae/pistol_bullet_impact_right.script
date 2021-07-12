@@ -1,0 +1,31 @@
+-- import
+local SND = require("scripts.platformer.sound")
+
+-- localization
+local defold = _G
+local play_flipbook = sprite.play_flipbook
+local delete = go.delete
+local play_sound = SND.play_sound
+
+-- functions
+local animation_complete
+
+-- properties
+go.property("animation", hash("shantae_pistol_bullet_impact_right_1"))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  play_flipbook("#sprite", self.animation, animation_complete)
+  play_sound(SND.SHANTAE_BULLET_HIT_WALL)
+end -- init
+
+---------------------------------------
+-- on_complete
+---------------------------------------
+
+function animation_complete()
+  delete()
+end -- on_complete

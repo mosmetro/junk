@@ -1,0 +1,1916 @@
+name: "e1m2"
+instances {
+  id: "ledge2"
+  prototype: "/maze/e1/props/static_geometry/ledge48.go"
+  position {
+    x: -346.0
+    y: 219.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "static_geometry"
+    properties {
+      id: "can_climb_up"
+      value: "false"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ledge1"
+  prototype: "/maze/e1/props/static_geometry/ledge48.go"
+  position {
+    x: -404.0
+    y: 220.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: -480.0
+    y: -336.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "can_jump_down"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end1"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: 32.0
+    y: -224.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -64.0
+    y: -224.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end1"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -528.0
+    y: -384.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end2"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -528.0
+    y: -288.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "can_jump_down"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end3"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -352.0
+    y: -608.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end4"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -624.0
+    y: -528.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end2"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: 0.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end5"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -32.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end3"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: 272.0
+    y: -96.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end4"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: 240.0
+    y: -112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end8"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -496.0
+    y: -400.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left_end9"
+  prototype: "/maze/e1/props/slopes/slope_left_end.go"
+  position {
+    x: -464.0
+    y: -416.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left"
+  prototype: "/maze/e1/props/slopes/slope_left.go"
+  position {
+    x: -496.0
+    y: -304.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "can_jump_down"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_left1"
+  prototype: "/maze/e1/props/slopes/slope_left.go"
+  position {
+    x: -464.0
+    y: -320.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "can_jump_down"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right"
+  prototype: "/maze/e1/props/slopes/slope_right.go"
+  position {
+    x: -512.0
+    y: -352.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "can_jump_down"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right1"
+  prototype: "/maze/e1/props/slopes/slope_right.go"
+  position {
+    x: -544.0
+    y: -368.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "can_jump_down"
+      value: "true"
+      type: PROPERTY_TYPE_BOOLEAN
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end5"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: 208.0
+    y: -128.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "slope_right_end6"
+  prototype: "/maze/e1/props/slopes/slope_right_end.go"
+  position {
+    x: 176.0
+    y: -144.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint1"
+  prototype: "/maze/e1/props/platforms/waypoint.go"
+  position {
+    x: -577.0
+    y: 84.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "platform1"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint2"
+  prototype: "/maze/e1/props/platforms/waypoint.go"
+  position {
+    x: -259.0
+    y: 84.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "platform1"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cloud_generator3"
+  prototype: "/maze/e1/props/clouds/cloud_generator.go"
+  position {
+    x: -30.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "length"
+      value: "-600.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cloud_generator1"
+  prototype: "/maze/e1/props/clouds/cloud_generator.go"
+  position {
+    x: 5.0
+    y: -64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "length"
+      value: "-40.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cloud_generator2"
+  prototype: "/maze/e1/props/clouds/cloud_generator.go"
+  position {
+    x: -32.0
+    y: 112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "length"
+      value: "-190.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench1"
+  prototype: "/maze/e1/props/static_geometry/bench1.go"
+  position {
+    x: -309.0
+    y: -77.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "light5"
+  prototype: "/maze/e1/props/lights/light.go"
+  position {
+    x: -230.0
+    y: -383.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "light1"
+  prototype: "/maze/e1/props/lights/light.go"
+  position {
+    x: -466.0
+    y: -183.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "light2"
+  prototype: "/maze/e1/props/lights/light.go"
+  position {
+    x: -337.0
+    y: -183.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "light4"
+  prototype: "/maze/e1/props/lights/light.go"
+  position {
+    x: -469.0
+    y: -371.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "dust_generator"
+  prototype: "/maze/e1/props/dust/dust_generator.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "max_dust"
+      value: "10.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "dust_factory"
+      value: "game:/entities#dust_factory"
+      type: PROPERTY_TYPE_URL
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bench2"
+  prototype: "/maze/e1/props/static_geometry/bench1.go"
+  position {
+    x: -510.0
+    y: -76.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint3"
+  prototype: "/maze/e1/props/platforms/waypoint.go"
+  position {
+    x: -216.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "platform2"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "waypoint4"
+  prototype: "/maze/e1/props/platforms/waypoint.go"
+  position {
+    x: -216.0
+    y: -596.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "platform"
+      value: "platform2"
+      type: PROPERTY_TYPE_HASH
+    }
+    properties {
+      id: "index"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "invisible_wall"
+  prototype: "/maze/e1/props/static_geometry/invisible_wall.go"
+  position {
+    x: -28.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "invisible_wall1"
+  prototype: "/maze/e1/props/static_geometry/invisible_wall.go"
+  position {
+    x: -28.0
+    y: 112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "invisible_wall2"
+  prototype: "/maze/e1/props/static_geometry/invisible_wall.go"
+  position {
+    x: -228.0
+    y: 112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "cloud"
+  prototype: "/maze/e1/props/clouds/cloud.go"
+  position {
+    x: -340.0
+    y: -200.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "gate1"
+  collection: "/maze/e1/props/gate/gate.collection"
+  position {
+    x: -199.0
+    y: 112.0
+    z: -0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination_map"
+        value: "e1s1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "destination_gate"
+        value: "/gate1/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "gate2"
+  collection: "/maze/e1/props/gate/gate.collection"
+  position {
+    x: -395.0
+    y: -208.0
+    z: -0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination_map"
+        value: "e1s1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "destination_gate"
+        value: "/gate2/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china1"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -255.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform1"
+  collection: "/maze/e1/props/platforms/platform48.collection"
+  position {
+    x: -550.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "platform1"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "speed"
+        value: "60.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "wait_time"
+        value: "0.3"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "easing_factor"
+        value: "1.25"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_x"
+        value: "-582.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_y"
+        value: "32.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_x"
+        value: "-350.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_y"
+        value: "96.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "checkpoint"
+  collection: "/maze/e1/props/checkpoint/checkpoint.collection"
+  position {
+    x: -76.0
+    y: 112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "map"
+        value: "e1m2"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "location"
+        value: "/checkpoint/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china2"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -217.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot2"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china3"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -344.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot3"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china4"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -306.0
+    y: 16.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot4"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china5"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -456.0
+    y: 48.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot5"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china6"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -236.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot6"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "candle_single2"
+  collection: "/maze/e1/props/candles/candle_single.collection"
+  position {
+    x: -565.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "platform"
+        value: "platform1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "candle_single1"
+  collection: "/maze/e1/props/candles/candle_single.collection"
+  position {
+    x: -446.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china7"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -543.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot7"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "platform"
+        value: "platform1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "platform2"
+  collection: "/maze/e1/props/platforms/platform48.collection"
+  position {
+    x: -216.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "platform2"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "speed"
+        value: "40.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "wait_time"
+        value: "0.5"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "easing_factor"
+        value: "1.5"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_x"
+        value: "-248.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_min_y"
+        value: "-628.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_x"
+        value: "-184.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+      properties {
+        id: "aabb_max_y"
+        value: "-208.0"
+        type: PROPERTY_TYPE_NUMBER
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "candle_single3"
+  collection: "/maze/e1/props/candles/candle_single.collection"
+  position {
+    x: -209.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "platform"
+        value: "platform2"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china8"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -199.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot8"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "platform"
+        value: "platform2"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "candle_single4"
+  collection: "/maze/e1/props/candles/candle_single.collection"
+  position {
+    x: -617.0
+    y: 96.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "box1"
+  collection: "/maze/e1/props/box/box.collection"
+  position {
+    x: -526.0
+    y: 144.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "box1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china9"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: 71.0
+    y: -208.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot9"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "candle_single5"
+  collection: "/maze/e1/props/candles/candle_single.collection"
+  position {
+    x: -525.0
+    y: 164.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "platform"
+        value: "box1"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "rat3"
+  collection: "/maze/e1/enemies/rat/rat.collection"
+  position {
+    x: 199.0
+    y: 1.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china10"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: -126.0
+    y: 112.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot10"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "rat_inside"
+        value: "true"
+        type: PROPERTY_TYPE_BOOLEAN
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china11"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: 151.0
+    y: -208.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot11"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "pot_china12"
+  collection: "/maze/e1/props/pots/china/potchina03/potchina03.collection"
+  position {
+    x: 138.0
+    y: -240.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "name"
+        value: "pot12"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "gate3"
+  collection: "/maze/e1/props/gate/gate.collection"
+  position {
+    x: -405.0
+    y: -592.0
+    z: -0.1
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination_map"
+        value: "e1m4"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "destination_gate"
+        value: "/gate1/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "water_system"
+  collection: "/water_system/water_system.collection"
+  position {
+    x: -64.0
+    y: -8.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+collection_instances {
+  id: "passage1"
+  collection: "/maze/e1/maps/m4/passage1.collection"
+  position {
+    x: 261.0
+    y: -16.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  instance_properties {
+    id: "root"
+    properties {
+      id: "script"
+      properties {
+        id: "destination"
+        value: "e1m4"
+        type: PROPERTY_TYPE_HASH
+      }
+      properties {
+        id: "passage"
+        value: "/passage2/root"
+        type: PROPERTY_TYPE_HASH
+      }
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "static_geometry"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/maze/e1/maps/m2/e1m2_static_geometry.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"script\"\n"
+  "  component: \"/maze/e1/props/static_geometry/static_geometry.script\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"collision_shape: \\\"/maze/e1/maps/m2/e1m2_static_geometry.tilemap\\\"\\n"
+  "type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"default\\\"\\n"
+  "mask: \\\"default\\\"\\n"
+  "linear_damping: 0.0\\n"
+  "angular_damping: 0.0\\n"
+  "locked_rotation: false\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "aaa"
+  data: ""
+  position {
+    x: -422.0
+    y: 45.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}

@@ -1,0 +1,46 @@
+local global = require("game.global")
+-- local utils = require("m.utils")
+
+local defold = _G
+local msg = msg
+local runtime = runtime
+local on_input = runtime.on_input
+
+local function enable()
+   runtime.reset_input()
+   msg.post("#", msg.ENABLE)
+end -- enable
+
+local function disable()
+   msg.post("#", msg.DISABLE)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   local sys_info = sys.get_sys_info()
+   local system_name = sys_info.system_name
+   if system_name == "iPhone OS" or system_name == "Android" then
+      return
+   else
+      global.ingame_controls_context = self
+   end
+
+   gui.set_render_order(0)
+
+   self.enable = enable
+   self.disable = disable
+end -- init
+
+function defold.on_input(_, action_id, action)
+   if action_id then
+      on_input(action_id, action.value == 1)
+   end
+   return true
+end -- on_input
+
+-- function defold.on_message(_, message_id)
+--    -- utils.log(message_id, sender)
+--    if message_id == msg.ENABLE then
+--       runtime.reset_input()
+--    end
+-- end -- defold.on_message

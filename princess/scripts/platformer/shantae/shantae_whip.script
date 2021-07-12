@@ -1,0 +1,116 @@
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local LAYER = require("scripts.shared.layers")
+local MSG = require("scripts.shared.messages")
+local FX = require("scripts.platformer.fx")
+local GRP = require("scripts.shared.groups")
+local CLR = require("scripts.shared.colors")
+
+-- localization
+local defold = _G
+local post = msg.post
+local execute_in_context = utils.execute_in_context
+local get_id = go.get_id
+-- local get_world_position = go.get_world_position
+local get_context = game.get_context
+local set_context = game.set_context
+local ray_cast = physics.ray_cast
+local vector3 = vmath.vector3
+local create_gameobject = factory.create
+
+-- functions
+local whip
+local down_thrust
+
+-- constants
+local IDENTITY = vmath.quat()
+local ONE = vmath.vector3(1)
+
+local DAMAGE_RECEIVERS = {
+	GRP.PLATFORM,
+	GRP.ONE_WAY_PLATFORM,
+	GRP.BREAKABLE,
+}
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+	self.gameobject = get_id()
+	self.player = get_id("root")
+  set_context(self.gameobject, self)
+  self.hits = {}
+  self.whip = whip
+	self.down_thrust = down_thrust
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  set_context(self.gameobject, nil)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.RAY_CAST_RESPONSE then
+		local damage_receiver = message.id
+		if self.hits[damage_receiver] then
+			return
+		end
+
+		-- local damage_receiver = message.id
+		self.hits[damage_receiver] = true
+		local damage_receiver_context = get_context(damage_receiver)
+		message.position.z = LAYER.FX_1
+		create_gameobject(FX.IMPACT_FACTORY, message.position, IDENTITY, nil, ONE)
+		if damage_receiver_context.apply_damage then
+			execute_in_context(damage_receiver_context, damage_receiver_context.apply_damage)
+			if message.request_id == 3 then -- down thrust
+				self.hits[damage_receiver] = nil
+				local player_context = get_context(self.player)
+				player_context.velocity.y = player_context.jump_speed * 0.85
+
+			end
+		end
+	end
+end
+
+---------------------------------------
+-- whip
+---------------------------------------
+
+function whip(_, position, height, look_direction)
+	local ray_start = vector3(position)
+	ray_start.y = ray_start.y + height
+
+	-- bottom (1)
+	local ray_end = vector3(ray_start.x + 67 * look_direction, ray_start.y, 0)
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 1)
+	-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = CLR.MAGENTA })
+
+	-- top (2)
+	ray_start.y = ray_start.y + 4
+	ray_end.y = ray_start.y
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 2)
+	-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = CLR.MAGENTA })
+end -- whip
+
+---------------------------------------
+-- down_thrust
+---------------------------------------
+
+function down_thrust(_, position)
+	local ray_start = vector3(position)
+	ray_start.y = ray_start.y + 30
+
+	local ray_end = vector3(ray_start.x, ray_start.y - 40, 0)
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 3) -- request_id is 3 for this attack type
+	post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = CLR.MAGENTA })
+end -- down_thrust

@@ -1,0 +1,11 @@
+name: "noname"
+vertex_program: "/render/new_render/materials/blit/blit_mirror.vp"
+fragment_program: "/render/new_render/materials/blit/blit_mirror.fp"
+vertex_space: VERTEX_SPACE_WORLD
+samplers {
+  name: "sampler"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_NEAREST
+  filter_mag: FILTER_MODE_MAG_NEAREST
+}

@@ -1,0 +1,168 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+local application = require("scripts.shared.application")
+
+-- localization
+local execute_in_context = utils.execute_in_context
+local translate = translations.translate
+local next = next
+local post = msg.post
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_text = gui.set_text
+local format = string.format
+
+-- functions
+local enable
+local disable
+local on_language_change
+
+local titles = {
+	file1 = translations.FILE1,
+	file2 = translations.FILE2,
+	file3 = translations.FILE3,
+}
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	ui.manage_file_context = self
+	disable()
+	set_render_order(1)
+
+	local use_button = SimpleButton.new {
+		image_node = get_node("use/image"),
+		text_node = get_node("use/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			application.save_table({ file = application.file }, application.get_id())
+			disable()
+			execute_in_context(ui.start_context, function (context)
+				context:enable()
+			end)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.USE_FILE))
+		end,
+	} -- use_button
+
+	self.save_button = SimpleButton.new {
+		image_node = get_node("save/image"),
+		text_node = get_node("save/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.SAVE_TO_CLOUD))
+		end,
+	} -- save_button
+
+	local load_button = SimpleButton.new {
+		image_node = get_node("load/image"),
+		text_node = get_node("load/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.LOAD_FROM_CLOUD))
+		end,
+	} -- load_button
+
+	self.erase_button = SimpleButton.new {
+		image_node = get_node("erase/image"),
+		text_node = get_node("erase/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.ERASE_FILE))
+		end,
+	} -- erase_button
+
+	local back_button = SimpleButton.new {
+		image_node = get_node("back/image"),
+		text_node = get_node("back/text"),
+		released = SimpleButton.RELEASED_IMAGE,
+		pressed = SimpleButton.PRESSED_IMAGE,
+		callback = function ()
+			disable()
+			execute_in_context(ui.select_file_context, function (context)
+				context:enable()
+			end)
+		end,
+		on_language_change = function (sender)
+			set_text(sender.text_node, translate(translations.OPTIONS_COMMON_BUTTON_BACK))
+		end,
+	} -- back_button
+
+	self.controls = {
+		use_button,
+		self.save_button,
+		load_button,
+		self.erase_button,
+		back_button,
+	}
+
+	self.enable = enable
+	self.disable = disable
+	nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_change)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final (self)
+	ui.manage_file_context = nil
+	nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable (self)
+	local play_time = application.get_play_time(application.file)
+	self.save_button.enable(play_time ~= nil)
+	self.erase_button.enable(play_time ~= nil)
+	play_time = play_time or translate(translations.NEW_GAME)
+	local title = format("%s:  %s", translate(titles[application.file]), play_time)
+	set_text(get_node("title/text"), title)
+
+	ui.first_responder = self
+	post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable ()
+	ui.first_responder = nil
+	post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- on_language_change
+---------------------------------------
+
+function on_language_change (self)
+	for _, control in next, self.controls do
+		if control.on_language_change then
+			control:on_language_change()
+		end
+	end
+end -- on_language_did_change

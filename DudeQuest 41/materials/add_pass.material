@@ -1,0 +1,18 @@
+name: "add_pass"
+vertex_program: "/materials/passthrough.vp"
+fragment_program: "/materials/add_pass.fp"
+vertex_space: VERTEX_SPACE_WORLD
+samplers {
+  name: "source1"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_LINEAR
+  filter_mag: FILTER_MODE_MAG_LINEAR
+}
+samplers {
+  name: "source2"
+  wrap_u: WRAP_MODE_CLAMP_TO_EDGE
+  wrap_v: WRAP_MODE_CLAMP_TO_EDGE
+  filter_min: FILTER_MODE_MIN_LINEAR
+  filter_mag: FILTER_MODE_MAG_LINEAR
+}

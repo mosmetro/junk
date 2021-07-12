@@ -1,0 +1,16 @@
+local Prototype = require("pixelfrog.props.movable_block.movable_block")
+
+local defold = _G
+
+go.property("width", 0)
+go.property("height", 0)
+go.property("max_horizontal_speed", 0)
+go.property("gravity", 0)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

@@ -1,0 +1,156 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+local nc = require("m.notification_center")
+local const = require("m.constants")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+local MenuButton = require("hud.slot_selector.menu_button")
+local Label = require("hud.label")
+local translations = require("game.translations")
+local gamestate = require("game.gamestate")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local next = next
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+local translate = translations.translate
+
+local controls
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = context
+
+   local lang_code = translations.get_language_code()
+   for _, control in next, controls do
+      set_color(control.node, colors.TRANSPARENT_WHITE)
+      if control.on_language_change then
+         control:on_language_change(lang_code)
+      end
+   end
+
+   for _, control in next, controls do
+      animate(control.node, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   end
+end -- enable
+
+local function disable(next_context, out_button)
+   global.single_touch_first_responder = nil
+
+   for _, control in next, controls do
+      if control ~= out_button then
+         gui.animate(control.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+      end
+   end
+   gui.animate(out_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ACCENT_ANIMATION_EASING, ui.ACCENT_ANIMATION_DURATION, 0, function()
+      msg.post("#", msg.DISABLE)
+      runtime.execute_in_context(next_context.enable, next_context)
+   end)
+end -- disable
+
+local function on_language_change()
+   for _, control in next, controls do
+      if control.on_language_change then
+         control:on_language_change()
+      end
+   end
+end -- on_language_change
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.game_options_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   set_color(get_node("heading/underline"), colors.CONTROL_DISABLED_COLOR)
+
+   controls = {}
+
+   local heading_label = Label.new {
+      node = get_node("heading/root"),
+      title_node = get_node("heading/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.GAME_OPTIONS_LABEL_HEADING))
+      end,
+   }
+   controls[#controls + 1] = heading_label
+
+   local language_label = Label.new {
+      node = get_node("language/root"),
+      title_node = get_node("language/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.GAME_OPTIONS_LABEL_LANGUAGE))
+      end,
+   }
+   controls[#controls + 1] = language_label
+
+   local lang_current_label = Label.new {
+      node = get_node("lang_current/root"),
+      title_node = get_node("lang_current/text"),
+      color = colors.LABEL_COLOR,
+      on_language_change = function(control)
+         control.set_text(translate(translations.GAME_OPTIONS_LABEL_CURRENT_LANGUAGE))
+      end,
+   }
+   controls[#controls + 1] = lang_current_label
+
+   local lang_prev_button = MenuButton.new {
+      node = get_node("lang_prev/root"),
+      title_node = get_node("lang_prev/text"),
+      aabb = { -15, -14, 15, 8, },
+      callback = function()
+         local lang_code = translations.set_prev_language()
+         gamestate.set(nil, gamestate.player, "language", lang_code)
+         on_language_change()
+         nc.post_notification(const.LANGUAGE_DID_CHANGE_NOTIFICATION)
+      end,
+   }
+   controls[#controls + 1] = lang_prev_button
+
+   local lang_next_button = MenuButton.new {
+      node = get_node("lang_next/root"),
+      title_node = get_node("lang_next/text"),
+      aabb = { -15, -14, 15, 8, },
+      callback = function()
+         local lang_code = translations.set_next_language()
+         gamestate.set(nil, gamestate.player, "language", lang_code)
+         on_language_change()
+         nc.post_notification(const.LANGUAGE_DID_CHANGE_NOTIFICATION)
+      end,
+   }
+   controls[#controls + 1] = lang_next_button
+
+   local reset_button = MenuButton.new {
+      node = get_node("reset/root"),
+      title_node = get_node("reset/text"),
+      callback = function()
+         gamestate.set(nil, gamestate.player, "language", nil)
+         local default_lang = sys.get_sys_info().device_language:sub(1, 2)
+         translations.set_language(default_lang)
+         on_language_change()
+         nc.post_notification(const.LANGUAGE_DID_CHANGE_NOTIFICATION)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_RESET_DEFAULTS))
+      end,
+   }
+   controls[#controls + 1] = reset_button
+
+   local back_button  = MenuButton.new {
+      node = get_node("back/root"),
+      title_node = get_node("back/text"),
+      callback = function(control)
+         disable(global.options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_BACK))
+      end,
+   }
+   controls[#controls + 1] = back_button
+
+   self.controls = controls
+end -- defold.init

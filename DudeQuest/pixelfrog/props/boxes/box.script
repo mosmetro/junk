@@ -1,0 +1,18 @@
+local Prototype = require("pixelfrog.props.boxes.box")
+
+local defold = _G
+
+go.property("health_points", 1)
+go.property("idle_animation", hash("box1_idle"))
+go.property("hit_animation", hash("box1_hit"))
+go.property("destroyed_collection", msg.url("/props#box1_destroyed"))
+go.property("has_gold_coin", false)
+go.property("has_sword", false)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

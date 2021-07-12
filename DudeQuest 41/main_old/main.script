@@ -1,0 +1,75 @@
+-- import
+local ui = require("m.ui.ui")
+local snd = require("sound.sound")
+-- local nc = require("m.notification_center")
+-- local utils = require("m.utils")
+-- local thread = require("m.thread")
+local game = require("maze.game")
+-- local utf8 = require("m.third_party.utf8")
+
+-- localization
+local defold = _G
+local execute_in_context = runtime.execute_in_context
+-- local fmod = fmod
+-- local fmod_studio_system = fmod.studio.system
+
+-- constants
+local APPLICATION_START = hash("APPLICATION_START")
+
+function defold.init()
+   game.set_save_slot(1)
+   snd.init_sound()
+   -- local bundle_path = fmod.get_bundle_root() -- The path to your game's directory
+   -- local path_to_banks = bundle_path .. "/fmod/mobile"
+   -- fmod.studio.system:load_bank_file(path_to_banks .. "/master.bank", fmod.STUDIO_LOAD_BANK_NORMAL)
+   -- fmod.studio.system:load_bank_file(path_to_banks .. "/master.strings.bank", fmod.STUDIO_LOAD_BANK_NORMAL)
+   -- fmod.studio.system:load_bank_file(path_to_banks .. "/soundfx.bank", fmod.STUDIO_LOAD_BANK_NORMAL)
+
+   -- fmod_studio_system:load_bank_memory(resource.load("/res/common/fmod/mobile/master.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+   -- fmod_studio_system:load_bank_memory(resource.load("/res/common/fmod/mobile/master.strings.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+   -- fmod_studio_system:load_bank_memory(resource.load("/banks/mobile/music.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+   -- local soundfx_bank = fmod_studio_system:load_bank_memory(resource.load("/res/common/fmod/mobile/soundfx.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+   -- soundfx_bank:load_sample_data()
+
+   -- local e = fmod_studio_system:get_event("event:/shantae_player_risky_cannon_fire")
+   -- e:create_instance():start()
+   msg.post(".", msg.ACQUIRE_INPUT_FOCUS)
+   msg.post("#", APPLICATION_START)
+   -- thread.new(self, function ()
+   --    thread.load(self, msg.url("/zone1#sector1"), true)
+   --    msg.post(msg.url("/zone1#sector1"), msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+   -- end)
+   -- msg.post(msg.url("/zone1#sector1"), msg.ASYNC_LOAD)
+   -- profiler.enable_ui(true)
+   -- profiler.set_ui_view_mode(profiler.VIEW_MODE_MINIMIZED)
+   -- profiler.set_ui_vsync_wait_visible(false)
+   -- math.randomseed(socket.gettime())
+   -- 62794DC8-CF10-41AB-8F1B-5F6D9B55F0BE
+   -- 644c6481-2f05-4c4d-85d8-cc9b9c941d2d
+   -- utils.log(fastmath.get_uuid())
+end -- init
+
+function defold.on_message(_, message_id)
+   if message_id == APPLICATION_START then
+      -- utils.log(runtime.execute_in_context(ui.loader_context.test_func, ui.loader_context, 11, 12))
+      -- utils.log(result)
+      -- execute_in_context(ui.loader_context.enable, ui.loader_context, nil, msg.url("/zone1#sector1"))
+      -- execute_in_context(ui.loader_context.enable, ui.loader_context, nil, msg.url("#sector2"))
+      -- execute_in_context(ui.loader_context.enable, ui.loader_context, nil, msg.url("/zone1#sector3"))
+      -- execute_in_context(ui.loader_context.enable, ui.loader_context, nil, msg.url("/zone1#sector4"))
+      -- execute_in_context(ui.loader_context.enable, ui.loader_context, nil, msg.url("#world"))
+      execute_in_context(ui.loader_context.enable, ui.loader_context, nil, msg.url("#maze"))
+   end
+   -- if message_id == msg.PROXY_LOADED then
+   -- msg.post(sender, msg.ENABLE)
+   -- msg.post(sender, msg.SET_TIME_STEP, { factor = 1, mode = 1 })
+   -- end
+end -- on_message
+
+-- function defold.update(self, dt)
+--    thread.update(self, dt)
+-- end -- update
+
+-- function defold.on_message(self, message_id, message, sender)
+--    thread.on_message(self, message_id, message, sender)
+-- end -- on_message

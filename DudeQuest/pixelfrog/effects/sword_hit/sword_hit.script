@@ -1,0 +1,11 @@
+local SwordHit = require("pixelfrog.effects.sword_hit.sword_hit")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = SwordHit.new(self)
+end -- init
+
+function defold.final(self)
+   SwordHit.free(self.instance)
+end -- final

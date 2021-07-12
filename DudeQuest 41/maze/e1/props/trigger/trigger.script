@@ -1,0 +1,28 @@
+local nc = require("m.notification_center")
+local CONST = require("m.constants")
+-- local utils = require("m.utils")
+
+local defold = _G
+
+go.property("name", hash(""))
+
+function defold.init(self)
+   local id = go.get_id()
+   self.destroy = function()
+      go.delete(id)
+   end
+
+   nc.add_observer(self.destroy, CONST.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+end -- init
+
+function defold.final(self)
+   nc.remove_observer(self.destroy, CONST.LEVEL_DID_DISAPPEAR_NOTIFICATION)
+end
+
+function defold.on_message(self, message_id, message)
+	if message_id == msg.TRIGGER_RESPONSE and message.enter then
+		nc.post_notification(CONST.TRIGGER_ENTER_NOTIFICATION, self.name)
+   else
+      nc.post_notification(CONST.TRIGGER_EXIT_NOTIFICATION, self.name)
+	end
+end -- on_message

@@ -1,0 +1,13 @@
+local Debris = require("pixelfrog.props.debris.debris")
+
+local defold = _G
+
+go.property("lifetime", 4)
+
+function defold.init(self)
+   self.instance = Debris.new(self)
+end
+
+function defold.final(self)
+   Debris.free(self.instance)
+end

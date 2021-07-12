@@ -1,0 +1,157 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local ui = require("scripts.shared.ui.ui")
+local SimpleButton = require("scripts.shared.ui.controls.simple_button")
+local player_data = require("scripts.platformer.player_data")
+-- local Textfield = require("scripts.shared.ui.controls.textfield")
+-- local TextfieldBase = require ("scripts.shared.ui.textfield_base")
+local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+
+-- localization
+local defold = _G
+local execute_in_context = utils.execute_in_context
+local translate = translations.translate
+-- local hash = hash
+local next = next
+local post = msg.post
+-- local url = msg.url
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local set_text = gui.set_text
+-- local vector3 = vmath.vector3
+
+-- functions
+local enable
+local disable
+local on_language_change
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+   ui.pause_context = self
+   disable(self)
+   set_render_order(6)
+
+   local resume_button = SimpleButton.new {
+      sensor_node = get_node("resume/sensor"),
+      image_node = get_node("resume/image"),
+      text_node = get_node("resume/text"),
+      released = SimpleButton.RELEASED_IMAGE,
+      pressed = SimpleButton.PRESSED_IMAGE,
+      callback = function ()
+         execute_in_context(ui.single_touch_controls_context, ui.single_touch_controls_context.disable)
+         disable(self)
+         execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.enable)
+         post(player_data.get_current_sector_url(), MSG.SET_TIME_STEP, { factor = 1, mode = 1 })
+      end,
+      on_language_change = function (sender)
+         set_text(sender.text_node, translate(translations.GAME_RESUME))
+      end,
+   }
+
+   local forward_button = SimpleButton.new {
+      sensor_node = get_node("forward/sensor"),
+      image_node = get_node("forward/image"),
+      text_node = get_node("forward/arrow"),
+      released = SimpleButton.RELEASED_IMAGE,
+      pressed = SimpleButton.PRESSED_IMAGE,
+      callback = function ()
+
+      end,
+      on_language_change = function()
+
+      end,
+   }
+
+   local backward_button = SimpleButton.new {
+      sensor_node = get_node("backward/sensor"),
+      image_node = get_node("backward/image"),
+      text_node = get_node("backward/arrow"),
+      released = SimpleButton.RELEASED_IMAGE,
+      pressed = SimpleButton.PRESSED_IMAGE,
+      callback = function ()
+
+      end,
+      on_language_change = function()
+
+      end,
+   }
+
+
+   self.controls = {
+      resume_button,
+      forward_button,
+      backward_button,
+   }
+
+   self.enable = enable
+   self.disable = disable
+   nc.add_observer(self, translations.LANGUAGE_DID_CHANGE_NOTIFICATION, on_language_change)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final ()
+   ui.pause_context = nil
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function defold.update (self, dt)
+   for _, control in next, self.controls do
+      if control.update then
+         control.update(dt)
+      end
+   end
+end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message (self, message_id)
+   if message_id == MSG.ENABLE then
+      ui.first_responder = self
+      self.next_responder = ui.options_context
+   end
+end -- on_message
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable()
+   execute_in_context(ui.options_context, ui.options_context.enable)
+   post("#", MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable(self)
+   ui.first_responder = nil
+   self.next_responder = nil
+   execute_in_context(ui.options_context, ui.options_context.disable)
+   post("#", MSG.DISABLE)
+end -- disable
+
+---------------------------------------
+-- on_language_change
+---------------------------------------
+
+function on_language_change (self)
+   for _, control in next, self.controls do
+      if control.on_language_change then
+         control:on_language_change()
+      end
+   end
+end -- on_language_change

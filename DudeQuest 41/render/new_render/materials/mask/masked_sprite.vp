@@ -1,0 +1,15 @@
+attribute vec3 position;
+attribute mediump vec2 texcoord0;
+
+uniform mat4 vp;
+
+varying mediump vec2 screen_uv;
+varying mediump vec2 uv;
+
+void main()
+{
+   vec4 p = vp * vec4(position, 1.0);
+   gl_Position = p;
+   screen_uv = (p.xy + 1.0) * 0.5;
+   uv = texcoord0;
+}

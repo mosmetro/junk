@@ -1,0 +1,133 @@
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local nc  = require("scripts.shared.notification_center")
+local ui = require("scripts.shared.ui.ui")
+local player_data = require("scripts.platformer.player_data")
+
+-- localization
+local defold = _G
+local get_id = go.get_id
+local get_position = go.get_position
+local set_position = go.set_position
+-- local delete = go.delete
+local url = msg.url
+local post = msg.post
+local get_context = game.get_context
+local set_context = game.set_context
+local execute_in_context = utils.execute_in_context
+
+-- functions
+local exit_sector
+local on_player_enter_sector
+local frame_update
+
+-- constants
+local PLAYER_ENTER_SECTOR_NOTIFICATION = hash("PLAYER_ENTER_SECTOR_NOTIFICATION")
+local UPDATE_GROUP = game.update_group_after_player
+
+-- properties
+go.property("to_region", 0)
+go.property("to_sector", 0)
+go.property("entry_point", 0)
+go.property("look_direction", 0)
+go.property("primary_action", hash(""))
+go.property("secondary_action", hash(""))
+go.property("exit_velocity", vmath.vector3())
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id("root")
+  self.position = get_position(self.gameobject)
+  self.bottom = get_id("bottom")
+  self.bottom_position = get_position(self.bottom)
+  self.bottom_position.z = LAYER.TILES_A
+  set_position(self.bottom_position, self.bottom)
+  local top = get_id("top")
+  local position = get_position(top)
+  position.z = LAYER.OBJECT_2
+  set_position(position, top)
+  self.well_sensor = url("#well_sensor")
+  post(self.well_sensor, MSG.DISABLE)
+  self.well_lid = get_id("well_lid")
+  self.camera = get_id("/camera")
+  nc.add_observer(self, PLAYER_ENTER_SECTOR_NOTIFICATION, on_player_enter_sector)
+  set_context(self.gameobject, self)
+  self.exit_sector = exit_sector
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  game.remove_update_callback(self, UPDATE_GROUP)
+  set_context(self.gameobject, nil)
+  nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function frame_update(self)
+  local target = get_context(self.camera).target
+  local y = self.position.y + 32
+  target.y = y
+  target.bottom = y
+	target.top = y
+  target.direction = player_data.get_look_direction()
+end -- update
+
+---------------------------------------
+-- exit_sector
+---------------------------------------
+
+function exit_sector(self, caller)
+  if
+  ((caller.velocity.y < 0) and (caller.velocity.x == 0)) and
+  ((self.position.x - 15) < (caller.position.x - caller.raycast_width * 0.5)) and
+  ((self.position.x + 15) > (caller.position.x + caller.raycast_width * 0.5)) then
+    utils.log("exit!")
+    -- delete(caller.gameobject, true)
+    execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.disable)
+    game.reset_input()
+    game.add_update_callback(self, frame_update, UPDATE_GROUP) -- intercept camera
+    post(self.well_lid, MSG.DISABLE)
+    self.bottom_position.z = LAYER.TILES_A
+    set_position(self.bottom_position, self.bottom)
+    local current_proxy = player_data.get_current_sector_url()
+    player_data.set_current_region(self.to_region)
+    player_data.set_current_sector(self.to_sector)
+    player_data.set_entry_point(self.entry_point)
+    local look_direction = (self.look_direction == 0) and caller.look_direction or self.look_direction
+    player_data.set_look_direction(look_direction)
+    player_data.set_move_direction((self.exit_velocity.x == 0) and 0 or look_direction)
+    player_data.set_primary_action(self.primary_action)
+    player_data.set_secondary_action(self.secondary_action)
+    player_data.set_exit_velocity(self.exit_velocity)
+    local next_proxy = player_data.get_current_sector_url()
+    execute_in_context(ui.loader_context, ui.loader_context.enable, current_proxy, next_proxy)
+    return true
+  else
+    return false
+  end
+
+
+end -- exit_sector
+
+---------------------------------------
+-- on_player_enter_sector
+---------------------------------------
+
+function on_player_enter_sector(self) -- self, sender, payload
+  game.remove_update_callback(self, UPDATE_GROUP)
+  self.bottom_position.z = LAYER.OBJECT_2
+  set_position(self.bottom_position, self.bottom)
+  post(self.well_sensor, MSG.ENABLE)
+end -- on_player_enter_sector

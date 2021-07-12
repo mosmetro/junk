@@ -1,0 +1,76 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local MSG = require("scripts.shared.messages")
+local SND = require("scripts.platformer.sound")
+
+-- localization
+local get_id = go.get_id
+local get_world_position = go.get_world_position
+local delete = go.delete
+local table_remove = table.remove
+local post = msg.post
+local vector3 = vmath.vector3
+local add_update_callback = game.add_update_callback
+local remove_update_callback = game.remove_update_callback
+
+-- functions
+local frame_update
+
+-- constants
+local FORCE = vector3(1300, 200, 0)
+local UPDATE_GROUP = game.update_group_after_player
+
+-- properties
+go.property("direction", 1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  SND.BREAK_MEDIUM_POT:create_instance():start()
+  self.time = 0
+
+  self.debris = {
+    get_id("go5"),
+    get_id("go4"),
+    get_id("go3"),
+    get_id("go2"),
+    get_id("go1"),
+  }
+
+  local force = vector3(FORCE.x * self.direction, FORCE.y, 0)
+  for i = 1, #self.debris do
+    local id = self.debris[i]
+    post(id, MSG.APPLY_FORCE, {force = force, position = get_world_position(id)})
+  end
+
+  add_update_callback(self, frame_update, UPDATE_GROUP)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  remove_update_callback(self, UPDATE_GROUP)
+end -- final
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function frame_update(self, dt)
+  self.time = self.time + dt
+  if self.time > 0.75 then
+    local id = table_remove(self.debris)
+    if id then
+      delete(id)
+    else
+      delete()
+    end
+    self.time = 0
+  end
+end -- frame_update

@@ -1,0 +1,5 @@
+local defold = _G
+
+function defold.init(self)
+    particlefx.play("candle#candle_fire")
+end

@@ -1,0 +1,30 @@
+local Rat = require("maze.e1.enemies.rat.rat")
+-- local utils = require("m.utils")
+local defold = _G
+
+go.property("look_direction", 0)
+go.property("velocity_y", -1) -- so it's always drop down (with zero velocity it's may hanging in  the air)
+-- go.property("hit_material", resource.material("/maze/e1/props/effects/effect.material"))
+-- go.property("normal_material", resource.material("/builtins/materials/sprite.material"))
+
+function defold.init(self)
+   self.instance = Rat.new(self)
+   self.dispatch_table = {
+      [msg.COLLISION_RESPONSE] = self.instance.on_collision_response,
+      [msg.CONTACT_POINT_RESPONSE] = self.instance.on_contact_point_response,
+      -- [msg.TRIGGER_RESPONSE] = self.instance.on_trigger_response,
+   }
+end -- init
+
+function defold.final(self)
+   Rat.free(self.instance)
+end -- final
+
+function defold.on_message(self, message_id, message, sender)
+   local fn = self.dispatch_table[message_id]
+   if fn then
+      fn(message, sender)
+   -- else
+   --    utils.log(runtime.current_frame, message_id, sender, "fuck")
+   end
+end -- on_message

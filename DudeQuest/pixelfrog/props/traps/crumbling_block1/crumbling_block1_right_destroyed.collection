@@ -1,0 +1,22 @@
+name: "default"
+collection_instances {
+  id: "crumbling_block1_right_debris1"
+  collection: "/pixelfrog/props/traps/crumbling_block1/crumbling_block1_right_debris1.collection"
+  position {
+    x: 0.0
+    y: -3.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

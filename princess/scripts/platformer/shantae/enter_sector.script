@@ -1,0 +1,63 @@
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local nc  = require("scripts.shared.notification_center")
+local ui = require("scripts.shared.ui.ui")
+
+-- localization
+local defold = _G
+local get_id = go.get_id
+local url = msg.url
+local post = msg.post
+local set_context = game.set_context
+local execute_in_context = utils.execute_in_context
+
+-- functions
+local enter_sector
+local on_player_enter_sector
+
+-- constants
+local PLAYER_ENTER_SECTOR_NOTIFICATION = hash("PLAYER_ENTER_SECTOR_NOTIFICATION")
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  self.collisionobject = url("#collisionobject")
+  nc.add_observer(self, PLAYER_ENTER_SECTOR_NOTIFICATION, on_player_enter_sector)
+  set_context(self.gameobject, self)
+  self.enter_sector = enter_sector
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  set_context(self.gameobject, nil)
+  nc.remove_observer(self)
+end -- final
+
+---------------------------------------
+-- enter_sector
+---------------------------------------
+
+function enter_sector(_, caller)
+  utils.log("enter!")
+  caller.speed = caller.max_horizontal_speed
+  caller.velocity.x = 0
+  nc.post_notification(PLAYER_ENTER_SECTOR_NOTIFICATION)
+  execute_in_context(ui.ingame_controls_context, ui.ingame_controls_context.enable)
+  -- execute_in_context(ui.hud_context, ui.hud_context.enable, true)
+end -- enter_sector
+
+---------------------------------------
+-- on_player_enter_sector
+---------------------------------------
+
+function on_player_enter_sector(self) -- self, sender, payload
+  post(self.collisionobject, MSG.DISABLE)
+end -- on_player_enter_sector

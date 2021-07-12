@@ -1,0 +1,69 @@
+# App manifest generated Mon Mar 18 2019 16:23:10 GMT+0300 (MSK)
+# Settings: Record,Facebook,Gameroom,Sound
+platforms:
+    x86_64-osx:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+
+    x86_64-linux:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+
+    js-web:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeJsLibs: ["facebook","facebook_iap"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+
+    wasm-web:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeJsLibs: ["facebook","facebook_iap"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+
+    x86-win32:
+        context:
+            excludeLibs: ["librecord","vpx","libfacebookext.lib","gameroomext","libsound","libtremolo"]
+            excludeSymbols: ["FacebookExt","GameroomExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["librecord_null.lib","libsound_null.lib"]
+            linkFlags: []
+
+    x86_64-win32:
+        context:
+            excludeLibs: ["librecord","vpx","libfacebookext.lib","gameroomext","libsound","libtremolo"]
+            excludeSymbols: ["FacebookExt","GameroomExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["librecord_null.lib","libsound_null.lib"]
+            linkFlags: []
+
+    armv7-android:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeJars: ["(.*)/facebooksdk.jar","(.*)/facebook_android.jar"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+
+    armv7-ios:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+
+    arm64-ios:
+        context:
+            excludeLibs: ["record","vpx","facebookext","sound","tremolo"]
+            excludeSymbols: ["FacebookExt","DefaultSoundDevice","AudioDecoderWav","AudioDecoderStbVorbis","AudioDecoderTremolo"]
+            libs: ["record_null","sound_null"]
+            linkFlags: []
+

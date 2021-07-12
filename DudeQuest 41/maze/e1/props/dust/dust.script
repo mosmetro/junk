@@ -1,0 +1,11 @@
+local Dust = require("maze.e1.props.dust.dust")
+
+local defold = _G
+
+function defold.init(self)
+   self.instance = Dust.new(self)
+end -- init
+
+function defold.final(self)
+   Dust.free(self.instance)
+end -- final

@@ -1,0 +1,18 @@
+local Prototype = require("pixelfrog.props.traps.smasher")
+
+local defold = _G
+
+go.property("is_pendulum", true)
+go.property("swing_start", -10)
+go.property("swing_end", -170)
+go.property("swing_duration", 3)
+go.property("start_delay", 0)
+go.property("damage_points", 1)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

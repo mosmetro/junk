@@ -1,0 +1,40 @@
+local Platform = require("pixelfrog.props.platforms.platform")
+-- local utils = require("m.utils")
+
+local defold = _G
+
+go.property("name", hash(""))
+go.property("width", 0)
+go.property("height", 0)
+go.property("start_waypoint", 1)
+go.property("speed", 0)
+go.property("wait_time", 0)
+go.property("easing_factor", 1)
+go.property("is_solid", false)
+go.property("is_active", true)
+-- go.property("can_jump_down", false)
+go.property("aabb_min_x", 0)
+go.property("aabb_min_y", 0)
+go.property("aabb_max_x", 0)
+go.property("aabb_max_y", 0)
+
+function defold.init(self)
+   self.instance = Platform.new(self)
+   self.dispatch_table = {
+      [msg.COLLISION_RESPONSE] = self.instance.on_collision_response,
+      -- [msg.CONTACT_POINT_RESPONSE] = self.instance.on_contact_point_response,
+      -- [msg.TRIGGER_RESPONSE] = self.instance.on_trigger_response,
+   }
+end -- init
+
+function defold.final(self)
+   Platform.free(self.instance)
+end -- final
+
+function defold.on_message(self, message_id, message, sender)
+   -- utils.log(message_id, sender, message.id)
+   local fn = self.dispatch_table[message_id]
+   if fn then
+      fn(message, sender)
+   end
+end -- on_message

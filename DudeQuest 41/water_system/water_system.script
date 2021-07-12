@@ -1,0 +1,11 @@
+local Prototype = require("water_system.water_system")
+
+local defold = _G
+
+function defold.init(self)
+	self.instance = Prototype.new(self)
+end -- defold.init
+
+function defold.final(self)
+	Prototype.free(self.instance)
+end -- defold.final

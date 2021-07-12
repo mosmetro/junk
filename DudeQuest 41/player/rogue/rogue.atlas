@@ -1,0 +1,1286 @@
+images {
+  image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_1.png"
+}
+images {
+  image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_2.png"
+}
+images {
+  image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_3.png"
+}
+images {
+  image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_4.png"
+}
+images {
+  image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_5.png"
+}
+images {
+  image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_3.png"
+}
+animations {
+  id: "rogue_turnaround_door"
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_1.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_2.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_2.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_3.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_4.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_5.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_6.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_7.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_8.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_9.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_9.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_10.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_10.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_11.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_turnaround_door/sc_rogue_turnaround_door_11.png"
+  }
+  images {
+    image: "/assets/images/blank_1x1.png"
+  }
+  images {
+    image: "/assets/images/blank_1x1.png"
+  }
+  images {
+    image: "/assets/images/blank_1x1.png"
+  }
+  images {
+    image: "/assets/images/blank_1x1.png"
+  }
+  images {
+    image: "/assets/images/blank_1x1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "no_animation"
+  images {
+    image: "/assets/images/blank_1x1.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_ledge_grab"
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_grab/sc_rogue_ledge_grab_1.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_grab/sc_rogue_ledge_grab_2.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_grab/sc_rogue_ledge_grab_3.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_grab/sc_rogue_ledge_grab_4.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_grab/sc_rogue_ledge_grab_5.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_grab/sc_rogue_ledge_grab_6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_ledge_climb"
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_climb/sc_rogue_ledge_climb_1.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_climb/sc_rogue_ledge_climb_2.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_climb/sc_rogue_ledge_climb_3.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_climb/sc_rogue_ledge_climb_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_ledge_stand"
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_1.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_2.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_3.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_4.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_5.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_6.png"
+  }
+  images {
+    image: "/player/rogue/images/sc_rogue_ledge_stand/sc_rogue_ledge_stand_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_idle"
+  images {
+    image: "/player/rogue/images/rogue_idle/rogue_idle_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_idle_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_idle/rogue_idle_with_shield_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_idle_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_idle/rogue_idle_with_spear_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_walk"
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_7.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_walk_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_7.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_shield_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_walk_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_7.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_walk/rogue_walk_with_spear_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_rise"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_rise_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_rise_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_loop"
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_loop_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_loop_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_loop_with_shield_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_loop_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_loop_with_spear_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_finish"
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_finish_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_shield_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_finish_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump/rogue_jump_finish_with_spear_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_land"
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_land_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_with_shield_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_land_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_land/rogue_land_with_spear_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack1"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack1_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_shield_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack1_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack1_with_spear_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack2"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack2_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_shield_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack2_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack2_with_spear_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack3"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack3_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_shield_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack3_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack3_with_spear_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack4"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack4_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_shield_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_jump_attack4_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_5.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_6.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_jump_attack/rogue_jump_attack4_with_spear_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_attack"
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_attack_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_shield_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_attack_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_attack/rogue_attack_with_spear_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_attack"
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_attack_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_shield_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_attack_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_1.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_2.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_4.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_crouch_attack/rogue_crouch_attack_with_spear_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_workaround"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_5.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_workaround_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_shield_5.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_crouch_workaround_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_crouch/rogue_crouch_with_spear_5.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall2"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall2_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall2_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall2_with_shield_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall2_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall2_with_spear_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall3"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall3_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall3_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall3_with_shield_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall3_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall3_with_spear_.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall_after_jump_attack"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall_after_jump_attack_with_shield"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_shield_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "rogue_fall_after_jump_attack_with_spear"
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_3.png"
+  }
+  images {
+    image: "/player/rogue/images/rogue_fall/rogue_fall_with_spear_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

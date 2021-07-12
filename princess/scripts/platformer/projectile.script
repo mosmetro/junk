@@ -1,0 +1,14 @@
+-- import
+-- local LAYER = require("scripts.shared.layers")
+
+-- localization
+-- local defold = _G
+-- local get_position = go.get_position
+-- local set_position = go.set_position
+
+---------------------------------------
+-- init
+---------------------------------------
+
+-- function defold.init()
+-- end -- init

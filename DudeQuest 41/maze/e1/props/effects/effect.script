@@ -1,0 +1,18 @@
+local defold = _G
+local hash = hash
+local TINT_W = hash("tint.w")
+local SCALE = hash("scale")
+local DURATION = 0.25
+
+local function destroy()
+   go.delete()
+end -- destroy
+
+function defold.init()
+   local root = msg.url(".")
+   local sprite = msg.url("#sprite")
+   go.set(root, SCALE, 0)
+   go.set(sprite, TINT_W, 0.5)
+   go.animate(root, SCALE, go.PLAYBACK_ONCE_FORWARD, 0.4, go.EASING_OUTQUAD, DURATION, 0, destroy)
+   go.animate(sprite, TINT_W, go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, DURATION)
+end

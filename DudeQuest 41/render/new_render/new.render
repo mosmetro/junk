@@ -1,0 +1,21 @@
+script: "/render/new_render/new.render_script"
+materials {
+  name: "refraction"
+  material: "/render/new_render/materials/refraction/refraction.material"
+}
+materials {
+  name: "blit_linear"
+  material: "/render/new_render/materials/blit/blit_linear.material"
+}
+materials {
+  name: "h_blur"
+  material: "/render/new_render/materials/blur/h_blur.material"
+}
+materials {
+  name: "v_blur"
+  material: "/render/new_render/materials/blur/v_blur.material"
+}
+materials {
+  name: "blit_mirror"
+  material: "/render/new_render/materials/blit/blit_mirror.material"
+}

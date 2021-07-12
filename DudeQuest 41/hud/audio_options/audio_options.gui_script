@@ -1,0 +1,195 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local nc = require("m.notification_center")
+-- local const = require("m.constants")
+-- local utils = require("m.utils")
+
+local global = require("game.global")
+local MenuButton = require("hud.slot_selector.menu_button")
+local Label = require("hud.label")
+local Slider = require("hud.slider")
+local translations = require("game.translations")
+local gamestate = require("game.gamestate")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local next = next
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+local translate = translations.translate
+local tostring = tostring
+
+local controls
+local sound_volume_slider
+local music_volume_slider
+local sound_volume_label
+local music_volume_label
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = context
+
+   local sound_volume = gamestate.get(nil, gamestate.player, "sound_volume", global.DEFAULT_SOUND_VOLUME)
+   sound_volume_slider.set_value(sound_volume)
+   sound_volume_label.set_text(tostring(sound_volume))
+
+   local music_volume = gamestate.get(nil, gamestate.player, "music_volume", global.DEFAULT_MUSIC_VOLUME)
+   music_volume_slider.set_value(music_volume)
+   music_volume_label.set_text(tostring(music_volume))
+
+   for _, control in next, controls do
+      set_color(control.node, colors.TRANSPARENT_WHITE)
+      if control.on_language_change then
+         control:on_language_change()
+      end
+   end
+
+   for _, control in next, controls do
+      animate(control.node, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   end
+end -- enable
+
+local function disable(next_context, out_button)
+   global.single_touch_first_responder = nil
+
+   for _, control in next, controls do
+      if control ~= out_button then
+         gui.animate(control.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+      end
+   end
+   gui.animate(out_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ACCENT_ANIMATION_EASING, ui.ACCENT_ANIMATION_DURATION, 0, function()
+      msg.post("#", msg.DISABLE)
+      runtime.execute_in_context(next_context.enable, next_context)
+   end)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.audio_options_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   local soundfx_bus
+   local music_bus
+
+   set_color(get_node("heading/underline"), colors.CONTROL_DISABLED_COLOR)
+
+   controls = {}
+
+   local heading_label = Label.new {
+      node = get_node("heading/root"),
+      title_node = get_node("heading/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.AUDIO_OPTIONS_LABEL_HEADING))
+      end,
+   }
+   controls[#controls + 1] = heading_label
+
+   local sound_label = Label.new {
+      node = get_node("sound/root"),
+      title_node = get_node("sound/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.AUDIO_OPTIONS_LABEL_SOUND))
+      end,
+   }
+   controls[#controls + 1] = sound_label
+
+   sound_volume_label = Label.new {
+      node = get_node("sound_label/root"),
+      title_node = get_node("sound_label/text"),
+      color = colors.LABEL_COLOR,
+   }
+   controls[#controls + 1] = sound_volume_label
+
+   sound_volume_slider = Slider.new {
+      node = get_node("sound_slider/root"),
+      track = get_node("sound_slider/track"),
+      track_highlight = get_node("sound_slider/track_highlight"),
+      knob = get_node("sound_slider/knob"),
+      min_value = 0,
+      max_value = global.DEFAULT_SOUND_VOLUME,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "sound_volume", value)
+         if not soundfx_bus then
+				soundfx_bus = fmod.studio.system:get_bus("bus:/soundfx")
+			end
+			soundfx_bus:set_volume(value/control.max_value)
+         sound_volume_label.set_text(tostring(value))
+      end
+   }
+   controls[#controls + 1] = sound_volume_slider
+
+   local music_label = Label.new {
+      node = get_node("music/root"),
+      title_node = get_node("music/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.AUDIO_OPTIONS_LABEL_MUSIC))
+      end,
+   }
+   controls[#controls + 1] = music_label
+
+   music_volume_label = Label.new {
+      node = get_node("music_label/root"),
+      title_node = get_node("music_label/text"),
+      color = colors.LABEL_COLOR,
+   }
+   controls[#controls + 1] = music_volume_label
+
+   music_volume_slider = Slider.new {
+      node = get_node("music_slider/root"),
+      track = get_node("music_slider/track"),
+      track_highlight = get_node("music_slider/track_highlight"),
+      knob = get_node("music_slider/knob"),
+      min_value = 0,
+      max_value = global.DEFAULT_MUSIC_VOLUME,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "music_volume", value)
+         if not music_bus then
+				music_bus = fmod.studio.system:get_bus("bus:/music")
+			end
+			music_bus:set_volume(value/control.max_value)
+         music_volume_label.set_text(tostring(value))
+      end
+   }
+   controls[#controls + 1] = music_volume_slider
+
+   local reset_button = MenuButton.new {
+      node = get_node("reset/root"),
+      title_node = get_node("reset/text"),
+      callback = function()
+         local sound_volume = global.DEFAULT_SOUND_VOLUME
+         gamestate.set(nil, gamestate.player, "sound_volume", sound_volume)
+         sound_volume_slider.set_value(sound_volume, true)
+         sound_volume_label.set_text(tostring(sound_volume))
+
+         local music_volume = global.DEFAULT_MUSIC_VOLUME
+         gamestate.set(nil, gamestate.player, "music_volume", global.DEFAULT_MUSIC_VOLUME)
+         music_volume_slider.set_value(music_volume, true)
+         music_volume_label.set_text(tostring(music_volume))
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_RESET_DEFAULTS))
+      end,
+   }
+   controls[#controls + 1] = reset_button
+
+   local back_button  = MenuButton.new {
+      node = get_node("back/root"),
+      title_node = get_node("back/text"),
+      callback = function(control)
+         disable(global.options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_BACK))
+      end,
+   }
+   controls[#controls + 1] = back_button
+
+   self.controls = controls
+end -- defold.init

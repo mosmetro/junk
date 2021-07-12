@@ -1,0 +1,148 @@
+tile_set: "/pixelfrog/levels/terrain.tilesource"
+layers {
+  id: "layer1"
+  z: 0.55
+  is_visible: 1
+  cell {
+    x: 0
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 1
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 2
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 3
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 4
+    y: -2
+    tile: 226
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -5
+    y: -2
+    tile: 224
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -4
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -3
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -2
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -1
+    y: -2
+    tile: 225
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 0
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 1
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 2
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 3
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: 4
+    y: -1
+    tile: 194
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -5
+    y: -1
+    tile: 192
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -4
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -3
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -2
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+  cell {
+    x: -1
+    y: -1
+    tile: 193
+    h_flip: 0
+    v_flip: 0
+  }
+}
+material: "/builtins/materials/tile_map.material"
+blend_mode: BLEND_MODE_ALPHA

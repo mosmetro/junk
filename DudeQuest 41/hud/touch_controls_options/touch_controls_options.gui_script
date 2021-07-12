@@ -1,0 +1,292 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local nc = require("m.notification_center")
+-- local const = require("m.constants")
+local utils = require("m.utils")
+
+local global = require("game.global")
+local MenuButton = require("hud.slot_selector.menu_button")
+local Label = require("hud.label")
+local Slider = require("hud.slider")
+local translations = require("game.translations")
+local gamestate = require("game.gamestate")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local next = next
+local get_node = gui.get_node
+local set_color = gui.set_color
+local animate = gui.animate
+local translate = translations.translate
+local tostring = tostring
+local vector4_set_xyzw = fastmath.vector4_set_xyzw
+local execute_in_context = runtime.execute_in_context
+
+local controls
+local hue_slider
+local hue_value_label
+local saturation_slider
+local saturation_value_label
+local brightness_slider
+local brightness_value_label
+local alpha_slider
+local alpha_value_label
+
+local controls_color = vmath.vector4()
+
+local function get_controls_color()
+   local h = gamestate.get(nil, gamestate.player, "onscreen_controls_hue", 0)
+   local s = gamestate.get(nil, gamestate.player, "onscreen_controls_saturation", 0)
+   local v = gamestate.get(nil, gamestate.player, "onscreen_controls_value", 100)
+   local a = gamestate.get(nil, gamestate.player, "onscreen_controls_alpha", 38)
+   return h, s, v, a
+end -- get_controls_color
+
+local function enable(context)
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = context
+
+   local h, s, v, a = get_controls_color()
+   hue_slider.set_value(h)
+   hue_value_label.set_text(tostring(h))
+   saturation_slider.set_value(s)
+   saturation_value_label.set_text(tostring(s))
+   brightness_slider.set_value(v)
+   brightness_value_label.set_text(tostring(v))
+   alpha_slider.set_value(a)
+   alpha_value_label.set_text(tostring(a))
+   vector4_set_xyzw(controls_color, colors.hsv2rgb(h/360, s/100, v/100, a/255))
+   execute_in_context(global.multi_touch_controls_proxy_context.set_controls_color, global.multi_touch_controls_proxy_context, controls_color)
+   execute_in_context(global.multi_touch_controls_proxy_context.enable, global.multi_touch_controls_proxy_context)
+
+   for _, control in next, controls do
+      set_color(control.node, colors.TRANSPARENT_WHITE)
+      animate(control.node, gui.PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+      if control.on_language_change then
+         control:on_language_change()
+      end
+   end
+end -- enable
+
+local function disable(next_context, out_button)
+   global.single_touch_first_responder = nil
+   runtime.execute_in_context(global.multi_touch_controls_proxy_context.disable, global.multi_touch_controls_proxy_context)
+
+   for _, control in next, controls do
+      if control ~= out_button then
+         gui.animate(control.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+      end
+   end
+   gui.animate(out_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ACCENT_ANIMATION_EASING, ui.ACCENT_ANIMATION_DURATION, 0, function()
+      msg.post("#", msg.DISABLE)
+      runtime.execute_in_context(next_context.enable, next_context)
+   end)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.touch_controls_options_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   set_color(get_node("heading/underline"), colors.CONTROL_DISABLED_COLOR)
+   set_color(get_node("heading/hint"), colors.CONTROL_COLOR)
+
+   controls = {}
+
+   local heading_label = Label.new {
+      node = get_node("heading/root"),
+      title_node = get_node("heading/text"),
+      hint_node = get_node("heading/hint"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.TOUCH_CONTROLS_OPTIONS_LABEL_HEADING))
+         gui.set_text(control.hint_node, translate(translations.TOUCH_CONTROLS_OPTIONS_LABEL_HINT))
+      end,
+   }
+   controls[#controls + 1] = heading_label
+
+   local hue_label = Label.new {
+      node = get_node("hue/root"),
+      title_node = get_node("hue/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.TOUCH_CONTROLS_OPTIONS_LABEL_HUE))
+      end,
+   }
+   controls[#controls + 1] = hue_label
+
+   hue_value_label = Label.new {
+      node = get_node("hue_value/root"),
+      title_node = get_node("hue_value/text"),
+      color = colors.LABEL_COLOR,
+   }
+   controls[#controls + 1] = hue_value_label
+
+   hue_slider = Slider.new {
+      node = get_node("hue_slider/root"),
+      track = get_node("hue_slider/track"),
+      track_highlight = get_node("hue_slider/track_highlight"),
+      knob = get_node("hue_slider/knob"),
+      min_value = 0,
+      max_value = 360,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_hue", value)
+         hue_value_label.set_text(tostring(value))
+         local h, s, v, a = get_controls_color()
+         fastmath.vector4_set_xyzw(controls_color, colors.hsv2rgb(h/360, s/100, v/100, a/255))
+         runtime.execute_in_context(global.multi_touch_controls_proxy_context.set_controls_color, global.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+   controls[#controls + 1] = hue_slider
+
+   local saturation_label = Label.new {
+      node = get_node("saturation/root"),
+      title_node = get_node("saturation/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.TOUCH_CONTROLS_OPTIONS_LABEL_SATURATION))
+      end,
+   }
+   controls[#controls + 1] = saturation_label
+
+   saturation_value_label = Label.new {
+      node = get_node("saturation_value/root"),
+      title_node = get_node("saturation_value/text"),
+      color = colors.LABEL_COLOR,
+   }
+   controls[#controls + 1] = saturation_value_label
+
+   saturation_slider = Slider.new {
+      node = get_node("saturation_slider/root"),
+      track = get_node("saturation_slider/track"),
+      track_highlight = get_node("saturation_slider/track_highlight"),
+      knob = get_node("saturation_slider/knob"),
+      min_value = 0,
+      max_value = 100,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_saturation", value)
+         saturation_value_label.set_text(tostring(value))
+         local h, s, v, a = get_controls_color()
+         fastmath.vector4_set_xyzw(controls_color, colors.hsv2rgb(h/360, s/100, v/100, a/255))
+         runtime.execute_in_context(global.multi_touch_controls_proxy_context.set_controls_color, global.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+   controls[#controls + 1] = saturation_slider
+
+   local brightness_label = Label.new {
+      node = get_node("brightness/root"),
+      title_node = get_node("brightness/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.TOUCH_CONTROLS_OPTIONS_LABEL_VALUE))
+      end,
+   }
+   controls[#controls + 1] = brightness_label
+
+   brightness_value_label = Label.new {
+      node = get_node("brightness_value/root"),
+      title_node = get_node("brightness_value/text"),
+      color = colors.LABEL_COLOR,
+   }
+   controls[#controls + 1] = brightness_value_label
+
+   brightness_slider = Slider.new {
+      node = get_node("brightness_slider/root"),
+      track = get_node("brightness_slider/track"),
+      track_highlight = get_node("brightness_slider/track_highlight"),
+      knob = get_node("brightness_slider/knob"),
+      min_value = 0,
+      max_value = 100,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_value", value)
+         brightness_value_label.set_text(tostring(value))
+         local h, s, v, a = get_controls_color()
+         fastmath.vector4_set_xyzw(controls_color, colors.hsv2rgb(h/360, s/100, v/100, a/255))
+         runtime.execute_in_context(global.multi_touch_controls_proxy_context.set_controls_color, global.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+   controls[#controls + 1] = brightness_slider
+
+   local alpha_label = Label.new {
+      node = get_node("alpha/root"),
+      title_node = get_node("alpha/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.TOUCH_CONTROLS_OPTIONS_LABEL_ALPHA))
+      end,
+   }
+   controls[#controls + 1] = alpha_label
+
+   alpha_value_label = Label.new {
+      node = get_node("alpha_value/root"),
+      title_node = get_node("alpha_value/text"),
+      color = colors.LABEL_COLOR,
+   }
+   controls[#controls + 1] = alpha_value_label
+
+   alpha_slider = Slider.new {
+      node = get_node("alpha_slider/root"),
+      track = get_node("alpha_slider/track"),
+      track_highlight = get_node("alpha_slider/track_highlight"),
+      knob = get_node("alpha_slider/knob"),
+      min_value = 0,
+      max_value = 255,
+      is_integral = true,
+      callback = function(control)
+         local value = control.get_value()
+         gamestate.set(nil, gamestate.player, "onscreen_controls_alpha", value)
+         alpha_value_label.set_text(tostring(value))
+         local h, s, v, a = get_controls_color()
+         fastmath.vector4_set_xyzw(controls_color, colors.hsv2rgb(h/360, s/100, v/100, a/255))
+         runtime.execute_in_context(global.multi_touch_controls_proxy_context.set_controls_color, global.multi_touch_controls_proxy_context, controls_color)
+      end
+   }
+   controls[#controls + 1] = alpha_slider
+
+   local reset_button = MenuButton.new {
+      node = get_node("reset/root"),
+      title_node = get_node("reset/text"),
+      callback = function()
+         global.single_touch_first_responder = nil
+         gamestate.set(nil, gamestate.player, "onscreen_controls_hue", nil)
+         gamestate.set(nil, gamestate.player, "onscreen_controls_saturation", nil)
+         gamestate.set(nil, gamestate.player, "onscreen_controls_value", nil)
+         gamestate.set(nil, gamestate.player, "onscreen_controls_alpha", nil)
+         local h, s, v, a = get_controls_color()
+         utils.log(h, s, v, a)
+         hue_value_label.set_text(tostring(h))
+         hue_slider.set_value(h, true)
+         saturation_value_label.set_text(tostring(s))
+         saturation_slider.set_value(s, true)
+         brightness_value_label.set_text(tostring(v))
+         brightness_slider.set_value(v, true)
+         alpha_value_label.set_text(tostring(a))
+         alpha_slider.set_value(a, true, function()
+            global.single_touch_first_responder = self
+         end)
+         fastmath.vector4_set_xyzw(controls_color, colors.hsv2rgb(h/360, s/100, v/100, a/255))
+         runtime.execute_in_context(global.multi_touch_controls_proxy_context.reset_controls, global.multi_touch_controls_proxy_context, controls_color, true)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_RESET_DEFAULTS))
+      end,
+   }
+   controls[#controls + 1] = reset_button
+
+   local back_button  = MenuButton.new {
+      node = get_node("back/root"),
+      title_node = get_node("back/text"),
+      callback = function(control)
+         disable(global.options_context, control)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.BUTTON_BACK))
+      end,
+   }
+   controls[#controls + 1] = back_button
+
+   self.controls = controls
+end -- defold.init

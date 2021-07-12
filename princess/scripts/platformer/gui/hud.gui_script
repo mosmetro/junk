@@ -1,0 +1,160 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local Counter = require("scripts.shared.counter")
+local ui = require("scripts.shared.ui.ui")
+local player_data = require("scripts.platformer.player_data")
+
+-- localization
+local defold = _G
+local get_currency = player_data.get_currency
+local get_health = player_data.get_health
+local get_node = gui.get_node
+local set_render_order = gui.set_render_order
+local hash = hash
+local post = msg.post
+local get_position = gui.get_position
+local set_position = gui.set_position
+local get_height = gui.get_height
+local vector3 = vmath.vector3
+local animate = gui.animate
+
+-- functions
+-- local enable
+-- local disable
+
+-- constants
+local POSITION_Y = hash("position.y")
+local ON_SCREEN_EASING = gui.EASING_OUTQUAD
+local OFF_SCREEN_EASING = gui.EASING_INQUAD
+local DURATION = 0.3
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  ui.hud_context = self
+  -- disable()
+  set_render_order(1)
+
+  self.currency_counter = Counter.new {
+    nodes = {
+      get_node("currency_ones"),
+      get_node("currency_tens"),
+      get_node("currency_hundreds"),
+    },
+    images = {
+      hash("shantae_ui_digit_0"),
+      hash("shantae_ui_digit_1"),
+      hash("shantae_ui_digit_2"),
+      hash("shantae_ui_digit_3"),
+      hash("shantae_ui_digit_4"),
+      hash("shantae_ui_digit_5"),
+      hash("shantae_ui_digit_6"),
+      hash("shantae_ui_digit_7"),
+      hash("shantae_ui_digit_8"),
+      hash("shantae_ui_digit_9"),
+    },
+    -- current_value = get_currency(),
+    change_speed = 20,
+  }
+
+	self.health_counter = Counter.new {
+		nodes = {
+			get_node("heart1"),
+      get_node("heart2"),
+      get_node("heart3"),
+      get_node("heart4"),
+		},
+		images = {
+			hash("shantae_ui_heart_0"),
+			hash("shantae_ui_heart_1"),
+      hash("shantae_ui_heart_2"),
+      hash("shantae_ui_heart_3"),
+      hash("shantae_ui_heart_4"),
+		},
+		-- current_value = 0,
+		change_speed = 5,
+		value_transformer = {
+			health = {
+				[0] = 0,
+				[1] = 1,
+				[2] = 2,
+				[3] = 3,
+				[4] = 4,
+				[5] = 9,
+				[6] = 14,
+				[7] = 19,
+				[8] = 24,
+				[9] = 49,
+				[10] = 74,
+				[11] = 99,
+				[12] = 124,
+				[13] = 249,
+				[14] = 374,
+				[15] = 499,
+				[16] = 624,
+			},
+			transform = function (transformer, value)
+				return transformer.health[value]
+			end,
+		},
+	}
+
+  local root = get_node("root")
+  local on_screen_position = get_position(root)
+  local off_screen_position = vector3(on_screen_position)
+  off_screen_position.y = get_height()
+
+  self.enable = function(_, animated)
+		post("#", MSG.ENABLE)
+    self.currency_counter.init(get_currency())
+    self.health_counter.init(get_health(), player_data.get_max_health())
+		if animated then
+			set_position(root, off_screen_position)
+			animate(root, POSITION_Y, on_screen_position, ON_SCREEN_EASING, DURATION)
+		else
+			set_position(root, on_screen_position)
+		end
+	end
+
+	self.disable = function(_, animated)
+		if animated then
+			set_position(root, on_screen_position)
+			animate(root, POSITION_Y, off_screen_position, OFF_SCREEN_EASING, DURATION, 0, function()
+				post("#", MSG.DISABLE)
+			end)
+		else
+			post("#", MSG.DISABLE)
+		end
+	end
+
+  self.disable(self, false)
+  -- self.enable = enable
+  -- self.disable = disable
+end -- init
+
+---------------------------------------
+-- update
+---------------------------------------
+
+function defold.update(self, dt)
+	self.currency_counter.update(get_currency(), dt)
+	self.health_counter.update(get_health(), dt)
+end -- update
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+-- function enable ()
+-- 	post("#", MSG.ENABLE)
+-- end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+-- function disable ()
+-- 	post("#", MSG.DISABLE)
+-- end -- disable

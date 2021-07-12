@@ -1,0 +1,17 @@
+local CrumblingBlock = require("pixelfrog.props.traps.crumbling_block")
+
+local defold = _G
+
+go.property("idle_animation", hash(""))
+go.property("break_animation", hash(""))
+go.property("destroyed_collection", msg.url(""))
+go.property("away_time", 3)
+go.property("can_jump_down", false)
+
+function defold.init(self)
+   self.instance = CrumblingBlock.new(self)
+end
+
+function defold.final(self)
+   CrumblingBlock.free(self.instance)
+end

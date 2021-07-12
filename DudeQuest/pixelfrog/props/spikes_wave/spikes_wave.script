@@ -1,0 +1,14 @@
+local Prototype = require("pixelfrog.props.spikes_wave.spikes_wave")
+
+local defold = _G
+
+go.property("name", hash(""))
+go.property("controller_name", hash(""))
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end -- defold.init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- defold.final

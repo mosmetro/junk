@@ -1,0 +1,134 @@
+local ui = require("m.ui.ui")
+local nc = require("m.notification_center")
+local const = require("m.constants")
+local colors = require("m.colors")
+-- local utils = require("m.utils")
+
+local game = require("pixelfrog.game.game")
+-- local snd = require("sound.sound")
+local gamestate = require("pixelfrog.game.gamestate")
+local Button = require("pixelfrog.ui.button")
+
+local defold = _G
+local msg = msg
+local gui = gui
+local hash = hash
+local vector3_stub = fastmath.vector3_stub
+
+local root
+local back_button
+local stage_number
+
+local level1_button
+local level2_button
+
+local stage_numbers = {
+   hash("stage_number_1"),
+   hash("stage_number_2"),
+   hash("stage_number_3"),
+}
+
+local stage_shift = { 0, 11, 22, }
+local current_stage
+local selected_level
+
+local function appearance_complete()
+   ui.first_responder = ui.level_selector_context
+   back_button.enable()
+   level1_button.enable()
+   level2_button.enable()
+end -- appearance_complete
+
+local function enable(_, stage)
+   msg.post("#", msg.ENABLE)
+   current_stage = stage
+
+   for _, control in next, ui.level_selector_context.controls do
+      control.deactivate()
+   end
+
+   gui.play_flipbook(stage_number, stage_numbers[stage])
+   fastmath.vector3_set_xyz(vector3_stub, 0, 30, 0)
+   gui.set_position(root, vector3_stub)
+   gui.set_color(root, colors.TRANSPARENT_WHITE)
+   gui.animate(root, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, 0.5)
+   gui.animate(root, const.POSITION_Y, 0, go.EASING_OUTBACK, 0.5, 0, appearance_complete)
+end -- enable
+
+local function to_stage_selector()
+   runtime.execute_in_context(ui.stage_selector_context.enable, ui.stage_selector_context)
+   msg.post("#", msg.DISABLE)
+end -- to_stage_selector
+
+local function to_level()
+   msg.post("#", msg.DISABLE)
+   if ui.ingame_controls_context.configure then
+      runtime.execute_in_context(ui.ingame_controls_context.configure, ui.ingame_controls_context)
+   end
+   nc.post_notification(const.LEVEL_START_NOTIFICATION, nil, selected_level)
+end -- to_level
+
+local function disable(_, callback)
+   gui.animate(root, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, 0.5)
+   gui.animate(root, const.POSITION_Y, 30, go.EASING_INBACK, 0.5, 0, callback)
+   runtime.execute_in_context(ui.backdrop_context.disable, ui.backdrop_context)
+end -- disable
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   ui.level_selector_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+   self.disable = disable
+
+   root = gui.get_node("root")
+
+   back_button = Button.new {
+      node = gui.get_node("back"),
+      released_animation = hash("back_released"),
+      pressed_animation = hash("back_pressed"),
+      callback = function()
+         ui.first_responder = nil
+         disable(nil, to_stage_selector)
+      end,
+   }
+
+   level1_button = Button.new {
+      node = gui.get_node("level1/button"),
+      info_node = gui.get_node("level1/info"),
+      released_animation = hash("level1_released"),
+      pressed_animation = hash("level1_pressed"),
+      callback = function()
+         selected_level = 1 + stage_shift[current_stage]
+         gamestate.set(nil, gamestate.player, "last_checkpoint", { map = "level" .. tostring(selected_level), location = "/teleport1/root" })
+         ui.first_responder = nil
+         disable(nil, to_level)
+      end,
+   }
+
+   level2_button = Button.new {
+      node = gui.get_node("level2/button"),
+      info_node = gui.get_node("level2/info"),
+      released_animation = hash("level2_released"),
+      pressed_animation = hash("level2_pressed"),
+      callback = function()
+         selected_level = 2 + stage_shift[current_stage]
+         gamestate.set(nil, gamestate.player, "last_checkpoint", { map = "level" .. tostring(selected_level), location = "/teleport1/root" })
+         ui.first_responder = nil
+         disable(nil, to_level)
+      end,
+   }
+
+   stage_number = gui.get_node("stage_number")
+
+   local x = -80 - (-80 - game.view_left) * 0.5
+   x = fastmath.clamp(x, -104, 0)
+   fastmath.vector3_set_xyz(vector3_stub, x, 0, 0)
+   gui.set_position(back_button.node, vector3_stub)
+
+   self.controls = {
+      back_button,
+      level1_button,
+      level2_button,
+   }
+end -- defold.init

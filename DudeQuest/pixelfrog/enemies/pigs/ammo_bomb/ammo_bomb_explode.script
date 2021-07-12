@@ -1,0 +1,13 @@
+local Prototype = require("pixelfrog.enemies.pigs.ammo_bomb.ammo_bomb_explode")
+
+local defold = _G
+
+go.property("damage_points", 0)
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

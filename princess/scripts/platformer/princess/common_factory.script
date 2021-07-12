@@ -1,0 +1,26 @@
+-- import
+local FACTORY = require("scripts.shared.factories")
+
+-- localization
+local defold = _G
+local url = msg.url
+local create_collection = collectionfactory.create
+
+-- constants
+local IDENTITY = vmath.quat()
+local ONE = vmath.vector3(1)
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init()
+  local player_factory = url("#player")
+
+  FACTORY.create_player = function(position, rotation, properties, scale)
+    position = position or IDENTITY
+    scale = scale or ONE
+    return create_collection(player_factory, position, rotation, properties, scale)
+  end
+
+end -- init

@@ -1,0 +1,32 @@
+-- import
+local MSG = require("scripts.shared.messages")
+local TAG = require("scripts.shared.tags")
+local game = require("scripts.platformer.game")
+
+-- localization
+local defold = _G
+local set_context = game.set_context
+local get_id = go.get_id
+local post = msg.post
+
+-- properties
+go.property("platform", hash(""))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+  self.gameobject = get_id()
+  post(self.gameobject, MSG.SET_PARENT, { parent_id = self.platform })
+  self.tag = TAG.ROPE
+  set_context(self.gameobject, self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+  set_context(self.gameobject, nil)
+end -- final

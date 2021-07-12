@@ -1,0 +1,131 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local SND = require("scripts.platformer.sound")
+local translations = require("scripts.platformer.translations")
+local nc = require("scripts.shared.notification_center")
+local utils = require("scripts.shared.utils")
+local ui = require("scripts.shared.ui.ui")
+local application = require("scripts.shared.application")
+
+-- localization
+local fmod = fmod
+local fmod_studio_system = fmod.studio.system
+local resource = resource
+local execute_in_context = utils.execute_in_context
+-- local translate = translations.translate
+-- local set_language = translations.set_language
+local WINDOW_EVENT_FOCUS_LOST = window.WINDOW_EVENT_FOCUS_LOST
+-- local WINDOW_EVENT_FOCUS_GAINED = window.WINDOW_EVENT_FOCUS_GAINED
+local set_listener = window.set_listener
+local post = msg.post
+local get_sys_info = sys.get_sys_info
+local get_engine_info = sys.get_engine_info
+local format = string.format
+
+-- functions
+local window_callback
+local init_fmod
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init()
+	local engine_info = get_engine_info()
+	local engine_info_str = format("Version: %s(%s, %s)", engine_info.version, engine_info.is_debug and "DEBUG" or "RELEASE", engine_info.version_sha1)
+	utils.log(engine_info_str)
+
+	set_listener(window_callback)
+
+	post("#", MSG.APPLICATION_START)
+
+	-- print(application.play_time_from_seconds(12349))
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final()
+	post(".", MSG.RELEASE_INPUT_FOCUS)
+end -- final
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(_, message_id)
+	if message_id == MSG.APPLICATION_START then
+		local info = get_sys_info()
+		local system_name = info.system_name
+		if system_name == "iPhone OS" or system_name == "Android" then
+			ui.ingame_controls_context = ui.multi_touch_controls_context
+		else
+			ui.ingame_controls_context = ui.keyboard_controls_context
+		end
+
+		translations.set_language(info.device_language:sub(1, 2))
+		nc.post_notification(translations.LANGUAGE_DID_CHANGE_NOTIFICATION)
+
+		execute_in_context(
+			ui.single_touch_controls_context,
+			function(context)
+				context:enable()
+			end
+		)
+
+		application.set_id("princess")
+		local meta = application.load_table(application.get_id())
+		if meta.file then
+			application.file = meta.file
+			utils.log("save file:", application.file)
+			execute_in_context(
+				ui.start_context,
+				function(context)
+					context:enable()
+				end
+			)
+		else
+			execute_in_context(
+				ui.select_file_context,
+				function(context)
+					context:enable()
+				end
+			)
+		end
+
+		init_fmod()
+
+		post(".", MSG.ACQUIRE_INPUT_FOCUS)
+	end
+end -- on_message
+
+---------------------------------------
+-- window_callback
+---------------------------------------
+
+function window_callback(_, event)
+	if event == WINDOW_EVENT_FOCUS_LOST then
+		utils.log("focus lost")
+	end
+end -- window_callback
+
+---------------------------------------
+-- init_fmod
+---------------------------------------
+
+function init_fmod()
+	fmod_studio_system:load_bank_memory(resource.load("/banks/mobile/master.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	fmod_studio_system:load_bank_memory(resource.load("/banks/mobile/master.strings.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	-- fmod_studio_system:load_bank_memory(resource.load("/banks/mobile/music.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	local soundfx_bank = fmod_studio_system:load_bank_memory(resource.load("/banks/mobile/soundfx.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	soundfx_bank:load_sample_data()
+
+	SND.BUTTON_CLICK = fmod_studio_system:get_event("event:/goblin-sword-button2")
+	SND.TRAP_HIT_GROUND = fmod_studio_system:get_event("event:/goblin-sword-shield")
+	SND.PLAYER_JUMP = fmod_studio_system:get_event("event:/goblin-sword-jump")
+	SND.PLAYER_GET_HIT = fmod_studio_system:get_event("event:/goblin-sword-player-damage")
+	SND.EXPLOSION = fmod_studio_system:get_event("event:/goblin-sword-explosion")
+end

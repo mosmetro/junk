@@ -1,0 +1,135 @@
+local defold = _G
+
+-- imports
+local MSG = require("scripts.shared.messages")
+local GUI = require("scripts.platformer.gui")
+-- local debug_draw = require("scripts.shared.debug_draw")
+local game = require("scripts.platformer.game")
+local Counter = require("scripts.shared.counter")
+
+-- localization
+local MAGIC1 = game.MAGIC1
+local MAGIC2 = game.MAGIC2
+local MAGIC3 = game.MAGIC3
+local MAGIC4 = game.MAGIC4
+local MAGIC5 = game.MAGIC5
+local MAGIC6 = game.MAGIC6
+local get_node = gui.get_node
+local get_screen_position = gui.get_screen_position
+local next = next
+local post = msg.post
+local play_flipbook = gui.play_flipbook
+
+-- functions
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+	local buttons = {
+		[MAGIC1] = get_screen_position(get_node(MAGIC1)),
+		[MAGIC2] = get_screen_position(get_node(MAGIC2)),
+		[MAGIC3] = get_screen_position(get_node(MAGIC3)),
+		[MAGIC4] = get_screen_position(get_node(MAGIC4)),
+		[MAGIC5] = get_screen_position(get_node(MAGIC5)),
+		[MAGIC6] = get_screen_position(get_node(MAGIC6)),
+	}
+
+	for action, position in next, buttons do
+		post(GUI.MULTI_TOUCH_CONTROLS, MSG.ADD_ACTION, { action = action, position = position } )
+	end
+
+	self.target_stars = 20
+	self.target_hearts = 15
+
+	self.stars_counter = Counter.new {
+		nodes = {
+			get_node("stars_counter_tens"),
+			get_node("stars_counter_ones"),
+		},
+		images = {
+			"ui_digit_0",
+			"ui_digit_1",
+			"ui_digit_2",
+			"ui_digit_3",
+			"ui_digit_4",
+			"ui_digit_5",
+			"ui_digit_6",
+			"ui_digit_7",
+			"ui_digit_8",
+			"ui_digit_9",
+		},
+		current_value = 0,
+		change_speed = 120,
+	}
+
+	self.hearts_counter = Counter.new {
+		nodes = {
+			get_node("heart8"),
+			get_node("heart7"),
+			get_node("heart6"),
+			get_node("heart5"),
+			get_node("heart4"),
+			get_node("heart3"),
+			get_node("heart2"),
+			get_node("heart1"),
+		},
+		images = {
+			"transparent_1x1",
+			"ui_heart_half",
+			"ui_heart_full",
+		},
+		current_value = 0,
+		change_speed = 32,
+		value_transformer = {
+			health = {
+				[0] = 0,
+				[1] = 1,
+				[2] = 2,
+				[3] = 5,
+				[4] = 8,
+				[5] = 17,
+				[6] = 26,
+				[7] = 53,
+				[8] = 80,
+				[9] = 161,
+				[10] = 242,
+				[11] = 485,
+				[12] = 728,
+				[13] = 1457,
+				[14] = 2186,
+				[15] = 4373,
+				[16] = 6560,
+			},
+			transform = function (transformer, value)
+				return transformer.health[value]
+			end,
+		},
+	}
+end -- init
+
+---------------------------------------
+
+-- on_message
+
+---------------------------------------
+
+function defold.on_message(_, message_id)
+	if message_id == hash("show_advanced_magic_cost") then
+		play_flipbook(get_node("magic1_cost"), "ui_magic_charge_2_8")
+	elseif message_id == hash("show_basic_magic_cost") then
+		play_flipbook(get_node("magic1_cost"), "ui_magic_charge_8_2")
+	end
+end -- on_message
+
+---------------------------------------
+
+-- on_message
+
+---------------------------------------
+
+function defold.update (self, dt)
+	self.stars_counter:update(self.target_stars, dt)
+	self.hearts_counter:update(self.target_hearts, dt)
+end

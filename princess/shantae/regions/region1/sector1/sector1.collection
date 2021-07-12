@@ -1,0 +1,459 @@
+name: "region1_sector1"
+instances {
+  id: "map"
+  prototype: "/shantae/regions/region1/sector1/sector1.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/common/camera.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "ambient_color"
+      value: "0.1, 0.1, 0.1, 1.0"
+      type: PROPERTY_TYPE_VECTOR4
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "update_sink"
+  prototype: "/common/update_sink.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "grade"
+  prototype: "/common/grade.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "factory"
+  prototype: "/common/factory.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "sector1_background"
+  prototype: "/shantae/regions/region1/sector1/sector1_background.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: -0.97
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "candelabrum_tall"
+  prototype: "/shantae/candelabrum_tall/candelabrum_tall.go"
+  position {
+    x: -71.0
+    y: 32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "color"
+      value: "0.8, 0.9, 0.2, 1.0"
+      type: PROPERTY_TYPE_VECTOR4
+    }
+    properties {
+      id: "falloff"
+      value: "0.15, 0.0, 45.0, 0.0"
+      type: PROPERTY_TYPE_VECTOR4
+    }
+    properties {
+      id: "smoothing"
+      value: "10.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "light_height"
+      value: "70.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_large"
+  prototype: "/shantae/clay_jugs/clay_jug_large.go"
+  position {
+    x: 160.0
+    y: 9.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_medium_a"
+  prototype: "/shantae/clay_jugs/clay_jug_medium_a.go"
+  position {
+    x: 15.0
+    y: 70.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_medium_b"
+  prototype: "/shantae/clay_jugs/clay_jug_medium_b.go"
+  position {
+    x: 31.0
+    y: 71.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_small"
+  prototype: "/shantae/clay_jugs/clay_jug_small.go"
+  position {
+    x: -29.0
+    y: 70.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_stand"
+  prototype: "/shantae/clay_jugs/clay_jug_stand.go"
+  position {
+    x: -11.0
+    y: 64.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "clay_jug_small1"
+  prototype: "/shantae/clay_jugs/clay_jug_small.go"
+  position {
+    x: -11.0
+    y: 86.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "exit_sector"
+  prototype: "/shantae/regions/exit_sector.go"
+  position {
+    x: -280.0
+    y: 32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "to_region"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "to_sector"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "entry_point"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "primary_action"
+      value: "left"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "enter_sector"
+  prototype: "/shantae/regions/enter_sector.go"
+  position {
+    x: -200.0
+    y: 32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player_entry_point1"
+  prototype: "/common/player_entry_point.go"
+  position {
+    x: -272.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player_entry_point2"
+  prototype: "/common/player_entry_point.go"
+  position {
+    x: 272.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "enter_sector1"
+  prototype: "/shantae/regions/enter_sector.go"
+  position {
+    x: 200.0
+    y: 32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "exit_sector1"
+  prototype: "/shantae/regions/exit_sector.go"
+  position {
+    x: 280.0
+    y: 32.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "script"
+    properties {
+      id: "to_region"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "to_sector"
+      value: "2.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "entry_point"
+      value: "1.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "primary_action"
+      value: "right"
+      type: PROPERTY_TYPE_HASH
+    }
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+scale_along_z: 0

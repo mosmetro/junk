@@ -1,0 +1,15 @@
+local Passage = require("maze.e1.props.passage.passage")
+
+local defold = _G
+
+go.property("destination_map", hash(""))
+go.property("destination_passage", hash(""))
+go.property("is_horizontal", true)
+
+function defold.init(self)
+   self.instance = Passage.new(self)
+end
+
+function defold.final(self)
+   Passage.free(self.instance)
+end

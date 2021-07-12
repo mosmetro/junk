@@ -1,0 +1,2450 @@
+images {
+  image: "/assets/common/marker.png"
+}
+images {
+  image: "/assets/common/transparent_1x1.png"
+}
+images {
+  image: "/assets/princess/princess_jump_up_2.png"
+}
+images {
+  image: "/assets/princess/princess_chain_hook_2.png"
+}
+images {
+  image: "/assets/common/magic1_projectile.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_1.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_2.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_3.png"
+}
+images {
+  image: "/assets/princess/princess_magic_attack_4.png"
+}
+images {
+  image: "/assets/princess/princess_attack_land_1.png"
+}
+images {
+  image: "/assets/princess/princess_attack_land_2.png"
+}
+images {
+  image: "/assets/princess/princess_attack_land_3.png"
+}
+images {
+  image: "/assets/princess/princess_attack_air_1.png"
+}
+images {
+  image: "/assets/princess/princess_attack_air_2.png"
+}
+images {
+  image: "/assets/princess/princess_attack_air_3.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_1.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_2.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_3.png"
+}
+images {
+  image: "/assets/princess/princess_power_attack_land_4.png"
+}
+images {
+  image: "/assets/sunnyland/crate1.png"
+}
+images {
+  image: "/assets/sunnyland/crate2.png"
+}
+images {
+  image: "/assets/princess/princess_attack_down_repeat_1.png"
+}
+images {
+  image: "/assets/common/pin_for_hook.png"
+}
+images {
+  image: "/assets/kronbits-inca/kronbits-inca-crate1.png"
+}
+images {
+  image: "/assets/kronbits-inca/kronbits-inca-platform1.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-wheel-machine.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-wheel-platform.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-city1.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-doubleaxe-blade.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-nails.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-mountain2.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-platform-onoff.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-rolling-bladetrap.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-doubleaxe-block.png"
+}
+images {
+  image: "/assets/goblin-sword/goblin-sword-spikes-castle.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/forest_bg_parallaxNear.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/forest_bg_parallaxFar.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/sky_bg.png"
+}
+images {
+  image: "/assets/aamatniekss/forest/sky_bg_clouds.png"
+}
+images {
+  image: "/assets/common/night.png"
+}
+images {
+  image: "/assets/common/light_gizmo.png"
+}
+images {
+  image: "/assets/aamatniekss/props/BigPot.png"
+}
+images {
+  image: "/assets/aamatniekss/props/MidPot.png"
+}
+images {
+  image: "/assets/aamatniekss/props/SmallPot.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/clay_pot_destroyed_1.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/clay_pot_destroyed_2.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/clay_pot_destroyed_3.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/clay_pot_destroyed_4.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/clay_pot_destroyed_5.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/clay_pot_destroyed_6.png"
+}
+images {
+  image: "/assets/aamatniekss/props/Barrel.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_1.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_10.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_2.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_3.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_4.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_5.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_6.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_7.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_8.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/barrel_destroyed_9.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/mid_pot_destroyed_1.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/mid_pot_destroyed_2.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/mid_pot_destroyed_3.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/mid_pot_destroyed_4.png"
+}
+images {
+  image: "/assets/aamatniekss/props/destroyed/mid_pot_destroyed_5.png"
+}
+images {
+  image: "/assets/aamatniekss/props/BigCrate.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_tuck_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_tuck_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_tuck_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_tuck_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_chain_link_0.png"
+}
+images {
+  image: "/assets/shantae/shantae_chain_link_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_chain_link_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_chain_link_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_platform_a.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_5.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_6.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_7.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_8.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_9.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_10.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_11.png"
+}
+images {
+  image: "/assets/shantae/shantae_rope_up_12.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_5.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_6.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_7.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_glide_8.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_init_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_init_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_init_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_init_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_init_5.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_init_6.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_remove_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_remove_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_remove_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_remove_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_remove_5.png"
+}
+images {
+  image: "/assets/shantae/shantae_hat_remove_6.png"
+}
+images {
+  image: "/assets/shantae/shantae_skeleton_bit1.png"
+}
+images {
+  image: "/assets/shantae/shantae_skeleton_bit2.png"
+}
+images {
+  image: "/assets/shantae/shantae_skeleton_bit3.png"
+}
+images {
+  image: "/assets/shantae/shantae_skeleton_bit4.png"
+}
+images {
+  image: "/assets/shantae/shantae_skeleton_bit5.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_1.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_2.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_3.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_4.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_5.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_6.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_7.png"
+}
+images {
+  image: "/assets/shantae/shantae_jump_whip_8.png"
+}
+animations {
+  id: "princess_idle"
+  images {
+    image: "/assets/princess/princess_idle_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_blink"
+  images {
+    image: "/assets/princess/princess_idle_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_idle_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 4
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bored"
+  images {
+    image: "/assets/princess/princess_bored_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_bored_7.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_run"
+  images {
+    image: "/assets/princess/princess_run_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_run_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_look_up"
+  images {
+    image: "/assets/princess/princess_look_up.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_crouch"
+  images {
+    image: "/assets/princess/princess_crouch.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hide"
+  images {
+    image: "/assets/princess/princess_hide.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_crawl"
+  images {
+    image: "/assets/princess/princess_crawl_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_crawl_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 9
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_jump_up"
+  images {
+    image: "/assets/princess/princess_jump_up_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_jump_up_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_jump_up_apex"
+  images {
+    image: "/assets/princess/princess_jump_up_apex.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_land"
+  images {
+    image: "/assets/princess/princess_land.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_land_side"
+  images {
+    image: "/assets/princess/princess_land_side.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_roll"
+  images {
+    image: "/assets/princess/princess_roll_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_roll_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_roll_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_roll_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_fall"
+  images {
+    image: "/assets/princess/princess_fall_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_fall_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_fall_side"
+  images {
+    image: "/assets/princess/princess_fall_side_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_fall_side_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bounce_up"
+  images {
+    image: "/assets/princess/princess_bounce_up.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bounce_down"
+  images {
+    image: "/assets/princess/princess_bounce_down.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_smash"
+  images {
+    image: "/assets/princess/princess_smash.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_bounce_land"
+  images {
+    image: "/assets/princess/princess_bounce_land.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_jump_side"
+  images {
+    image: "/assets/princess/princess_jump_side.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_crash_fall"
+  images {
+    image: "/assets/princess/princess_crashfall_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_crashfall_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_push"
+  images {
+    image: "/assets/princess/princess_push_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_7.png"
+  }
+  images {
+    image: "/assets/princess/princess_push_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_chain_a"
+  images {
+    image: "/assets/princess/princess_chain_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_chain_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_chain_b"
+  images {
+    image: "/assets/princess/princess_chain_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_chain_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_chain_hook"
+  images {
+    image: "/assets/princess/princess_chain_hook_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_chain_hook_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "sparkle"
+  images {
+    image: "/assets/common/sparkle_1.png"
+  }
+  images {
+    image: "/assets/common/sparkle_2.png"
+  }
+  images {
+    image: "/assets/common/sparkle_3.png"
+  }
+  images {
+    image: "/assets/common/sparkle_4.png"
+  }
+  images {
+    image: "/assets/common/sparkle_5.png"
+  }
+  images {
+    image: "/assets/common/sparkle_6.png"
+  }
+  images {
+    image: "/assets/common/sparkle_7.png"
+  }
+  images {
+    image: "/assets/common/sparkle_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_basic_magic_attack"
+  images {
+    image: "/assets/princess/princess_magic_attack_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_magic_attack_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_magic_attack_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_magic_attack_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_sword_attack_air"
+  images {
+    image: "/assets/princess/princess_attack_air_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_air_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_air_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_sword_attack_land"
+  images {
+    image: "/assets/princess/princess_attack_land_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_land_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_land_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_sword_power_attack"
+  images {
+    image: "/assets/princess/princess_power_attack_land_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_power_attack_land_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_power_attack_land_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_power_attack_land_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 15
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_slide"
+  images {
+    image: "/assets/princess/princess_slide_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_slide_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_balance_start"
+  images {
+    image: "/assets/princess/princess_balance_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_balance_middle"
+  images {
+    image: "/assets/princess/princess_balance_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_7.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_8.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_6.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_7.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 9
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_balance_end"
+  images {
+    image: "/assets/princess/princess_balance_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_5.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_3.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_4.png"
+  }
+  images {
+    image: "/assets/princess/princess_balance_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 6
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hit"
+  images {
+    image: "/assets/princess/princess_hit_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hit_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_attack_down_start"
+  images {
+    image: "/assets/princess/princess_attack_down_start_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_down_start_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_attack_down_repeat"
+  images {
+    image: "/assets/princess/princess_attack_down_repeat_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_attack_down_repeat_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_land_start"
+  images {
+    image: "/assets/princess/princess_hook_throw_land_start_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_land_start_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_land_end"
+  images {
+    image: "/assets/princess/princess_hook_throw_land_end_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_land_end_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_land_end_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_air_start"
+  images {
+    image: "/assets/princess/princess_hook_throw_air_start_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_air_start_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_hook_throw_air_end"
+  images {
+    image: "/assets/princess/princess_hook_throw_air_end_1.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_air_end_2.png"
+  }
+  images {
+    image: "/assets/princess/princess_hook_throw_air_end_3.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_1"
+  images {
+    image: "/assets/princess/princess_swing_1.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_2"
+  images {
+    image: "/assets/princess/princess_swing_2.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_3"
+  images {
+    image: "/assets/princess/princess_swing_3.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_4"
+  images {
+    image: "/assets/princess/princess_swing_4.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_5"
+  images {
+    image: "/assets/princess/princess_swing_5.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "princess_swing_6"
+  images {
+    image: "/assets/princess/princess_swing_6.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "impact_small"
+  images {
+    image: "/assets/common/impact_small_1.png"
+  }
+  images {
+    image: "/assets/common/impact_small_2.png"
+  }
+  images {
+    image: "/assets/common/impact_small_3.png"
+  }
+  images {
+    image: "/assets/common/impact_small_4.png"
+  }
+  images {
+    image: "/assets/common/impact_small_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_conveyor_left"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-left4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_conveyor_middle"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-middle4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_conveyor_right"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-platform-belt-right4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin_sword_trampoline"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline5.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-trampoline6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-roller-idle"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-idle-unarmed.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 1
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-roller-prepare"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-prepare5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-roller-throw"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-roller-throw5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-fx-destroy"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy5.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy6.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy7.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy8.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy9.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy10.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy11.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-destroy12.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "goblin-sword-fx-hero-get-hit"
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit1.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit2.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit3.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit4.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit5.png"
+  }
+  images {
+    image: "/assets/goblin-sword/goblin-sword-fx-hero-get-hit6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "dude_idle"
+  images {
+    image: "/assets/aamatniekss/hero/hero_idle_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_idle_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_idle_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_idle_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_idle_5.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_idle_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 14
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "dude_run"
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_5.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_6.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_7.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_run_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "dude_jump"
+  images {
+    image: "/assets/aamatniekss/hero/hero_jump_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_jump_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "dude_fall"
+  images {
+    image: "/assets/aamatniekss/hero/hero_fall_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_fall_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "dude_attack"
+  images {
+    image: "/assets/aamatniekss/hero/hero_attack_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_attack_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_attack_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_attack_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/hero_attack_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "fx_dude_jump_dust"
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_5.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_6.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_7.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_8.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_jump_9.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "fx_dude_run_dust_right"
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_5.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_6.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_7.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_8.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_9.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "fx_dude_run_dust_left"
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_5.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_6.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_7.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_8.png"
+  }
+  images {
+    image: "/assets/aamatniekss/hero/fx_hero_cloud_walk_9.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 1
+  flip_vertical: 0
+}
+animations {
+  id: "gold_coin_1"
+  images {
+    image: "/assets/common/gold_a_1.png"
+  }
+  images {
+    image: "/assets/common/gold_a_2.png"
+  }
+  images {
+    image: "/assets/common/gold_a_3.png"
+  }
+  images {
+    image: "/assets/common/gold_a_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "gold_coin_2"
+  images {
+    image: "/assets/common/gold_a_2.png"
+  }
+  images {
+    image: "/assets/common/gold_a_3.png"
+  }
+  images {
+    image: "/assets/common/gold_a_4.png"
+  }
+  images {
+    image: "/assets/common/gold_a_1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "gold_coin_3"
+  images {
+    image: "/assets/common/gold_a_3.png"
+  }
+  images {
+    image: "/assets/common/gold_a_4.png"
+  }
+  images {
+    image: "/assets/common/gold_a_1.png"
+  }
+  images {
+    image: "/assets/common/gold_a_2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "gold_coin_4"
+  images {
+    image: "/assets/common/gold_a_4.png"
+  }
+  images {
+    image: "/assets/common/gold_a_1.png"
+  }
+  images {
+    image: "/assets/common/gold_a_2.png"
+  }
+  images {
+    image: "/assets/common/gold_a_3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "torch"
+  images {
+    image: "/assets/aamatniekss/props/SmallProps_Torch32x32_1.png"
+  }
+  images {
+    image: "/assets/aamatniekss/props/SmallProps_Torch32x32_2.png"
+  }
+  images {
+    image: "/assets/aamatniekss/props/SmallProps_Torch32x32_3.png"
+  }
+  images {
+    image: "/assets/aamatniekss/props/SmallProps_Torch32x32_4.png"
+  }
+  images {
+    image: "/assets/aamatniekss/props/SmallProps_Torch32x32_5.png"
+  }
+  images {
+    image: "/assets/aamatniekss/props/SmallProps_Torch32x32_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_standing_idle_full"
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_8.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_9.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_10.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_11.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_12.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_13.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_14.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_15.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_idle_full_16.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_duck_idle"
+  images {
+    image: "/assets/shantae/shantae_duck_idle_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_8.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_9.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_idle_10.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_duck_down"
+  images {
+    image: "/assets/shantae/shantae_duck_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_duck_up"
+  images {
+    image: "/assets/shantae/shantae_duck_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_duck_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_fall"
+  images {
+    image: "/assets/shantae/shantae_fall_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_fall_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_fall_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_fall_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_run"
+  images {
+    image: "/assets/shantae/shantae_run_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_8.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_9.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_10.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_11.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_12.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_13.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_14.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_15.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_16.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_run_stop"
+  images {
+    image: "/assets/shantae/shantae_run_stop_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_8.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_9.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_10.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_run_stop_11.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_crawl"
+  images {
+    image: "/assets/shantae/shantae_crawl_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_8.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_9.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_crawl_10.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_jump"
+  images {
+    image: "/assets/shantae/shantae_jump_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_jump_finish"
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_fall_start"
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_tuck_4.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 22
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_land"
+  images {
+    image: "/assets/shantae/shantae_land_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_land_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_land_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_land_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_land_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_land_6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 18
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_rope_idle"
+  images {
+    image: "/assets/shantae/shantae_rope_idle_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_rope_idle_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_rope_idle_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_rope_idle_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_rope_down"
+  images {
+    image: "/assets/shantae/shantae_rope_down_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_rope_down_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_rope_down_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_rope_down_4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_hat_init"
+  images {
+    image: "/assets/shantae/shantae_hat_init_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_init_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_init_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_init_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_init_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_init_6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_hat_glide"
+  images {
+    image: "/assets/shantae/shantae_hat_glide_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_glide_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_hat_remove"
+  images {
+    image: "/assets/shantae/shantae_hat_remove_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_remove_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_remove_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_remove_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_remove_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_hat_remove_6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_idle"
+  images {
+    image: "/assets/shantae/shantae_orc_idle_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_idle_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_idle_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_idle_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_idle_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_idle_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_walk"
+  images {
+    image: "/assets/shantae/shantae_orc_walk_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_8.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_9.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_walk_10.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_turn_left"
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_left_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_turn_right"
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_turn_right_7.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_fly"
+  images {
+    image: "/assets/shantae/shantae_orc_fly_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_fly_fast"
+  images {
+    image: "/assets/shantae/shantae_orc_fly_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_fly_8.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 16
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_land"
+  images {
+    image: "/assets/shantae/shantae_orc_land_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_land_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_land_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_land_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_land_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_land_6.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_get_hit"
+  images {
+    image: "/assets/shantae/shantae_orc_gethit_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_gethit_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_orc_get_hit_fly"
+  images {
+    image: "/assets/shantae/shantae_orc_gethitfly_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_orc_gethitfly_2.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 8
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_saveguy_idle"
+  images {
+    image: "/assets/shantae/shantae_saveguy_idle_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_idle_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_idle_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_idle_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_idle_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_idle_6.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_saveguy_turn_left"
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_5.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_saveguy_turn_right"
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_saveguy_turn_1.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 10
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_standing_whip"
+  images {
+    image: "/assets/shantae/shantae_standing_whip_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_standing_whip_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "shantae_jump_whip"
+  images {
+    image: "/assets/shantae/shantae_jump_whip_1.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_2.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_3.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_4.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_5.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_6.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_7.png"
+  }
+  images {
+    image: "/assets/shantae/shantae_jump_whip_8.png"
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 20
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+margin: 0
+extrude_borders: 1
+inner_padding: 0

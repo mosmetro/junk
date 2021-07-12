@@ -1,0 +1,182 @@
+local defold = _G
+
+-- import
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local MSG = require("scripts.shared.messages")
+local LAYER = require("scripts.shared.layers")
+local GROUP = require("scripts.shared.groups")
+local COLOR = require("scripts.shared.colors")
+
+-- localization
+local post = msg.post
+local url = msg.url
+local length = vmath.length
+local set_position = go.set_position
+local get_id = go.get_id
+local ray_cast = physics.ray_cast
+local vector3 = vmath.vector3
+local get_position = go.get_position
+local sign = utils.sign
+local PLAYER = GROUP.PLAYER
+local CRATE = GROUP.CRATE
+local abs = math.abs
+-- local rad = math.rad
+local atan2 = math.atan2
+local sin = math.sin
+local cos = math.cos
+
+-- functions
+local raycast_request
+local raycast_response
+local frame_update
+local calculate_movement
+local enable
+local disable
+
+-- constants
+local PUSHABLES = {
+	CRATE,
+	PLAYER
+	-- ENEMIES, --?
+}
+
+local RAY_LENGTH = 2000
+
+-- properties
+go.property("character_width", 23)
+go.property("character_height", 6)
+go.property("horizontal_ray_count", 2)
+go.property("skin_width", 0.01)
+go.property("ram", false)
+go.property("speed", 0) -- degree per second
+go.property("pivot", hash(""))
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init(self)
+	self.gameobject = get_id()
+	self.sprite = url("#sprite")
+	self.delta_position = vector3()
+	self.position = get_position()
+	self.position.z = LAYER.PLATFORM
+	set_position(self.position)
+	self.depth_x = self.character_width * 0.5
+	self.horizontal_ray_spacing = (self.character_height - 2 * self.skin_width) / (self.horizontal_ray_count - 1)
+	self.processed_targets = {}
+	self.pivot_position = get_position(self.pivot)
+	local to_platform = self.position - self.pivot_position
+	self.angle = atan2(to_platform.y, to_platform.x)
+	self.radius = length(to_platform)
+
+	-- game.add_update_callback(self, frame_update, game.motor_platforms)
+	game.get_shared_data(self.gameobject).context = self
+	self.enable = enable
+	self.disable = disable
+	disable(self)
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final(self)
+	game.remove_update_callback(self, game.motor_platforms)
+	game.remove_shared_data(self.gameobject)
+end -- final
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, dt)
+	self.position = self.position + self.delta_position
+	set_position(self.position)
+	self.delta_position = calculate_movement(self, dt)
+	game.set_delta_position(self.gameobject, self.delta_position)
+	if self.ram then
+		raycast_request(self)
+	end
+end -- update
+
+---------------------------------------
+-- on_message
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.RAY_CAST_RESPONSE then
+		raycast_response(self, message)
+	end
+end -- on_message
+
+---------------------------------------
+-- calculate_movement
+---------------------------------------
+
+function calculate_movement(self, dt)
+	self.angle = self.angle + self.speed * dt
+	local x = self.radius * cos(self.angle)
+	local y = self.radius * sin(self.angle)
+	local new_position = vector3(self.pivot_position.x + x, self.pivot_position.y + y, self.position.z)
+	return new_position - self.position
+end -- calculate_movement
+
+---------------------------------------
+-- raycast_request
+---------------------------------------
+
+function raycast_request(self)
+	self.processed_targets = {}
+	local ray_origin_horizontal = vector3(self.position.x, self.position.y - self.character_height + self.skin_width, 0)
+
+	local dx = self.delta_position.x
+	if dx ~= 0 then
+		local direction = sign(dx)
+		local ray_start = vector3(ray_origin_horizontal)
+		local ray_end = vector3(ray_start.x + RAY_LENGTH * direction, ray_start.y, 0)
+		for ray = 1, self.horizontal_ray_count do
+			ray_cast(ray_start, ray_end, PUSHABLES, ray)
+			post("@render:", "draw_line", {start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA})
+			ray_start.y = ray_start.y + self.horizontal_ray_spacing
+			ray_end.y = ray_start.y
+		end
+	end
+end -- raycast_request
+
+---------------------------------------
+-- raycast_response
+---------------------------------------
+
+function raycast_response(self, message)
+	if message.group == CRATE then
+		local target = game.get_shared_data(message.id).context
+		if not self.processed_targets[target] then
+			local direction = sign(self.delta_position.x)
+			local hit_distance = RAY_LENGTH * message.fraction - self.depth_x
+			if hit_distance + target.delta_position.x * direction < abs(self.delta_position.x) then
+				target.push = self.delta_position.x - hit_distance * direction
+				self.processed_targets[target] = true
+			end
+		end
+	end
+end -- raycast_response
+
+---------------------------------------
+-- enable
+---------------------------------------
+
+function enable(self)
+	game.add_update_callback(self, frame_update, game.motor_platforms)
+	post(self.sprite, MSG.ENABLE)
+end -- enable
+
+---------------------------------------
+-- disable
+---------------------------------------
+
+function disable(self)
+	game.remove_update_callback(self, game.motor_platforms)
+	post(self.sprite, MSG.DISABLE)
+end -- disable

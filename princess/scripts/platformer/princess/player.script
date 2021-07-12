@@ -1,0 +1,718 @@
+local defold = _G
+
+-- import
+local MSG = require("scripts.shared.messages")
+local SND = require("scripts.platformer.sound")
+local COLOR = require("scripts.shared.colors")
+local GROUP = require("scripts.shared.groups")
+local FX = require("scripts.platformer.fx")
+local LAYER = require("scripts.shared.layers")
+local game = require("scripts.platformer.game")
+local utils = require("scripts.shared.utils")
+local player_states = require("scripts.platformer.princess.player_states")
+
+-- localization
+local STATIC = GROUP.STATIC
+local ONE_WAY_STATIC = GROUP.ONE_WAY_STATIC
+local PLATFORM = GROUP.PLATFORM
+local ONE_WAY_PLATFORM = GROUP.ONE_WAY_PLATFORM
+local CRATE = GROUP.CRATE
+local ENEMY = GROUP.ENEMY
+local get_position = go.get_position
+local set_position = go.set_position
+local get_id = go.get_id
+local vector3 = vmath.vector3
+local vector = vmath.vector
+local post = msg.post
+local url = msg.url
+local ray_cast = physics.ray_cast
+local abs = math.abs
+local min = math.min
+local ceil = math.ceil
+local sqrt = math.sqrt
+local sign = utils.sign
+local next = next
+local create = factory.create
+local delete = go.delete
+local set_constant = sprite.set_constant
+local animate = go.animate
+local cancel_animations = go.cancel_animations
+local PLAYBACK_LOOP_FORWARD = go.PLAYBACK_LOOP_FORWARD
+
+-- functions
+local down_thrust_attack
+local sword_attack
+local move
+local check_edges
+local frame_update
+local raycast_request
+local raycast_response
+local calculate_gravity_and_jump_speed
+local calculate_delta_position
+local down_pass
+local up_pass
+local horizontal_pass
+local set_height_profile
+local apply_damage
+-- local descend_slope
+
+-- constants
+local RAY_LENGTH = 2000
+local HUGE = math.huge
+local IDENTITY = vmath.quat()
+local ONE = vector3(1)
+local DAMAGE_COOLDOWN = 1.33 -- seconds
+local TINT = hash("tint")
+local CUSTOM_EASING = vector {
+	0, 0, 0, 0, 0, 0, 0, 0,
+	1, 1, 1, 1, 1, 1, 1, 0,
+}
+local BLINK_DURATION = 0.26
+
+local PUSHABLES = {
+	STATIC,
+	PLATFORM,
+	CRATE,
+}
+
+local GROUND = {
+	STATIC,
+	ONE_WAY_STATIC,
+	PLATFORM,
+	ONE_WAY_PLATFORM,
+	CRATE,
+}
+
+local SOLIDS = {
+	STATIC,
+	PLATFORM,
+	CRATE,
+}
+
+local DAMAGE_RECEIVERS = {
+	STATIC,
+	ONE_WAY_STATIC,
+	PLATFORM,
+	ONE_WAY_PLATFORM,
+	CRATE,
+	ENEMY,
+}
+
+---------------------------------------
+-- init
+---------------------------------------
+
+function defold.init (self)
+	self.gameobject = get_id()
+	self.pivot = get_id("pivot")
+	self.body = get_id("body")
+	self.body_sprite = url("body#sprite")
+	self.label = url("#label")
+	-- post(self.label, MSG.DISABLE)
+	self.collisionobject_raycast_high = url("#collisionobject_raycast_high")
+	self.collisionobject_raycast_low = url("#collisionobject_raycast_low")
+
+	self.responses = {}
+	self.contacts = {}
+	self.processed_targets = {}
+	self.hits = {}
+
+	self.min_obstacle_height = 16
+	self.min_obstacle_width = 16
+	self.raycast_high_profile = 30
+	self.raycast_low_profile = 20
+	self.skin_width = 0.01
+	self.raycast_width = 15
+	self.vertical_ray_count = ceil(self.raycast_width / self.min_obstacle_width) + 1
+	self.vertical_ray_spacing = (self.raycast_width - 2 * self.skin_width) / (self.vertical_ray_count - 1)
+	self.acceleration = 1500
+	self.max_horizontal_speed = 160
+	self.max_vertical_speed = 800
+	self.jump_height = 72 --66
+	self.jump_length = 125--120--112
+	set_height_profile(self, self.raycast_high_profile)
+
+	self.move_direction = 0
+	self.look_direction = 1
+	self.position = get_position()
+	self.position.z = LAYER.PLAYER
+	set_position(self.position)
+	self.delta_position = vector3()
+
+	self.depth_x = self.raycast_width * 0.5
+	self.depth_y = self.skin_width
+
+	self.up_space = HUGE
+
+	calculate_gravity_and_jump_speed(self)
+	self.velocity = vector3()
+
+	self.camera = get_id("/camera")
+	-- post(self.camera, MSG.SET_CAMERA_LOOK_AT, { position = self.position, dt = 0 })
+
+	-- self.horizontal_collision = false
+	self.collision_right = false
+	self.collision_left = false
+
+	self.states = player_states.make_machine(self)
+
+	self.link_a = get_id("link_a")
+	self.link_a_sprite = url("link_a#sprite")
+	self.link_a_position = get_position(self.link_a)
+
+	self.link_b = get_id("link_b")
+	self.link_b_sprite = url("link_b#sprite")
+	self.link_b_position = get_position(self.link_b)
+
+	self.link_c = get_id("link_c")
+	self.link_c_sprite = url("link_c#sprite")
+	self.link_c_position = get_position(self.link_c)
+
+	self.hook = get_id("hook")
+	self.hook_sprite = url("hook#sprite")
+	self.hook_collisionobject = url("hook#collisionobject")
+	self.hook_position = get_position(self.hook)
+	self.hook_length = sqrt(self.hook_position.x * self.hook_position.x + self.hook_position.y * self.hook_position.y)
+
+	post(self.link_a_sprite, MSG.DISABLE)
+	post(self.link_b_sprite, MSG.DISABLE)
+	post(self.link_c_sprite, MSG.DISABLE)
+	post(self.hook_sprite,   MSG.DISABLE)
+	post(self.hook_collisionobject, MSG.DISABLE)
+
+	self.damage_cooldown = 0
+	self.health_amount = 10
+
+	self.down_thrust_attack = down_thrust_attack
+	self.sword_attack = sword_attack
+	self.move = move
+	self.check_edges = check_edges
+	self.set_height_profile = set_height_profile
+	self.apply_damage = apply_damage
+
+	game.add_update_callback(self, frame_update, game.player)
+	game.get_shared_data(self.gameobject).context = self
+end -- init
+
+---------------------------------------
+-- final
+---------------------------------------
+
+function defold.final (self)
+	game.remove_update_callback(self, game.player)
+	game.remove_shared_data(self.gameobject)
+end -- final
+
+---------------------------------------
+-- set_height_profile
+---------------------------------------
+
+function set_height_profile (self, height)
+	self.raycast_height = height
+	self.horizontal_ray_count = ceil(height / self.min_obstacle_height) + 1
+	self.horizontal_ray_spacing = (height -  2 * self.skin_width) / (self.horizontal_ray_count - 1)
+
+	self.total_ray_count = (self.horizontal_ray_count + self.vertical_ray_count) * 2
+
+	self.first_right_ray = 1
+	self.last_right_ray = self.first_right_ray + self.horizontal_ray_count - 1
+
+	self.first_left_ray = self.last_right_ray + 1
+	self.last_left_ray = self.first_left_ray + self.horizontal_ray_count - 1
+
+	self.first_down_ray = self.last_left_ray + 1
+	self.last_down_ray = self.first_down_ray + self.vertical_ray_count - 1
+
+	self.first_up_ray = self.last_down_ray + 1
+	self.last_up_ray = self.first_up_ray + self.vertical_ray_count - 1
+
+	for k, _ in next, self.responses do
+		self.responses[k] = nil
+	end
+
+	for k, _ in next, self.contacts do
+		self.contacts[k] = nil
+	end
+
+	if height == self.raycast_low_profile then
+		self.speed = self.max_horizontal_speed * 2
+		post(self.collisionobject_raycast_high, MSG.DISABLE)
+		post(self.collisionobject_raycast_low, MSG.ENABLE)
+	else
+		self.speed = self.max_horizontal_speed
+		post(self.collisionobject_raycast_high, MSG.ENABLE)
+		post(self.collisionobject_raycast_low, MSG.DISABLE)
+	end
+end -- set_height_profile
+
+---------------------------------------
+-- frame_update
+---------------------------------------
+
+function frame_update(self, dt)
+	self.states.update(dt)
+
+	self.damage_cooldown = self.damage_cooldown - dt
+	if self.damage_cooldown < 0 then
+		cancel_animations(self.body_sprite, TINT)
+		set_constant(self.body_sprite, TINT, COLOR.WHITE)
+	end
+
+	local target = game.get_shared_data(self.camera).target
+	target.x = self.position.x
+	target.y = self.position.y
+	target.bottom = self.position.y
+	target.top = self.position.y + self.raycast_high_profile
+	target.direction = self.look_direction
+	-- assert(get_position().z == 1)
+	-- utils.log(self.position.z)
+end -- frame_update
+
+---------------------------------------
+-- move
+---------------------------------------
+
+function move (self, dt)
+	self.position = self.position + self.delta_position
+	set_position(self.position, self.gameobject)
+	self.delta_position = calculate_delta_position(self, dt)
+	game.set_delta_position(self.gameobject, self.delta_position + game.get_delta_position(self.ground))
+	raycast_request(self)
+end -- move
+
+---------------------------------------
+
+-- check_edges
+
+---------------------------------------
+
+function check_edges (self)
+	local left_contact = self.contacts[self.first_down_ray]
+	local right_contact = self.contacts[self.last_down_ray]
+
+	if left_contact and not right_contact then
+		local limit = self.raycast_width * 0.3
+		local ray_start = vector3(self.position.x - self.raycast_width * 0.5 + limit, self.position.y + self.skin_width, 0)
+		local ray_end = vector3(ray_start.x, ray_start.y - limit, 0)
+		defold.__dm_script_instance__ = game.get_shared_data(self.gameobject).edge_checker_context
+		ray_cast(ray_start, ray_end, GROUND, 1)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+		defold.__dm_script_instance__ = self
+
+	elseif right_contact and not left_contact then
+		local limit = self.raycast_width * 0.3
+		local ray_start = vector3(self.position.x + self.raycast_width * 0.5 - limit, self.position.y + self.skin_width, 0)
+		local ray_end = vector3(ray_start.x, ray_start.y - limit, 0)
+		defold.__dm_script_instance__ = game.get_shared_data(self.gameobject).edge_checker_context
+		ray_cast(ray_start, ray_end, GROUND, 2)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+		defold.__dm_script_instance__ = self
+	end
+end -- check_edges
+
+---------------------------------------
+
+-- sword_attack
+
+---------------------------------------
+
+function sword_attack (self)
+	defold.__dm_script_instance__ = game.get_shared_data(self.gameobject).damage_dealer_context
+
+	local position = self.position-- + self.delta_position
+
+	-- middle (1)
+	local ray_start = vector3(position.x, position.y + 16, 0)
+	local ray_end = vector3(ray_start.x + 40 * self.look_direction, ray_start.y, 0)
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 1)
+	post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+
+	-- top (2)
+	ray_start.y = position.y + 24
+	ray_end.y = ray_start.y
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 2)
+	post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+
+	-- bottom (3)
+	ray_start.y = position.y + 8
+	ray_end.y = ray_start.y
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 3)
+	post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+
+	defold.__dm_script_instance__ = self
+end -- sword attack
+
+---------------------------------------
+
+-- down_thrust_attack
+
+---------------------------------------
+
+function down_thrust_attack (self)
+	local context = defold.__dm_script_instance__
+	defold.__dm_script_instance__ = game.get_shared_data(self.gameobject).damage_dealer_context
+
+	local position = self.position-- + self.delta_position
+
+	local ray_start = vector3(position.x, position.y + 1, 0)
+	local ray_end = vector3(ray_start.x, ray_start.y - 16, 0)
+	ray_cast(ray_start, ray_end, DAMAGE_RECEIVERS, 4) -- request_id is 4 for this attack type
+	post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA })
+
+	defold.__dm_script_instance__ = context
+end -- down_thrust_attack attack
+
+---------------------------------------
+
+-- on_message
+
+---------------------------------------
+
+function defold.on_message(self, message_id, message)
+	if message_id == MSG.RAY_CAST_RESPONSE then
+		raycast_response(self, message)
+	else
+		self.states.on_message(message_id, message)
+	end
+end -- on_message
+
+---------------------------------------
+
+-- calculate_gravity_and_jump_speed
+
+---------------------------------------
+
+function calculate_gravity_and_jump_speed (self, jump_height, jump_length)
+	local height = jump_height or self.jump_height
+	local half_length = (jump_length or self.jump_length) * 0.5
+	self.gravity = -(2 * height * self.max_horizontal_speed * self.max_horizontal_speed) / (half_length * half_length)
+	self.jump_speed = (2 * height * self.max_horizontal_speed) / (half_length)
+	utils.log(self.gameobject .. " gravity: " .. self.gravity .. ", jump speed: " .. self.jump_speed)
+end -- calculate_gravity_and_jump_speed
+
+---------------------------------------
+-- calculate_delta_position
+---------------------------------------
+
+function calculate_delta_position (self, dt)
+	-- determine the target speed based on input
+	local target_speed = self.move_direction * self.speed
+	-- calculate the difference between our current speed and the target speed
+	local speed_diff = target_speed - self.velocity.x
+	-- the complete acceleration to integrate over this frame
+	local acceleration = vector3(0, self.gravity, 0)
+
+	-- set the acceleration to work in the direction of the difference
+	if speed_diff < 0 then
+		acceleration.x = -self.acceleration
+	elseif speed_diff > 0 then
+		acceleration.x = self.acceleration
+	else
+		acceleration.x = 0
+	end
+
+	local dv = acceleration * dt
+
+	--check if dv exceeds the intended speed difference, clamp it in that case
+	if abs(dv.x) > abs(speed_diff) then
+		dv.x = speed_diff
+	end
+
+	-- calculate the new velocity by adding the velocity change
+	local old_velocity = self.velocity
+	self.velocity = self.velocity + dv
+
+	if abs(self.velocity.y) > self.max_vertical_speed then
+		self.velocity.y = self.max_vertical_speed * sign(self.velocity.y)
+	end
+
+	-- calculate the translation this frame (delta position) by integrating the velocity
+	-- http://lolengine.net/blog/2011/12/14/understanding-motion-in-games
+	return (old_velocity + self.velocity) * 0.5 * dt
+end -- calculate_delta_position
+
+---------------------------------------
+-- raycast_request
+---------------------------------------
+
+function raycast_request (self)
+	-- reset flags
+	self.collision_right = false
+	self.collision_left = false
+
+	-- update ray origins
+	local position = self.position
+	local skin_width = self.skin_width
+	local half_width = self.raycast_width * 0.5
+
+	local ray_origin_horizontal_right = vector3(position.x + half_width - self.depth_x, position.y + skin_width, 0)
+	local ray_origin_horizontal_left  = vector3(position.x - half_width + self.depth_x, position.y + skin_width, 0)
+	local ray_origin_vertical_down    = vector3(position.x - half_width + skin_width, position.y + skin_width, 0)
+	local ray_origin_vertical_up      = vector3(position.x - half_width + skin_width, position.y + self.raycast_height - skin_width, 0)
+
+	local ray_start
+	local ray_end
+
+	-- right rays (horizontal)
+	ray_start = vector3(ray_origin_horizontal_right)
+	ray_end = vector3(ray_start.x + RAY_LENGTH, ray_start.y, 0)
+	for ray = self.first_right_ray, self.last_right_ray do
+		ray_cast(ray_start, ray_end, PUSHABLES, ray)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.y = ray_start.y + self.horizontal_ray_spacing
+		ray_end.y = ray_start.y
+	end
+
+	-- left rays (horizontal)
+	ray_start = vector3(ray_origin_horizontal_left)
+	ray_end = vector3(ray_start.x - RAY_LENGTH, ray_start.y, 0)
+	for ray = self.first_left_ray, self.last_left_ray do
+		ray_cast(ray_start, ray_end, PUSHABLES, ray)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.y = ray_start.y + self.horizontal_ray_spacing
+		ray_end.y = ray_start.y
+	end
+
+	-- down rays (vertical)
+	ray_start = vector3(ray_origin_vertical_down)
+	-- ray_start.x = ray_start.x + self.delta_position.x
+	ray_end = vector3(ray_start.x, ray_start.y - RAY_LENGTH, 0)
+	for ray = self.first_down_ray, self.last_down_ray do
+		ray_cast(ray_start, ray_end, GROUND, ray)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.x = ray_start.x + self.vertical_ray_spacing
+		ray_end.x = ray_start.x
+	end
+
+	-- up rays (vertical)
+	ray_start = vector3(ray_origin_vertical_up)
+	-- ray_start.x = ray_start.x + self.delta_position.x
+	ray_end = vector3(ray_start.x, ray_start.y + RAY_LENGTH, 0)
+	for ray = self.first_up_ray, self.last_up_ray do
+		ray_cast(ray_start, ray_end, SOLIDS, ray)
+		-- post("@render:", "draw_line", { start_point = ray_start, end_point = ray_end, color = COLOR.MAGENTA } )
+		ray_start.x = ray_start.x + self.vertical_ray_spacing
+		ray_end.x = ray_start.x
+	end
+
+end -- raycast_request
+
+---------------------------------------
+-- raycast_response
+---------------------------------------
+
+function raycast_response (self, message)
+	self.responses[message.request_id] = message
+	if message.request_id < self.total_ray_count then
+		return
+	end
+	-- all responses now collected
+
+	local dx = self.delta_position.x
+	local dy = self.delta_position.y
+
+	-- if dy < 0 and dx ~= 0 then
+	-- 	dx, dy = descend_slope(self, dx, dy)
+	-- end
+
+	local d1, v1 = down_pass(self, dy, self.velocity.y, self.first_down_ray, self.last_down_ray, 1)
+	local d2, v2 = down_pass(self, dy, self.velocity.y, self.last_down_ray, self.first_down_ray, -1)
+
+	local d = d1 > d2 and d1 or d2
+	local v = v1 > v2 and v1 or v2
+
+	dy, self.velocity.y, self.up_space = up_pass(self, d, v, self.first_up_ray, self.last_up_ray, 1)
+
+	self.previous_ground = self.ground
+	self.ground = nil
+	for _, g in next, self.contacts do
+		if not self.ground then
+			self.ground = g
+		end
+		if self.ground ~= g then
+			local g_delta = game.get_delta_position(g)
+			local ground_delta = game.get_delta_position(self.ground)
+			if g_delta.y > ground_delta.y then
+				self.ground = g
+			elseif g_delta.x == 0 then
+				self.ground = g
+			end
+		end
+	end
+	-- utils.log(self.ground)
+	local ground_dx = game.get_delta_position(self.ground).x
+	local self_push = self.push
+
+	-- local dx = ground_dx
+	if self_push then
+		dx = self.push
+	else
+		dx = dx + ground_dx
+	end
+
+	if dx > 0 then
+		dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+		dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+	else
+		dx = horizontal_pass(self, 1, dx, self.first_right_ray, self.last_right_ray)
+		dx = horizontal_pass(self, -1, dx, self.first_left_ray, self.last_left_ray)
+	end
+
+	self.push = nil
+	self.delta_position.x = dx
+	self.delta_position.y = dy
+	for target, push in next, self.processed_targets do
+		target.delta_position.x = target.delta_position.x + push
+		self.processed_targets[target] = nil
+	end
+end -- raycast_response
+
+---------------------------------------
+-- horizontal_pass
+---------------------------------------
+
+function horizontal_pass (self, direction, dx, first_ray, last_ray)
+	for ray = first_ray, last_ray do
+		local response = self.responses[ray]
+		local hit_distance = RAY_LENGTH * response.fraction - self.depth_x
+		if abs(hit_distance) < 0.001 then
+			hit_distance = 0
+		end
+		local target_dx = game.get_delta_position(response.id).x
+		local delta = dx - target_dx
+		if abs(delta) < 0.001 then
+			delta = 0
+		end
+
+		if hit_distance <= abs(delta) then
+			if direction == 1 then
+				self.collision_right = true
+			end
+			if direction == -1 then
+				self.collision_left = true
+			end
+
+			if delta * direction > 0 then
+				if response.group == CRATE then
+					local target = game.get_shared_data(response.id).context
+					if not self.processed_targets[target] then
+						local push_limit = min(abs(target.speed * game.get_delta_time()), abs((direction > 0) and target.push_limit_right or target.push_limit_left))
+						local push = delta - hit_distance * direction
+						if push_limit < abs(push) then
+							push = push_limit * sign(push)
+						end
+						self.processed_targets[target] = push
+						dx = push + hit_distance * direction + target_dx
+					end
+				else
+						dx = hit_distance * direction + target_dx
+				end
+			end
+		end
+	end
+	return dx
+end -- horizontal_pass
+
+---------------------------------------
+-- down_pass
+---------------------------------------
+
+function down_pass (self, delta_y, velocity_y, start, finish, step)
+	for i = start, finish, step do
+		local response = self.responses[i]
+		local target_delta_y = game.get_delta_position(response.id).y
+		local hit_distance = response.fraction * RAY_LENGTH - self.skin_width
+		if abs(hit_distance) < 0.001 then
+			hit_distance = 0
+		end
+
+		if delta_y < 0 or target_delta_y ~= 0 then
+			if target_delta_y < 0 then
+				if delta_y < 0 then
+					if hit_distance < abs(delta_y + target_delta_y) then
+						if hit_distance == 0 then
+							velocity_y = 0
+						end
+						delta_y = -hit_distance + target_delta_y
+					end
+				end
+			else -- target_delta_y >= 0 then
+				if hit_distance + delta_y < target_delta_y then
+					if hit_distance == 0 then
+						velocity_y = 0
+					end
+					delta_y = -hit_distance + target_delta_y
+				end
+			end
+		end
+		self.contacts[response.request_id] = (hit_distance == 0) and response.id or nil
+	end -- end for
+
+	return delta_y, velocity_y
+end -- down_pass
+
+---------------------------------------
+-- up_pass
+---------------------------------------
+
+function up_pass (self, delta_y, velocity_y, start, finish, step)
+	local up_space = HUGE
+	for i = start, finish, step do
+		local response = self.responses[i]
+		local target_delta_y = game.get_delta_position(response.id).y
+
+		local hit_distance = response.fraction * RAY_LENGTH - self.skin_width
+		if hit_distance < up_space then
+			up_space = hit_distance
+		end
+
+		if delta_y > 0 or target_delta_y ~= 0 then
+			if abs(hit_distance) < 0.001 then
+				hit_distance = 0
+			end
+
+			local delta_position_y = delta_y - target_delta_y
+			if hit_distance < delta_position_y then
+				delta_y = hit_distance + target_delta_y
+				if velocity_y > 0 then
+					velocity_y = 0
+				end
+			end
+		end
+	end -- end for
+
+	return delta_y, velocity_y, up_space
+end -- up_pass
+
+---------------------------------------
+-- apply_damage
+---------------------------------------
+
+function apply_damage (self, damage_amount)
+	if self.damage_cooldown > 0 then return end
+
+	self.damage_cooldown = DAMAGE_COOLDOWN
+
+	local position = vector3(self.position)
+	position.y = position.y + 16
+
+	local health_amount = self.health_amount
+
+	health_amount = health_amount - damage_amount
+	if health_amount < 0 then
+		health_amount = 0
+	end
+
+	if health_amount == 0 then
+		create(FX.FACTORY, position, IDENTITY, FX.DESTROY, ONE)
+		SND.EXPLOSION:create_instance():start()
+		delete(self.gameobject, true)
+		return
+	else
+		animate(self.body_sprite, TINT, PLAYBACK_LOOP_FORWARD, COLOR.TRANSPARENT_WHITE, CUSTOM_EASING, BLINK_DURATION)
+		create(FX.FACTORY, position, IDENTITY, FX.HERO_GET_HIT, ONE)
+		SND.PLAYER_GET_HIT:create_instance():start()
+	end
+
+	self.health_amount = health_amount
+end

@@ -1,0 +1,16 @@
+local Prototype = require("pixelfrog.props.collectable.collectable")
+
+local defold = _G
+
+go.property("kind", hash(""))
+go.property("variant", hash(""))
+go.property("collect_vfx", msg.url())
+go.property("collect_sfx", hash(""))
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end -- init
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end -- final

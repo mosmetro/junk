@@ -1,0 +1,16 @@
+local Prototype = require("pixelfrog.props.bullet.bullet")
+
+local defold = _G
+
+go.property("speed", 0)
+go.property("damage_points", 0)
+go.property("hit_soundfx", hash(""))
+go.property("debris_factory", msg.url())
+
+function defold.init(self)
+   self.instance = Prototype.new(self)
+end
+
+function defold.final(self)
+   Prototype.free(self.instance)
+end

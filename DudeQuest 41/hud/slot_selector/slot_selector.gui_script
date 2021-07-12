@@ -1,0 +1,422 @@
+local ui = require("m.ui.ui")
+local colors = require("m.colors")
+-- local nc = require("m.notification_center")
+-- local const = require("m.constants")
+local utils = require("m.utils")
+-- local Label = require("m.ui.label")
+
+local global = require("game.global")
+local gamestate = require("game.gamestate")
+local ProfileButton = require("hud.slot_selector.profile_button")
+local MenuButton = require("hud.slot_selector.menu_button")
+local Label = require("hud.label")
+local DialogButton = require("hud.slot_selector.dialog_button")
+local translations = require("game.translations")
+
+local defold = _G
+local msg = msg
+local gui = gui
+-- local sys = sys
+local get_node = gui.get_node
+local set_color = gui.set_color
+local next = next
+local translate = translations.translate
+local PROP_COLOR = gui.PROP_COLOR
+
+local ANIMATION_DURATION = 0.2
+
+local selected_slot
+local slot_copy_from
+
+local info
+
+local profiles_root
+local profile1_button
+local profile2_button
+local profile3_button
+local profile4_button
+
+local menu_root
+local play_button
+local copy_button
+local paste_button
+local clear_button
+
+local underline_root
+
+local dialog_root
+local query_root
+local query
+local confirm_button
+local cancel_button
+
+local profile_buttons
+
+-- local menu_root_nodes
+local menu_buttons
+
+local controls
+
+local function set_slot_copy_from(slot)
+   slot_copy_from = slot
+end -- set_slot_copy_from
+
+-- local function refresh_play_time(slot)
+--    local file = sys.get_save_file(gamestate.get_app_id(), gamestate.get_slot_name(slot)) .. "/" .. "player"
+--    local play_time
+--    if gamestate.file_exists(file) then
+--       local t = sys.load(file)
+--       play_time = t.play_time
+--       utils.log("play time: ", slot, play_time)
+--    end
+--    set_text(info_node, os.date("!%H:%M", play_time or 0))
+-- end -- refresh_play_time
+
+local function validate_menu(animated)
+   if selected_slot == 4 then
+      play_button.disable(animated)
+      clear_button.disable(animated)
+   else
+      play_button.enable(animated)
+      clear_button.enable(animated)
+   end
+   copy_button.enable(animated)
+   if slot_copy_from and (slot_copy_from ~= selected_slot) then
+      paste_button.enable(animated)
+   else
+      paste_button.disable(animated)
+   end
+end -- validate_menu
+
+local function show_menu()
+   for _, control in next, menu_buttons do
+      gui.animate(control.node, PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   end
+   validate_menu(false)
+end -- show_memu
+
+local function hide_menu()
+   for _, control in next, menu_buttons do
+      control.deactivate()
+      gui.animate(control.node, PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   end
+end -- hide_menu
+
+local function enable()
+   set_slot_copy_from(nil)
+
+   selected_slot = gamestate.get_save_slot()
+   if selected_slot then
+      utils.log("slot " .. selected_slot)
+      profile_buttons[selected_slot].set_on(true)
+      gui.set_position(menu_root, gui.get_position(profile_buttons[selected_slot].node))
+   end
+
+   for _, control in next, controls do
+      if control.on_language_change then
+         control:on_language_change()
+      end
+   end
+
+   set_color(profiles_root, colors.TRANSPARENT_WHITE)
+   for i = 1, #menu_buttons do
+      set_color(menu_buttons[i].node, colors.TRANSPARENT_WHITE)
+   end
+   set_color(underline_root, colors.TRANSPARENT_WHITE)
+   set_color(dialog_root, colors.TRANSPARENT_WHITE)
+
+   gui.animate(profiles_root, PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   gui.animate(underline_root, PROP_COLOR, colors.WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   show_menu()
+
+   confirm_button.deactivate()
+   cancel_button.deactivate()
+
+   msg.post("#", msg.ENABLE)
+   global.single_touch_first_responder = global.slot_selector_context
+end -- enable
+
+local function disappearance_complete()
+   runtime.execute_in_context(global.home_context.enable, global.home_context)
+   msg.post("#", msg.DISABLE)
+end -- disappearance_complete
+
+local function disable()
+   gui.animate(profiles_root, PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION, 0, disappearance_complete)
+   gui.animate(underline_root, PROP_COLOR, colors.TRANSPARENT_WHITE, ui.ANIMATION_EASING, ui.ANIMATION_DURATION)
+   hide_menu()
+end -- disable
+
+local function select_save_slot(slot)
+   if slot == selected_slot then return end
+   selected_slot = slot
+   -- snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+   gui.animate(menu_root, gui.PROP_POSITION, gui.get_position(profile_buttons[slot].node), gui.EASING_INOUTQUAD, 0.3)
+   validate_menu(true)
+   gamestate.set_save_slot(fastmath.clamp(slot, 1, 4))
+end -- select_save_slot
+
+local function change_slot(slot)
+   select_save_slot(slot)
+   -- local default_lang = sys.get_sys_info().device_language:sub(1, 2)
+   -- translations.set_language(gamestate.get(nil, gamestate.player, "language", default_lang))
+   -- on_language_change()
+   gamestate.set(nil, gamestate.player, "language", translations.get_language_code())
+end -- change_slot
+
+local function activate_profiles()
+   for _, control in next, profile_buttons do
+      control.activate()
+      gui.animate(control.node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, ANIMATION_DURATION)
+   end
+end -- activate_profiles
+
+local function show_dialog(message, on_confirm, on_cancel)
+   gui.set_color(dialog_root, colors.WHITE)
+   gui.set_text(query, message)
+   gui.animate(query_root, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, ANIMATION_DURATION)
+   if on_confirm then
+      confirm_button.activate(on_confirm)
+      gui.animate(confirm_button.node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, ANIMATION_DURATION)
+   end
+   if on_cancel then
+      cancel_button.activate(on_cancel)
+      gui.animate(cancel_button.node, gui.PROP_COLOR, colors.WHITE, gui.EASING_LINEAR, ANIMATION_DURATION)
+   end
+end -- show_dialog
+
+local function hide_dialog_complete()
+   activate_profiles()
+   show_menu()
+end --hide_dialog_complete
+
+local function hide_dialog(selected_button, other_button)
+   selected_button.deactivate()
+   if other_button then
+      other_button.deactivate()
+      gui.animate(other_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, ANIMATION_DURATION)
+   end
+   gui.animate(query_root, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, ANIMATION_DURATION)
+   gui.animate(selected_button.node, gui.PROP_COLOR, colors.TRANSPARENT_WHITE, gui.EASING_LINEAR, 0.4, 0, hide_dialog_complete)
+end -- hide_dialog
+
+local function deactivate_profiles()
+   for i = 1, #profile_buttons do
+      local control = profile_buttons[i]
+      control.deactivate()
+      if i ~= selected_slot then
+         gui.animate(control.node, gui.PROP_COLOR, vmath.vector4(1, 1, 1, 0.33), gui.EASING_LINEAR, ANIMATION_DURATION)
+      end
+   end
+end -- deactivate_profiles
+
+local function confirm_delete_slot()
+   if selected_slot == slot_copy_from then
+      set_slot_copy_from(nil)
+   end
+   gamestate.clear_slot(selected_slot)
+   -- snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+   hide_dialog(confirm_button, cancel_button)
+   -- local default_lang = sys.get_sys_info().device_language:sub(1, 2)
+   -- translations.set_language(default_lang)
+   -- on_language_change()
+   gamestate.set(nil, gamestate.player, "language", translations.get_language_code())
+end -- confirm_delete_slot
+
+local function cancel_delete_slot()
+   hide_dialog(cancel_button, confirm_button)
+end -- cancel_delete_slot
+
+local function ready_delete_slot()
+   hide_menu(false)
+   deactivate_profiles()
+   show_dialog("Clear Save " .. selected_slot .. "?", confirm_delete_slot, cancel_delete_slot)
+end -- ready_delete_slot
+
+local function confirm_copy_slot()
+   utils.log("from ", slot_copy_from, "to ", selected_slot)
+   gamestate.clear_slot(selected_slot)
+   gamestate.copy_slot(slot_copy_from, selected_slot)
+   -- snd.start_music(snd.AROUND_THE_CASTLE_LOOP)
+   hide_dialog(confirm_button, cancel_button)
+   -- local default_lang = sys.get_sys_info().device_language:sub(1, 2)
+   -- translations.set_language(gamestate.get(nil, gamestate.player, "language", default_lang))
+   -- on_language_change()
+   gamestate.set(nil, gamestate.player, "language", translations.get_language_code())
+end -- confirm_copy_slot
+
+local function cancel_copy_slot()
+   hide_dialog(cancel_button, confirm_button)
+end -- cancel_copy_slot
+
+local function ready_copy_slot()
+   hide_menu(false)
+   local message = "Copy from Save " .. tostring(slot_copy_from) .. " to Save " .. tostring(selected_slot) .. "?"
+   show_dialog(message, confirm_copy_slot, cancel_copy_slot)
+end -- ready_copy_slot
+
+function defold.init(self)
+   msg.post("#", msg.DISABLE)
+   global.slot_selector_context = self
+   gui.set_render_order(ui.MENU)
+   self.enable = enable
+
+   controls = {}
+
+   info = get_node("info")
+   set_color(info, colors.LABEL_COLOR)
+
+   profiles_root = get_node("profiles_root")
+
+   menu_root = get_node("menu_root")
+   underline_root = get_node("underline_root")
+   set_color(get_node("underline"), colors.CONTROL_DISABLED_COLOR)
+
+   dialog_root = get_node("dialog_root")
+   query_root = get_node("query_root")
+   query = get_node("query")
+   set_color(query, colors.LABEL_COLOR)
+
+   set_color(get_node("heading/text"), colors.LABEL_COLOR)
+   set_color(get_node("heading/underline"), colors.CONTROL_DISABLED_COLOR)
+
+   local heading_label = Label.new {
+      node = get_node("heading/root"),
+      title_node = get_node("heading/text"),
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_LABEL_HEADING))
+      end,
+   }
+   controls[#controls + 1] = heading_label
+
+   ProfileButton.color = colors.CONTROL_COLOR
+   ProfileButton.selected_color = colors.CONTROL_SELECTED_COLOR
+   ProfileButton.aabb = { -20, -16, 20, 8, }
+
+   profile1_button = ProfileButton.new {
+      node = get_node("profile1/root"),
+      title_node = get_node("profile1/text"),
+      callback = function()
+         change_slot(1)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_SLOT1))
+      end,
+   }
+   controls[#controls + 1] = profile1_button
+
+   profile2_button = ProfileButton.new {
+      node = get_node("profile2/root"),
+      title_node = get_node("profile2/text"),
+      callback = function()
+         change_slot(2)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_SLOT2))
+      end,
+   }
+   controls[#controls + 1] = profile2_button
+
+   profile3_button = ProfileButton.new {
+      node = get_node("profile3/root"),
+      title_node = get_node("profile3/text"),
+      callback = function()
+         change_slot(3)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_SLOT3))
+      end,
+   }
+   controls[#controls + 1] = profile3_button
+
+   profile4_button = ProfileButton.new {
+      node = get_node("profile4/root"),
+      title_node = get_node("profile4/text"),
+      callback = function()
+         change_slot(4)
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_SLOT4))
+      end,
+   }
+   controls[#controls + 1] = profile4_button
+
+   play_button = MenuButton.new {
+      node = get_node("play/root"),
+      title_node = get_node("play/text"),
+      -- underline = get_node("play/hline"),
+      callback = function()
+         global.single_touch_first_responder = nil
+         disable()
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_USE))
+      end,
+   }
+   controls[#controls + 1] = play_button
+
+   copy_button = MenuButton.new {
+      node = get_node("copy/root"),
+      title_node = get_node("copy/text"),
+      -- underline = get_node("copy/hline"),
+      callback = function()
+         set_slot_copy_from(selected_slot)
+         paste_button.disable()
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_COPY))
+      end,
+   }
+   controls[#controls + 1] = copy_button
+
+   paste_button = MenuButton.new {
+      node = get_node("paste/root"),
+      title_node = get_node("paste/text"),
+      -- underline = get_node("paste/hline"),
+      callback = function()
+         ready_copy_slot()
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_PASTE))
+      end,
+   }
+   controls[#controls + 1] = paste_button
+
+   clear_button = MenuButton.new {
+      node = get_node("clear/root"),
+      title_node = get_node("clear/text"),
+      -- underline = get_node("clear/hline"),
+      callback = function()
+         ready_delete_slot()
+      end,
+      on_language_change = function(control)
+         control.set_text(translate(translations.SELECT_PROFILE_BUTTON_CLEAR))
+      end,
+   }
+   controls[#controls + 1] = clear_button
+
+   DialogButton.color = colors.CONTROL_COLOR
+   DialogButton.selected_color = colors.CONTROL_SELECTED_COLOR
+   DialogButton.aabb = { -20, -16, 20, 8, }
+
+   confirm_button = DialogButton.new {
+      node = get_node("confirm/root"),
+      title_node = get_node("confirm/text"),
+   }
+   controls[#controls + 1] = confirm_button
+
+   cancel_button = DialogButton.new {
+      node = get_node("cancel/root"),
+      title_node = get_node("cancel/text"),
+   }
+   controls[#controls + 1] = cancel_button
+
+   profile_buttons = { profile1_button, profile2_button, profile3_button, profile4_button }
+   menu_buttons = { play_button, copy_button, paste_button, clear_button }
+
+   self.controls = controls
+end -- defold.init
+
+function defold.final()
+   global.slot_selector_context = nil
+end -- defold.final
